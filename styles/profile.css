@@ -1,0 +1,490 @@
+/* Styles for User Dashboard Page */
+
+/* User Profile Header */
+.profile-header {
+    background: white;
+    padding: 3rem 0;
+    border-bottom: 1px solid #e1e8ed;
+    margin-bottom: 2rem;
+}
+
+.profile-info {
+    display: flex;
+    gap: 2rem;
+    align-items: center;
+    margin-bottom: 2rem;
+}
+
+.profile-avatar {
+    flex-shrink: 0;
+}
+
+.avatar-img {
+    width: 120px;
+    height: 120px;
+    border-radius: 50%;
+    object-fit: cover;
+    border: 4px solid #3498db;
+}
+
+.profile-details {
+    flex: 1;
+}
+
+.profile-name {
+    font-size: 2rem;
+    font-weight: 700;
+    color: #2c3e50;
+    margin-bottom: 0.5rem;
+}
+
+.profile-title {
+    font-size: 1.125rem;
+    color: #7f8c8d;
+    margin-bottom: 0.25rem;
+}
+
+.profile-institution {
+    font-size: 1rem;
+    color: #555;
+    margin-bottom: 1.5rem;
+}
+
+.profile-stats {
+    display: flex;
+    gap: 2rem;
+}
+
+.stat-item {
+    text-align: center;
+}
+
+.stat-number {
+    display: block;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #3498db;
+    margin-bottom: 0.25rem;
+}
+
+.stat-label {
+    font-size: 0.875rem;
+    color: #7f8c8d;
+}
+
+.profile-actions {
+    display: flex;
+    gap: 1rem;
+    flex-wrap: wrap;
+}
+
+/* User Profile Content */
+.profile-content {
+    margin-bottom: 3rem;
+}
+
+.content-grid {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    gap: 2rem;
+}
+
+/* Sidebar */
+.sidebar {
+    background: white;
+    border-radius: 12px;
+    padding: 1.5rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    height: fit-content;
+}
+
+.sidebar-nav {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.sidebar-link {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem;
+    color: #7f8c8d;
+    text-decoration: none;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+    font-weight: 500;
+}
+
+.sidebar-link:hover {
+    background: #f8f9fa;
+    color: #2c3e50;
+}
+
+.sidebar-link.active {
+    background: #3498db;
+    color: white;
+}
+
+/* Main Content */
+.main-content {
+    background: white;
+    border-radius: 12px;
+    padding: 2rem;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.tab-content {
+    display: none;
+}
+
+.tab-content.active {
+    display: block;
+}
+
+.content-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2rem;
+    padding-bottom: 1rem;
+    border-bottom: 2px solid #e1e8ed;
+}
+
+.content-title {
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.content-actions {
+    display: flex;
+    gap: 1rem;
+}
+
+/* Saved Items / Favorites List */
+.favorites-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.favorite-item {
+    padding: 1.5rem;
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.favorite-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-bottom: 1rem;
+    gap: 1rem;
+}
+
+.item-title {
+    flex: 1;
+    margin: 0;
+}
+
+.item-title a {
+    color: #2c3e50;
+    text-decoration: none;
+    font-size: 1.125rem;
+    font-weight: 600;
+    line-height: 1.4;
+    transition: color 0.3s ease;
+}
+
+.item-title a:hover {
+    color: #3498db;
+}
+
+.item-actions {
+    flex-shrink: 0;
+}
+
+.item-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    color: #7f8c8d;
+    flex-wrap: wrap;
+}
+
+.meta-item {
+    display: flex;
+    align-items: center;
+}
+
+.item-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+}
+
+/* Comparison List */
+.comparisons-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.comparison-item {
+    padding: 1.5rem;
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.comparison-item:hover {
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    transform: translateY(-2px);
+}
+
+.comparison-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.comparison-title {
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin: 0;
+}
+
+.comparison-actions {
+    display: flex;
+    gap: 0.5rem;
+}
+
+.comparison-meta {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 1rem;
+    font-size: 0.875rem;
+    color: #7f8c8d;
+    flex-wrap: wrap;
+}
+
+.comparison-studies {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
+.study-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0.75rem;
+    background: #f8f9fa;
+    border-radius: 6px;
+    font-size: 0.875rem;
+}
+
+.study-title {
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.study-author {
+    color: #7f8c8d;
+}
+
+/* Search History */
+.history-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.history-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 1rem;
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.history-item:hover {
+    background: #f8f9fa;
+}
+
+.history-query {
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+}
+
+.query-link {
+    color: #2c3e50;
+    text-decoration: none;
+    font-weight: 500;
+    font-size: 1rem;
+    transition: color 0.3s ease;
+}
+
+.query-link:hover {
+    color: #3498db;
+}
+
+.query-time {
+    font-size: 0.875rem;
+    color: #7f8c8d;
+}
+
+.history-results {
+    font-size: 0.875rem;
+    color: #7f8c8d;
+}
+
+/* Settings */
+.settings-sections {
+    display: flex;
+    flex-direction: column;
+    gap: 2rem;
+}
+
+.settings-section {
+    padding: 1.5rem;
+    border: 1px solid #e1e8ed;
+    border-radius: 8px;
+}
+
+.settings-title {
+    font-size: 1.25rem;
+    font-weight: 600;
+    color: #2c3e50;
+    margin-bottom: 1.5rem;
+    padding-bottom: 0.5rem;
+    border-bottom: 2px solid #e1e8ed;
+}
+
+.settings-form {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+}
+
+.settings-form .form-group {
+    margin-bottom: 0;
+}
+
+.settings-form .form-label {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-weight: 500;
+    color: #2c3e50;
+}
+
+.settings-form input[type="checkbox"] {
+    width: auto;
+    margin: 0;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+    .content-grid {
+        grid-template-columns: 1fr;
+        gap: 1.5rem;
+    }
+    
+    .sidebar {
+        order: -1;
+    }
+    
+    .sidebar-nav {
+        flex-direction: row;
+        overflow-x: auto;
+        gap: 0.25rem;
+    }
+    
+    .sidebar-link {
+        white-space: nowrap;
+        padding: 0.75rem 1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .profile-header {
+        padding: 2rem 0;
+    }
+    
+    .profile-info {
+        flex-direction: column;
+        text-align: center;
+        gap: 1.5rem;
+    }
+    
+    .profile-stats {
+        justify-content: center;
+    }
+    
+    .profile-actions {
+        justify-content: center;
+    }
+    
+    .main-content {
+        padding: 1.5rem;
+    }
+    
+    .item-header {
+        flex-direction: column;
+        align-items: stretch;
+    }
+    
+    .item-actions {
+        align-self: flex-start;
+    }
+    
+    .comparison-header {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 1rem;
+    }
+    
+    .comparison-actions {
+        justify-content: flex-start;
+    }
+    
+    .history-item {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .profile-name {
+        font-size: 1.75rem;
+    }
+    
+    .profile-stats {
+        flex-direction: column;
+        gap: 1rem;
+    }
+    
+    .main-content {
+        padding: 1rem;
+    }
+    
+    .settings-section {
+        padding: 1rem;
+    }
+}

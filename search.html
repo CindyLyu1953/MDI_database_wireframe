@@ -1,0 +1,368 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - Questionnaire Database Platform</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/search.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Questionnaire Database Platform</h1>
+                <span class="tagline">Academic Research Tool</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="search.html" class="nav-link active">Search</a>
+                <a href="browse.html" class="nav-link">Browse</a>
+                <a href="compare.html" class="nav-link">Compare</a>
+                <a href="profile.html" class="nav-link">Profile</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Search Bar -->
+            <section class="search-section">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search keywords, authors, journals..." class="search-input" value="">
+                    <button class="search-btn" onclick="performSearch()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        Search
+                    </button>
+                </div>
+            </section>
+
+            <!-- Filters -->
+            <section class="filters-section">
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label class="filter-label">Year</label>
+                        <select class="filter-select" id="yearFilter">
+                            <option value="">All Years</option>
+                            <option value="2024">2024</option>
+                            <option value="2023">2023</option>
+                            <option value="2022">2022</option>
+                            <option value="2021">2021</option>
+                            <option value="2020">2020</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Journal</label>
+                        <select class="filter-select" id="journalFilter">
+                            <option value="">All Journals</option>
+                            <option value="Nature">Nature</option>
+                            <option value="Science">Science</option>
+                            <option value="PNAS">PNAS</option>
+                            <option value="JPSP">Journal of Personality and Social Psychology</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Research Method</label>
+                        <select class="filter-select" id="methodFilter">
+                            <option value="">All Methods</option>
+                            <option value="experimental">Experimental</option>
+                            <option value="survey">Survey</option>
+                            <option value="meta-analysis">Meta-Analysis</option>
+                            <option value="longitudinal">Longitudinal</option>
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Sort By</label>
+                        <select class="filter-select" id="sortFilter">
+                            <option value="relevance">Relevance</option>
+                            <option value="year">Year</option>
+                            <option value="citations">Citations</option>
+                            <option value="title">Title</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search Results -->
+            <section class="results-section">
+                <div class="results-header">
+                    <h2 class="results-title">Search Results</h2>
+                    <div class="results-count">
+                        <span id="resultCount">Found 15 relevant articles</span>
+                    </div>
+                </div>
+
+                <div class="results-list" id="resultsList">
+                    <!-- Search Result Items -->
+                    <article class="result-item">
+                        <div class="result-header">
+                            <h3 class="result-title">
+                                <a href="article.html?id=1">The Impact of Social Media on Political Trust: A Cross-National Analysis</a>
+                            </h3>
+                            <div class="result-actions">
+                                <button class="btn btn-outline btn-sm" onclick="addToCompare(1)">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m0-7v7m0-7h10a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2H9m0-7V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
+                                    </svg>
+                                    Compare
+                                </button>
+                                <button class="btn btn-outline btn-sm" onclick="toggleFavorite(1)">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                    </svg>
+                                    Favorite
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="result-meta">
+                            <div class="result-authors">
+                                <strong>Authors:</strong> Smith, J., Johnson, A., & Brown, M.
+                            </div>
+                            <div class="result-journal">
+                                <strong>Journal:</strong> Journal of Political Psychology, 2023
+                            </div>
+                            <div class="result-citations">
+                                <strong>Citations:</strong> 45 times
+                            </div>
+                        </div>
+
+                        <div class="result-abstract">
+                            <p>This study examines the relationship between social media usage and political trust across 25 countries. Using data from the World Values Survey and social media usage statistics, we find that increased social media consumption is associated with decreased political trust, particularly in democratic societies...</p>
+                        </div>
+
+                        <div class="result-features">
+                            <div class="feature-tags">
+                                <span class="tag tag-primary">Trust</span>
+                                <span class="tag">Social Media</span>
+                                <span class="tag">Political Psychology</span>
+                                <span class="tag">Cross-National</span>
+                            </div>
+                        </div>
+
+                        <div class="result-footer">
+                            <a href="article.html?id=1" class="btn btn-primary">View Details</a>
+                            <div class="result-stats">
+                                <span class="stat-item">Sample Size: 15,000</span>
+                                <span class="stat-item">Countries: 25</span>
+                                <span class="stat-item">Method: Survey</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="result-item">
+                        <div class="result-header">
+                            <h3 class="result-title">
+                                <a href="article.html?id=2">Measuring Tolerance in Digital Spaces: A New Scale Development</a>
+                            </h3>
+                            <div class="result-actions">
+                                <button class="btn btn-outline btn-sm" onclick="addToCompare(2)">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m0-7v7m0-7h10a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2H9m0-7V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
+                                    </svg>
+                                    Compare
+                                </button>
+                                <button class="btn btn-outline btn-sm" onclick="toggleFavorite(2)">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                    </svg>
+                                    Favorite
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="result-meta">
+                            <div class="result-authors">
+                                <strong>Authors:</strong>Chen, L., Wilson, K., & Davis, R.
+                            </div>
+                            <div class="result-journal">
+                                <strong>Journal:</strong>Computers in Human Behavior, 2023
+                            </div>
+                            <div class="result-citations">
+                                <strong>Citations:</strong>32 times
+                            </div>
+                        </div>
+
+                        <div class="result-abstract">
+                            <p>This paper presents the development and validation of a new scale for measuring tolerance in digital communication contexts. The Digital Tolerance Scale (DTS) was developed through a multi-stage process including item generation, expert review, and psychometric validation...</p>
+                        </div>
+
+                        <div class="result-features">
+                            <div class="feature-tags">
+                                <span class="tag tag-primary">Tolerance</span>
+                                <span class="tag">Scale Development</span>
+                                <span class="tag">Digital Communication</span>
+                                <span class="tag">Psychometrics</span>
+                            </div>
+                        </div>
+
+                        <div class="result-footer">
+                            <a href="article.html?id=2" class="btn btn-primary">View Details</a>
+                            <div class="result-stats">
+                                <span class="stat-item">Sample Size: 2,500</span>
+                                <span class="stat-item">Countries: 3</span>
+                                <span class="stat-item">Method: Scale Development</span>
+                            </div>
+                        </div>
+                    </article>
+
+                    <article class="result-item">
+                        <div class="result-header">
+                            <h3 class="result-title">
+                                <a href="article.html?id=3">Social Media and Political Polarization: A Meta-Analysis</a>
+                            </h3>
+                            <div class="result-actions">
+                                <button class="btn btn-outline btn-sm" onclick="addToCompare(3)">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m0-7v7m0-7h10a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2H9m0-7V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
+                                    </svg>
+                                    Compare
+                                </button>
+                                <button class="btn btn-outline btn-sm" onclick="toggleFavorite(3)">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                    </svg>
+                                    Favorite
+                                </button>
+                            </div>
+                        </div>
+                        
+                        <div class="result-meta">
+                            <div class="result-authors">
+                                <strong>Authors:</strong>Anderson, P., Taylor, S., & Miller, B.
+                            </div>
+                            <div class="result-journal">
+                                <strong>Journal:</strong>Communication Research, 2022
+                            </div>
+                            <div class="result-citations">
+                                <strong>Citations:</strong>78 times
+                            </div>
+                        </div>
+
+                        <div class="result-abstract">
+                            <p>A comprehensive meta-analysis of 127 studies examining the relationship between social media use and political polarization. Results show a small but significant positive correlation between social media use and political polarization, with stronger effects observed in certain demographic groups...</p>
+                        </div>
+
+                        <div class="result-features">
+                            <div class="feature-tags">
+                                <span class="tag tag-primary">Political Polarization</span>
+                                <span class="tag">Social Media</span>
+                                <span class="tag">Meta-Analysis</span>
+                                <span class="tag">Communication</span>
+                            </div>
+                        </div>
+
+                        <div class="result-footer">
+                            <a href="article.html?id=3" class="btn btn-primary">View Details</a>
+                            <div class="result-stats">
+                                <span class="stat-item">Studies: 127</span>
+                                <span class="stat-item">Sample Size: 500,000+</span>
+                                <span class="stat-item">Method: Meta-Analysis</span>
+                            </div>
+                        </div>
+                    </article>
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="pagination-btn" disabled>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15,18 9,12 15,6"></polyline>
+                        </svg>
+                        Previous
+                    </button>
+                    <div class="pagination-pages">
+                        <button class="pagination-page active">1</button>
+                        <button class="pagination-page">2</button>
+                        <button class="pagination-page">3</button>
+                        <span class="pagination-ellipsis">...</span>
+                        <button class="pagination-page">10</button>
+                    </div>
+                    <button class="pagination-btn">
+                        Next
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9,18 15,12 9,6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <p>Committed to providing efficient tools and platforms for academic research</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="search.html">Search Research</a>
+                    <a href="browse.html">Browse Categories</a>
+                    <a href="compare.html">Compare Features</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>support@questionnaire-platform.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Questionnaire Database Platform. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Get URL parameters
+        function getUrlParameter(name) {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get(name);
+        }
+
+        // Initialize search
+        function initializeSearch() {
+            const query = getUrlParameter('q');
+            if (query) {
+                document.getElementById('searchInput').value = query;
+            }
+        }
+
+        // Perform search
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const query = searchInput.value.trim();
+            if (query) {
+                window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+            }
+        }
+
+        // Add to comparison
+        function addToCompare(articleId) {
+            // Add comparison logic here
+            console.log('Add to comparison:', articleId);
+        }
+
+        // Toggle favorite
+        function toggleFavorite(articleId) {
+            // Add favorite logic here
+            console.log('Toggle favorite:', articleId);
+        }
+
+        // Search on Enter key press
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initializeSearch();
+        });
+    </script>
+</body>
+</html>

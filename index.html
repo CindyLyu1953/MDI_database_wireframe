@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Questionnaire Database Platform - Academic Research Tool</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/home.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Questionnaire Database Platform</h1>
+                <span class="tagline">Academic Research Tool</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link active">Home</a>
+                <a href="search.html" class="nav-link">Search</a>
+                <a href="browse.html" class="nav-link">Browse</a>
+                <a href="compare.html" class="nav-link">Compare</a>
+                <a href="profile.html" class="nav-link">Profile</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <section class="hero">
+            <div class="container">
+                <div class="hero-content">
+                    <h2 class="hero-title">Discover, Compare, and Integrate Academic Research</h2>
+                    <p class="hero-description">
+                        A centralized questionnaire database platform that collects key information from social media-related experimental research,
+                        helping scholars quickly find appropriate measurement methods and avoid redundant work.
+                    </p>
+                    
+                    <div class="search-box">
+                        <input type="text" id="searchInput" placeholder="Search keywords, authors, journals..." class="search-input">
+                        <button class="search-btn" onclick="performSearch()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="11" cy="11" r="8"></circle>
+                                <path d="m21 21-4.35-4.35"></path>
+                            </svg>
+                            Search
+                        </button>
+                    </div>
+                    
+                    <div class="search-suggestions">
+                        <span class="suggestion-label">Popular searches:</span>
+                        <a href="#" class="suggestion-tag" onclick="searchTag('trust')">trust</a>
+                        <a href="#" class="suggestion-tag" onclick="searchTag('tolerance')">tolerance</a>
+                        <a href="#" class="suggestion-tag" onclick="searchTag('social media')">social media</a>
+                        <a href="#" class="suggestion-tag" onclick="searchTag('political polarization')">political polarization</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="features">
+            <div class="container">
+                <h3 class="section-title">Platform Features</h3>
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🔍</div>
+                        <h4>Smart Search</h4>
+                        <p>Support multi-dimensional search by keywords, authors, journals, etc., quickly finding relevant research</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📊</div>
+                        <h4>Feature Comparison</h4>
+                        <p>Side-by-side comparison of different studies' measurement methods for the same concepts, discovering operationalization differences</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">📚</div>
+                        <h4>Knowledge Integration</h4>
+                        <p>Centralized display of key research information to improve research efficiency</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">👥</div>
+                        <h4>Multi-User Service</h4>
+                        <p>Serving scholars, journalists, and the general public simultaneously to meet different needs</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="stats">
+            <div class="container">
+                <h3 class="section-title">Platform Statistics</h3>
+                <div class="stats-grid">
+                    <div class="stat-item">
+                        <div class="stat-number">1,250+</div>
+                        <div class="stat-label">Research Articles</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">500+</div>
+                        <div class="stat-label">Measurement Tools</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">50+</div>
+                        <div class="stat-label">Academic Journals</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">100+</div>
+                        <div class="stat-label">Research Fields</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <p>Committed to providing efficient tools and platforms for academic research</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="search.html">Search Research</a>
+                    <a href="browse.html">Browse Categories</a>
+                    <a href="compare.html">Compare Features</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>support@questionnaire-platform.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Questionnaire Database Platform. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const query = searchInput.value.trim();
+            if (query) {
+                window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+            }
+        }
+
+        function searchTag(tag) {
+            window.location.href = `search.html?q=${encodeURIComponent(tag)}`;
+        }
+
+        // Search on Enter key press
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    </script>
+</body>
+</html>

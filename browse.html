@@ -1,0 +1,348 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Browse Categories - Questionnaire Database Platform</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/browse.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Questionnaire Database Platform</h1>
+                <span class="tagline">Academic Research Tool</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="search.html" class="nav-link">Search</a>
+                <a href="browse.html" class="nav-link active">Browse</a>
+                <a href="compare.html" class="nav-link">Compare</a>
+                <a href="profile.html" class="nav-link">Profile</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Browse Header -->
+            <section class="browse-header">
+                <h1 class="page-title">Browse Categories</h1>
+                <p class="page-description">Browse research articles by topic, method, year and other dimensions to discover relevant studies</p>
+            </section>
+
+            <!-- Category Navigation -->
+            <section class="category-nav">
+                <div class="nav-tabs">
+                    <button class="nav-tab active" onclick="switchCategory('topic')">By Topic</button>
+                    <button class="nav-tab" onclick="switchCategory('method')">By Method</button>
+                    <button class="nav-tab" onclick="switchCategory('year')">By Year</button>
+                    <button class="nav-tab" onclick="switchCategory('journal')">By Journal</button>
+                </div>
+            </section>
+
+            <!-- Topic Content -->
+            <section class="category-content" id="topic-content">
+                <div class="category-grid">
+                    <div class="category-card">
+                        <div class="category-icon">🏛️</div>
+                        <h3 class="category-title">Political Trust</h3>
+                        <p class="category-description">Research related to political trust, including government trust, institutional trust, etc.</p>
+                        <div class="category-stats">
+                            <span class="stat">125 Articles</span>
+                            <span class="stat">15 Scales</span>
+                        </div>
+                        <a href="search.html?category=political-trust" class="btn btn-primary">Browse Research</a>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon">🤝</div>
+                        <h3 class="category-title">Social Tolerance</h3>
+                        <p class="category-description">Research related to social tolerance, political tolerance, cultural tolerance, etc.</p>
+                        <div class="category-stats">
+                            <span class="stat">98 Articles</span>
+                            <span class="stat">12 Scales</span>
+                        </div>
+                        <a href="search.html?category=tolerance" class="btn btn-primary">Browse Research</a>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon">📱</div>
+                        <h3 class="category-title">Social Media</h3>
+                        <p class="category-description">Research related to social media use, influence, behavior, etc.</p>
+                        <div class="category-stats">
+                            <span class="stat">156 Articles</span>
+                            <span class="stat">20 Scales</span>
+                        </div>
+                        <a href="search.html?category=social-media" class="btn btn-primary">Browse Research</a>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon">⚖️</div>
+                        <h3 class="category-title">Political Polarization</h3>
+                        <p class="category-description">Research related to political polarization, ideological division, etc.</p>
+                        <div class="category-stats">
+                            <span class="stat">87 Articles</span>
+                            <span class="stat">10 Scales</span>
+                        </div>
+                        <a href="search.html?category=polarization" class="btn btn-primary">Browse Research</a>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon">🗳️</div>
+                        <h3 class="category-title">Political Participation</h3>
+                        <p class="category-description">Research related to political participation, civic engagement, voting behavior, etc.</p>
+                        <div class="category-stats">
+                            <span class="stat">112 Articles</span>
+                            <span class="stat">18 Scales</span>
+                        </div>
+                        <a href="search.html?category=participation" class="btn btn-primary">Browse Research</a>
+                    </div>
+
+                    <div class="category-card">
+                        <div class="category-icon">🌍</div>
+                        <h3 class="category-title">Cross-National Comparison</h3>
+                        <p class="category-description">Cross-national comparative research, cultural differences, institutional effects, etc.</p>
+                        <div class="category-stats">
+                            <span class="stat">134 Articles</span>
+                            <span class="stat">25 Scales</span>
+                        </div>
+                        <a href="search.html?category=cross-national" class="btn btn-primary">Browse Research</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Method Content -->
+            <section class="category-content hidden" id="method-content">
+                <div class="method-grid">
+                    <div class="method-card">
+                        <div class="method-icon">📊</div>
+                        <h3 class="method-title">Survey Research</h3>
+                        <p class="method-description">Cross-sectional surveys, longitudinal surveys, panel data, etc.</p>
+                        <div class="method-stats">
+                            <span class="stat">245 Articles</span>
+                            <span class="stat">Avg Sample Size: 2,500</span>
+                        </div>
+                        <a href="search.html?method=survey" class="btn btn-primary">Browse Research</a>
+                    </div>
+
+                    <div class="method-card">
+                        <div class="method-icon">🧪</div>
+                        <h3 class="method-title">Experimental Research</h3>
+                        <p class="method-description">Laboratory experiments, field experiments, online experiments, etc.</p>
+                        <div class="method-stats">
+                            <span class="stat">156 Articles</span>
+                            <span class="stat">Avg Sample Size: 800</span>
+                        </div>
+                        <a href="search.html?method=experiment" class="btn btn-primary">Browse Research</a>
+                    </div>
+
+                    <div class="method-card">
+                        <div class="method-icon">📈</div>
+                        <h3 class="method-title">Meta-Analysis</h3>
+                        <p class="method-description">Systematic reviews, meta-analysis, meta-analyses, etc.</p>
+                        <div class="method-stats">
+                            <span class="stat">67 Articles</span>
+                            <span class="stat">Avg Studies: 45</span>
+                        </div>
+                        <a href="search.html?method=meta-analysis" class="btn btn-primary">Browse Research</a>
+                    </div>
+
+                    <div class="method-card">
+                        <div class="method-icon">📝</div>
+                        <h3 class="method-title">Scale Development</h3>
+                        <p class="method-description">Scale development, validation, cross-cultural adaptation, etc.</p>
+                        <div class="method-stats">
+                            <span class="stat">89 Articles</span>
+                            <span class="stat">Avg Items: 12</span>
+                        </div>
+                        <a href="search.html?method=scale-development" class="btn btn-primary">Browse Research</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Year Content -->
+            <section class="category-content hidden" id="year-content">
+                <div class="year-timeline">
+                    <div class="timeline-item">
+                        <div class="timeline-year">2024</div>
+                        <div class="timeline-content">
+                            <h3>Latest Research</h3>
+                            <p>Latest research published in 2024, including the latest theoretical developments and empirical findings</p>
+                            <div class="timeline-stats">
+                                <span class="stat">45 Articles</span>
+                                <span class="stat">12 New Scales</span>
+                            </div>
+                            <a href="search.html?year=2024" class="btn btn-primary">Browse Research</a>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-year">2023</div>
+                        <div class="timeline-content">
+                            <h3>2023 Research</h3>
+                            <p>Research published in 2023, including important theoretical contributions and empirical findings</p>
+                            <div class="timeline-stats">
+                                <span class="stat">156 Articles</span>
+                                <span class="stat">28 Scales</span>
+                            </div>
+                            <a href="search.html?year=2023" class="btn btn-primary">Browse Research</a>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-year">2022</div>
+                        <div class="timeline-content">
+                            <h3>2022 Research</h3>
+                            <p>Research published in 2022, including important theoretical contributions and empirical findings</p>
+                            <div class="timeline-stats">
+                                <span class="stat">134 Articles</span>
+                                <span class="stat">22 Scales</span>
+                            </div>
+                            <a href="search.html?year=2022" class="btn btn-primary">Browse Research</a>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-year">2021</div>
+                        <div class="timeline-content">
+                            <h3>2021 Research</h3>
+                            <p>Research published in 2021, including important theoretical contributions and empirical findings</p>
+                            <div class="timeline-stats">
+                                <span class="stat">98 Articles</span>
+                                <span class="stat">18 Scales</span>
+                            </div>
+                            <a href="search.html?year=2021" class="btn btn-primary">Browse Research</a>
+                        </div>
+                    </div>
+
+                    <div class="timeline-item">
+                        <div class="timeline-year">2020</div>
+                        <div class="timeline-content">
+                            <h3>2020 Research</h3>
+                            <p>Research published in 2020, including important theoretical contributions and empirical findings</p>
+                            <div class="timeline-stats">
+                                <span class="stat">87 Articles</span>
+                                <span class="stat">15 Scales</span>
+                            </div>
+                            <a href="search.html?year=2020" class="btn btn-primary">Browse Research</a>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Journal Content -->
+            <section class="category-content hidden" id="journal-content">
+                <div class="journal-grid">
+                    <div class="journal-card">
+                        <div class="journal-logo">N</div>
+                        <h3 class="journal-title">Nature</h3>
+                        <p class="journal-description">Top scientific journal, publishing high-quality research</p>
+                        <div class="journal-stats">
+                            <span class="stat">12 Articles</span>
+                            <span class="stat">Impact Factor: 69.5</span>
+                        </div>
+                        <a href="search.html?journal=Nature" class="btn btn-primary">Browse Research</a>
+                    </div>
+
+                    <div class="journal-card">
+                        <div class="journal-logo">S</div>
+                        <h3 class="journal-title">Science</h3>
+                        <p class="journal-description">Top scientific journal, publishing high-quality research</p>
+                        <div class="journal-stats">
+                            <span class="stat">8 Articles</span>
+                            <span class="stat">Impact Factor: 63.7</span>
+                        </div>
+                        <a href="search.html?journal=Science" class="btn btn-primary">Browse Research</a>
+                    </div>
+
+                    <div class="journal-card">
+                        <div class="journal-logo">P</div>
+                        <h3 class="journal-title">PNAS</h3>
+                        <p class="journal-description">American National Academy of Sciences Journal</p>
+                        <div class="journal-stats">
+                            <span class="stat">15 Articles</span>
+                            <span class="stat">Impact Factor: 12.8</span>
+                        </div>
+                        <a href="search.html?journal=PNAS" class="btn btn-primary">Browse Research</a>
+                    </div>
+
+                    <div class="journal-card">
+                        <div class="journal-logo">J</div>
+                        <h3 class="journal-title">JPSP</h3>
+                        <p class="journal-description">Journal of Personality and Social Psychology</p>
+                        <div class="journal-stats">
+                            <span class="stat">23 Articles</span>
+                            <span class="stat">Impact Factor: 8.5</span>
+                        </div>
+                        <a href="search.html?journal=JPSP" class="btn btn-primary">Browse Research</a>
+                    </div>
+
+                    <div class="journal-card">
+                        <div class="journal-logo">C</div>
+                        <h3 class="journal-title">CHB</h3>
+                        <p class="journal-description">Computer in Human Behavior</p>
+                        <div class="journal-stats">
+                            <span class="stat">45 Articles</span>
+                            <span class="stat">Impact Factor: 9.9</span>
+                        </div>
+                        <a href="search.html?journal=CHB" class="btn btn-primary">Browse Research</a>
+                    </div>
+
+                    <div class="journal-card">
+                        <div class="journal-logo">P</div>
+                        <h3 class="journal-title">Political Psychology</h3>
+                        <p class="journal-description">Journal of Political Psychology</p>
+                        <div class="journal-stats">
+                            <span class="stat">67 Articles</span>
+                            <span class="stat">Impact Factor: 3.2</span>
+                        </div>
+                        <a href="search.html?journal=Political Psychology" class="btn btn-primary">Browse Research</a>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <p>To provide efficient tools and platforms for academic research</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="search.html">Search Research</a>
+                    <a href="browse.html">Browse Categories</a>
+                    <a href="compare.html">Compare Features</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>support@questionnaire-platform.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Questionnaire Database Platform. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function switchCategory(category) {
+            // Hide all content
+            const contents = document.querySelectorAll('.category-content');
+            contents.forEach(content => content.classList.add('hidden'));
+            
+            // Show selected content
+            document.getElementById(category + '-content').classList.remove('hidden');
+            
+            // Update tab status
+            const tabs = document.querySelectorAll('.nav-tab');
+            tabs.forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+        }
+    </script>
+</body>
+</html>

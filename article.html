@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Details - Questionnaire Database Platform</title>
+    <link rel="stylesheet" href="styles/main.css">
+    <link rel="stylesheet" href="styles/article.css">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Questionnaire Database Platform</h1>
+                <span class="tagline">Academic Research Tool</span>
+            </div>
+            <nav class="nav">
+                <a href="index.html" class="nav-link">Home</a>
+                <a href="search.html" class="nav-link">Search</a>
+                <a href="browse.html" class="nav-link">Browse</a>
+                <a href="compare.html" class="nav-link">Compare</a>
+                <a href="profile.html" class="nav-link">Profile</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="main">
+        <div class="container">
+            <!-- Article Header Information -->
+            <section class="article-header">
+                <div class="article-meta">
+                    <div class="article-journal">Journal of Political Psychology</div>
+                    <div class="article-year">2023</div>
+                    <div class="article-citations">Citations: 45</div>
+                </div>
+                
+                <h1 class="article-title">The Impact of Social Media on Political Trust: A Cross-National Analysis</h1>
+                
+                <div class="article-authors">
+                    <strong>Authors:</strong> Smith, J., Johnson, A., & Brown, M.
+                </div>
+                
+                <div class="article-actions">
+                    <button class="btn btn-outline" onclick="addToCompare()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m0-7v7m0-7h10a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2H9m0-7V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
+                        </svg>
+                        Add to Compare
+                    </button>
+                    <button class="btn btn-outline" onclick="toggleFavorite()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                        </svg>
+                        Favorite
+                    </button>
+                    <button class="btn btn-outline" onclick="exportArticle()">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                            <polyline points="7,10 12,15 17,10"></polyline>
+                            <line x1="12" y1="15" x2="12" y2="3"></line>
+                        </svg>
+                        Export
+                    </button>
+                </div>
+            </section>
+
+            <!-- Article Content -->
+            <section class="article-content">
+                <div class="content-grid">
+                    <!-- Main Content on Left -->
+                    <div class="content-main">
+                        <!-- Abstract -->
+                        <div class="content-section">
+                            <h2 class="section-title">Abstract</h2>
+                            <div class="feature-content">
+                                <div class="feature-summary">
+                                    <p>This study examines the relationship between social media usage and political trust across 25 countries. Using data from the World Values Survey and social media usage statistics, we find that increased social media consumption is associated with decreased political trust, particularly in democratic societies. The effect is moderated by individual-level factors such as education and political interest, as well as country-level factors including media freedom and democratic quality.</p>
+                                </div>
+                                <button class="btn btn-outline btn-sm" onclick="toggleFullText('abstract')">
+                                    <span class="btn-text">View Full Abstract</span>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="6,9 12,15 18,9"></polyline>
+                                    </svg>
+                                </button>
+                                <div class="feature-full-text hidden" id="abstract-full">
+                                    <p>This study examines the relationship between social media usage and political trust across 25 countries using a multi-level approach. We combine individual-level data from the World Values Survey (WVS) with country-level indicators of media freedom, democratic quality, and social media penetration rates. Our analysis covers the period from 2010 to 2020, allowing us to track changes over time as social media platforms became more prevalent globally.</p>
+                                    <p>The theoretical framework draws on theories of media effects, political communication, and comparative politics. We hypothesize that social media use will be negatively associated with political trust, but that this relationship will be moderated by both individual characteristics (education, political interest, age) and contextual factors (media freedom, democratic quality, economic development).</p>
+                                    <p>Our findings reveal a significant negative association between social media use and political trust across all countries in our sample. However, the strength of this relationship varies considerably across contexts. In countries with high levels of media freedom and democratic quality, the negative effect of social media on political trust is more pronounced. This suggests that social media may amplify existing political cynicism in already skeptical populations.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Research Methods -->
+                        <div class="content-section">
+                            <h2 class="section-title">Research Methods</h2>
+                            <div class="feature-content">
+                                <div class="feature-summary">
+                                    <p><strong>Study Type:</strong> Cross-sectional Survey Research</p>
+                                    <p><strong>Data Source:</strong> World Values Survey (WVS) Wave 7 Data</p>
+                                    <p><strong>Sample Size:</strong> 25 countries, 15,000 respondents total</p>
+                                    <p><strong>Analysis Level:</strong> Multi-level Analysis (Individual + Country Level)</p>
+                                </div>
+                                <button class="btn btn-outline btn-sm" onclick="toggleFullText('methodology')">
+                                    <span class="btn-text">View Full Methods</span>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="6,9 12,15 18,9"></polyline>
+                                    </svg>
+                                </button>
+                                <div class="feature-full-text hidden" id="methodology-full">
+                                    <h4>Data Collection</h4>
+                                    <p>This study uses the World Values Survey Wave 7 data, which was conducted in 25 countries between 2017 and 2022. The survey used a stratified random sampling method to ensure representation of age, gender, education, and residence. The sample size ranged from 500 to 1,000 per country, with a total of 15,000 respondents.</p>
+                                    
+                                    <h4>Measurement Tools</h4>
+                                    <p><strong>Dependent Variable:</strong> Political Trust measured through questions like "How much do you trust the following institutions?" including government, parliament, parties, courts, etc. Using a 5-point Likert scale (1=completely distrust, 5=completely trust).</p>
+                                    
+                                    <p><strong>Independent Variable:</strong> Social media usage frequency measured through "How much time do you spend on social media (e.g., Facebook, Twitter, Instagram) per day?" Options include: never, less than 1 hour, 1-2 hours, 3-4 hours, 5 hours or more.</p>
+                                    
+                                    <h4>Control Variables</h4>
+                                    <p>Individual Level: Age, gender, education, income, political interest, political ideology, media usage habits, etc.</p>
+                                    <p>Country Level: GDP, democracy index, media freedom index, internet penetration rate, political system type, etc.</p>
+                                    
+                                    <h4>Analysis Methods</h4>
+                                    <p>Multi-level linear model (HLM) was used for analysis, with the first level being individual-level variables and the second level being country-level variables. Statistical analysis was performed using SPSS 28.0 and R 4.2.0.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Main Findings -->
+                        <div class="content-section">
+                            <h2 class="section-title">Main Findings</h2>
+                            <div class="feature-content">
+                                <div class="feature-summary">
+                                    <p><strong>Main Effect:</strong> Social media use is significantly negatively associated with political trust (β = -0.23, p < 0.001)</p>
+                                    <p><strong>Moderating Effect:</strong> Education level and democratic quality significantly moderate this relationship</p>
+                                    <p><strong>Country Differences:</strong> The relationship is stronger in democratic countries</p>
+                                </div>
+                                <button class="btn btn-outline btn-sm" onclick="toggleFullText('findings')">
+                                    <span class="btn-text">View Full Findings</span>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="6,9 12,15 18,9"></polyline>
+                                    </svg>
+                                </button>
+                                <div class="feature-full-text hidden" id="findings-full">
+                                    <h4>Descriptive Statistics</h4>
+                                    <p>In the sample, the average daily social media usage is 2.3 hours (SD = 1.8), and the average political trust score is 2.8 (SD = 1.2). There are significant differences between countries, with the highest political trust in Nordic countries and the lowest in Latin American countries.</p>
+                                    
+                                    <h4>Main Effect</h4>
+                                    <p>Multi-level analysis results show that there is a significant negative association between social media usage frequency and political trust (β = -0.23, p < 0.001, 95% CI [-0.31, -0.15]). This effect remains significant after controlling for individual and country characteristics.</p>
+                                    
+                                    <h4>Moderating Effect</h4>
+                                    <p><strong>Education Level:</strong> Education level significantly moderates the relationship between social media use and political trust (β = 0.15, p < 0.01). For high education groups, the negative impact of social media use is smaller.</p>
+                                    
+                                    <p><strong>Democratic Quality:</strong> The democratic quality index at the country level significantly moderates this relationship (β = 0.08, p < 0.05). In countries with higher democratic quality, the negative impact of social media use on political trust is stronger.</p>
+                                    
+                                    <h4>Mediating Effect</h4>
+                                    <p>Further analysis shows that the diversity of political information channels partially mediates the relationship between social media use and political trust. Social media use increases the diversity of information channels, but also increases the uncertainty and contradiction of information, thus reducing political trust.</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Measurement Tools -->
+                        <div class="content-section">
+                            <h2 class="section-title">Measurement Tools</h2>
+                            <div class="feature-content">
+                                <div class="feature-summary">
+                                    <p><strong>Political Trust Scale:</strong> 5 items, Cronbach's α = 0.87</p>
+                                    <p><strong>Social Media Use:</strong> Single item measurement, 5-point scale</p>
+                                    <p><strong>Control Variables:</strong> Demographic variables + Political attitude variables</p>
+                                </div>
+                                <button class="btn btn-outline btn-sm" onclick="toggleFullText('measures')">
+                                    <span class="btn-text">View Full Scale</span>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="6,9 12,15 18,9"></polyline>
+                                    </svg>
+                                </button>
+                                <div class="feature-full-text hidden" id="measures-full">
+                                    <h4>Political Trust Scale</h4>
+                                    <p>Using the political support theory of Easton (1975), the scale measures the level of trust in the political system. The scale contains 5 items:</p>
+                                    <ol>
+                                        <li>"How much do you trust the government?"</li>
+                                        <li>"How much do you trust the parliament?"</li>
+                                        <li>"How much do you trust political parties?"</li>
+                                        <li>"How much do you trust the courts?"</li>
+                                        <li>"How much do you trust the police?"</li>
+                                    </ol>
+                                    <p>All items use a 5-point Likert scale (1=completely distrust, 5=completely trust). The scale has good reliability (Cronbach's α = 0.87), and the confirmatory factor analysis shows good fit of a single factor structure (CFI = 0.95, RMSEA = 0.06).</p>
+                                    
+                                    <h4>Social Media Use Measurement</h4>
+                                    <p>Measured through the following question: "How much time do you spend on social media (e.g., Facebook, Twitter, Instagram, TikTok) per day?"</p>
+                                    <p>Options: 1=never, 2=less than 1 hour, 3=1-2 hours, 4=3-4 hours, 5=5 hours or more</p>
+                                    
+                                    <h4>Control Variables Measurement</h4>
+                                    <p><strong>Demographic Variables:</strong> Age (continuous variable), gender (0=female, 1=male), education level (1=elementary school or below, 2=middle school, 3=high school, 4=university or above), income level (1=low income, 2=low-middle income, 3=middle income, 4=middle-high income, 5=high income)</p>
+                                    
+                                    <p><strong>Political Attitude Variables:</strong> Political interest (1=completely not interested, 5=very interested), political ideology (1=very left, 5=very right), political efficacy (3 items, Cronbach's α = 0.82)</p>
+                                    
+                                    <h4>Country Level Variables</h4>
+                                    <p>Obtained from institutions like World Bank, Freedom House, Economist, etc.: GDP per capita (log transformed), democracy index (Freedom House), media freedom index (Reporters Without Borders), internet penetration rate, political system type (presidential system/parliamentary system)</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Right Sidebar -->
+                    <div class="content-sidebar">
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Article Information</h3>
+                            <div class="info-item">
+                                <strong>DOI:</strong> 10.1000/182
+                            </div>
+                            <div class="info-item">
+                                <strong>Published:</strong> March 2023
+                            </div>
+                            <div class="info-item">
+                                <strong>Pages:</strong> 15 pages
+                            </div>
+                            <div class="info-item">
+                                <strong>Keywords:</strong> Political Trust, Social Media, Cross-National, Multi-Level Analysis
+                            </div>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Research Features</h3>
+                            <div class="feature-tags">
+                                <span class="tag tag-primary">Trust</span>
+                                <span class="tag">Social Media</span>
+                                <span class="tag">Cross-National</span>
+                                <span class="tag">Survey</span>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Related Studies</h3>
+                            <div class="related-studies">
+                                <a href="#" class="related-study">
+                                    <div class="related-title">Social Media and Political Trust in Europe</div>
+                                    <div class="related-meta">European Journal of Political Research, 2022</div>
+                                </a>
+                                <a href="#" class="related-study">
+                                    <div class="related-title">Digital Media Effects on Democracy</div>
+                                    <div class="related-meta">Political Communication, 2023</div>
+                                </a>
+                                <a href="#" class="related-study">
+                                    <div class="related-title">Trust in Digital Age</div>
+                                    <div class="related-meta">Journal of Computer-Mediated Communication, 2023</div>
+                                </a>
+                            </div>
+                        </div>
+
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Download Links</h3>
+                            <div class="download-links">
+                                <a href="#" class="download-link">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                        <polyline points="7,10 12,15 17,10"></polyline>
+                                        <line x1="12" y1="15" x2="12" y2="3"></line>
+                                    </svg>
+                                    Full PDF
+                                </a>
+                                <a href="#" class="download-link">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                                        <polyline points="14,2 14,8 20,8"></polyline>
+                                    </svg>
+                                    Citation Format
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <p>Committed to providing efficient tools and platforms for academic research</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="search.html">Search Research</a>
+                    <a href="browse.html">Browse Categories</a>
+                    <a href="compare.html">Compare Features</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>support@questionnaire-platform.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Questionnaire Database Platform. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFullText(featureId) {
+            const fullTextElement = document.getElementById(featureId + '-full');
+            const button = event.target.closest('button');
+            const buttonText = button.querySelector('.btn-text');
+            
+            if (fullTextElement.classList.contains('hidden')) {
+                fullTextElement.classList.remove('hidden');
+                buttonText.textContent = 'Collapse';
+                button.querySelector('svg').style.transform = 'rotate(180deg)';
+            } else {
+                fullTextElement.classList.add('hidden');
+                buttonText.textContent = 'View Full ' + getFeatureName(featureId);
+                button.querySelector('svg').style.transform = 'rotate(0deg)';
+            }
+        }
+
+        function getFeatureName(featureId) {
+            const names = {
+                'abstract': 'Abstract',
+                'methodology': 'Methods',
+                'findings': 'Findings',
+                'measures': 'Scale'
+            };
+            return names[featureId] || 'Content';
+        }
+
+        function addToCompare() {
+            console.log('Add to comparison');
+        }
+
+        function toggleFavorite() {
+            console.log('Toggle favorite');
+        }
+
+        function exportArticle() {
+            console.log('Export article');
+        }
+    </script>
+</body>
+</html>
