@@ -17,9 +17,7 @@
             <nav class="nav">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="search.html" class="nav-link active">Search</a>
-                <a href="browse.html" class="nav-link">Browse</a>
                 <a href="compare.html" class="nav-link">Compare</a>
-                <a href="profile.html" class="nav-link">Profile</a>
             </nav>
         </div>
     </header>
@@ -95,175 +93,8 @@
                     </div>
                 </div>
 
-                <div class="results-list" id="resultsList">
-                    <!-- Search Result Items -->
-                    <article class="result-item">
-                        <div class="result-header">
-                            <h3 class="result-title">
-                                <a href="article.html?id=1">The Impact of Social Media on Political Trust: A Cross-National Analysis</a>
-                            </h3>
-                            <div class="result-actions">
-                                <button class="btn btn-outline btn-sm" onclick="addToCompare(1)">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m0-7v7m0-7h10a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2H9m0-7V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
-                                    </svg>
-                                    Compare
-                                </button>
-                                <button class="btn btn-outline btn-sm" onclick="toggleFavorite(1)">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                                    </svg>
-                                    Favorite
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="result-meta">
-                            <div class="result-authors">
-                                <strong>Authors:</strong> Smith, J., Johnson, A., & Brown, M.
-                            </div>
-                            <div class="result-journal">
-                                <strong>Journal:</strong> Journal of Political Psychology, 2023
-                            </div>
-                            <div class="result-citations">
-                                <strong>Citations:</strong> 45 times
-                            </div>
-                        </div>
-
-                        <div class="result-abstract">
-                            <p>This study examines the relationship between social media usage and political trust across 25 countries. Using data from the World Values Survey and social media usage statistics, we find that increased social media consumption is associated with decreased political trust, particularly in democratic societies...</p>
-                        </div>
-
-                        <div class="result-features">
-                            <div class="feature-tags">
-                                <span class="tag tag-primary">Trust</span>
-                                <span class="tag">Social Media</span>
-                                <span class="tag">Political Psychology</span>
-                                <span class="tag">Cross-National</span>
-                            </div>
-                        </div>
-
-                        <div class="result-footer">
-                            <a href="article.html?id=1" class="btn btn-primary">View Details</a>
-                            <div class="result-stats">
-                                <span class="stat-item">Sample Size: 15,000</span>
-                                <span class="stat-item">Countries: 25</span>
-                                <span class="stat-item">Method: Survey</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="result-item">
-                        <div class="result-header">
-                            <h3 class="result-title">
-                                <a href="article.html?id=2">Measuring Tolerance in Digital Spaces: A New Scale Development</a>
-                            </h3>
-                            <div class="result-actions">
-                                <button class="btn btn-outline btn-sm" onclick="addToCompare(2)">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m0-7v7m0-7h10a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2H9m0-7V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
-                                    </svg>
-                                    Compare
-                                </button>
-                                <button class="btn btn-outline btn-sm" onclick="toggleFavorite(2)">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                                    </svg>
-                                    Favorite
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="result-meta">
-                            <div class="result-authors">
-                                <strong>Authors:</strong>Chen, L., Wilson, K., & Davis, R.
-                            </div>
-                            <div class="result-journal">
-                                <strong>Journal:</strong>Computers in Human Behavior, 2023
-                            </div>
-                            <div class="result-citations">
-                                <strong>Citations:</strong>32 times
-                            </div>
-                        </div>
-
-                        <div class="result-abstract">
-                            <p>This paper presents the development and validation of a new scale for measuring tolerance in digital communication contexts. The Digital Tolerance Scale (DTS) was developed through a multi-stage process including item generation, expert review, and psychometric validation...</p>
-                        </div>
-
-                        <div class="result-features">
-                            <div class="feature-tags">
-                                <span class="tag tag-primary">Tolerance</span>
-                                <span class="tag">Scale Development</span>
-                                <span class="tag">Digital Communication</span>
-                                <span class="tag">Psychometrics</span>
-                            </div>
-                        </div>
-
-                        <div class="result-footer">
-                            <a href="article.html?id=2" class="btn btn-primary">View Details</a>
-                            <div class="result-stats">
-                                <span class="stat-item">Sample Size: 2,500</span>
-                                <span class="stat-item">Countries: 3</span>
-                                <span class="stat-item">Method: Scale Development</span>
-                            </div>
-                        </div>
-                    </article>
-
-                    <article class="result-item">
-                        <div class="result-header">
-                            <h3 class="result-title">
-                                <a href="article.html?id=3">Social Media and Political Polarization: A Meta-Analysis</a>
-                            </h3>
-                            <div class="result-actions">
-                                <button class="btn btn-outline btn-sm" onclick="addToCompare(3)">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m0-7v7m0-7h10a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2H9m0-7V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
-                                    </svg>
-                                    Compare
-                                </button>
-                                <button class="btn btn-outline btn-sm" onclick="toggleFavorite(3)">
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
-                                    </svg>
-                                    Favorite
-                                </button>
-                            </div>
-                        </div>
-                        
-                        <div class="result-meta">
-                            <div class="result-authors">
-                                <strong>Authors:</strong>Anderson, P., Taylor, S., & Miller, B.
-                            </div>
-                            <div class="result-journal">
-                                <strong>Journal:</strong>Communication Research, 2022
-                            </div>
-                            <div class="result-citations">
-                                <strong>Citations:</strong>78 times
-                            </div>
-                        </div>
-
-                        <div class="result-abstract">
-                            <p>A comprehensive meta-analysis of 127 studies examining the relationship between social media use and political polarization. Results show a small but significant positive correlation between social media use and political polarization, with stronger effects observed in certain demographic groups...</p>
-                        </div>
-
-                        <div class="result-features">
-                            <div class="feature-tags">
-                                <span class="tag tag-primary">Political Polarization</span>
-                                <span class="tag">Social Media</span>
-                                <span class="tag">Meta-Analysis</span>
-                                <span class="tag">Communication</span>
-                            </div>
-                        </div>
-
-                        <div class="result-footer">
-                            <a href="article.html?id=3" class="btn btn-primary">View Details</a>
-                            <div class="result-stats">
-                                <span class="stat-item">Studies: 127</span>
-                                <span class="stat-item">Sample Size: 500,000+</span>
-                                <span class="stat-item">Method: Meta-Analysis</span>
-                            </div>
-                        </div>
-                    </article>
+                <div class="results-list" id="search-results">
+                    <!-- Search results will be dynamically loaded here -->
                 </div>
 
                 <!-- Pagination -->
@@ -302,7 +133,6 @@
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <a href="search.html">Search Research</a>
-                    <a href="browse.html">Browse Categories</a>
                     <a href="compare.html">Compare Features</a>
                 </div>
                 <div class="footer-section">
@@ -316,6 +146,8 @@
         </div>
     </footer>
 
+    <script src="js/csv-loader.js"></script>
+    <script src="js/data-loader.js"></script>
     <script>
         // Get URL parameters
         function getUrlParameter(name) {
@@ -333,23 +165,69 @@
 
         // Perform search
         function performSearch() {
-            const searchInput = document.getElementById('searchInput');
-            const query = searchInput.value.trim();
-            if (query) {
-                window.location.href = `search.html?q=${encodeURIComponent(query)}`;
-            }
+            const query = document.getElementById('searchInput').value;
+            const year = document.getElementById('yearFilter').value;
+            const journal = document.getElementById('journalFilter').value;
+            const methodology = document.getElementById('methodologyFilter').value;
+            const country = document.getElementById('countryFilter').value;
+            const sampleSize = document.getElementById('sampleSizeFilter').value;
+            const sortBy = document.getElementById('sortByFilter').value;
+            
+            // Update URL with search parameters
+            const params = new URLSearchParams();
+            if (query) params.set('q', query);
+            if (year) params.set('year', year);
+            if (journal) params.set('journal', journal);
+            if (methodology) params.set('methodology', methodology);
+            if (country) params.set('country', country);
+            if (sampleSize) params.set('sampleSize', sampleSize);
+            if (sortBy) params.set('sortBy', sortBy);
+            
+            // Reload page with new parameters
+            window.location.href = `search.html?${params.toString()}`;
+        }
+
+        // Load search results based on URL parameters
+        function loadSearchResults() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const query = urlParams.get('q') || '';
+            const year = urlParams.get('year') || '';
+            const journal = urlParams.get('journal') || '';
+            const methodology = urlParams.get('methodology') || '';
+            const country = urlParams.get('country') || '';
+            const sampleSize = urlParams.get('sampleSize') || '';
+            const sortBy = urlParams.get('sortBy') || 'relevance';
+            
+            // Update form values
+            document.getElementById('searchInput').value = query;
+            document.getElementById('yearFilter').value = year;
+            document.getElementById('journalFilter').value = journal;
+            document.getElementById('methodologyFilter').value = methodology;
+            document.getElementById('countryFilter').value = country;
+            document.getElementById('sampleSizeFilter').value = sampleSize;
+            document.getElementById('sortByFilter').value = sortBy;
+            
+            // Perform search with real data
+            const filters = { year, journal, methodology, country, sampleSize, sortBy };
+            const results = window.dataLoader.searchPapers(query, filters);
+            updateSearchResults(results);
         }
 
         // Add to comparison
         function addToCompare(articleId) {
-            // Add comparison logic here
-            console.log('Add to comparison:', articleId);
+            window.dataLoader.addToComparison(articleId);
+            showNotification('Added to comparison');
         }
 
         // Toggle favorite
         function toggleFavorite(articleId) {
-            // Add favorite logic here
-            console.log('Toggle favorite:', articleId);
+            if (window.dataLoader.isFavorited(articleId)) {
+                window.dataLoader.removeFromFavorites(articleId);
+            } else {
+                window.dataLoader.addToFavorites(articleId);
+            }
+            updateFavoritesUI();
+            showNotification('Favorites updated');
         }
 
         // Search on Enter key press
@@ -360,8 +238,26 @@
         });
 
         // Initialize on page load
-        document.addEventListener('DOMContentLoaded', function() {
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Wait for data to load
+            await window.dataLoader.loadPapers();
+            
             initializeSearch();
+            loadSearchResults();
+            
+            // Show all papers by default if no search parameters
+            const urlParams = new URLSearchParams(window.location.search);
+            if (!urlParams.get('q') && !urlParams.get('year') && !urlParams.get('journal') && !urlParams.get('methodology') && !urlParams.get('country') && !urlParams.get('sampleSize') && !urlParams.get('sortBy')) {
+                // Show all papers
+                const allPapers = window.dataLoader.getAllPapers();
+                updateSearchResults(allPapers);
+                
+                // Update result count
+                const resultCount = document.getElementById('resultCount');
+                if (resultCount) {
+                    resultCount.textContent = `Found ${allPapers.length} articles`;
+                }
+            }
         });
     </script>
 </body>

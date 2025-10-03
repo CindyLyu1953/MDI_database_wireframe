@@ -17,9 +17,7 @@
             <nav class="nav">
                 <a href="index.html" class="nav-link active">Home</a>
                 <a href="search.html" class="nav-link">Search</a>
-                <a href="browse.html" class="nav-link">Browse</a>
                 <a href="compare.html" class="nav-link">Compare</a>
-                <a href="profile.html" class="nav-link">Profile</a>
             </nav>
         </div>
     </header>
@@ -56,57 +54,7 @@
             </div>
         </section>
 
-        <section class="features">
-            <div class="container">
-                <h3 class="section-title">Platform Features</h3>
-                <div class="features-grid">
-                    <div class="feature-card">
-                        <div class="feature-icon">🔍</div>
-                        <h4>Smart Search</h4>
-                        <p>Support multi-dimensional search by keywords, authors, journals, etc., quickly finding relevant research</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">📊</div>
-                        <h4>Feature Comparison</h4>
-                        <p>Side-by-side comparison of different studies' measurement methods for the same concepts, discovering operationalization differences</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">📚</div>
-                        <h4>Knowledge Integration</h4>
-                        <p>Centralized display of key research information to improve research efficiency</p>
-                    </div>
-                    <div class="feature-card">
-                        <div class="feature-icon">👥</div>
-                        <h4>Multi-User Service</h4>
-                        <p>Serving scholars, journalists, and the general public simultaneously to meet different needs</p>
-                    </div>
-                </div>
-            </div>
-        </section>
 
-        <section class="stats">
-            <div class="container">
-                <h3 class="section-title">Platform Statistics</h3>
-                <div class="stats-grid">
-                    <div class="stat-item">
-                        <div class="stat-number">1,250+</div>
-                        <div class="stat-label">Research Articles</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">500+</div>
-                        <div class="stat-label">Measurement Tools</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">50+</div>
-                        <div class="stat-label">Academic Journals</div>
-                    </div>
-                    <div class="stat-item">
-                        <div class="stat-number">100+</div>
-                        <div class="stat-label">Research Fields</div>
-                    </div>
-                </div>
-            </div>
-        </section>
     </main>
 
     <footer class="footer">
@@ -119,7 +67,6 @@
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <a href="search.html">Search Research</a>
-                    <a href="browse.html">Browse Categories</a>
                     <a href="compare.html">Compare Features</a>
                 </div>
                 <div class="footer-section">
@@ -133,17 +80,52 @@
         </div>
     </footer>
 
+    <script src="js/csv-loader.js"></script>
+    <script src="js/data-loader.js"></script>
     <script>
         function performSearch() {
             const searchInput = document.getElementById('searchInput');
             const query = searchInput.value.trim();
             if (query) {
-                window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+                // Handle both file:// and http:// protocols
+                if (window.location.protocol === 'file:') {
+                    // For file:// protocol, use relative path
+                    window.location.href = `search.html?q=${encodeURIComponent(query)}`;
+                } else {
+                    // For http:// protocol, use absolute path
+                    window.location.href = `${window.location.origin}/search.html?q=${encodeURIComponent(query)}`;
+                }
             }
         }
 
         function searchTag(tag) {
-            window.location.href = `search.html?q=${encodeURIComponent(tag)}`;
+            // Handle both file:// and http:// protocols
+            if (window.location.protocol === 'file:') {
+                // For file:// protocol, use relative path
+                window.location.href = `search.html?q=${encodeURIComponent(tag)}`;
+            } else {
+                // For http:// protocol, use absolute path
+                window.location.href = `${window.location.origin}/search.html?q=${encodeURIComponent(tag)}`;
+            }
+        }
+
+        function updateStatistics() {
+            const stats = window.dataLoader.getStatistics();
+            
+            // Update statistics in the hero section
+            const totalStudies = document.querySelector('.stat-number');
+            if (totalStudies) {
+                totalStudies.textContent = stats.totalPapers;
+            }
+            
+            // Update statistics in the stats section
+            const statItems = document.querySelectorAll('.stat-item');
+            if (statItems.length >= 4) {
+                statItems[0].querySelector('.stat-number').textContent = stats.totalPapers;
+                statItems[1].querySelector('.stat-number').textContent = stats.totalStudies.toLocaleString();
+                statItems[2].querySelector('.stat-number').textContent = stats.totalCountries;
+                statItems[3].querySelector('.stat-number').textContent = stats.methodologies.length;
+            }
         }
 
         // Search on Enter key press
@@ -151,6 +133,13 @@
             if (e.key === 'Enter') {
                 performSearch();
             }
+        });
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Wait for data to load
+            await window.dataLoader.loadPapers();
+            updateStatistics();
         });
     </script>
 </body>

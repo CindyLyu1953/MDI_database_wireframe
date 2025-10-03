@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% block title %}Questionnaire Database Platform{% endblock %}</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/article.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/compare.css') }}">
+</head>
+<body>
+    <header class="header">
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-brand">
+                    <a href="{{ url_for('index') }}" class="nav-logo">Questionnaire Database</a>
+                </div>
+                <div class="nav-menu">
+                    <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                    <a href="{{ url_for('search') }}" class="nav-link">Search</a>
+                    <a href="{{ url_for('compare') }}" class="nav-link">Compare</a>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="main">
+        {% block content %}{% endblock %}
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <p>To provide efficient tools and platforms for academic research</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="{{ url_for('search') }}">Search Research</a>
+                    <a href="{{ url_for('compare') }}">Compare Features</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>support@questionnaire-platform.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Questionnaire Database Platform. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    {% block scripts %}{% endblock %}
+</body>
+</html>

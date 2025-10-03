@@ -1,0 +1,271 @@
+{% extends "base.html" %}
+
+{% block title %}Compare Studies - Questionnaire Database Platform{% endblock %}
+
+{% block content %}
+<div class="container">
+    <section class="compare-header">
+        <h1>Compare Studies</h1>
+        <div class="compare-actions">
+            <a href="{{ url_for('search') }}" class="btn btn-outline">Add Studies</a>
+        </div>
+    </section>
+
+    <section class="compare-content">
+        {% if papers %}
+            <div class="comparison-table-container">
+                <div class="comparison-table">
+                    <!-- Table Header -->
+                    <div class="table-header">
+                        <div class="header-cell feature-column">Features</div>
+                        {% for paper in papers %}
+                        <div class="header-cell study-column">
+                            <div class="study-header">
+                                <h3>Study {{ loop.index }}</h3>
+                            </div>
+                            <div class="study-title">{{ paper.title }}</div>
+                            <div class="study-meta">{{ paper.authors|join(', ') }}, {{ paper.year }}</div>
+                        </div>
+                        {% endfor %}
+                    </div>
+
+                    <!-- Basic Information Section -->
+                    <div class="table-row section-header">
+                        <div class="feature-cell">
+                            <div class="feature-name">Basic Information</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell"></div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Authors</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.authors|join(', ') }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Title</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.title }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Journal</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.journal }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Year</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.year }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">APA Style Citation</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.citation or '' }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Abstract</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.abstract[:200] }}{% if paper.abstract|length > 200 %}...{% endif %}</div>
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Experiment Design Section -->
+                    <div class="table-row section-header">
+                        <div class="feature-cell">
+                            <div class="feature-name">Experiment Design</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell"></div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Treatment / Independent Variables</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.extracted_features.independent_variables or '' }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Outcome / Dependent Variables</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.extracted_features.dependent_variables or '' }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Survey Questions</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.extracted_features.survey_questions or '' }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Incentive</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.extracted_features.incentive or '' }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Study Type</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.extracted_features.study_type or '' }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Analysis / Estimating Equations</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.extracted_features.analysis_equations or '' }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Level of Analysis</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.extracted_features.level_of_analysis or '' }}</div>
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Effects and Moderations Section -->
+                    <div class="table-row section-header">
+                        <div class="feature-cell">
+                            <div class="feature-name">Effects and Moderations</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell"></div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Main Effects</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.extracted_features.main_effects or '' }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Statistical Power</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.extracted_features.statistical_power or '' }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Moderators</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.extracted_features.moderators or '' }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Moderation Results</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.extracted_features.moderation_results or '' }}</div>
+                        {% endfor %}
+                    </div>
+                    
+                    <!-- Context Information Section -->
+                    <div class="table-row section-header">
+                        <div class="feature-cell">
+                            <div class="feature-name">Context Information</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell"></div>
+                        {% endfor %}
+                    </div>
+                    
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Demographics</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.extracted_features.demographics or '' }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Recruitment Source</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.extracted_features.recruitment_source or '' }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Sample Size</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ "{:,}".format(paper.sample_size) if paper.sample_size else '' }}</div>
+                        {% endfor %}
+                    </div>
+
+                    <div class="table-row">
+                        <div class="feature-cell">
+                            <div class="feature-name">Country or Region</div>
+                        </div>
+                        {% for paper in papers %}
+                        <div class="study-cell">{{ paper.extracted_features.country_region or '' }}</div>
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+        {% else %}
+            <div class="empty-comparison">
+                <h3>No Studies Selected</h3>
+                <p>Add studies from search results to compare them side by side.</p>
+                <a href="{{ url_for('search') }}" class="btn btn-primary">Add Studies</a>
+            </div>
+        {% endif %}
+    </section>
+</div>
+{% endblock %}

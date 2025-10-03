@@ -1,0 +1,97 @@
+{% extends "base.html" %}
+
+{% block title %}{{ paper.title }} - Questionnaire Database Platform{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Article Header -->
+    <section class="article-header">
+        <div class="article-actions">
+            <a href="{{ url_for('compare', ids=[paper.id]) }}" class="btn btn-outline">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m0-7v7m0-7h10a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2H9m0-7V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
+                </svg>
+                Add to Comparison
+            </a>
+        </div>
+        
+        <h1 class="article-title">{{ paper.title }}</h1>
+        
+        <div class="article-meta">
+            <div class="meta-item">
+                <strong>Authors:</strong> {{ paper.authors|join(', ') }}
+            </div>
+            <div class="meta-item">
+                <strong>Journal:</strong> {{ paper.journal }}
+            </div>
+            <div class="meta-item">
+                <strong>Year:</strong> {{ paper.year }}
+            </div>
+            <div class="meta-item">
+                <strong>Sample Size:</strong> {{ "{:,}".format(paper.sample_size) }}
+            </div>
+            <div class="meta-item">
+                <strong>Countries:</strong> {{ paper.countries|join(', ') }}
+            </div>
+        </div>
+    </section>
+
+    <!-- Article Content -->
+    <section class="article-content">
+        <div class="content-section">
+            <h2>Abstract</h2>
+            <p>{{ paper.abstract }}</p>
+        </div>
+
+        <div class="content-section">
+            <h2>Extracted Features</h2>
+            <div class="features-container">
+                {% for feature_name, feature_value in paper.extracted_features.items() %}
+                    {% if feature_value and feature_value != 'NOT SPECIFIED' and not feature_name.endswith('_verbatim') %}
+                        <div class="feature-item">
+                            <h3 class="feature-title">{{ feature_name.replace('_', ' ').title() }}</h3>
+                            <div class="feature-content">
+                                <div class="condensed-content">
+                                    <p>{{ feature_value }}</p>
+                                </div>
+                                
+                                {% set verbatim_key = feature_name + '_verbatim' %}
+                                {% if verbatim_key in paper.extracted_features and paper.extracted_features[verbatim_key] and paper.extracted_features[verbatim_key] != 'NOT SPECIFIED' %}
+                                    <button class="btn-view-full" onclick="toggleVerbatim('{{ feature_name }}')">View Full</button>
+                                    <div class="verbatim-content hidden" id="{{ feature_name }}-verbatim">
+                                        <p>{{ paper.extracted_features[verbatim_key] }}</p>
+                                    </div>
+                                {% endif %}
+                            </div>
+                        </div>
+                    {% endif %}
+                {% endfor %}
+            </div>
+        </div>
+
+        <div class="content-section">
+            <h2>Citation</h2>
+            <div class="citation">
+                <p>{{ paper.citation }}</p>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+function toggleVerbatim(featureId) {
+    const verbatimElement = document.getElementById(featureId + '-verbatim');
+    const button = event.target;
+    
+    if (verbatimElement.classList.contains('hidden')) {
+        verbatimElement.classList.remove('hidden');
+        button.textContent = 'Hide Full';
+    } else {
+        verbatimElement.classList.add('hidden');
+        button.textContent = 'View Full';
+    }
+}
+</script>
+{% endblock %}

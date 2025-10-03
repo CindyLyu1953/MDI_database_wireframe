@@ -17,9 +17,7 @@
             <nav class="nav">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="search.html" class="nav-link">Search</a>
-                <a href="browse.html" class="nav-link">Browse</a>
                 <a href="compare.html" class="nav-link">Compare</a>
-                <a href="profile.html" class="nav-link">Profile</a>
             </nav>
         </div>
     </header>
@@ -283,7 +281,6 @@
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <a href="search.html">Search Research</a>
-                    <a href="browse.html">Browse Categories</a>
                     <a href="compare.html">Compare Features</a>
                 </div>
                 <div class="footer-section">
@@ -297,7 +294,11 @@
         </div>
     </footer>
 
+    <script src="js/csv-loader.js"></script>
+    <script src="js/data-loader.js"></script>
     <script>
+        let currentPaper = null;
+
         function toggleFullText(featureId) {
             const fullTextElement = document.getElementById(featureId + '-full');
             const button = event.target.closest('button');
@@ -319,22 +320,243 @@
                 'abstract': 'Abstract',
                 'methodology': 'Methods',
                 'findings': 'Findings',
-                'measures': 'Scale'
+                'measures': 'Measures'
             };
             return names[featureId] || 'Content';
         }
 
+        // Generate feature content with condensed and verbatim versions
+        function generateFeatureContent(featureType, extractedFeatures) {
+            let content = '';
+            
+            // Define feature groups for different sections
+            const featureGroups = {
+                'methodology': [
+                    'study_type', 'analysis_equations', 'level_of_analysis', 
+                    'recruitment_source', 'demographics', 'statistical_power'
+                ],
+                'findings': [
+                    'main_effects', 'moderators', 'moderation_results', 
+                    'independent_variables', 'dependent_variables'
+                ],
+                'measures': [
+                    'survey_questions', 'incentive'
+                ]
+            };
+            
+            const features = featureGroups[featureType] || [];
+            
+            features.forEach(feature => {
+                const condensedValue = extractedFeatures[feature];
+                const verbatimValue = extractedFeatures[feature + '_verbatim'];
+                
+                // Only show feature if it has content and is not "NOT SPECIFIED"
+                if (condensedValue && condensedValue !== 'NOT SPECIFIED' && condensedValue.trim() !== '') {
+                    content += `<div class="feature-item">`;
+                    content += `<h4>${formatFeatureName(feature)}</h4>`;
+                    content += `<div class="condensed-content">`;
+                    content += `<p>${condensedValue}</p>`;
+                    content += `</div>`;
+                    
+                    // Add verbatim version if available and different from condensed version
+                    if (verbatimValue && verbatimValue !== 'NOT SPECIFIED' && verbatimValue.trim() !== '' && verbatimValue !== condensedValue) {
+                        content += `<div class="verbatim-content hidden" id="${feature}-verbatim">`;
+                        content += `<h5>Verbatim Version:</h5>`;
+                        content += `<p>${verbatimValue}</p>`;
+                        content += `</div>`;
+                        content += `<button class="btn-view-full" onclick="toggleVerbatim('${feature}')">`;
+                        content += `<span class="btn-text">View Full ${formatFeatureName(feature)}</span>`;
+                        content += `<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">`;
+                        content += `<polyline points="6,9 12,15 18,9"></polyline>`;
+                        content += `</svg>`;
+                        content += `</button>`;
+                    }
+                    
+                    content += `</div>`;
+                }
+            });
+            
+            return content || '<p>No information available for this section.</p>';
+        }
+
+        // Format feature names for display
+        function formatFeatureName(feature) {
+            const names = {
+                'study_type': 'Study Type',
+                'analysis_equations': 'Analysis Methods',
+                'level_of_analysis': 'Level of Analysis',
+                'recruitment_source': 'Recruitment Source',
+                'demographics': 'Demographics',
+                'statistical_power': 'Statistical Power',
+                'main_effects': 'Main Effects',
+                'moderators': 'Moderators',
+                'moderation_results': 'Moderation Results',
+                'independent_variables': 'Independent Variables',
+                'dependent_variables': 'Dependent Variables',
+                'survey_questions': 'Survey Questions',
+                'incentive': 'Incentive'
+            };
+            return names[feature] || feature.replace(/_/g, ' ').replace(/\b\w/g, l => l.toUpperCase());
+        }
+
+        // Toggle verbatim content visibility
+        function toggleVerbatim(featureId) {
+            const verbatimElement = document.getElementById(featureId + '-verbatim');
+            const button = event.target.closest('button');
+            const buttonText = button.querySelector('.btn-text');
+            
+            if (verbatimElement.classList.contains('hidden')) {
+                verbatimElement.classList.remove('hidden');
+                buttonText.textContent = 'Collapse';
+                button.querySelector('svg').style.transform = 'rotate(180deg)';
+            } else {
+                verbatimElement.classList.add('hidden');
+                buttonText.textContent = 'View Full ' + formatFeatureName(featureId);
+                button.querySelector('svg').style.transform = 'rotate(0deg)';
+            }
+        }
+
         function addToCompare() {
-            console.log('Add to comparison');
+            if (currentPaper) {
+                window.dataLoader.addToComparison(currentPaper.id);
+                showNotification('Added to comparison');
+            }
         }
 
         function toggleFavorite() {
-            console.log('Toggle favorite');
+            if (currentPaper) {
+                if (window.dataLoader.isFavorited(currentPaper.id)) {
+                    window.dataLoader.removeFromFavorites(currentPaper.id);
+                } else {
+                    window.dataLoader.addToFavorites(currentPaper.id);
+                }
+                updateFavoriteButton();
+                showNotification('Favorites updated');
+            }
+        }
+
+        function updateFavoriteButton() {
+            const favoriteBtn = document.querySelector('.btn-favorite');
+            if (currentPaper && window.dataLoader.isFavorited(currentPaper.id)) {
+                favoriteBtn.classList.add('favorited');
+                favoriteBtn.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    Favorited
+                `;
+            } else {
+                favoriteBtn.classList.remove('favorited');
+                favoriteBtn.innerHTML = `
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                    </svg>
+                    Add to Favorites
+                `;
+            }
         }
 
         function exportArticle() {
-            console.log('Export article');
+            if (currentPaper) {
+                const data = {
+                    title: currentPaper.title,
+                    authors: currentPaper.authors,
+                    journal: currentPaper.journal,
+                    year: currentPaper.year,
+                    doi: currentPaper.doi,
+                    abstract: currentPaper.abstract,
+                    url: window.location.href
+                };
+                
+                const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = `${currentPaper.id}.json`;
+                document.body.appendChild(a);
+                a.click();
+                document.body.removeChild(a);
+                URL.revokeObjectURL(url);
+                
+                showNotification('Article exported');
+            }
         }
+
+        function loadArticleDetails() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const paperId = urlParams.get('id');
+            
+            if (paperId) {
+                currentPaper = window.dataLoader.getPaperById(paperId);
+                if (currentPaper) {
+                    updateArticleDetails(currentPaper);
+                } else {
+                    document.querySelector('.main').innerHTML = '<div class="error">Article not found</div>';
+                }
+            } else {
+                document.querySelector('.main').innerHTML = '<div class="error">No article ID provided</div>';
+            }
+        }
+
+        function updateArticleDetails(paper) {
+            // Update title
+            document.querySelector('.article-title').textContent = paper.title;
+            
+            // Update meta information
+            document.querySelector('.article-journal').textContent = paper.journal;
+            document.querySelector('.article-year').textContent = paper.year;
+            document.querySelector('.article-citations').textContent = `Citations: ${paper.citations}`;
+            
+            // Update authors
+            document.querySelector('.article-authors').innerHTML = `<strong>Authors:</strong> ${paper.authors.join(', ')}`;
+            
+            // Update abstract
+            document.querySelector('.abstract-content').textContent = paper.abstract;
+            
+            // Update research characteristics
+            const characteristics = document.querySelector('.characteristics-grid');
+            characteristics.innerHTML = `
+                <div class="characteristic-item">
+                    <span class="characteristic-label">Sample Size</span>
+                    <span class="characteristic-value">${paper.sample_size.toLocaleString()}</span>
+                </div>
+                <div class="characteristic-item">
+                    <span class="characteristic-label">Countries</span>
+                    <span class="characteristic-value">${paper.countries.join(', ')}</span>
+                </div>
+                <div class="characteristic-item">
+                    <span class="characteristic-label">Methodology</span>
+                    <span class="characteristic-value">${paper.methodology}</span>
+                </div>
+                <div class="characteristic-item">
+                    <span class="characteristic-label">Research Type</span>
+                    <span class="characteristic-value">${paper.research_type}</span>
+                </div>
+            `;
+            
+            // Update research methods with condensed and verbatim versions
+            const methodsContent = document.querySelector('#methodology-full');
+            methodsContent.innerHTML = generateFeatureContent('methodology', paper.extracted_features);
+            
+            // Update main findings with condensed and verbatim versions
+            const findingsContent = document.querySelector('#findings-full');
+            findingsContent.innerHTML = generateFeatureContent('findings', paper.extracted_features);
+            
+            // Update measurement tools with condensed and verbatim versions
+            const measuresContent = document.querySelector('#measures-full');
+            measuresContent.innerHTML = generateFeatureContent('measures', paper.extracted_features);
+            
+            // Update favorite button
+            updateFavoriteButton();
+            
+            // Update page title
+            document.title = `${paper.title} - Questionnaire Database Platform`;
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', function() {
+            loadArticleDetails();
+        });
     </script>
 </body>
 </html>

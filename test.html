@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Test</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        .search-box { margin: 20px 0; }
+        .search-box input { padding: 10px; width: 300px; }
+        .search-box button { padding: 10px 20px; margin-left: 10px; }
+        .results { margin-top: 20px; }
+        .paper { border: 1px solid #ccc; margin: 10px 0; padding: 10px; }
+        .debug { background: #f0f0f0; padding: 10px; margin: 10px 0; font-family: monospace; }
+    </style>
+</head>
+<body>
+    <h1>Search Test Page</h1>
+    
+    <div class="search-box">
+        <input type="text" id="searchInput" placeholder="Enter search term (e.g., 'online')">
+        <button onclick="performSearch()">Search</button>
+    </div>
+    
+    <div class="debug" id="debugInfo">
+        Loading data...
+    </div>
+    
+    <div class="results" id="results">
+        <p>Enter a search term above to test the search functionality.</p>
+    </div>
+
+    <script src="js/csv-loader.js"></script>
+    <script src="js/data-loader.js"></script>
+    <script>
+        let dataLoaded = false;
+        
+        async function loadData() {
+            try {
+                await window.dataLoader.loadPapers();
+                dataLoaded = true;
+                const papers = window.dataLoader.getAllPapers();
+                document.getElementById('debugInfo').innerHTML = `
+                    <strong>Data loaded successfully!</strong><br>
+                    Total papers: ${papers.length}<br>
+                    Papers: ${papers.map(p => p.title).join('<br>')}
+                `;
+            } catch (error) {
+                document.getElementById('debugInfo').innerHTML = `
+                    <strong>Error loading data:</strong><br>
+                    ${error.message}
+                `;
+            }
+        }
+        
+        function performSearch() {
+            if (!dataLoaded) {
+                document.getElementById('results').innerHTML = '<p>Data not loaded yet. Please wait...</p>';
+                return;
+            }
+            
+            const query = document.getElementById('searchInput').value.trim();
+            if (!query) {
+                document.getElementById('results').innerHTML = '<p>Please enter a search term.</p>';
+                return;
+            }
+            
+            console.log('Performing search for:', query);
+            const results = window.dataLoader.searchPapers(query);
+            
+            if (results.length === 0) {
+                document.getElementById('results').innerHTML = '<p>No results found.</p>';
+                return;
+            }
+            
+            let html = `<h3>Found ${results.length} results for "${query}":</h3>`;
+            results.forEach(paper => {
+                html += `
+                    <div class="paper">
+                        <h4>${paper.title}</h4>
+                        <p><strong>Authors:</strong> ${paper.authors.join(', ')}</p>
+                        <p><strong>Journal:</strong> ${paper.journal} (${paper.year})</p>
+                        <p><strong>Abstract:</strong> ${paper.abstract.substring(0, 200)}...</p>
+                    </div>
+                `;
+            });
+            
+            document.getElementById('results').innerHTML = html;
+        }
+        
+        // Load data when page loads
+        document.addEventListener('DOMContentLoaded', loadData);
+        
+        // Search on Enter key
+        document.getElementById('searchInput').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                performSearch();
+            }
+        });
+    </script>
+</body>
+</html>

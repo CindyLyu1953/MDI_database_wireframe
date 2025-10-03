@@ -17,9 +17,7 @@
             <nav class="nav">
                 <a href="index.html" class="nav-link">Home</a>
                 <a href="search.html" class="nav-link">Search</a>
-                <a href="browse.html" class="nav-link">Browse</a>
                 <a href="compare.html" class="nav-link active">Compare</a>
-                <a href="profile.html" class="nav-link">Profile</a>
             </nav>
         </div>
     </header>
@@ -61,382 +59,12 @@
             <!-- Comparison Content -->
             <section class="compare-content">
                 <div class="comparison-table-container">
-                    <div class="comparison-table">
-                        <!-- Table Header -->
-                        <div class="table-header">
-                            <div class="header-cell feature-column">Features</div>
-                            <div class="header-cell study-column">
-                                <div class="study-header">
-                                    <h3>Study 1</h3>
-                                    <button class="remove-study-btn" onclick="removeStudy(1)">×</button>
-                                </div>
-                                <div class="study-title">The Impact of Social Media on Political Trust</div>
-                                <div class="study-meta">Smith et al., 2023</div>
-                            </div>
-                            <div class="header-cell study-column">
-                                <div class="study-header">
-                                    <h3>Study 2</h3>
-                                    <button class="remove-study-btn" onclick="removeStudy(2)">×</button>
-                                </div>
-                                <div class="study-title">Measuring Tolerance in Digital Spaces</div>
-                                <div class="study-meta">Chen et al., 2023</div>
-                            </div>
-                            <div class="header-cell study-column">
-                                <div class="study-header">
-                                    <h3>Study 3</h3>
-                                    <button class="remove-study-btn" onclick="removeStudy(3)">×</button>
-                                </div>
-                                <div class="study-title">Social Media and Political Polarization</div>
-                                <div class="study-meta">Anderson et al., 2022</div>
-                            </div>
-                        </div>
-
-                        <!-- Basic Information Rows -->
-                        <div class="table-row">
-                            <div class="feature-cell">
-                                <div class="feature-name">Authors</div>
-                            </div>
-                            <div class="study-cell">Smith, J., Johnson, A., & Brown, M.</div>
-                            <div class="study-cell">Chen, L., Wilson, K., & Davis, R.</div>
-                            <div class="study-cell">Anderson, P., Taylor, S., & Miller, B.</div>
-                        </div>
-
-                        <div class="table-row">
-                            <div class="feature-cell">
-                                <div class="feature-name">Journal</div>
-                            </div>
-                            <div class="study-cell">Journal of Political Psychology</div>
-                            <div class="study-cell">Computers in Human Behavior</div>
-                            <div class="study-cell">Communication Research</div>
-                        </div>
-
-                        <div class="table-row">
-                            <div class="feature-cell">
-                                <div class="feature-name">Year</div>
-                            </div>
-                            <div class="study-cell">2023</div>
-                            <div class="study-cell">2023</div>
-                            <div class="study-cell">2022</div>
-                        </div>
-
-                        <div class="table-row">
-                            <div class="feature-cell">
-                                <div class="feature-name">Sample Size</div>
-                            </div>
-                            <div class="study-cell">15,000</div>
-                            <div class="study-cell">2,500</div>
-                            <div class="study-cell">500,000+</div>
-                        </div>
-
-                        <div class="table-row">
-                            <div class="feature-cell">
-                                <div class="feature-name">Research Method</div>
-                            </div>
-                            <div class="study-cell">Cross-sectional Survey</div>
-                            <div class="study-cell">Scale Development</div>
-                            <div class="study-cell">Meta-analysis</div>
-                        </div>
-
-                        <!-- Core Concept Measurement Comparison -->
-                        <div class="table-row section-header">
-                            <div class="feature-cell">
-                                <div class="feature-name">Core Concept Measurement</div>
-                            </div>
-                            <div class="study-cell"></div>
-                            <div class="study-cell"></div>
-                            <div class="study-cell"></div>
-                        </div>
-
-                        <div class="table-row">
-                            <div class="feature-cell">
-                                <div class="feature-name">Trust Measurement</div>
-                                <div class="feature-description">How to measure political trust</div>
-                            </div>
-                            <div class="study-cell">
-                                <div class="measurement-item">
-                                    <strong>Scale Name:</strong> Political Trust Scale
-                                </div>
-                                <div class="measurement-item">
-                                    <strong>Number of Items:</strong> 5
-                                </div>
-                                <div class="measurement-item">
-                                    <strong>Reliability:</strong> α = 0.87
-                                </div>
-                                <button class="btn btn-outline btn-sm" onclick="toggleFullText('trust1')">
-                                    View Full Scale
-                                </button>
-                                <div class="measurement-full hidden" id="trust1-full">
-                                    <p>1. How much do you trust the government?</p>
-                                    <p>2. How much do you trust the parliament?</p>
-                                    <p>3. How much do you trust political parties?</p>
-                                    <p>4. How much do you trust the courts?</p>
-                                    <p>5. How much do you trust the police?</p>
-                                    <p>Using 5-point Likert scale (1=Complete distrust, 5=Complete trust)</p>
-                                </div>
-                            </div>
-                            <div class="study-cell">
-                                <div class="measurement-item">
-                                    <strong>Scale Name:</strong> Digital Tolerance Scale
-                                </div>
-                                <div class="measurement-item">
-                                    <strong>Number of Items:</strong> 8
-                                </div>
-                                <div class="measurement-item">
-                                    <strong>Reliability:</strong> α = 0.91
-                                </div>
-                                <button class="btn btn-outline btn-sm" onclick="toggleFullText('trust2')">
-                                    View Full Scale
-                                </button>
-                                <div class="measurement-full hidden" id="trust2-full">
-                                    <p>1. I would like to hear different opinions on the internet</p>
-                                    <p>2. I respect different opinions on the internet</p>
-                                    <p>3. I think different voices on the internet are valuable</p>
-                                    <p>4. I am willing to listen to opposing opinions on the internet</p>
-                                    <p>5. I think the diversity on the internet is positive</p>
-                                    <p>6. I am willing to maintain an open mindset in the internet space</p>
-                                    <p>7. I think different viewpoints on the internet can promote understanding</p>
-                                    <p>8. I am willing to maintain a tolerant attitude in internet discussions</p>
-                                    <p>Using 7-point Likert scale (1=Strongly disagree, 7=Strongly agree)</p>
-                                </div>
-                            </div>
-                            <div class="study-cell">
-                                <div class="measurement-item">
-                                    <strong>Measurement Method:</strong> Meta-analysis Integration
-                                </div>
-                                <div class="measurement-item">
-                                    <strong>Studies Included:</strong> 127
-                                </div>
-                                <div class="measurement-item">
-                                    <strong>Measurement Tools:</strong> Multiple Scale Integration</div>
-                                <button class="btn btn-outline btn-sm" onclick="toggleFullText('trust3')">
-                                    View Measurement Details
-                                </button>
-                                <div class="measurement-full hidden" id="trust3-full">
-                                    <p>Integrated political trust measurements from 127 studies, including:</p>
-                                    <p>• Government Trust Scale (45 studies)</p>
-                                    <p>• Political Institution Trust Scale (38 studies)</p>
-                                    <p>• Political Efficacy Scale (44 studies)</p>
-                                    <p>Cross-study comparison achieved through standardized conversion</p>
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="table-row">
-                            <div class="feature-cell">
-                                <div class="feature-name">Social Media Usage</div>
-                                <div class="feature-description">How to measure social media usage</div>
-                            </div>
-                            <div class="study-cell">
-                                <div class="measurement-item">
-                                    <strong>Measurement Method:</strong> Usage Time
-                                </div>
-                                <div class="measurement-item">
-                                    <strong>Scale:</strong> 5-point Scale
-                                </div>
-                                <div class="measurement-item">
-                                    <strong>Range:</strong> Never to 5+ hours</div>
-                            </div>
-                            <div class="study-cell">
-                                <div class="measurement-item">
-                                    <strong>Measurement Method:</strong> Usage Frequency
-                                </div>
-                                <div class="measurement-item">
-                                    <strong>Scale:</strong> 7-point Scale
-                                </div>
-                                <div class="measurement-item">
-                                    <strong>Range:</strong> Never to Multiple times daily</div>
-                            </div>
-                            <div class="study-cell">
-                                <div class="measurement-item">
-                                    <strong>Measurement Method:</strong> Multi-dimensional
-                                </div>
-                                <div class="measurement-item">
-                                    <strong>Dimensions:</strong> Time, Frequency, Intensity</div>
-                                <div class="measurement-item">
-                                    <strong>Integration:</strong> Standardized Composite Index</div>
-                            </div>
-                        </div>
-
-                        <!-- Research Design Comparison -->
-                        <div class="table-row section-header">
-                            <div class="feature-cell">
-                                <div class="feature-name">Research Design</div>
-                            </div>
-                            <div class="study-cell"></div>
-                            <div class="study-cell"></div>
-                            <div class="study-cell"></div>
-                        </div>
-
-                        <div class="table-row">
-                            <div class="feature-cell">
-                                <div class="feature-name">Study Type</div>
-                            </div>
-                            <div class="study-cell">Cross-sectional Survey</div>
-                            <div class="study-cell">Scale Development & Validation</div>
-                            <div class="study-cell">Meta-analysis</div>
-                        </div>
-
-                        <div class="table-row">
-                            <div class="feature-cell">
-                                <div class="feature-name">Data Source</div>
-                            </div>
-                            <div class="study-cell">World Values Survey</div>
-                            <div class="study-cell">Online Survey Platform</div>
-                            <div class="study-cell">Published Studies</div>
-                        </div>
-
-                        <div class="table-row">
-                            <div class="feature-cell">
-                                <div class="feature-name">Analysis Level</div>
-                            </div>
-                            <div class="study-cell">Multi-level Analysis</div>
-                            <div class="study-cell">Individual Level</div>
-                            <div class="study-cell">Study Level</div>
-                        </div>
-
-                        <div class="table-row">
-                            <div class="feature-cell">
-                                <div class="feature-name">Control Variables</div>
-                            </div>
-                            <div class="study-cell">
-                                <div class="control-vars">
-                                    <span class="control-tag">Age</span>
-                                    <span class="control-tag">Gender</span>
-                                    <span class="control-tag">Education</span>
-                                    <span class="control-tag">Income</span>
-                                    <span class="control-tag">Political Interest</span>
-                                </div>
-                            </div>
-                            <div class="study-cell">
-                                <div class="control-vars">
-                                    <span class="control-tag">Age</span>
-                                    <span class="control-tag">Gender</span>
-                                    <span class="control-tag">Education</span>
-                                    <span class="control-tag">Network Experience</span>
-                                </div>
-                            </div>
-                            <div class="study-cell">
-                                <div class="control-vars">
-                                    <span class="control-tag">Publication Year</span>
-                                    <span class="control-tag">Sample Size</span>
-                                    <span class="control-tag">Research Quality</span>
-                                    <span class="control-tag">Cultural Background</span>
-                                </div>
-                            </div>
-                        </div>
-
-                        <!-- Main Findings Comparison -->
-                        <div class="table-row section-header">
-                            <div class="feature-cell">
-                                <div class="feature-name">Main Findings</div>
-                            </div>
-                            <div class="study-cell"></div>
-                            <div class="study-cell"></div>
-                            <div class="study-cell"></div>
-                        </div>
-
-                        <div class="table-row">
-                            <div class="feature-cell">
-                                <div class="feature-name">Main Effects</div>
-                            </div>
-                            <div class="study-cell">
-                                <div class="finding-item">
-                                    <strong>Effect:</strong> β = -0.23, p < 0.001
-                                </div>
-                                <div class="finding-item">
-                                    <strong>Direction:</strong> Negative correlation
-                                </div>
-                                <div class="finding-item">
-                                    <strong>Strength:</strong> Medium
-                                </div>
-                            </div>
-                            <div class="study-cell">
-                                <div class="finding-item">
-                                    <strong>Effect:</strong> r = 0.45, p < 0.001
-                                </div>
-                                <div class="finding-item">
-                                    <strong>Direction:</strong> Positive correlation
-                                </div>
-                                <div class="finding-item">
-                                    <strong>Strength:</strong> Medium
-                                </div>
-                            </div>
-                            <div class="study-cell">
-                                <div class="finding-item">
-                                    <strong>Effect:</strong> d = 0.32, p < 0.001
-                                </div>
-                                <div class="finding-item">
-                                    <strong>Direction:</strong> Positive correlation
-                                </div>
-                                <div class="finding-item">
-                                    <strong>Strength:</strong> Small to medium
-                                </div>
-                            </div>
-                        </div>
-
-                        <div class="table-row">
-                            <div class="feature-cell">
-                                <div class="feature-name">Moderator Variables</div>
-                            </div>
-                            <div class="study-cell">
-                                <div class="moderator-item">
-                                    <strong>Education Level:</strong> Significant moderation
-                                </div>
-                                <div class="moderator-item">
-                                    <strong>Democratic Quality:</strong> Significant moderation
-                                </div>
-                            </div>
-                            <div class="study-cell">
-                                <div class="moderator-item">
-                                    <strong>Network Experience:</strong> Significant moderation
-                                </div>
-                                <div class="moderator-item">
-                                    <strong>Age:</strong> Significant moderation
-                                </div>
-                            </div>
-                            <div class="study-cell">
-                                <div class="moderator-item">
-                                    <strong>Research Quality:</strong> Significant moderation
-                                </div>
-                                <div class="moderator-item">
-                                    <strong>Cultural Background:</strong> Significant moderation
-                                </div>
-                            </div>
-                        </div>
+                    <div class="comparison-table" id="comparison-table">
+                        <!-- Comparison table will be dynamically generated here -->
                     </div>
                 </div>
             </section>
 
-            <!-- Comparison Summary -->
-            <section class="comparison-summary">
-                <h2 class="summary-title">Comparison Summary</h2>
-                <div class="summary-content">
-                    <div class="summary-section">
-                        <h3>Measurement Method Differences</h3>
-                        <ul>
-                            <li>Study 1 uses traditional political trust scales, focusing on trust in political institutions</li>
-                            <li>Study 2 developed a new digital tolerance scale, focusing on tolerance attitudes in cyberspace</li>
-                            <li>Study 3 integrated multiple measurement methods through meta-analysis, providing a more comprehensive perspective</li>
-                        </ul>
-                    </div>
-                    <div class="summary-section">
-                        <h3>Research Design Differences</h3>
-                        <ul>
-                            <li>Study 1 adopted a cross-national cross-sectional design with large sample size but lacks temporal dimension</li>
-                            <li>Study 2 focused on scale development with relatively small sample but high measurement precision</li>
-                            <li>Study 3 integrated numerous studies through meta-analysis but may have publication bias</li>
-                        </ul>
-                    </div>
-                    <div class="summary-section">
-                        <h3>Main Findings Differences</h3>
-                        <ul>
-                            <li>Study 1 found negative correlation between social media use and political trust</li>
-                            <li>Study 2 found positive correlation between social media use and digital tolerance</li>
-                            <li>Study 3 found positive correlation between social media use and political polarization</li>
-                        </ul>
-                    </div>
-                </div>
-            </section>
         </div>
     </main>
 
@@ -450,7 +78,6 @@
                 <div class="footer-section">
                     <h4>Quick Links</h4>
                     <a href="search.html">Search Research</a>
-                    <a href="browse.html">Browse Categories</a>
                     <a href="compare.html">Compare Features</a>
                 </div>
                 <div class="footer-section">
@@ -464,6 +91,8 @@
         </div>
     </footer>
 
+    <script src="js/csv-loader.js"></script>
+    <script src="js/data-loader.js"></script>
     <script>
         function toggleFullText(measurementId) {
             const fullTextElement = document.getElementById(measurementId + '-full');
@@ -488,20 +117,189 @@
         }
 
         function addStudy() {
-            console.log('Add study');
+            // Handle both file:// and http:// protocols
+            if (window.location.protocol === 'file:') {
+                // For file:// protocol, use relative path
+                window.location.href = 'search.html';
+            } else {
+                // For http:// protocol, use absolute path
+                window.location.href = `${window.location.origin}/search.html`;
+            }
         }
 
         function removeStudy(studyId) {
-            console.log('Remove study:', studyId);
+            window.dataLoader.removeFromComparison(studyId);
+            loadComparisonTable();
+            showNotification('Study removed from comparison');
         }
 
         function exportComparison() {
-            console.log('Export comparison');
+            const comparisonList = window.dataLoader.getComparisonList();
+            if (comparisonList.length === 0) {
+                showNotification('No studies to export');
+                return;
+            }
+
+            const data = {
+                comparisonDate: new Date().toISOString(),
+                studies: comparisonList.map(paper => ({
+                    id: paper.id,
+                    title: paper.title,
+                    authors: paper.authors,
+                    journal: paper.journal,
+                    year: paper.year,
+                    sampleSize: paper.sample_size,
+                    countries: paper.countries,
+                    methodology: paper.methodology,
+                    extractedFeatures: paper.extracted_features
+                }))
+            };
+
+            const blob = new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `comparison_${new Date().toISOString().split('T')[0]}.json`;
+            document.body.appendChild(a);
+            a.click();
+            document.body.removeChild(a);
+            URL.revokeObjectURL(url);
+
+            showNotification('Comparison exported');
         }
 
         function clearComparison() {
-            console.log('Clear comparison');
+            if (confirm('Are you sure you want to clear all studies from comparison?')) {
+                window.dataLoader.comparisonList = [];
+                window.dataLoader.saveComparison();
+                loadComparisonTable();
+                showNotification('Comparison cleared');
+            }
         }
+
+        function loadComparisonTable() {
+            const comparisonList = window.dataLoader.getComparisonList();
+            const comparisonTable = document.getElementById('comparison-table');
+            
+            if (comparisonList.length === 0) {
+                comparisonTable.innerHTML = `
+                    <div class="empty-comparison">
+                        <h3>No Studies Selected</h3>
+                        <p>Add studies from search results to compare them side by side.</p>
+                        <button class="btn btn-primary" onclick="addStudy()">Add Studies</button>
+                    </div>
+                `;
+                return;
+            }
+
+            // Generate comparison table
+            const tableHTML = generateComparisonTable(comparisonList);
+            comparisonTable.innerHTML = tableHTML;
+        }
+
+        function generateComparisonTable(studies) {
+            let tableHTML = `
+                <!-- Table Header -->
+                <div class="table-header">
+                    <div class="header-cell feature-column">Features</div>
+                    ${studies.map((study, index) => `
+                        <div class="header-cell study-column">
+                            <div class="study-header">
+                                <h3>Study ${index + 1}</h3>
+                                <button class="remove-study-btn" onclick="removeStudy('${study.id}')">×</button>
+                            </div>
+                            <div class="study-title">${study.title}</div>
+                            <div class="study-meta">${study.authors.join(', ')}, ${study.year}</div>
+                        </div>
+                    `).join('')}
+                </div>
+
+                <!-- Basic Information Section -->
+                <div class="table-row section-header">
+                    <div class="feature-cell">
+                        <div class="feature-name">Basic Information</div>
+                    </div>
+                    ${studies.map(() => '<div class="study-cell"></div>').join('')}
+                </div>
+                
+                ${generateComparisonRows('Authors', studies, study => study.authors.join(', '))}
+                ${generateComparisonRows('Title', studies, study => study.title)}
+                ${generateComparisonRows('Journal', studies, study => study.journal)}
+                ${generateComparisonRows('Year', studies, study => study.year)}
+                ${generateComparisonRows('APA Style Citation', studies, study => study.citation || '')}
+                ${generateComparisonRows('Abstract', studies, study => study.abstract ? study.abstract.substring(0, 200) + (study.abstract.length > 200 ? '...' : '') : '')}
+                
+                <!-- Experiment Design Section -->
+                <div class="table-row section-header">
+                    <div class="feature-cell">
+                        <div class="feature-name">Experiment Design</div>
+                    </div>
+                    ${studies.map(() => '<div class="study-cell"></div>').join('')}
+                </div>
+                
+                ${generateComparisonRows('Treatment / Independent Variables', studies, study => study.extracted_features?.independent_variables)}
+                ${generateComparisonRows('Outcome / Dependent Variables', studies, study => study.extracted_features?.dependent_variables)}
+                ${generateComparisonRows('Survey Questions', studies, study => study.extracted_features?.survey_questions)}
+                ${generateComparisonRows('Incentive', studies, study => study.extracted_features?.incentive)}
+                ${generateComparisonRows('Study Type', studies, study => study.extracted_features?.study_type)}
+                ${generateComparisonRows('Analysis / Estimating Equations', studies, study => study.extracted_features?.analysis_equations)}
+                ${generateComparisonRows('Level of Analysis', studies, study => study.extracted_features?.level_of_analysis)}
+                
+                <!-- Effects and Moderations Section -->
+                <div class="table-row section-header">
+                    <div class="feature-cell">
+                        <div class="feature-name">Effects and Moderations</div>
+                    </div>
+                    ${studies.map(() => '<div class="study-cell"></div>').join('')}
+                </div>
+                
+                ${generateComparisonRows('Main Effects', studies, study => study.extracted_features?.main_effects)}
+                ${generateComparisonRows('Statistical Power', studies, study => study.extracted_features?.statistical_power)}
+                ${generateComparisonRows('Moderators', studies, study => study.extracted_features?.moderators)}
+                ${generateComparisonRows('Moderation Results', studies, study => study.extracted_features?.moderation_results)}
+                
+                <!-- Context Information Section -->
+                <div class="table-row section-header">
+                    <div class="feature-cell">
+                        <div class="feature-name">Context Information</div>
+                    </div>
+                    ${studies.map(() => '<div class="study-cell"></div>').join('')}
+                </div>
+                
+                ${generateComparisonRows('Demographics', studies, study => study.extracted_features?.demographics)}
+                ${generateComparisonRows('Recruitment Source', studies, study => study.extracted_features?.recruitment_source)}
+                ${generateComparisonRows('Sample Size', studies, study => study.sample_size ? study.sample_size.toLocaleString() : '')}
+                ${generateComparisonRows('Country or Region', studies, study => study.extracted_features?.country_region)}
+            `;
+
+            return tableHTML;
+        }
+
+        // Helper function to generate comparison rows
+        function generateComparisonRows(label, studies, getValue) {
+            return `
+                <div class="table-row">
+                    <div class="feature-cell">
+                        <div class="feature-name">${label}</div>
+                    </div>
+                    ${studies.map(study => {
+                        const value = getValue(study);
+                        return `
+                            <div class="study-cell">
+                                ${value && value !== 'NOT SPECIFIED' && value.trim() !== '' ? value : ''}
+                            </div>
+                        `;
+                    }).join('')}
+                </div>
+            `;
+        }
+
+        // Initialize page
+        document.addEventListener('DOMContentLoaded', async function() {
+            // Wait for data to load
+            await window.dataLoader.loadPapers();
+            loadComparisonTable();
+        });
     </script>
 </body>
 </html>

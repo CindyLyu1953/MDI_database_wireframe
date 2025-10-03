@@ -1,0 +1,146 @@
+{% extends "base.html" %}
+
+{% block title %}Search Results - Questionnaire Database Platform{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Search Header -->
+    <section class="search-header">
+        <div class="search-form-container">
+            <form action="{{ url_for('search') }}" method="GET" class="search-form">
+                <div class="search-input-group">
+                    <input type="text" name="q" placeholder="Search by title, abstract, journal, or author name..." class="search-input" value="{{ query }}">
+                    <button type="submit" class="search-button">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                        Search
+                    </button>
+                </div>
+            </form>
+        </div>
+
+        <!-- Filters -->
+        <div class="filters-container">
+            <form action="{{ url_for('search') }}" method="GET" class="filters-form">
+                <input type="hidden" name="q" value="{{ query }}">
+                
+                <div class="filter-group">
+                    <label for="yearFilter">Year:</label>
+                    <select name="year" id="yearFilter" class="filter-select">
+                        <option value="">All Years</option>
+                        {% for year in stats.years %}
+                        <option value="{{ year }}" {% if filters.year == year|string %}selected{% endif %}>{{ year }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="journalFilter">Journal:</label>
+                    <select name="journal" id="journalFilter" class="filter-select">
+                        <option value="">All Journals</option>
+                        {% for journal in stats.journals %}
+                        <option value="{{ journal }}" {% if filters.journal == journal %}selected{% endif %}>{{ journal }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="methodologyFilter">Methodology:</label>
+                    <select name="methodology" id="methodologyFilter" class="filter-select">
+                        <option value="">All Methodologies</option>
+                        {% for methodology in stats.methodologies %}
+                        <option value="{{ methodology }}" {% if filters.methodology == methodology %}selected{% endif %}>{{ methodology }}</option>
+                        {% endfor %}
+                    </select>
+                </div>
+
+                <div class="filter-group">
+                    <label for="sortByFilter">Sort By:</label>
+                    <select name="sortBy" id="sortByFilter" class="filter-select">
+                        <option value="relevance" {% if filters.sortBy == 'relevance' %}selected{% endif %}>Relevance</option>
+                        <option value="year" {% if filters.sortBy == 'year' %}selected{% endif %}>Year</option>
+                        <option value="citations" {% if filters.sortBy == 'citations' %}selected{% endif %}>Citations</option>
+                        <option value="sampleSize" {% if filters.sortBy == 'sampleSize' %}selected{% endif %}>Sample Size</option>
+                    </select>
+                </div>
+
+                <button type="submit" class="filter-button">Apply Filters</button>
+            </form>
+        </div>
+    </section>
+
+    <!-- Results Section -->
+    <section class="results-section">
+        <div class="results-header">
+            <h2 class="results-title">Search Results</h2>
+            <div class="results-count">
+                <span>Found {{ results|length }} article{{ 's' if results|length != 1 else '' }}</span>
+            </div>
+        </div>
+
+        <div class="results-list">
+            {% if results %}
+                {% for paper in results %}
+                <article class="result-item">
+                    <div class="result-header">
+                        <h3 class="result-title">
+                            <a href="{{ url_for('article', paper_id=paper.id) }}">{{ paper.title }}</a>
+                        </h3>
+                        <div class="result-actions">
+                            <a href="{{ url_for('compare', ids=[paper.id]) }}" class="btn btn-outline btn-sm">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m0-7v7m0-7h10a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2H9m0-7V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
+                                </svg>
+                                Compare
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <div class="result-meta">
+                        <div class="result-authors">
+                            <strong>Authors:</strong> {{ paper.authors|join(', ') }}
+                        </div>
+                        <div class="result-journal">
+                            <strong>Journal:</strong> {{ paper.journal }}, {{ paper.year }}
+                        </div>
+                        <div class="result-citations">
+                            <strong>Citations:</strong> {{ paper.citations }} times
+                        </div>
+                    </div>
+
+                    <div class="result-abstract">
+                        <p>{{ paper.abstract }}</p>
+                    </div>
+
+                    <div class="result-features">
+                        <div class="feature-tags">
+                            <span class="tag tag-primary">{{ paper.methodology }}</span>
+                            <span class="tag">Social Media</span>
+                            <span class="tag">Political Psychology</span>
+                            <span class="tag">Cross-National</span>
+                        </div>
+                    </div>
+
+                    <div class="result-footer">
+                        <a href="{{ url_for('article', paper_id=paper.id) }}" class="btn btn-primary">View Details</a>
+                        <div class="result-stats">
+                            <span class="stat-item">Sample Size: {{ "{:,}".format(paper.sample_size) }}</span>
+                            <span class="stat-item">Countries: {{ paper.countries|join(', ') }}</span>
+                            <span class="stat-item">Method: {{ paper.methodology }}</span>
+                        </div>
+                    </div>
+                </article>
+                {% endfor %}
+            {% else %}
+                <div class="no-results">
+                    <h3>No results found</h3>
+                    <p>Try adjusting your search criteria or browse all articles.</p>
+                    <a href="{{ url_for('search') }}" class="btn btn-primary">Browse All Articles</a>
+                </div>
+            {% endif %}
+        </div>
+    </section>
+</div>
+{% endblock %}
