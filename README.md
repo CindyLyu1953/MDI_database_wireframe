@@ -115,7 +115,7 @@ database_wireframe/
 
 4. **Run the Application**:
    ```bash
-   python run.py
+   python app.py
    ```
 
 5. **Access the Website**:
