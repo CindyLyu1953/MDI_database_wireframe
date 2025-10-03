@@ -38,48 +38,6 @@
                 </div>
             </section>
 
-            <!-- Filters -->
-            <section class="filters-section">
-                <div class="filters-container">
-                    <div class="filter-group">
-                        <label class="filter-label">Year</label>
-                        <select class="filter-select" id="yearFilter">
-                            <option value="">All Years</option>
-                            {% for year in stats.years %}
-                            <option value="{{ year }}" {% if filters.year == year|string %}selected{% endif %}>{{ year }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label class="filter-label">Journal</label>
-                        <select class="filter-select" id="journalFilter">
-                            <option value="">All Journals</option>
-                            {% for journal in stats.journals %}
-                            <option value="{{ journal }}" {% if filters.journal == journal %}selected{% endif %}>{{ journal }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label class="filter-label">Research Method</label>
-                        <select class="filter-select" id="methodFilter">
-                            <option value="">All Methods</option>
-                            {% for methodology in stats.methodologies %}
-                            <option value="{{ methodology }}" {% if filters.methodology == methodology %}selected{% endif %}>{{ methodology }}</option>
-                            {% endfor %}
-                        </select>
-                    </div>
-                    <div class="filter-group">
-                        <label class="filter-label">Sort By</label>
-                        <select class="filter-select" id="sortFilter">
-                            <option value="relevance" {% if filters.sortBy == 'relevance' %}selected{% endif %}>Relevance</option>
-                            <option value="year" {% if filters.sortBy == 'year' %}selected{% endif %}>Year</option>
-                            <option value="citations" {% if filters.sortBy == 'citations' %}selected{% endif %}>Citations</option>
-                            <option value="title" {% if filters.sortBy == 'title' %}selected{% endif %}>Title</option>
-                        </select>
-                    </div>
-                </div>
-            </section>
-
             <!-- Search Results -->
             <section class="results-section">
                 <div class="results-header">
