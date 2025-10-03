@@ -283,8 +283,13 @@ def article(paper_id):
 @app.route("/compare")
 def compare():
     """Compare page"""
-    # Get comparison list from session or query parameters
-    comparison_ids = request.args.getlist("ids")
+    # Get comparison list from query parameters
+    ids_param = request.args.get("ids", "")
+    if ids_param:
+        comparison_ids = ids_param.split(",")
+    else:
+        comparison_ids = []
+
     comparison_papers = [p for p in papers_data if p["id"] in comparison_ids]
 
     return render_template("compare.html", papers=comparison_papers)

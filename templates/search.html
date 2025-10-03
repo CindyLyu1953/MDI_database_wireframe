@@ -1,16 +1,34 @@
-{% extends "base.html" %}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Results - Questionnaire Database Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/search.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Questionnaire Database Platform</h1>
+                <span class="tagline">Academic Research Tool</span>
+            </div>
+            <nav class="nav">
+                <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('search') }}" class="nav-link active">Search</a>
+                <a href="{{ url_for('compare') }}" class="nav-link">Compare</a>
+            </nav>
+        </div>
+    </header>
 
-{% block title %}Search Results - Questionnaire Database Platform{% endblock %}
-
-{% block content %}
-<div class="container">
-    <!-- Search Header -->
-    <section class="search-header">
-        <div class="search-form-container">
-            <form action="{{ url_for('search') }}" method="GET" class="search-form">
-                <div class="search-input-group">
-                    <input type="text" name="q" placeholder="Search by title, abstract, journal, or author name..." class="search-input" value="{{ query }}">
-                    <button type="submit" class="search-button">
+    <main class="main">
+        <div class="container">
+            <!-- Search Bar -->
+            <section class="search-section">
+                <div class="search-box">
+                    <input type="text" id="searchInput" placeholder="Search keywords, authors, journals..." class="search-input" value="{{ query }}">
+                    <button class="search-btn" onclick="performSearch()">
                         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <circle cx="11" cy="11" r="8"></circle>
                             <path d="m21 21-4.35-4.35"></path>
@@ -18,129 +36,213 @@
                         Search
                     </button>
                 </div>
-            </form>
+            </section>
+
+            <!-- Filters -->
+            <section class="filters-section">
+                <div class="filters-container">
+                    <div class="filter-group">
+                        <label class="filter-label">Year</label>
+                        <select class="filter-select" id="yearFilter">
+                            <option value="">All Years</option>
+                            {% for year in stats.years %}
+                            <option value="{{ year }}" {% if filters.year == year|string %}selected{% endif %}>{{ year }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Journal</label>
+                        <select class="filter-select" id="journalFilter">
+                            <option value="">All Journals</option>
+                            {% for journal in stats.journals %}
+                            <option value="{{ journal }}" {% if filters.journal == journal %}selected{% endif %}>{{ journal }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Research Method</label>
+                        <select class="filter-select" id="methodFilter">
+                            <option value="">All Methods</option>
+                            {% for methodology in stats.methodologies %}
+                            <option value="{{ methodology }}" {% if filters.methodology == methodology %}selected{% endif %}>{{ methodology }}</option>
+                            {% endfor %}
+                        </select>
+                    </div>
+                    <div class="filter-group">
+                        <label class="filter-label">Sort By</label>
+                        <select class="filter-select" id="sortFilter">
+                            <option value="relevance" {% if filters.sortBy == 'relevance' %}selected{% endif %}>Relevance</option>
+                            <option value="year" {% if filters.sortBy == 'year' %}selected{% endif %}>Year</option>
+                            <option value="citations" {% if filters.sortBy == 'citations' %}selected{% endif %}>Citations</option>
+                            <option value="title" {% if filters.sortBy == 'title' %}selected{% endif %}>Title</option>
+                        </select>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Search Results -->
+            <section class="results-section">
+                <div class="results-header">
+                    <h2 class="results-title">Search Results</h2>
+                    <div class="results-count">
+                        <span>Found {{ results|length }} relevant articles</span>
+                    </div>
+                </div>
+
+                <div class="results-list">
+                    {% if results %}
+                        {% for paper in results %}
+                        <article class="result-item">
+                            <div class="result-header">
+                                <h3 class="result-title">
+                                    <a href="{{ url_for('article', paper_id=paper.id) }}">{{ paper.title }}</a>
+                                </h3>
+                                <div class="result-actions">
+                                    <button class="btn btn-outline btn-sm" onclick="addToCompare('{{ paper.id }}')">
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m0-7v7m0-7h10a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2H9m0-7V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
+                                        </svg>
+                                        Compare
+                                    </button>
+                                </div>
+                            </div>
+                            
+                            <div class="result-meta">
+                                <div class="result-authors">
+                                    <strong>Authors:</strong> {{ paper.authors|join(', ') }}
+                                </div>
+                                <div class="result-journal">
+                                    <strong>Journal:</strong> {{ paper.journal }}, {{ paper.year }}
+                                </div>
+                                <div class="result-citations">
+                                    <strong>Citations:</strong> {{ paper.citations }} times
+                                </div>
+                            </div>
+
+                                <div class="result-abstract">
+                                    <p>{{ paper.abstract }}</p>
+                                </div>
+
+                            <div class="result-footer">
+                                <a href="{{ url_for('article', paper_id=paper.id) }}" class="btn btn-primary">View Details</a>
+                            </div>
+                        </article>
+                        {% endfor %}
+                    {% else %}
+                        <div class="no-results">
+                            <h3>No results found</h3>
+                            <p>Try adjusting your search criteria or browse all articles.</p>
+                            <a href="{{ url_for('search') }}" class="btn btn-primary">Browse All Articles</a>
+                        </div>
+                    {% endif %}
+                </div>
+
+                <!-- Pagination -->
+                <div class="pagination">
+                    <button class="pagination-btn" disabled>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15,18 9,12 15,6"></polyline>
+                        </svg>
+                        Previous
+                    </button>
+                    <div class="pagination-pages">
+                        <button class="pagination-page active">1</button>
+                        <button class="pagination-page">2</button>
+                        <button class="pagination-page">3</button>
+                    </div>
+                    <button class="pagination-btn">
+                        Next
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9,18 15,12 9,6"></polyline>
+                        </svg>
+                    </button>
+                </div>
+            </section>
         </div>
+    </main>
 
-        <!-- Filters -->
-        <div class="filters-container">
-            <form action="{{ url_for('search') }}" method="GET" class="filters-form">
-                <input type="hidden" name="q" value="{{ query }}">
-                
-                <div class="filter-group">
-                    <label for="yearFilter">Year:</label>
-                    <select name="year" id="yearFilter" class="filter-select">
-                        <option value="">All Years</option>
-                        {% for year in stats.years %}
-                        <option value="{{ year }}" {% if filters.year == year|string %}selected{% endif %}>{{ year }}</option>
-                        {% endfor %}
-                    </select>
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <p>To provide efficient tools and platforms for academic research</p>
                 </div>
-
-                <div class="filter-group">
-                    <label for="journalFilter">Journal:</label>
-                    <select name="journal" id="journalFilter" class="filter-select">
-                        <option value="">All Journals</option>
-                        {% for journal in stats.journals %}
-                        <option value="{{ journal }}" {% if filters.journal == journal %}selected{% endif %}>{{ journal }}</option>
-                        {% endfor %}
-                    </select>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="{{ url_for('search') }}">Search Research</a>
+                    <a href="{{ url_for('compare') }}">Compare Features</a>
                 </div>
-
-                <div class="filter-group">
-                    <label for="methodologyFilter">Methodology:</label>
-                    <select name="methodology" id="methodologyFilter" class="filter-select">
-                        <option value="">All Methodologies</option>
-                        {% for methodology in stats.methodologies %}
-                        <option value="{{ methodology }}" {% if filters.methodology == methodology %}selected{% endif %}>{{ methodology }}</option>
-                        {% endfor %}
-                    </select>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>support@questionnaire-platform.com</p>
                 </div>
-
-                <div class="filter-group">
-                    <label for="sortByFilter">Sort By:</label>
-                    <select name="sortBy" id="sortByFilter" class="filter-select">
-                        <option value="relevance" {% if filters.sortBy == 'relevance' %}selected{% endif %}>Relevance</option>
-                        <option value="year" {% if filters.sortBy == 'year' %}selected{% endif %}>Year</option>
-                        <option value="citations" {% if filters.sortBy == 'citations' %}selected{% endif %}>Citations</option>
-                        <option value="sampleSize" {% if filters.sortBy == 'sampleSize' %}selected{% endif %}>Sample Size</option>
-                    </select>
-                </div>
-
-                <button type="submit" class="filter-button">Apply Filters</button>
-            </form>
-        </div>
-    </section>
-
-    <!-- Results Section -->
-    <section class="results-section">
-        <div class="results-header">
-            <h2 class="results-title">Search Results</h2>
-            <div class="results-count">
-                <span>Found {{ results|length }} article{{ 's' if results|length != 1 else '' }}</span>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Questionnaire Database Platform. All rights reserved.</p>
             </div>
         </div>
+    </footer>
 
-        <div class="results-list">
-            {% if results %}
-                {% for paper in results %}
-                <article class="result-item">
-                    <div class="result-header">
-                        <h3 class="result-title">
-                            <a href="{{ url_for('article', paper_id=paper.id) }}">{{ paper.title }}</a>
-                        </h3>
-                        <div class="result-actions">
-                            <a href="{{ url_for('compare', ids=[paper.id]) }}" class="btn btn-outline btn-sm">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m0-7v7m0-7h10a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2H9m0-7V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
-                                </svg>
-                                Compare
-                            </a>
-                        </div>
-                    </div>
-                    
-                    <div class="result-meta">
-                        <div class="result-authors">
-                            <strong>Authors:</strong> {{ paper.authors|join(', ') }}
-                        </div>
-                        <div class="result-journal">
-                            <strong>Journal:</strong> {{ paper.journal }}, {{ paper.year }}
-                        </div>
-                        <div class="result-citations">
-                            <strong>Citations:</strong> {{ paper.citations }} times
-                        </div>
-                    </div>
+    <script>
+        function performSearch() {
+            const searchInput = document.getElementById('searchInput');
+            const query = searchInput.value.trim();
+            if (query) {
+                window.location.href = "{{ url_for('search') }}?q=" + encodeURIComponent(query);
+            }
+        }
 
-                    <div class="result-abstract">
-                        <p>{{ paper.abstract }}</p>
-                    </div>
-
-                    <div class="result-features">
-                        <div class="feature-tags">
-                            <span class="tag tag-primary">{{ paper.methodology }}</span>
-                            <span class="tag">Social Media</span>
-                            <span class="tag">Political Psychology</span>
-                            <span class="tag">Cross-National</span>
-                        </div>
-                    </div>
-
-                    <div class="result-footer">
-                        <a href="{{ url_for('article', paper_id=paper.id) }}" class="btn btn-primary">View Details</a>
-                        <div class="result-stats">
-                            <span class="stat-item">Sample Size: {{ "{:,}".format(paper.sample_size) }}</span>
-                            <span class="stat-item">Countries: {{ paper.countries|join(', ') }}</span>
-                            <span class="stat-item">Method: {{ paper.methodology }}</span>
-                        </div>
-                    </div>
-                </article>
-                {% endfor %}
-            {% else %}
-                <div class="no-results">
-                    <h3>No results found</h3>
-                    <p>Try adjusting your search criteria or browse all articles.</p>
-                    <a href="{{ url_for('search') }}" class="btn btn-primary">Browse All Articles</a>
-                </div>
-            {% endif %}
-        </div>
-    </section>
-</div>
-{% endblock %}
+        function addToCompare(paperId) {
+            // Get current comparison list from localStorage
+            let comparisonIds = JSON.parse(localStorage.getItem('comparisonIds') || '[]');
+            
+            // Add new paper if not already in list
+            if (!comparisonIds.includes(paperId)) {
+                comparisonIds.push(paperId);
+                
+                // Limit to maximum 3 papers for comparison
+                if (comparisonIds.length > 3) {
+                    comparisonIds = comparisonIds.slice(-3);
+                    alert('Maximum 3 papers can be compared. The oldest paper has been removed.');
+                }
+                
+                // Save to localStorage
+                localStorage.setItem('comparisonIds', JSON.stringify(comparisonIds));
+                
+                // Update button text to show it's been added
+                event.target.textContent = 'Added';
+                event.target.style.backgroundColor = '#28a745';
+                
+                // Show notification
+                showNotification(`Added to comparison (${comparisonIds.length}/3)`);
+            } else {
+                alert('This paper is already in the comparison list.');
+            }
+        }
+        
+        function showNotification(message) {
+            // Create notification element
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: #28a745;
+                color: white;
+                padding: 10px 20px;
+                border-radius: 5px;
+                z-index: 1000;
+                font-size: 14px;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            
+            // Remove after 3 seconds
+            setTimeout(() => {
+                document.body.removeChild(notification);
+            }, 3000);
+        }
+    </script>
+</body>
+</html>

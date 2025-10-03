@@ -1,97 +1,201 @@
-{% extends "base.html" %}
-
-{% block title %}{{ paper.title }} - Questionnaire Database Platform{% endblock %}
-
-{% block content %}
-<div class="container">
-    <!-- Article Header -->
-    <section class="article-header">
-        <div class="article-actions">
-            <a href="{{ url_for('compare', ids=[paper.id]) }}" class="btn btn-outline">
-                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                    <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m0-7v7m0-7h10a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2H9m0-7V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
-                </svg>
-                Add to Comparison
-            </a>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Article Details - Questionnaire Database Platform</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/article.css') }}">
+</head>
+<body>
+    <header class="header">
+        <div class="container">
+            <div class="logo">
+                <h1>Questionnaire Database Platform</h1>
+                <span class="tagline">Academic Research Tool</span>
+            </div>
+            <nav class="nav">
+                <a href="{{ url_for('index') }}" class="nav-link">Home</a>
+                <a href="{{ url_for('search') }}" class="nav-link">Search</a>
+                <a href="{{ url_for('compare') }}" class="nav-link">Compare</a>
+            </nav>
         </div>
-        
-        <h1 class="article-title">{{ paper.title }}</h1>
-        
-        <div class="article-meta">
-            <div class="meta-item">
-                <strong>Authors:</strong> {{ paper.authors|join(', ') }}
-            </div>
-            <div class="meta-item">
-                <strong>Journal:</strong> {{ paper.journal }}
-            </div>
-            <div class="meta-item">
-                <strong>Year:</strong> {{ paper.year }}
-            </div>
-            <div class="meta-item">
-                <strong>Sample Size:</strong> {{ "{:,}".format(paper.sample_size) }}
-            </div>
-            <div class="meta-item">
-                <strong>Countries:</strong> {{ paper.countries|join(', ') }}
-            </div>
-        </div>
-    </section>
+    </header>
 
-    <!-- Article Content -->
-    <section class="article-content">
-        <div class="content-section">
-            <h2>Abstract</h2>
-            <p>{{ paper.abstract }}</p>
-        </div>
+    <main class="main">
+        <div class="container">
+            <!-- Article Header Information -->
+            <section class="article-header">
+                <div class="article-meta">
+                    <div class="article-journal">{{ paper.journal }}</div>
+                    <div class="article-year">{{ paper.year }}</div>
+                    <div class="article-citations">Citations: {{ paper.citations }}</div>
+                </div>
+                
+                <h1 class="article-title">{{ paper.title }}</h1>
+                
+                <div class="article-authors">
+                    <strong>Authors:</strong> {{ paper.authors|join(', ') }}
+                </div>
+                
+                    <div class="article-actions">
+                        <button class="btn btn-outline" onclick="addToCompare()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m0-7v7m0-7h10a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2H9m0-7V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
+                            </svg>
+                            Add to Compare
+                        </button>
+                        <button class="btn btn-outline" onclick="exportArticle()">
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="7,10 12,15 17,10"></polyline>
+                                <line x1="12" y1="15" x2="12" y2="3"></line>
+                            </svg>
+                            Export
+                        </button>
+                    </div>
+            </section>
 
-        <div class="content-section">
-            <h2>Extracted Features</h2>
-            <div class="features-container">
-                {% for feature_name, feature_value in paper.extracted_features.items() %}
-                    {% if feature_value and feature_value != 'NOT SPECIFIED' and not feature_name.endswith('_verbatim') %}
-                        <div class="feature-item">
-                            <h3 class="feature-title">{{ feature_name.replace('_', ' ').title() }}</h3>
+            <!-- Article Content -->
+            <section class="article-content">
+                <div class="content-grid">
+                    <!-- Main Content on Left -->
+                    <div class="content-main">
+                        <!-- Abstract -->
+                        <div class="content-section">
+                            <h2 class="section-title">Abstract</h2>
                             <div class="feature-content">
-                                <div class="condensed-content">
-                                    <p>{{ feature_value }}</p>
+                                <div class="feature-summary">
+                                    <p>{{ paper.abstract }}</p>
                                 </div>
-                                
-                                {% set verbatim_key = feature_name + '_verbatim' %}
-                                {% if verbatim_key in paper.extracted_features and paper.extracted_features[verbatim_key] and paper.extracted_features[verbatim_key] != 'NOT SPECIFIED' %}
-                                    <button class="btn-view-full" onclick="toggleVerbatim('{{ feature_name }}')">View Full</button>
-                                    <div class="verbatim-content hidden" id="{{ feature_name }}-verbatim">
-                                        <p>{{ paper.extracted_features[verbatim_key] }}</p>
-                                    </div>
+                                {% if paper.abstract_verbatim and paper.abstract_verbatim != 'NOT SPECIFIED' %}
+                                <button class="btn btn-outline btn-sm" onclick="toggleFullText('abstract')">
+                                    <span class="btn-text">View Full Abstract</span>
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                        <polyline points="6,9 12,15 18,9"></polyline>
+                                    </svg>
+                                </button>
+                                <div class="feature-full-text hidden" id="abstract-full">
+                                    <p>{{ paper.abstract_verbatim }}</p>
+                                </div>
                                 {% endif %}
                             </div>
                         </div>
-                    {% endif %}
-                {% endfor %}
+
+
+                        <!-- Extracted Features -->
+                        <div class="content-section">
+                            <div class="features-container">
+                                {% for feature_name, feature_value in paper.extracted_features.items() %}
+                                    {% if feature_value and feature_value != 'NOT SPECIFIED' and not feature_name.endswith('_verbatim') %}
+                                        <div class="feature-item">
+                                            <h3 class="feature-title">{{ feature_name.replace('_', ' ').title() }}</h3>
+                                            <div class="feature-content">
+                                                <div class="feature-summary">
+                                                    <p>{{ feature_value }}</p>
+                                                </div>
+                                                
+                                                {% set verbatim_key = feature_name + '_verbatim' %}
+                                                {% if verbatim_key in paper.extracted_features and paper.extracted_features[verbatim_key] and paper.extracted_features[verbatim_key] != 'NOT SPECIFIED' %}
+                                                    <button class="btn btn-outline btn-sm" onclick="toggleFullText('{{ feature_name }}')">
+                                                        <span class="btn-text">View Full</span>
+                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                            <polyline points="6,9 12,15 18,9"></polyline>
+                                                        </svg>
+                                                    </button>
+                                                    <div class="feature-full-text hidden" id="{{ feature_name }}-full">
+                                                        <p>{{ paper.extracted_features[verbatim_key] }}</p>
+                                                    </div>
+                                                {% endif %}
+                                            </div>
+                                        </div>
+                                    {% endif %}
+                                {% endfor %}
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- Sidebar on Right -->
+                    <div class="content-sidebar">
+                        <div class="sidebar-section">
+                            <h3 class="sidebar-title">Study Information</h3>
+                            <div class="sidebar-content">
+                                <div class="info-item">
+                                    <span class="info-label">Journal:</span>
+                                    <span class="info-value">{{ paper.journal }}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Year:</span>
+                                    <span class="info-value">{{ paper.year }}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Sample Size:</span>
+                                    <span class="info-value">{{ "{:,}".format(paper.sample_size) }}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Countries:</span>
+                                    <span class="info-value">{{ paper.countries|join(', ') }}</span>
+                                </div>
+                                <div class="info-item">
+                                    <span class="info-label">Methodology:</span>
+                                    <span class="info-value">{{ paper.methodology }}</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer class="footer">
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-section">
+                    <h4>About Us</h4>
+                    <p>To provide efficient tools and platforms for academic research</p>
+                </div>
+                <div class="footer-section">
+                    <h4>Quick Links</h4>
+                    <a href="{{ url_for('search') }}">Search Research</a>
+                    <a href="{{ url_for('compare') }}">Compare Features</a>
+                </div>
+                <div class="footer-section">
+                    <h4>Contact Us</h4>
+                    <p>support@questionnaire-platform.com</p>
+                </div>
+            </div>
+            <div class="footer-bottom">
+                <p>&copy; 2024 Questionnaire Database Platform. All rights reserved.</p>
             </div>
         </div>
+    </footer>
 
-        <div class="content-section">
-            <h2>Citation</h2>
-            <div class="citation">
-                <p>{{ paper.citation }}</p>
-            </div>
-        </div>
-    </section>
-</div>
-{% endblock %}
-
-{% block scripts %}
-<script>
-function toggleVerbatim(featureId) {
-    const verbatimElement = document.getElementById(featureId + '-verbatim');
-    const button = event.target;
-    
-    if (verbatimElement.classList.contains('hidden')) {
-        verbatimElement.classList.remove('hidden');
-        button.textContent = 'Hide Full';
-    } else {
-        verbatimElement.classList.add('hidden');
-        button.textContent = 'View Full';
-    }
-}
-</script>
-{% endblock %}
+    <script>
+        function toggleFullText(featureId) {
+            const fullTextElement = document.getElementById(featureId + '-full');
+            const button = event.target.closest('button');
+            
+            if (fullTextElement.classList.contains('hidden')) {
+                fullTextElement.classList.remove('hidden');
+                button.querySelector('.btn-text').textContent = 'Hide Full';
+            } else {
+                fullTextElement.classList.add('hidden');
+                button.querySelector('.btn-text').textContent = 'View Full';
+            }
+        }
+        
+        function addToCompare() {
+            console.log('Adding to compare');
+        }
+        
+        function toggleFavorite() {
+            console.log('Toggling favorite');
+        }
+        
+        function exportArticle() {
+            console.log('Exporting article');
+        }
+    </script>
+</body>
+</html>

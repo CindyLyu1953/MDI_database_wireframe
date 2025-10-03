@@ -1,36 +1,54 @@
 {% extends "base.html" %}
 
-{% block title %}Home - Questionnaire Database Platform{% endblock %}
+{% block title %}Questionnaire Database Platform - Academic Research Tool{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/home.css') }}">
+{% endblock %}
 
 {% block content %}
-<div class="container">
-    <!-- Hero Section -->
-    <section class="hero">
+<section class="hero">
+    <div class="container">
         <div class="hero-content">
-            <h1 class="hero-title">Questionnaire Database Platform</h1>
-            <p class="hero-subtitle">Search and compare research articles with extracted features</p>
+            <h2 class="hero-title">Discover, Compare, and Integrate Academic Research</h2>
+            <p class="hero-description">
+                A centralized questionnaire database platform that collects key information from social media-related experimental research,
+                helping scholars quickly find appropriate measurement methods and avoid redundant work.
+            </p>
             
             <div class="search-box">
-                <form action="{{ url_for('search') }}" method="GET" class="search-form">
-                    <div class="search-input-group">
-                        <input type="text" name="q" placeholder="Search by title, abstract, journal, or author name..." class="search-input" value="{{ request.args.get('q', '') }}">
-                        <button type="submit" class="search-button">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                <circle cx="11" cy="11" r="8"></circle>
-                                <path d="m21 21-4.35-4.35"></path>
-                            </svg>
-                            Search
-                        </button>
-                    </div>
-                </form>
-                
-                <div class="search-suggestions">
-                    <span class="suggestion-label">Popular searches:</span>
-                    <a href="{{ url_for('search', q='social media') }}" class="suggestion-tag">social media</a>
-                    <a href="{{ url_for('search', q='political polarization') }}" class="suggestion-tag">political polarization</a>
-                </div>
+                <input type="text" id="searchInput" placeholder="Search keywords, authors, journals..." class="search-input">
+                <button class="search-btn" onclick="performSearch()">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"></circle>
+                        <path d="m21 21-4.35-4.35"></path>
+                    </svg>
+                    Search
+                </button>
+            </div>
+            
+            <div class="search-suggestions">
+                <span class="suggestion-label">Popular searches:</span>
+                <a href="{{ url_for('search', q='trust') }}" class="suggestion-tag">trust</a>
+                <a href="{{ url_for('search', q='tolerance') }}" class="suggestion-tag">tolerance</a>
+                <a href="{{ url_for('search', q='social media') }}" class="suggestion-tag">social media</a>
+                <a href="{{ url_for('search', q='political polarization') }}" class="suggestion-tag">political polarization</a>
             </div>
         </div>
-    </section>
-</div>
+    </div>
+</section>
+
+<script>
+    function performSearch() {
+        const searchInput = document.getElementById('searchInput');
+        const query = searchInput.value.trim();
+        if (query) {
+            window.location.href = "{{ url_for('search') }}?q=" + encodeURIComponent(query);
+        }
+    }
+
+    function searchTag(tag) {
+        window.location.href = "{{ url_for('search') }}?q=" + encodeURIComponent(tag);
+    }
+</script>
 {% endblock %}
