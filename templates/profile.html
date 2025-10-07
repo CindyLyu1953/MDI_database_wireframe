@@ -1,0 +1,184 @@
+{% extends "base.html" %}
+
+{% block title %}Profile - Questionnaire Database Platform{% endblock %}
+
+{% block extra_css %}
+<link rel="stylesheet" href="{{ url_for('static', filename='css/profile.css') }}">
+{% endblock %}
+
+{% block content %}
+<div class="container">
+    <!-- Profile Header -->
+    <section class="profile-header">
+        <h1 class="page-title">User Profile</h1>
+        <p class="page-description">Manage your profile information and preferences</p>
+    </section>
+
+    <!-- Profile Content -->
+    <section class="profile-content">
+        <div class="profile-grid">
+            <!-- Profile Form -->
+            <div class="profile-form-section">
+                <div class="form-card">
+                    <h2 class="form-title">About</h2>
+                    <form id="profileForm" class="profile-form">
+                        <div class="form-group">
+                            <label for="username" class="form-label">Username</label>
+                            <input type="text" id="username" name="username" class="form-input" placeholder="Enter your username">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="institution" class="form-label">Institution</label>
+                            <input type="text" id="institution" name="institution" class="form-input" placeholder="Enter your institution">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="email" class="form-label">Email</label>
+                            <input type="email" id="email" name="email" class="form-input" placeholder="Enter your email">
+                        </div>
+                        
+                        <div class="form-group">
+                            <label for="researchInterests" class="form-label">Research Interests</label>
+                            <textarea id="researchInterests" name="researchInterests" class="form-textarea" placeholder="Describe your research interests..."></textarea>
+                        </div>
+                        
+                        <div class="form-actions">
+                            <button type="submit" class="btn btn-primary">Save Profile</button>
+                            <button type="button" class="btn btn-outline" onclick="resetForm()">Reset</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            <!-- Profile Info -->
+            <div class="profile-info-section">
+                <div class="info-card">
+                    <h3 class="info-title">Profile Information</h3>
+                    <div class="info-content">
+                        <div class="info-item">
+                            <span class="info-label">Username:</span>
+                            <span class="info-value" id="displayUsername">Not set</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Institution:</span>
+                            <span class="info-value" id="displayInstitution">Not set</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Email:</span>
+                            <span class="info-value" id="displayEmail">Not set</span>
+                        </div>
+                        <div class="info-item">
+                            <span class="info-label">Research Interests:</span>
+                            <span class="info-value" id="displayInterests">Not set</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="stats-card">
+                    <h3 class="stats-title">Activity Statistics</h3>
+                    <div class="stats-content">
+                        <div class="stat-item">
+                            <span class="stat-number" id="searchesCount">0</span>
+                            <span class="stat-label">Searches Performed</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="comparisonsCount">0</span>
+                            <span class="stat-label">Studies Compared</span>
+                        </div>
+                        <div class="stat-item">
+                            <span class="stat-number" id="articlesViewed">0</span>
+                            <span class="stat-label">Articles Viewed</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+    // Load profile data from localStorage
+    document.addEventListener('DOMContentLoaded', function() {
+        loadProfileData();
+        loadActivityStats();
+    });
+
+    function loadProfileData() {
+        const profileData = JSON.parse(localStorage.getItem('userProfile') || '{}');
+        
+        // Populate form fields
+        document.getElementById('username').value = profileData.username || '';
+        document.getElementById('institution').value = profileData.institution || '';
+        document.getElementById('email').value = profileData.email || '';
+        document.getElementById('researchInterests').value = profileData.researchInterests || '';
+        
+        // Update display
+        updateProfileDisplay(profileData);
+    }
+
+    function updateProfileDisplay(data) {
+        document.getElementById('displayUsername').textContent = data.username || 'Not set';
+        document.getElementById('displayInstitution').textContent = data.institution || 'Not set';
+        document.getElementById('displayEmail').textContent = data.email || 'Not set';
+        document.getElementById('displayInterests').textContent = data.researchInterests || 'Not set';
+    }
+
+    function loadActivityStats() {
+        const stats = JSON.parse(localStorage.getItem('userStats') || '{}');
+        document.getElementById('searchesCount').textContent = stats.searches || 0;
+        document.getElementById('comparisonsCount').textContent = stats.comparisons || 0;
+        document.getElementById('articlesViewed').textContent = stats.articlesViewed || 0;
+    }
+
+    // Handle form submission
+    document.getElementById('profileForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = {
+            username: document.getElementById('username').value,
+            institution: document.getElementById('institution').value,
+            email: document.getElementById('email').value,
+            researchInterests: document.getElementById('researchInterests').value
+        };
+        
+        // Save to localStorage
+        localStorage.setItem('userProfile', JSON.stringify(formData));
+        
+        // Update display
+        updateProfileDisplay(formData);
+        
+        // Show success message
+        showNotification('Profile saved successfully!');
+    });
+
+    function resetForm() {
+        document.getElementById('profileForm').reset();
+        loadProfileData();
+    }
+
+    function showNotification(message) {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 1000;
+            font-size: 14px;
+        `;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 3000);
+    }
+</script>
+{% endblock %}

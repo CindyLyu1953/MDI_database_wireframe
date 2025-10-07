@@ -1,6 +1,5 @@
 from flask import Flask, render_template, request, jsonify
 import csv
-import json
 import os
 
 app = Flask(__name__)
@@ -293,6 +292,12 @@ def compare():
     comparison_papers = [p for p in papers_data if p["id"] in comparison_ids]
 
     return render_template("compare.html", papers=comparison_papers)
+
+
+@app.route("/profile")
+def profile():
+    """Profile page"""
+    return render_template("profile.html")
 
 
 # API endpoints
