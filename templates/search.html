@@ -40,6 +40,12 @@
                             <a href="{{ url_for('article', paper_id=paper.id) }}">{{ paper.title }}</a>
                         </h3>
                         <div class="result-actions">
+                            <button class="btn btn-outline btn-sm" onclick="toggleFavorite('{{ paper.id }}')">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path>
+                                </svg>
+                                <span class="favorite-text">Favorite</span>
+                            </button>
                             <button class="btn btn-outline btn-sm" onclick="addToCompare('{{ paper.id }}')">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m0-7v7m0-7h10a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2H9m0-7V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
@@ -138,6 +144,37 @@
             showNotification(`Added to comparison (${comparisonIds.length}/3)`);
         } else {
             alert('This paper is already in the comparison list.');
+        }
+    }
+    
+    function toggleFavorite(paperId) {
+        // Get current favorites list from localStorage
+        let favorites = JSON.parse(localStorage.getItem('favorites') || '[]');
+        
+        if (favorites.includes(paperId)) {
+            // Remove from favorites
+            favorites = favorites.filter(id => id !== paperId);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // Update button appearance
+            const button = event.target.closest('button');
+            button.querySelector('.favorite-text').textContent = 'Favorite';
+            button.style.backgroundColor = '';
+            button.style.color = '';
+            
+            showNotification('Removed from favorites');
+        } else {
+            // Add to favorites
+            favorites.push(paperId);
+            localStorage.setItem('favorites', JSON.stringify(favorites));
+            
+            // Update button appearance
+            const button = event.target.closest('button');
+            button.querySelector('.favorite-text').textContent = 'Favorited';
+            button.style.backgroundColor = '#e74c3c';
+            button.style.color = 'white';
+            
+            showNotification('Added to favorites');
         }
     }
     

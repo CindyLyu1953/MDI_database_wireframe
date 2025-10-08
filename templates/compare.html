@@ -24,13 +24,21 @@
                 </svg>
                 Add Study
             </button>
-            <button class="btn btn-outline" onclick="exportComparison()">
+            <button class="btn btn-outline" onclick="downloadComparison()">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
                     <polyline points="7,10 12,15 17,10"></polyline>
                     <line x1="12" y1="15" x2="12" y2="3"></line>
                 </svg>
-                Export Comparison
+                Download Comparison
+            </button>
+            <button class="btn btn-outline" onclick="saveComparison()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M19 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h11l5 5v11a2 2 0 0 1-2 2z"></path>
+                    <polyline points="17,21 17,13 7,13 7,21"></polyline>
+                    <polyline points="7,3 7,8 15,8"></polyline>
+                </svg>
+                Save Comparison
             </button>
             <button class="btn btn-outline" onclick="clearComparison()">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -673,13 +681,185 @@
         window.location.href = "{{ url_for('search') }}";
     }
     
-    function exportComparison() {
-        console.log('Exporting comparison');
+    function downloadComparison() {
+        // Get comparison data
+        const comparisonData = generateComparisonData();
+        
+        // Create CSV content
+        const csvContent = generateCSV(comparisonData);
+        
+        // Create and download file
+        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+        const link = document.createElement('a');
+        const url = URL.createObjectURL(blob);
+        link.setAttribute('href', url);
+        link.setAttribute('download', 'comparison_results.csv');
+        link.style.visibility = 'hidden';
+        document.body.appendChild(link);
+        link.click();
+        document.body.removeChild(link);
+        
+        showNotification('Comparison downloaded successfully');
+    }
+    
+    function saveComparison() {
+        // Get comparison data
+        const comparisonData = generateComparisonData();
+        
+        // Get saved comparisons
+        let savedComparisons = JSON.parse(localStorage.getItem('savedComparisons') || '[]');
+        
+        // Create new comparison entry
+        const comparisonEntry = {
+            id: Date.now().toString(),
+            name: `Comparison ${savedComparisons.length + 1}`,
+            date: new Date().toLocaleDateString(),
+            papers: comparisonData.papers,
+            features: comparisonData.features
+        };
+        
+        // Add to saved comparisons
+        savedComparisons.push(comparisonEntry);
+        localStorage.setItem('savedComparisons', JSON.stringify(savedComparisons));
+        
+        showNotification('Comparison saved successfully');
+    }
+    
+    function generateComparisonData() {
+        const papers = {{ papers|tojson }};
+        const features = [
+            'Authors', 'Title', 'Journal', 'Year', 'Citation', 'Abstract',
+            'Sample Size', 'Country / Region', 'Recruitment Source', 'Demographics', 'Incentive',
+            'Treatment / Independent variable(s)', 'Survey Measures (treatment variables)',
+            'Outcome / Dependent variable(s)', 'Survey Measures (outcome variables)', 'Analysis (estimating equation)',
+            'Main Effects', 'Moderators', 'Moderation Results',
+            'Socio-cultural context', 'Political context', 'Platform / Technological context', 'Temporal context'
+        ];
+        
+        return { papers, features };
+    }
+    
+    function generateCSV(data) {
+        const { papers, features } = data;
+        
+        // Create header row
+        let csv = 'Feature,' + papers.map((paper, index) => `Study ${index + 1}`).join(',') + '\n';
+        
+        // Add data rows
+        features.forEach(feature => {
+            const row = [feature];
+            papers.forEach(paper => {
+                let value = '';
+                switch(feature) {
+                    case 'Authors':
+                        value = paper.authors.join(', ');
+                        break;
+                    case 'Title':
+                        value = paper.title;
+                        break;
+                    case 'Journal':
+                        value = paper.journal;
+                        break;
+                    case 'Year':
+                        value = paper.year;
+                        break;
+                    case 'Citation':
+                        value = paper.citation || '';
+                        break;
+                    case 'Abstract':
+                        value = paper.abstract;
+                        break;
+                    case 'Sample Size':
+                        value = paper.sample_size ? paper.sample_size.toLocaleString() : '';
+                        break;
+                    case 'Country / Region':
+                        value = paper.extracted_features.country_region || '';
+                        break;
+                    case 'Recruitment Source':
+                        value = paper.extracted_features.recruitment_source || '';
+                        break;
+                    case 'Demographics':
+                        value = paper.extracted_features.demographics || '';
+                        break;
+                    case 'Incentive':
+                        value = paper.extracted_features.incentive || '';
+                        break;
+                    case 'Treatment / Independent variable(s)':
+                        value = paper.extracted_features.independent_variables || '';
+                        break;
+                    case 'Survey Measures (treatment variables)':
+                        value = paper.extracted_features.survey_questions || '';
+                        break;
+                    case 'Outcome / Dependent variable(s)':
+                        value = paper.extracted_features.dependent_variables || '';
+                        break;
+                    case 'Survey Measures (outcome variables)':
+                        value = paper.extracted_features.survey_questions || '';
+                        break;
+                    case 'Analysis (estimating equation)':
+                        value = paper.extracted_features.analysis_equations || '';
+                        break;
+                    case 'Main Effects':
+                        value = paper.extracted_features.main_effects || '';
+                        break;
+                    case 'Moderators':
+                        value = paper.extracted_features.moderators || '';
+                        break;
+                    case 'Moderation Results':
+                        value = paper.extracted_features.moderation_results || '';
+                        break;
+                    case 'Socio-cultural context':
+                        value = paper.extracted_features.sociocultural_context || '';
+                        break;
+                    case 'Political context':
+                        value = paper.extracted_features.political_context || '';
+                        break;
+                    case 'Platform / Technological context':
+                        value = paper.extracted_features.platform_technological_context || '';
+                        break;
+                    case 'Temporal context':
+                        value = paper.extracted_features.temporal_context || '';
+                        break;
+                }
+                // Escape commas and quotes in CSV
+                value = value.replace(/"/g, '""');
+                if (value.includes(',') || value.includes('"') || value.includes('\n')) {
+                    value = '"' + value + '"';
+                }
+                row.push(value);
+            });
+            csv += row.join(',') + '\n';
+        });
+        
+        return csv;
     }
     
     function clearComparison() {
         localStorage.removeItem('comparisonIds');
         window.location.href = "{{ url_for('compare') }}";
+    }
+    
+    function showNotification(message) {
+        // Create notification element
+        const notification = document.createElement('div');
+        notification.style.cssText = `
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            z-index: 1000;
+            font-size: 14px;
+        `;
+        notification.textContent = message;
+        document.body.appendChild(notification);
+        
+        // Remove after 3 seconds
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 3000);
     }
     
     function toggleFullText(featureId) {
