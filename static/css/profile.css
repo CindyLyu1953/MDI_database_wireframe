@@ -208,10 +208,17 @@
 }
 
 /* Activity Statistics */
-.activity-stats {
+.activity-stats,
+.platform-stats {
     padding: 1.5rem;
     background: #f9fafb;
     border-radius: 0.375rem;
+    margin-bottom: 1.5rem;
+}
+
+.platform-stats {
+    background: #eff6ff;
+    border-left: 3px solid #3b82f6;
 }
 
 .stats-title {

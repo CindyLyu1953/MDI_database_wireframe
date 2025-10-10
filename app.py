@@ -1,8 +1,20 @@
-from flask import Flask, render_template, request, jsonify
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 import csv
 import os
+import json
+import sqlite3
+from datetime import datetime
+from functools import wraps
+import pytz
 
 app = Flask(__name__)
+app.secret_key = (
+    "your-secret-key-change-this-in-production"  # Change this in production!
+)
+
+# Admin credentials (in production, use environment variables or a proper auth system)
+ADMIN_USERNAME = "admin"
+ADMIN_PASSWORD = "admin123"  # Change this!
 
 # Global variable to store papers data
 papers_data = []
@@ -13,7 +25,7 @@ def load_papers_from_csv():
     global papers_data
     papers_data = []
 
-    csv_file = os.path.join("data", "papers_extracted.csv")
+    csv_file = os.path.join("data", "input", "papers_extracted.csv")
 
     try:
         with open(csv_file, "r", encoding="utf-8") as file:
@@ -163,46 +175,33 @@ def search_papers(query="", filters=None):
         ]
 
     # Apply filters
-    if filters.get("year"):
-        results = [paper for paper in results if paper["year"] >= int(filters["year"])]
+    if filters.get("year_from"):
+        results = [
+            paper for paper in results if paper["year"] >= int(filters["year_from"])
+        ]
+
+    if filters.get("year_to"):
+        results = [
+            paper for paper in results if paper["year"] <= int(filters["year_to"])
+        ]
 
     if filters.get("journal"):
         results = [
             paper
             for paper in results
-            if filters["journal"].lower() in paper["journal"].lower()
-        ]
-
-    if filters.get("methodology"):
-        results = [
-            paper for paper in results if paper["methodology"] == filters["methodology"]
+            if filters["journal"].lower() == paper["journal"].lower()
         ]
 
     if filters.get("country"):
         results = [
             paper
             for paper in results
-            if any(
-                filters["country"].lower() in country.lower()
-                for country in paper["countries"]
-            )
+            if filters["country"].lower()
+            in paper.get("extracted_features", {}).get("country_region", "").lower()
         ]
 
-    if filters.get("sampleSize"):
-        results = [
-            paper
-            for paper in results
-            if paper["sample_size"] >= int(filters["sampleSize"])
-        ]
-
-    # Sort results
-    sort_by = filters.get("sortBy", "relevance")
-    if sort_by == "year":
-        results.sort(key=lambda x: x["year"], reverse=True)
-    elif sort_by == "citations":
-        results.sort(key=lambda x: x["citations"], reverse=True)
-    elif sort_by == "sampleSize":
-        results.sort(key=lambda x: x["sample_size"], reverse=True)
+    # Sort by year (most recent first) by default
+    results.sort(key=lambda x: x["year"], reverse=True)
 
     return results
 
@@ -239,20 +238,16 @@ def index():
 def search():
     """Search page"""
     query = request.args.get("q", "")
-    year = request.args.get("year", "")
+    year_from = request.args.get("year_from", "")
+    year_to = request.args.get("year_to", "")
     journal = request.args.get("journal", "")
-    methodology = request.args.get("methodology", "")
     country = request.args.get("country", "")
-    sample_size = request.args.get("sampleSize", "")
-    sort_by = request.args.get("sortBy", "relevance")
 
     filters = {
-        "year": year,
+        "year_from": year_from,
+        "year_to": year_to,
         "journal": journal,
-        "methodology": methodology,
         "country": country,
-        "sampleSize": sample_size,
-        "sortBy": sort_by,
     }
 
     # Remove empty filters
@@ -260,12 +255,15 @@ def search():
 
     results = search_papers(query, filters)
 
+    # Get unique journals for filter dropdown
+    journals = sorted(list(set(p["journal"] for p in papers_data if p["journal"])))
+
     return render_template(
         "search.html",
         query=query,
         results=results,
         filters=filters,
-        stats=get_statistics(),
+        journals=journals,
     )
 
 
@@ -341,6 +339,313 @@ def api_paper(paper_id):
 def api_statistics():
     """API endpoint to get statistics"""
     return jsonify(get_statistics())
+
+
+# Database helper functions
+def get_db_connection():
+    """Get database connection"""
+    db_path = os.path.join("data", "output", "tracking.db")
+    conn = sqlite3.connect(db_path)
+    conn.row_factory = sqlite3.Row  # Enable column access by name
+    return conn
+
+
+def get_eastern_time():
+    """Get current time in US Eastern timezone"""
+    eastern = pytz.timezone("US/Eastern")
+    return datetime.now(eastern).strftime("%Y-%m-%d %H:%M:%S")
+
+
+def require_admin(f):
+    """Decorator to require admin authentication"""
+
+    @wraps(f)
+    def decorated_function(*args, **kwargs):
+        if not session.get("is_admin"):
+            return jsonify({"error": "Unauthorized"}), 401
+        return f(*args, **kwargs)
+
+    return decorated_function
+
+
+# Tracking functions (Database-based)
+
+
+@app.route("/api/track/search", methods=["POST"])
+def track_search():
+    """Track a search query"""
+    try:
+        data = request.json or {}
+        search_query = data.get("search_query", "")
+        filters_used = json.dumps(data.get("filters_used", {}))
+        num_results = data.get("num_results", 0)
+        user_session = session.get("user_id", "anonymous")
+        timestamp = get_eastern_time()
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            """
+            INSERT INTO search_logs (timestamp, search_query, filters_used, num_results, user_session)
+            VALUES (?, ?, ?, ?, ?)
+            """,
+            (timestamp, search_query, filters_used, num_results, user_session),
+        )
+        conn.commit()
+        conn.close()
+
+        return jsonify({"success": True, "message": "Search tracked"})
+    except Exception as e:
+        print(f"Error tracking search: {e}")
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route("/api/track/compare_view", methods=["POST"])
+def track_compare_view():
+    """Track a comparison page view"""
+    try:
+        data = request.json or {}
+        paper_ids = data.get("paper_ids", [])
+        user_session = session.get("user_id", "anonymous")
+        timestamp = get_eastern_time()
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            """
+            INSERT INTO compare_view_logs (timestamp, paper_ids, num_papers, user_session)
+            VALUES (?, ?, ?, ?)
+            """,
+            (timestamp, json.dumps(paper_ids), len(paper_ids), user_session),
+        )
+        conn.commit()
+        conn.close()
+
+        return jsonify({"success": True, "message": "Compare view tracked"})
+    except Exception as e:
+        print(f"Error tracking compare view: {e}")
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route("/api/track/download", methods=["POST"])
+def track_download():
+    """Track a comparison download"""
+    try:
+        data = request.json or {}
+        paper_ids = data.get("paper_ids", [])
+        user_session = session.get("user_id", "anonymous")
+        timestamp = get_eastern_time()
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            """
+            INSERT INTO download_logs (timestamp, paper_ids, num_papers, user_session)
+            VALUES (?, ?, ?, ?)
+            """,
+            (timestamp, json.dumps(paper_ids), len(paper_ids), user_session),
+        )
+        conn.commit()
+        conn.close()
+
+        return jsonify({"success": True, "message": "Download tracked"})
+    except Exception as e:
+        print(f"Error tracking download: {e}")
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route("/api/tracking/stats")
+def get_tracking_stats():
+    """Get tracking statistics (public endpoint for Profile page)"""
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute("SELECT COUNT(*) as count FROM compare_view_logs")
+        total_visits = cursor.fetchone()["count"]
+
+        cursor.execute("SELECT COUNT(*) as count FROM download_logs")
+        total_downloads = cursor.fetchone()["count"]
+
+        conn.close()
+
+        return jsonify(
+            {
+                "total_visits": total_visits,
+                "total_downloads": total_downloads,
+            }
+        )
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+# Admin routes
+@app.route("/admin/login", methods=["GET", "POST"])
+def admin_login():
+    """Admin login page"""
+    if request.method == "POST":
+        username = request.form.get("username")
+        password = request.form.get("password")
+
+        if username == ADMIN_USERNAME and password == ADMIN_PASSWORD:
+            session["is_admin"] = True
+            session["user_id"] = "admin"
+            return redirect(url_for("admin_dashboard"))
+        else:
+            return render_template("admin_login.html", error="Invalid credentials")
+
+    return render_template("admin_login.html")
+
+
+@app.route("/admin/logout")
+def admin_logout():
+    """Admin logout"""
+    session.pop("is_admin", None)
+    session.pop("user_id", None)
+    return redirect(url_for("index"))
+
+
+@app.route("/admin/dashboard")
+@require_admin
+def admin_dashboard():
+    """Admin dashboard page"""
+    return render_template("admin_dashboard.html")
+
+
+@app.route("/api/admin/search_logs")
+@require_admin
+def get_search_logs():
+    """Get search logs for admin"""
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            """
+            SELECT * FROM search_logs 
+            ORDER BY timestamp DESC 
+            LIMIT 1000
+        """
+        )
+        logs = [dict(row) for row in cursor.fetchall()]
+        conn.close()
+        return jsonify(logs)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/admin/compare_view_logs")
+@require_admin
+def get_compare_view_logs():
+    """Get compare view logs for admin"""
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            """
+            SELECT * FROM compare_view_logs 
+            ORDER BY timestamp DESC 
+            LIMIT 1000
+        """
+        )
+        logs = [dict(row) for row in cursor.fetchall()]
+        conn.close()
+        return jsonify(logs)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/admin/download_logs")
+@require_admin
+def get_download_logs():
+    """Get download logs for admin"""
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        cursor.execute(
+            """
+            SELECT * FROM download_logs 
+            ORDER BY timestamp DESC 
+            LIMIT 1000
+        """
+        )
+        logs = [dict(row) for row in cursor.fetchall()]
+        conn.close()
+        return jsonify(logs)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/admin/stats")
+@require_admin
+def get_admin_stats():
+    """Get statistics for admin dashboard"""
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        # Get counts
+        cursor.execute("SELECT COUNT(*) as count FROM search_logs")
+        total_searches = cursor.fetchone()["count"]
+
+        cursor.execute("SELECT COUNT(*) as count FROM compare_view_logs")
+        total_compares = cursor.fetchone()["count"]
+
+        cursor.execute("SELECT COUNT(*) as count FROM download_logs")
+        total_downloads = cursor.fetchone()["count"]
+
+        # Get recent activity (last 7 days)
+        cursor.execute(
+            """
+            SELECT COUNT(*) as count FROM search_logs 
+            WHERE timestamp >= datetime('now', '-7 days')
+        """
+        )
+        recent_searches = cursor.fetchone()["count"]
+
+        cursor.execute(
+            """
+            SELECT COUNT(*) as count FROM compare_view_logs 
+            WHERE timestamp >= datetime('now', '-7 days')
+        """
+        )
+        recent_compares = cursor.fetchone()["count"]
+
+        cursor.execute(
+            """
+            SELECT COUNT(*) as count FROM download_logs 
+            WHERE timestamp >= datetime('now', '-7 days')
+        """
+        )
+        recent_downloads = cursor.fetchone()["count"]
+
+        # Get top search queries
+        cursor.execute(
+            """
+            SELECT search_query, COUNT(*) as count 
+            FROM search_logs 
+            WHERE search_query != '' 
+            GROUP BY search_query 
+            ORDER BY count DESC 
+            LIMIT 10
+        """
+        )
+        top_searches = [dict(row) for row in cursor.fetchall()]
+
+        conn.close()
+
+        return jsonify(
+            {
+                "total_searches": total_searches,
+                "total_compares": total_compares,
+                "total_downloads": total_downloads,
+                "recent_searches": recent_searches,
+                "recent_compares": recent_compares,
+                "recent_downloads": recent_downloads,
+                "top_searches": top_searches,
+            }
+        )
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 
 if __name__ == "__main__":

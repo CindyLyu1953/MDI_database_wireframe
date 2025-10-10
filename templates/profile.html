@@ -105,6 +105,21 @@
                             </div>
                         </div>
                     </div>
+
+                    <!-- Platform Statistics -->
+                    <div class="platform-stats">
+                        <h3 class="stats-title">Platform Usage Statistics</h3>
+                        <div class="stats-grid">
+                            <div class="stat-item">
+                                <span class="stat-number" id="totalVisits">0</span>
+                                <span class="stat-label">Total Comparison Visits</span>
+                            </div>
+                            <div class="stat-item">
+                                <span class="stat-number" id="totalDownloads">0</span>
+                                <span class="stat-label">Total Downloads</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
 
                 <!-- Favorites Section -->
@@ -156,6 +171,7 @@
     document.addEventListener('DOMContentLoaded', function() {
         loadProfileData();
         loadActivityStats();
+        loadPlatformStats();
         updateBadgeCounts();
         loadFavorites();
         loadSavedComparisons();
@@ -216,6 +232,21 @@
         document.getElementById('searchesCount').textContent = stats.searches || 0;
         document.getElementById('comparisonsCount').textContent = stats.comparisons || 0;
         document.getElementById('articlesViewed').textContent = stats.articlesViewed || 0;
+    }
+
+    function loadPlatformStats() {
+        // Fetch platform statistics from backend
+        fetch('/api/tracking/stats')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('totalVisits').textContent = data.total_visits || 0;
+                document.getElementById('totalDownloads').textContent = data.total_downloads || 0;
+            })
+            .catch(error => {
+                console.error('Error loading platform stats:', error);
+                document.getElementById('totalVisits').textContent = '0';
+                document.getElementById('totalDownloads').textContent = '0';
+            });
     }
 
     function loadFavorites() {

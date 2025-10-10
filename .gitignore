@@ -50,3 +50,8 @@ instance/
 
 # Logs
 *.log
+
+# Database files (output data)
+data/output/
+*.db
+*.db-journal

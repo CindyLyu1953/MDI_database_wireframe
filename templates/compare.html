@@ -674,32 +674,92 @@
             console.log('Setting paper count to:', paperCount);
             document.documentElement.style.setProperty('--paper-count', paperCount);
             console.log('CSS variable set:', document.documentElement.style.getPropertyValue('--paper-count'));
+            
+            // Track comparison page visit
+            trackVisit(idsParam.split(','));
         }
     });
+    
+    // Track comparison page visit
+    function trackVisit(paperIds) {
+        fetch('/api/track/compare_view', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ paper_ids: paperIds })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Compare view tracked:', data);
+        })
+        .catch(error => {
+            console.error('Error tracking compare view:', error);
+        });
+    }
     
     function addStudy() {
         window.location.href = "{{ url_for('search') }}";
     }
     
     function downloadComparison() {
-        // Get comparison data
-        const comparisonData = generateComparisonData();
-        
-        // Create CSV content
-        const csvContent = generateCSV(comparisonData);
-        
-        // Create and download file
-        const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
-        const link = document.createElement('a');
-        const url = URL.createObjectURL(blob);
-        link.setAttribute('href', url);
-        link.setAttribute('download', 'comparison_results.csv');
-        link.style.visibility = 'hidden';
-        document.body.appendChild(link);
-        link.click();
-        document.body.removeChild(link);
-        
-        showNotification('Comparison downloaded successfully');
+        try {
+            // Get comparison data
+            const comparisonData = generateComparisonData();
+            
+            if (!comparisonData.papers || comparisonData.papers.length === 0) {
+                showNotification('No studies to download. Please add studies to compare first.', 'warning');
+                return;
+            }
+            
+            // Create CSV content
+            const csvContent = generateCSV(comparisonData);
+            
+            // Create timestamp for filename
+            const timestamp = new Date().toISOString().split('T')[0];
+            const filename = `comparison_${timestamp}.csv`;
+            
+            // Create and download file
+            const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+            const link = document.createElement('a');
+            const url = URL.createObjectURL(blob);
+            link.setAttribute('href', url);
+            link.setAttribute('download', filename);
+            link.style.visibility = 'hidden';
+            document.body.appendChild(link);
+            link.click();
+            document.body.removeChild(link);
+            
+            // Clean up the URL object
+            setTimeout(() => URL.revokeObjectURL(url), 100);
+            
+            // Track download
+            const paperIds = comparisonData.papers.map(p => p.id);
+            trackDownload(paperIds);
+            
+            showNotification('Comparison downloaded successfully as ' + filename, 'success');
+        } catch (error) {
+            console.error('Error downloading comparison:', error);
+            showNotification('Failed to download comparison. Please try again.', 'error');
+        }
+    }
+    
+    // Track comparison download
+    function trackDownload(paperIds) {
+        fetch('/api/track/download', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({ paper_ids: paperIds })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Download tracked:', data);
+        })
+        .catch(error => {
+            console.error('Error tracking download:', error);
+        });
     }
     
     function saveComparison() {
@@ -821,7 +881,8 @@
                         value = paper.extracted_features.temporal_context || '';
                         break;
                 }
-                // Escape commas and quotes in CSV
+                // Convert to string and escape commas and quotes in CSV
+                value = String(value || '');
                 value = value.replace(/"/g, '""');
                 if (value.includes(',') || value.includes('"') || value.includes('\n')) {
                     value = '"' + value + '"';
@@ -839,26 +900,40 @@
         window.location.href = "{{ url_for('compare') }}";
     }
     
-    function showNotification(message) {
+    function showNotification(message, type = 'success') {
+        // Define colors for different types
+        const colors = {
+            success: '#28a745',
+            warning: '#ffc107',
+            error: '#dc3545',
+            info: '#17a2b8'
+        };
+        
         // Create notification element
         const notification = document.createElement('div');
         notification.style.cssText = `
             position: fixed;
             top: 20px;
             right: 20px;
-            background: #28a745;
+            background: ${colors[type] || colors.success};
             color: white;
-            padding: 10px 20px;
-            border-radius: 5px;
+            padding: 12px 24px;
+            border-radius: 6px;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.15);
             z-index: 1000;
             font-size: 14px;
+            font-weight: 500;
+            max-width: 400px;
+            word-wrap: break-word;
         `;
         notification.textContent = message;
         document.body.appendChild(notification);
         
         // Remove after 3 seconds
         setTimeout(() => {
-            document.body.removeChild(notification);
+            if (document.body.contains(notification)) {
+                document.body.removeChild(notification);
+            }
         }, 3000);
     }
     

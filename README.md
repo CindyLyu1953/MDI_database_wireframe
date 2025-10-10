@@ -23,39 +23,53 @@ A centralized questionnaire database platform that collects key information from
 
 ```
 database_wireframe/
-├── app.py                    # Main Flask application
-├── run.py                    # Application runner script
-├── requirements.txt          # Python dependencies
-├── README.md                 # This file
+├── app.py                         # Main Flask application
+├── run.py                         # Application runner script
+├── requirements.txt               # Python dependencies
+├── README.md                      # This file
+├── ADMIN_GUIDE.md                 # Admin dashboard guide
 ├── data/
-│   └── papers_extracted.csv  # Research data (CSV format)
-├── templates/                # Jinja2 HTML templates
-│   ├── base.html            # Base template with header/footer
-│   ├── index.html           # Home page
-│   ├── search.html          # Search results page
-│   ├── article.html         # Article detail page
-│   └── compare.html         # Comparison page
+│   ├── input/
+│   │   └── papers_extracted.csv   # Research data (CSV format)
+│   └── output/
+│       └── tracking.db            # Usage tracking database (SQLite)
+├── database/
+│   └── init_db.py                 # Database initialization script
+├── templates/                     # Jinja2 HTML templates
+│   ├── base.html                  # Base template with header/footer
+│   ├── index.html                 # Home page
+│   ├── search.html                # Search results page
+│   ├── article.html               # Article detail page
+│   ├── compare.html               # Comparison page
+│   ├── profile.html               # User profile page
+│   ├── admin_login.html           # Admin login page
+│   └── admin_dashboard.html       # Admin dashboard
 └── static/
-    └── css/                 # Stylesheets
-        ├── main.css         # Core styles
-        ├── home.css         # Home page styles
-        ├── search.css       # Search page styles
-        ├── article.css      # Article page styles
-        └── compare.css      # Comparison page styles
+    └── css/                       # Stylesheets
+        ├── main.css               # Core styles
+        ├── home.css               # Home page styles
+        ├── search.css             # Search page styles
+        ├── article.css            # Article page styles
+        ├── compare.css            # Comparison page styles
+        └── profile.css            # Profile page styles
 ```
 
 ## 📋 File Descriptions
 
 ### Backend Files
-- **`app.py`**: Main Flask application with routes for all pages and API endpoints
+- **`app.py`**: Main Flask application with routes for all pages, API endpoints, and admin authentication
 - **`run.py`**: Simple script to start the Flask server
 - **`requirements.txt`**: Lists required Python packages (Flask, Werkzeug)
 
 ### Data Files
-- **`data/papers_extracted.csv`**: Contains extracted research features in CSV format
+- **`data/input/papers_extracted.csv`**: Contains extracted research features in CSV format
   - Includes basic information (title, authors, journal, year)
   - Contains extracted features (independent/dependent variables, survey questions, etc.)
   - Features have both condensed and verbatim versions
+- **`data/output/tracking.db`**: SQLite database for usage tracking (searches, compares, downloads)
+
+### Database Files
+- **`database/init_db.py`**: Script to initialize the SQLite tracking database with required tables
 
 ### Template Files
 - **`templates/base.html`**: Base template with common header, navigation, and footer
@@ -63,6 +77,9 @@ database_wireframe/
 - **`templates/search.html`**: Search results with filtering options
 - **`templates/article.html`**: Detailed article view with all extracted features
 - **`templates/compare.html`**: Side-by-side comparison of multiple papers
+- **`templates/profile.html`**: User profile with favorites and saved comparisons
+- **`templates/admin_login.html`**: Admin login page
+- **`templates/admin_dashboard.html`**: Admin dashboard with usage statistics and logs
 
 ### Style Files
 - **`static/css/main.css`**: Core styles, layout, and components

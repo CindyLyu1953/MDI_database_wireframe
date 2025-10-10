@@ -22,6 +22,75 @@
         </div>
     </section>
 
+    <!-- Filters Section -->
+    <section class="filters-section">
+        <div class="filters-header">
+            <h3 class="filters-title">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="4" y1="6" x2="20" y2="6"></line>
+                    <line x1="4" y1="12" x2="20" y2="12"></line>
+                    <line x1="4" y1="18" x2="20" y2="18"></line>
+                    <circle cx="6" cy="6" r="2"></circle>
+                    <circle cx="12" cy="12" r="2"></circle>
+                    <circle cx="16" cy="18" r="2"></circle>
+                </svg>
+                Filters
+            </h3>
+            <button class="btn btn-sm btn-outline" onclick="clearFilters()">Clear All</button>
+        </div>
+        
+        <div class="filters-grid">
+            <!-- Year Range Filter -->
+            <div class="filter-group">
+                <label class="filter-label">Year Range</label>
+                <div class="filter-inputs">
+                    <input type="number" id="yearFrom" class="filter-input" placeholder="From" min="1900" max="2030">
+                    <span>-</span>
+                    <input type="number" id="yearTo" class="filter-input" placeholder="To" min="1900" max="2030">
+                </div>
+            </div>
+            
+            <!-- Journal Filter -->
+            <div class="filter-group">
+                <label class="filter-label">Journal</label>
+                <select id="journalFilter" class="filter-select">
+                    <option value="">All Journals</option>
+                    {% for journal in journals %}
+                    <option value="{{ journal }}">{{ journal }}</option>
+                    {% endfor %}
+                </select>
+            </div>
+            
+            <!-- Country Filter -->
+            <div class="filter-group">
+                <label class="filter-label">Country/Region</label>
+                <select id="countryFilter" class="filter-select">
+                    <option value="">All Countries</option>
+                    <option value="USA">United States</option>
+                    <option value="UK">United Kingdom</option>
+                    <option value="Canada">Canada</option>
+                    <option value="Australia">Australia</option>
+                    <option value="Germany">Germany</option>
+                    <option value="France">France</option>
+                    <option value="China">China</option>
+                    <option value="Japan">Japan</option>
+                    <option value="South Korea">South Korea</option>
+                    <option value="India">India</option>
+                    <option value="Brazil">Brazil</option>
+                    <option value="Netherlands">Netherlands</option>
+                    <option value="Sweden">Sweden</option>
+                    <option value="Switzerland">Switzerland</option>
+                    <option value="Singapore">Singapore</option>
+                    <option value="Other">Other</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="filters-actions">
+            <button class="btn btn-primary" onclick="applyFilters()">Apply Filters</button>
+        </div>
+    </section>
+
     <!-- Search Results -->
     <section class="results-section">
         <div class="results-header">
@@ -115,9 +184,107 @@
         const searchInput = document.getElementById('searchInput');
         const query = searchInput.value.trim();
         if (query) {
+            // Update search count
+            updateUserStats('searches');
             window.location.href = "{{ url_for('search') }}?q=" + encodeURIComponent(query);
         }
     }
+    
+    // Track search on page load if there's a query
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get('q');
+        if (query) {
+            // Wait for DOM to be fully rendered, then count results
+            setTimeout(function() {
+                const numResults = document.querySelectorAll('.result-item').length;
+                console.log('Number of results found:', numResults); // Debug log
+                trackSearch(query, numResults);
+            }, 100);
+        }
+    });
+    
+    function getActiveFilters() {
+        const filters = {};
+        
+        const yearFrom = document.getElementById('yearFrom')?.value;
+        const yearTo = document.getElementById('yearTo')?.value;
+        const journal = document.getElementById('journalFilter')?.value;
+        const country = document.getElementById('countryFilter')?.value;
+        
+        if (yearFrom) filters.year_from = yearFrom;
+        if (yearTo) filters.year_to = yearTo;
+        if (journal) filters.journal = journal;
+        if (country) filters.country = country;
+        
+        return filters;
+    }
+    
+    function trackSearch(query, numResults) {
+        const filters = getActiveFilters();
+        
+        fetch('/api/track/search', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                search_query: query,
+                filters_used: filters,
+                num_results: numResults
+            })
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Search tracked:', data);
+        })
+        .catch(error => {
+            console.error('Error tracking search:', error);
+        });
+    }
+    
+    function applyFilters() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get('q') || '';
+        const filters = getActiveFilters();
+        
+        // Build URL with filters
+        let url = "{{ url_for('search') }}?q=" + encodeURIComponent(query);
+        Object.keys(filters).forEach(key => {
+            url += '&' + key + '=' + encodeURIComponent(filters[key]);
+        });
+        
+        window.location.href = url;
+    }
+    
+    function clearFilters() {
+        document.getElementById('yearFrom').value = '';
+        document.getElementById('yearTo').value = '';
+        document.getElementById('journalFilter').value = '';
+        document.getElementById('countryFilter').value = '';
+        
+        const urlParams = new URLSearchParams(window.location.search);
+        const query = urlParams.get('q') || '';
+        window.location.href = "{{ url_for('search') }}?q=" + encodeURIComponent(query);
+    }
+    
+    // Restore filters from URL
+    document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        
+        if (urlParams.get('year_from')) {
+            document.getElementById('yearFrom').value = urlParams.get('year_from');
+        }
+        if (urlParams.get('year_to')) {
+            document.getElementById('yearTo').value = urlParams.get('year_to');
+        }
+        if (urlParams.get('journal')) {
+            document.getElementById('journalFilter').value = urlParams.get('journal');
+        }
+        if (urlParams.get('country')) {
+            document.getElementById('countryFilter').value = urlParams.get('country');
+        }
+    });
 
     function addToCompare(paperId) {
         // Get current comparison list from localStorage
@@ -136,6 +303,9 @@
             // Save to localStorage
             localStorage.setItem('comparisonIds', JSON.stringify(comparisonIds));
             
+            // Update comparisons count
+            updateUserStats('comparisons');
+            
             // Update button text to show it's been added
             event.target.textContent = 'Added';
             event.target.style.backgroundColor = '#28a745';
@@ -145,6 +315,23 @@
         } else {
             alert('This paper is already in the comparison list.');
         }
+    }
+    
+    function updateUserStats(action) {
+        let stats = JSON.parse(localStorage.getItem('userStats') || '{}');
+        if (!stats.searches) stats.searches = 0;
+        if (!stats.comparisons) stats.comparisons = 0;
+        if (!stats.articlesViewed) stats.articlesViewed = 0;
+        
+        if (action === 'searches') {
+            stats.searches += 1;
+        } else if (action === 'comparisons') {
+            stats.comparisons += 1;
+        } else if (action === 'articlesViewed') {
+            stats.articlesViewed += 1;
+        }
+        
+        localStorage.setItem('userStats', JSON.stringify(stats));
     }
     
     function toggleFavorite(paperId) {

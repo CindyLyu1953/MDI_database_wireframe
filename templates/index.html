@@ -42,12 +42,38 @@
         const searchInput = document.getElementById('searchInput');
         const query = searchInput.value.trim();
         if (query) {
+            // Update search count
+            updateUserStats('searches');
             window.location.href = "{{ url_for('search') }}?q=" + encodeURIComponent(query);
         }
     }
 
     function searchTag(tag) {
+        // Update search count
+        updateUserStats('searches');
         window.location.href = "{{ url_for('search') }}?q=" + encodeURIComponent(tag);
+    }
+    
+    // Generate a simple session ID if not exists
+    if (!sessionStorage.getItem('sessionId')) {
+        sessionStorage.setItem('sessionId', 'session_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9));
+    }
+
+    function updateUserStats(action) {
+        let stats = JSON.parse(localStorage.getItem('userStats') || '{}');
+        if (!stats.searches) stats.searches = 0;
+        if (!stats.comparisons) stats.comparisons = 0;
+        if (!stats.articlesViewed) stats.articlesViewed = 0;
+        
+        if (action === 'searches') {
+            stats.searches += 1;
+        } else if (action === 'comparisons') {
+            stats.comparisons += 1;
+        } else if (action === 'articlesViewed') {
+            stats.articlesViewed += 1;
+        }
+        
+        localStorage.setItem('userStats', JSON.stringify(stats));
     }
 </script>
 {% endblock %}

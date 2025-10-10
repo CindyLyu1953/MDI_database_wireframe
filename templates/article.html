@@ -18,6 +18,7 @@
                 <a href="{{ url_for('index') }}" class="nav-link">Home</a>
                 <a href="{{ url_for('search') }}" class="nav-link">Search</a>
                 <a href="{{ url_for('compare') }}" class="nav-link">Compare</a>
+                <a href="{{ url_for('profile') }}" class="nav-link">Profile</a>
             </nav>
         </div>
     </header>
@@ -172,6 +173,28 @@
     </footer>
 
     <script>
+        // Track article view on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            updateUserStats('articlesViewed');
+        });
+
+        function updateUserStats(action) {
+            let stats = JSON.parse(localStorage.getItem('userStats') || '{}');
+            if (!stats.searches) stats.searches = 0;
+            if (!stats.comparisons) stats.comparisons = 0;
+            if (!stats.articlesViewed) stats.articlesViewed = 0;
+            
+            if (action === 'searches') {
+                stats.searches += 1;
+            } else if (action === 'comparisons') {
+                stats.comparisons += 1;
+            } else if (action === 'articlesViewed') {
+                stats.articlesViewed += 1;
+            }
+            
+            localStorage.setItem('userStats', JSON.stringify(stats));
+        }
+
         function toggleFullText(featureId) {
             const fullTextElement = document.getElementById(featureId + '-full');
             const button = event.target.closest('button');
