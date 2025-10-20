@@ -58,6 +58,23 @@ def init_database():
     """
     )
 
+    # Create upload_requests table
+    cursor.execute(
+        """
+        CREATE TABLE IF NOT EXISTS upload_requests (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            timestamp DATETIME DEFAULT CURRENT_TIMESTAMP,
+            request_name TEXT NOT NULL,
+            institution TEXT NOT NULL,
+            email TEXT NOT NULL,
+            paper_info TEXT NOT NULL,
+            change_requests TEXT,
+            pdf_filename TEXT,
+            status TEXT DEFAULT 'pending'
+        )
+    """
+    )
+
     # Commit changes and close connection
     conn.commit()
     conn.close()
@@ -67,6 +84,7 @@ def init_database():
     print("  - search_logs")
     print("  - compare_view_logs")
     print("  - download_logs")
+    print("  - upload_requests")
 
 
 if __name__ == "__main__":

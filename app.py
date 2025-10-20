@@ -512,6 +512,13 @@ def admin_dashboard():
     return render_template("admin_dashboard.html")
 
 
+@app.route("/admin/requests")
+@require_admin
+def admin_requests():
+    """Admin requests review page"""
+    return render_template("admin_requests.html")
+
+
 @app.route("/api/admin/search_logs")
 @require_admin
 def get_search_logs():
@@ -644,6 +651,176 @@ def get_admin_stats():
                 "top_searches": top_searches,
             }
         )
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/my-requests")
+def my_requests():
+    """Get user's upload requests"""
+    try:
+        # For now, return all requests (in a real app, you'd filter by user session/email)
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute(
+            """
+            SELECT id, timestamp, request_name, institution, email, paper_info, 
+                   change_requests, pdf_filename, status
+            FROM upload_requests 
+            ORDER BY timestamp DESC
+        """
+        )
+
+        requests = []
+        for row in cursor.fetchall():
+            requests.append(
+                {
+                    "id": row[0],
+                    "timestamp": row[1],
+                    "request_name": row[2],
+                    "institution": row[3],
+                    "email": row[4],
+                    "paper_info": row[5],
+                    "change_requests": row[6],
+                    "pdf_filename": row[7],
+                    "status": row[8],
+                }
+            )
+
+        conn.close()
+
+        return jsonify({"requests": requests})
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/upload-request", methods=["POST"])
+def upload_request():
+    """Handle paper upload requests"""
+    try:
+        # Get form data
+        request_name = request.form.get("requestName")
+        institution = request.form.get("institution")
+        email = request.form.get("email")
+        paper_info = request.form.get("paperInfo")
+        change_requests = request.form.get("changeRequests", "")
+
+        # Handle PDF file upload
+        pdf_file = request.files.get("pdfFile")
+        pdf_filename = None
+        if pdf_file and pdf_file.filename:
+            # Save PDF to uploads directory
+            upload_dir = os.path.join("data", "output", "uploads")
+            os.makedirs(upload_dir, exist_ok=True)
+
+            # Generate unique filename
+            timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
+            pdf_filename = f"upload_{timestamp}_{pdf_file.filename}"
+            pdf_path = os.path.join(upload_dir, pdf_filename)
+
+            pdf_file.save(pdf_path)
+
+        # Store request in database
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute(
+            """
+            INSERT INTO upload_requests 
+            (timestamp, request_name, institution, email, paper_info, change_requests, pdf_filename)
+            VALUES (?, ?, ?, ?, ?, ?, ?)
+        """,
+            (
+                get_eastern_time(),
+                request_name,
+                institution,
+                email,
+                paper_info,
+                change_requests,
+                pdf_filename,
+            ),
+        )
+
+        conn.commit()
+        conn.close()
+
+        return jsonify(
+            {"success": True, "message": "Upload request submitted successfully"}
+        )
+
+    except Exception as e:
+        return jsonify({"success": False, "error": str(e)}), 500
+
+
+@app.route("/api/admin/requests")
+@require_admin
+def get_admin_requests():
+    """Get all upload requests for admin review"""
+    try:
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute(
+            """
+            SELECT id, timestamp, request_name, institution, email, paper_info, 
+                   change_requests, pdf_filename, status
+            FROM upload_requests 
+            ORDER BY timestamp DESC
+        """
+        )
+
+        requests = []
+        for row in cursor.fetchall():
+            requests.append(
+                {
+                    "id": row[0],
+                    "timestamp": row[1],
+                    "request_name": row[2],
+                    "institution": row[3],
+                    "email": row[4],
+                    "paper_info": row[5],
+                    "change_requests": row[6],
+                    "pdf_filename": row[7],
+                    "status": row[8],
+                }
+            )
+
+        conn.close()
+
+        return jsonify({"requests": requests})
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
+
+
+@app.route("/api/admin/requests/<int:request_id>/status", methods=["POST"])
+@require_admin
+def update_request_status(request_id):
+    """Update request status (approve/reject)"""
+    try:
+        data = request.get_json()
+        new_status = data.get("status")
+
+        if new_status not in ["pending", "approved", "rejected"]:
+            return jsonify({"error": "Invalid status"}), 400
+
+        conn = get_db_connection()
+        cursor = conn.cursor()
+
+        cursor.execute(
+            "UPDATE upload_requests SET status = ? WHERE id = ?",
+            (new_status, request_id),
+        )
+
+        conn.commit()
+        conn.close()
+
+        return jsonify(
+            {"success": True, "message": f"Request {new_status} successfully"}
+        )
+
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 

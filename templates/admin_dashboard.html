@@ -15,6 +15,12 @@
         justify-content: space-between;
         align-items: center;
     }
+
+    .admin-actions {
+        display: flex;
+        gap: 1rem;
+        align-items: center;
+    }
     
     .dashboard-title {
         font-size: 2rem;
@@ -262,7 +268,10 @@
     <!-- Dashboard Header -->
     <div class="dashboard-header">
         <h1 class="dashboard-title">Admin Dashboard</h1>
-        <a href="{{ url_for('admin_logout') }}" class="logout-btn">Logout</a>
+        <div class="admin-actions">
+            <a href="{{ url_for('admin_requests') }}" class="btn btn-primary">Review Requests</a>
+            <a href="{{ url_for('admin_logout') }}" class="logout-btn">Logout</a>
+        </div>
     </div>
     
     <!-- Statistics Cards -->

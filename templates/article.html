@@ -176,6 +176,9 @@
         // Track article view on page load
         document.addEventListener('DOMContentLoaded', function() {
             updateUserStats('articlesViewed');
+            
+            // Check content length and hide unnecessary View Full buttons
+            setTimeout(checkContentLength, 100);
         });
 
         function updateUserStats(action) {
@@ -206,6 +209,25 @@
                 fullTextElement.classList.add('hidden');
                 button.querySelector('.btn-text').textContent = 'View Full';
             }
+        }
+
+        function checkContentLength() {
+            // Check all feature content and hide View Full buttons for short content
+            document.querySelectorAll('.feature-content').forEach(content => {
+                const summary = content.querySelector('.feature-summary');
+                const fullText = content.querySelector('.feature-full-text');
+                const button = content.querySelector('button[onclick*="toggleFullText"]');
+                
+                if (summary && fullText && button) {
+                    const summaryText = summary.textContent.trim();
+                    const fullTextContent = fullText.textContent.trim();
+                    
+                    // Hide button if content is short (less than 100 characters difference)
+                    if (fullTextContent.length - summaryText.length < 100) {
+                        button.style.display = 'none';
+                    }
+                }
+            });
         }
         
         function addToCompare() {

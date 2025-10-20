@@ -41,6 +41,27 @@
                         Saved Comparisons
                         <span class="badge" id="comparisonsCount">0</span>
                     </button>
+                    <button class="menu-item" onclick="showSection('upload')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path>
+                            <polyline points="14,2 14,8 20,8"></polyline>
+                            <line x1="16" y1="13" x2="8" y2="13"></line>
+                            <line x1="16" y1="17" x2="8" y2="17"></line>
+                            <polyline points="10,9 9,9 8,9"></polyline>
+                        </svg>
+                        Upload Papers
+                    </button>
+                    <button class="menu-item" onclick="showSection('requests')">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M9 12l2 2 4-4"></path>
+                            <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"></path>
+                            <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"></path>
+                            <path d="M12 3c0 1-1 3-3 3s-3-2-3-3 1-3 3-3 3 2 3 3"></path>
+                            <path d="M12 21c0-1 1-3 3-3s3 2 3 3-1 3-3 3-3-2-3-3"></path>
+                        </svg>
+                        My Requests
+                        <span class="badge" id="requestsCount">0</span>
+                    </button>
                 </div>
             </div>
 
@@ -159,6 +180,77 @@
                         </div>
                     </div>
                 </div>
+
+                <!-- Upload Papers Section -->
+                <div class="content-section" id="upload-section">
+                    <div class="section-header">
+                        <h2 class="section-title">Upload Papers</h2>
+                        <p class="section-description">Request to add papers to the database or report issues with existing papers</p>
+                    </div>
+                    
+                    <div class="upload-form-container">
+                        <form id="uploadForm" class="upload-form">
+                            <div class="form-group">
+                                <label for="requestName" class="form-label">Request Name *</label>
+                                <input type="text" id="requestName" name="requestName" class="form-input" placeholder="Enter a descriptive name for your request" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="institution" class="form-label">Institution *</label>
+                                <input type="text" id="institution" name="institution" class="form-input" placeholder="Your institution name" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="email" class="form-label">Email *</label>
+                                <input type="email" id="email" name="email" class="form-input" placeholder="your.email@institution.edu" required>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="paperInfo" class="form-label">Paper to be Added / URL *</label>
+                                <textarea id="paperInfo" name="paperInfo" class="form-textarea" placeholder="Please provide the paper title, authors, journal, year, and DOI/URL if available" rows="4" required></textarea>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="pdfFile" class="form-label">Optional PDF of the Paper</label>
+                                <input type="file" id="pdfFile" name="pdfFile" class="form-file" accept=".pdf" />
+                                <small class="form-help">Upload the PDF file if you have permission to share it</small>
+                            </div>
+                            
+                            <div class="form-group">
+                                <label for="changeRequests" class="form-label">Requests for Changes in Existing Papers</label>
+                                <textarea id="changeRequests" name="changeRequests" class="form-textarea" placeholder="If you've noticed any issues with existing papers in our database, please describe them here" rows="3"></textarea>
+                            </div>
+                            
+                            <div class="form-actions">
+                                <button type="submit" class="btn btn-primary">Submit Request</button>
+                                <button type="button" class="btn btn-outline" onclick="resetUploadForm()">Reset Form</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+
+                <!-- My Requests Section -->
+                <div class="content-section" id="requests-section">
+                    <div class="section-header">
+                        <h2 class="section-title">My Requests</h2>
+                        <p class="section-description">Track the status of your paper upload requests</p>
+                    </div>
+                    
+                    <div class="requests-container" id="myRequestsList">
+                        <div class="empty-state">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <path d="M9 12l2 2 4-4"></path>
+                                <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"></path>
+                                <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"></path>
+                                <path d="M12 3c0 1-1 3-3 3s-3-2-3-3 1-3 3-3 3 2 3 3"></path>
+                                <path d="M12 21c0-1 1-3 3-3s3 2 3 3-1 3-3 3-3-2-3-3"></path>
+                            </svg>
+                            <h3>No requests yet</h3>
+                            <p>Submit your first paper upload request to get started</p>
+                            <button class="btn btn-primary" onclick="showSection('upload')">Upload Papers</button>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </section>
@@ -175,6 +267,7 @@
         updateBadgeCounts();
         loadFavorites();
         loadSavedComparisons();
+        loadMyRequests();
     });
 
     // Section switching functionality
@@ -200,6 +293,11 @@
             loadFavorites();
         } else if (sectionName === 'comparisons') {
             loadSavedComparisons();
+        } else if (sectionName === 'upload') {
+            // Load any saved form data
+            loadUploadFormData();
+        } else if (sectionName === 'requests') {
+            loadMyRequests();
         }
     }
 
@@ -209,6 +307,17 @@
         
         document.getElementById('favoritesCount').textContent = favorites.length;
         document.getElementById('comparisonsCount').textContent = savedComparisons.length;
+        
+        // Update requests count
+        fetch('/api/my-requests')
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('requestsCount').textContent = data.requests ? data.requests.length : 0;
+            })
+            .catch(error => {
+                console.error('Error loading requests count:', error);
+                document.getElementById('requestsCount').textContent = '0';
+            });
     }
 
     function loadProfileData() {
@@ -359,6 +468,61 @@
                 `).join('')}
             </div>
         `;
+    }
+
+    function loadMyRequests() {
+        fetch('/api/my-requests')
+            .then(response => response.json())
+            .then(data => {
+                const requestsList = document.getElementById('myRequestsList');
+                
+                if (!data.requests || data.requests.length === 0) {
+                    requestsList.innerHTML = `
+                        <div class="empty-state">
+                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
+                                <path d="M9 12l2 2 4-4"></path>
+                                <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"></path>
+                                <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"></path>
+                                <path d="M12 3c0 1-1 3-3 3s-3-2-3-3 1-3 3-3 3 2 3 3"></path>
+                                <path d="M12 21c0-1 1-3 3-3s3 2 3 3-1 3-3 3-3-2-3-3"></path>
+                            </svg>
+                            <h3>No requests yet</h3>
+                            <p>Submit your first paper upload request to get started</p>
+                            <button class="btn btn-primary" onclick="showSection('upload')">Upload Papers</button>
+                        </div>
+                    `;
+                    return;
+                }
+                
+                requestsList.innerHTML = `
+                    <div class="requests-grid">
+                        ${data.requests.map(request => `
+                            <div class="request-card">
+                                <div class="card-header">
+                                    <h4 class="card-title">${request.request_name}</h4>
+                                    <span class="status-badge status-${request.status}">${request.status}</span>
+                                </div>
+                                <div class="card-content">
+                                    <p class="card-date">Submitted: ${request.timestamp}</p>
+                                    <p class="card-institution">Institution: ${request.institution}</p>
+                                    <p class="card-paper">Paper: ${request.paper_info.substring(0, 100)}...</p>
+                                    ${request.change_requests ? `<p class="card-changes">Changes: ${request.change_requests.substring(0, 100)}...</p>` : ''}
+                                    ${request.pdf_filename ? `<p class="card-file">PDF: ${request.pdf_filename}</p>` : ''}
+                                </div>
+                            </div>
+                        `).join('')}
+                    </div>
+                `;
+            })
+            .catch(error => {
+                console.error('Error loading requests:', error);
+                document.getElementById('myRequestsList').innerHTML = `
+                    <div class="empty-state">
+                        <h3>Error loading requests</h3>
+                        <p>Please try refreshing the page</p>
+                    </div>
+                `;
+            });
     }
 
     function removeFavorite(paperId) {
@@ -536,6 +700,70 @@
         document.getElementById('profileForm').reset();
         loadProfileData();
     }
+
+    function loadUploadFormData() {
+        // Load any previously saved form data
+        const savedData = JSON.parse(localStorage.getItem('uploadFormData') || '{}');
+        
+        if (savedData.requestName) document.getElementById('requestName').value = savedData.requestName;
+        if (savedData.institution) document.getElementById('institution').value = savedData.institution;
+        if (savedData.email) document.getElementById('email').value = savedData.email;
+        if (savedData.paperInfo) document.getElementById('paperInfo').value = savedData.paperInfo;
+        if (savedData.changeRequests) document.getElementById('changeRequests').value = savedData.changeRequests;
+    }
+
+    function resetUploadForm() {
+        document.getElementById('uploadForm').reset();
+        localStorage.removeItem('uploadFormData');
+        showNotification('Upload form reset');
+    }
+
+    // Handle upload form submission
+    document.getElementById('uploadForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const formData = new FormData();
+        formData.append('requestName', document.getElementById('requestName').value);
+        formData.append('institution', document.getElementById('institution').value);
+        formData.append('email', document.getElementById('email').value);
+        formData.append('paperInfo', document.getElementById('paperInfo').value);
+        formData.append('changeRequests', document.getElementById('changeRequests').value);
+        
+        const pdfFile = document.getElementById('pdfFile').files[0];
+        if (pdfFile) {
+            formData.append('pdfFile', pdfFile);
+        }
+        
+        // Save form data to localStorage for recovery
+        const formDataObj = {
+            requestName: document.getElementById('requestName').value,
+            institution: document.getElementById('institution').value,
+            email: document.getElementById('email').value,
+            paperInfo: document.getElementById('paperInfo').value,
+            changeRequests: document.getElementById('changeRequests').value
+        };
+        localStorage.setItem('uploadFormData', JSON.stringify(formDataObj));
+        
+        // Submit to backend
+        fetch('/api/upload-request', {
+            method: 'POST',
+            body: formData
+        })
+        .then(response => response.json())
+        .then(data => {
+            if (data.success) {
+                showNotification('Upload request submitted successfully! We will review it soon.');
+                document.getElementById('uploadForm').reset();
+                localStorage.removeItem('uploadFormData');
+            } else {
+                showNotification('Error submitting request: ' + (data.error || 'Unknown error'));
+            }
+        })
+        .catch(error => {
+            console.error('Error:', error);
+            showNotification('Error submitting request. Please try again.');
+        });
+    });
 
     function showNotification(message) {
         // Create notification element
