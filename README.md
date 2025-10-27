@@ -1,221 +1,127 @@
-# Questionnaire Database Platform
+# Social Media Effects Research Database Platform
 
-A centralized questionnaire database platform that collects key information from social media-related experimental research, helping scholars quickly find appropriate measurement methods and avoid redundant work.
+A structured database of social media effects studies enabling systematic comparison of methods, measures, and study contexts.
 
-## 🚀 Features
+## Features
 
-### Core Functionality
-- **Dynamic Data Loading**: Loads research data from CSV files
+### Search & Discovery
 - **Keyword Search**: Search across titles, abstracts, journals, and author names
-- **Multi-Paper Comparison**: Compare up to 3 research papers side-by-side
-- **Progressive Information Disclosure**: 
-  - Concise overviews in search results
-  - Detailed features in article view
-  - Full verbatim text with "View Full" functionality
+- **Advanced Filters**: Filter by year range, journal, country/region
+- **Comprehensive Results**: View all relevant social media effects studies in one place
 
-### User Interface
-- **Clean Search Interface**: Simplified search results without unnecessary tags
-- **Dynamic Comparison Table**: Features column fixed on left, papers dynamically added on right
-- **Full-Width Headers**: Modern layout with headers extending to screen edges
-- **Responsive Design**: Works on different screen sizes
+### Compare Studies
+- **Side-by-Side Comparison**: Compare up to 3 research papers simultaneously
+- **Organized Features**: Compare bibliographic information, research design, measurement & analysis, findings, and context
+- **Download Results**: Export comparisons as CSV files
+- **Save Comparisons**: Save comparison results for future reference
 
-## 📁 Project Structure
+### Progressive Information Disclosure
+- **Search Results**: View concise overviews with key information
+- **Article Details**: See condensed versions of all extracted features
+- **View Full**: Expand to see complete verbatim text (button only appears when additional details are available)
 
-```
-database_wireframe/
-├── app.py                         # Main Flask application
-├── run.py                         # Application runner script
-├── requirements.txt               # Python dependencies
-├── README.md                      # This file
-├── ADMIN_GUIDE.md                 # Admin dashboard guide
-├── data/
-│   ├── input/
-│   │   └── papers_extracted.csv   # Research data (CSV format)
-│   └── output/
-│       └── tracking.db            # Usage tracking database (SQLite)
-├── database/
-│   └── init_db.py                 # Database initialization script
-├── templates/                     # Jinja2 HTML templates
-│   ├── base.html                  # Base template with header/footer
-│   ├── index.html                 # Home page
-│   ├── search.html                # Search results page
-│   ├── article.html               # Article detail page
-│   ├── compare.html               # Comparison page
-│   ├── profile.html               # User profile page
-│   ├── admin_login.html           # Admin login page
-│   └── admin_dashboard.html       # Admin dashboard
-└── static/
-    └── css/                       # Stylesheets
-        ├── main.css               # Core styles
-        ├── home.css               # Home page styles
-        ├── search.css             # Search page styles
-        ├── article.css            # Article page styles
-        ├── compare.css            # Comparison page styles
-        └── profile.css            # Profile page styles
-```
+### Personal Management
+- **User Profile**: Set your username and institution
+- **Favorites**: Mark articles as favorites for quick access
+- **Saved Comparisons**: Keep track of your saved comparison results
 
-## 📋 File Descriptions
+### Contribute Research
+- **Upload Papers**: Request to add new papers to the database
+- **Provide Feedback**: Report issues with existing papers in the database
 
-### Backend Files
-- **`app.py`**: Main Flask application with routes for all pages, API endpoints, and admin authentication
-- **`run.py`**: Simple script to start the Flask server
-- **`requirements.txt`**: Lists required Python packages (Flask, Werkzeug)
+## How to Use
 
-### Data Files
-- **`data/input/papers_extracted.csv`**: Contains extracted research features in CSV format
-  - Includes basic information (title, authors, journal, year)
-  - Contains extracted features (independent/dependent variables, survey questions, etc.)
-  - Features have both condensed and verbatim versions
-- **`data/output/tracking.db`**: SQLite database for usage tracking (searches, compares, downloads)
+### Getting Started
+- **Visit the Platform**: Access the database at `http://localhost:5001`
 
-### Database Files
-- **`database/init_db.py`**: Script to initialize the SQLite tracking database with required tables
+### Searching for Studies
+- **Enter Keywords**: Type any relevant terms (topic, author, journal, etc.)
+- **Apply Filters**: Use year range, journal, or country/region filters to narrow results
+- **Review Results**: Browse the concise overview of each study
 
-### Template Files
-- **`templates/base.html`**: Base template with common header, navigation, and footer
-- **`templates/index.html`**: Home page with search functionality
-- **`templates/search.html`**: Search results with filtering options
-- **`templates/article.html`**: Detailed article view with all extracted features
-- **`templates/compare.html`**: Side-by-side comparison of multiple papers
-- **`templates/profile.html`**: User profile with favorites and saved comparisons
-- **`templates/admin_login.html`**: Admin login page
-- **`templates/admin_dashboard.html`**: Admin dashboard with usage statistics and logs
+### Viewing Article Details
+- **Click "View Details"**: Opens the detailed article page
+- **Review Features**: See condensed versions of all extracted features
+- **View Full Content**: Click "View Full" to see complete verbatim text (when available)
+- **Add to Favorites**: Mark articles as favorites for quick access
+- **Compare Papers**: Add papers to your comparison list
 
-### Style Files
-- **`static/css/main.css`**: Core styles, layout, and components
-- **`static/css/home.css`**: Home page specific styles
-- **`static/css/search.css`**: Search page specific styles
-- **`static/css/article.css`**: Article page specific styles
-- **`static/css/compare.css`**: Comparison page specific styles
+### Comparing Multiple Studies
+- **Select Papers**: Click "Compare" on up to 3 papers from search results
+- **View Comparison**: See side-by-side comparison table
+- **View Full Text**: Click "View Full" buttons to see complete verbatim text for any feature
+- **Save Comparison**: Save comparison results for future reference
+- **Download**: Export comparison as a CSV file
 
-## 🎯 How to Use
+### Managing Your Profile
+- **Access Profile**: Click "Profile" in the navigation menu
+- **Edit Information**: Update your username and institution
+- **View Favorites**: See all your favorited articles
+- **Manage Saved Comparisons**: View and reload previously saved comparisons
+- **Track Requests**: Monitor the status of your paper upload requests
+- **View Statistics**: See your activity statistics including searches, comparisons, and article views
 
-### 1. Search for Research
-- **Home Page**: Enter keywords in the search box
-- **Search Results**: Browse filtered results, click "Compare" to add papers
-- **Keywords**: Search works across titles, abstracts, journals, and author names
+### Submitting New Papers
+1. **Navigate to Profile**: Go to Profile - Upload Papers
+2. **Fill Out Form**: Provide request name, institution, email, and paper information
+3. **Upload PDF** (optional): Upload the PDF file if you have permission to share it
+4. **Describe Issues** (optional): Report any issues with existing papers
+5. **Submit**: Submit your request for admin review
+6. **Track Status**: Check "My Requests" to see the approval status
 
-### 2. View Article Details
-- **Click "View Details"**: See condensed version of all extracted features
-- **"View Full" Button**: Expand to see complete verbatim text (when available)
-- **Add to Compare**: Use the button to add papers to comparison list
+## Data Format
 
-### 3. Compare Papers
-- **Add Papers**: Click "Compare" buttons in search results (max 3 papers)
-- **Comparison Table**: Features listed vertically on left, papers on right
-- **Dynamic Columns**: Table adjusts based on number of papers selected
+The platform displays research data with the following structure:
 
-### 4. Navigation
-- **Header Navigation**: Use Home, Search, Compare links
-- **Breadcrumb**: Clear navigation between different views
-- **Responsive**: Works on desktop and mobile devices
+### Basic Information
+- Title
+- Authors
+- Journal
+- Year
+- Citation
+- Abstract
 
-## 🛠️ Local Setup and Running
+### Research Design & Sample
+- Sample size
+- Country/Region
+- Recruitment source
+- Demographics
+- Incentive
 
-### Prerequisites
-- Python 3.7 or higher
-- pip (Python package installer)
+### Measurement & Analysis
+- Treatment/Independent variable(s)
+- Survey measures for treatment variables
+- Outcome/Dependent variable(s)
+- Survey measures for outcome variables
+- Analysis (estimating equation)
 
-### Installation Steps
+### Findings
+- Main effects
+- Moderators
+- Moderation results
 
-1. **Clone or Download** the project to your local machine
+### Context Information
+- Socio-cultural context
+- Political context
+- Platform/Technological context
+- Temporal context
 
-2. **Navigate** to the project directory:
-   ```bash
-   cd database_wireframe
-   ```
+## Notes
 
-3. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
+- **Data Storage**: User data (profile, favorites, saved comparisons) is stored in your browser
+- **Upload Requests**: All upload requests require admin approval
+- **Responsive Design**: Works on both desktop and mobile devices
+- **Maximum Comparison**: You can compare up to 3 papers simultaneously
 
-4. **Run the Application**:
-   ```bash
-   python app.py
-   ```
+## Getting Help
 
-5. **Access the Website**:
-   - Open your web browser
-   - Go to: `http://localhost:5001`
-   - The application will be running locally
+If you encounter any issues or have questions:
+1. Check the admin guide if you're an administrator
+2. Use the "Requests for Changes" section when submitting papers
+3. Contact the database administrators for additional support
 
-### Alternative Running Method
-You can also run the application directly:
-```bash
-python app.py
-```
+## Privacy & Data
 
-### Stopping the Application
-- Press `Ctrl+C` in the terminal to stop the server
-
-## 📊 Data Format
-
-The application expects research data in CSV format (`data/papers_extracted.csv`) with the following structure:
-
-### Required Columns
-- `title`: Paper title
-- `authors`: Author names (semicolon-separated)
-- `journal`: Journal name
-- `year`: Publication year
-- `abstract`: Paper abstract
-- `sample_size`: Sample size (numeric)
-
-### Extracted Features
-Each feature should have both condensed and verbatim versions:
-- `independent_variables` / `independent_variables_verbatim`
-- `dependent_variables` / `dependent_variables_verbatim`
-- `survey_questions` / `survey_questions_verbatim`
-- `incentive` / `incentive_verbatim`
-- `study_type` / `study_type_verbatim`
-- `analysis_equations` / `analysis_equations_verbatim`
-- `level_of_analysis` / `level_of_analysis_verbatim`
-- `main_effects` / `main_effects_verbatim`
-- `statistical_power` / `statistical_power_verbatim`
-- `moderators` / `moderators_verbatim`
-- `moderation_results` / `moderation_results_verbatim`
-- `demographics` / `demographics_verbatim`
-- `recruitment_source` / `recruitment_source_verbatim`
-- `country_region`: Country or region
-- `sociocultural_context`: Sociocultural context
-- `political_context`: Political context
-- `platform_technological_context`: Platform/technological context
-- `temporal_context`: Temporal context
-- `recommended_moderators`: Recommended moderators
-- `research_context`: Research context
-- `intervention_insights`: Intervention insights
-
-## 🔧 Technical Details
-
-### Architecture
-- **Backend**: Flask (Python web framework)
-- **Frontend**: HTML5, CSS3, JavaScript
-- **Templates**: Jinja2 templating engine
-- **Data**: CSV file-based storage
-- **Styling**: Custom CSS with responsive design
-
-### Key Features
-- **Dynamic Column Count**: CSS variables adjust comparison table based on paper count
-- **Progressive Disclosure**: Three levels of information detail
-- **Local Storage**: Browser storage for comparison lists
-- **Responsive Grid**: CSS Grid layout for comparison tables
-- **Search Functionality**: Cross-field keyword matching
-
-## 📝 Notes
-
-- The application is designed for academic research purposes
-- All extracted features are displayed only if they contain data (not empty or "NOT SPECIFIED")
-- The comparison feature supports up to 3 papers simultaneously
-- The interface is optimized for desktop use but responsive for mobile
-- All text and interface elements are in English
-
-## 🤝 Contributing
-
-To add new research papers:
-1. Update the `data/papers_extracted.csv` file with new data
-2. Ensure the CSV follows the required format
-3. Restart the application to load new data
-
-For feature extraction integration:
-- The current system expects pre-extracted features in CSV format
-- Future integration with automated extraction tools can be added to the Flask backend
+- Your profile information, favorites, and saved comparisons are stored locally in your browser
+- Upload requests are stored securely in the database
+- All research data is publicly available for academic use

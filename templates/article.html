@@ -212,7 +212,8 @@
         }
 
         function checkContentLength() {
-            // Check all feature content and hide View Full buttons for short content
+            // Hide View Full buttons when verbatim content is same as condensed content
+            // This handles cases where the database may have identical condensed and verbatim versions
             document.querySelectorAll('.feature-content').forEach(content => {
                 const summary = content.querySelector('.feature-summary');
                 const fullText = content.querySelector('.feature-full-text');
@@ -222,8 +223,8 @@
                     const summaryText = summary.textContent.trim();
                     const fullTextContent = fullText.textContent.trim();
                     
-                    // Hide button if content is short (less than 100 characters difference)
-                    if (fullTextContent.length - summaryText.length < 100) {
+                    // Hide button if verbatim content is identical to condensed content
+                    if (summaryText === fullTextContent) {
                         button.style.display = 'none';
                     }
                 }
