@@ -18,17 +18,16 @@ Technical documentation for developers working on the Social Media Effects Resea
 ```
 database_wireframe/
 ├── app.py                         # Main Flask application
-├── run.py                         # Application runner script
 ├── requirements.txt               # Python dependencies
 ├── README.md                      # User-facing documentation
-├── DEVELOPER_GUIDE.md            # This file
+├── DEVELOPER_GUIDE.md             # This file
 ├── ADMIN_GUIDE.md                 # Admin dashboard guide
 ├── data/
 │   ├── input/
 │   │   └── papers_extracted.csv   # Research data (CSV format)
-│   └── output/
-│       ├── tracking.db            # Usage tracking database (SQLite)
-│       └── uploads/               # Uploaded PDF files
+│   ├── output/
+│   │   └── tracking.db            # Usage tracking database (SQLite)
+│   └── user_uploads/              # User-submitted PDF files (awaiting feature extraction)
 ├── database/
 │   └── init_db.py                 # Database initialization script
 ├── templates/                     # Jinja2 HTML templates
@@ -63,10 +62,7 @@ database_wireframe/
 - Manages file uploads and request processing
 - Admin authentication and authorization
 - Database connection management
-
-**`run.py`**
-- Simple script to start the Flask server on port 5001
-- Can be used for development testing
+- Run directly with: `python app.py`
 
 **`requirements.txt`**
 - Lists required Python packages:
@@ -78,10 +74,7 @@ database_wireframe/
 
 **`data/input/papers_extracted.csv`**
 - Contains extracted research features in CSV format
-- Includes basic information (title, authors, journal, year)
-- Contains extracted features (independent/dependent variables, survey questions, etc.)
 - Features have both condensed and verbatim versions
-- Required columns include: title, authors, journal, year, abstract, sample_size
 - Feature columns follow pattern: `feature_name` and `feature_name_verbatim`
 
 **`data/output/tracking.db`**
@@ -89,9 +82,11 @@ database_wireframe/
 - Tables: search_logs, compare_view_logs, download_logs, upload_requests
 - Tracks user activity and admin requests
 
-**`data/output/uploads/`**
-- Directory for storing uploaded PDF files from user requests
+**`data/user_uploads/`**
+- Directory for storing user-submitted PDF files
 - Files are renamed with timestamps for uniqueness
+- These files are waiting to be processed through the feature extraction pipeline
+- After feature extraction, the processed data should be added to `papers_extracted.csv`
 
 ### Database Files
 
@@ -120,16 +115,14 @@ database_wireframe/
 
 **`templates/article.html`**
 - Detailed article view with all extracted features
-- Progressive disclosure: condensed → verbatim
-- Smart View Full button display (hides when content is identical)
+- Progressive disclosure: condensed - verbatim
 - Add to favorites and comparison functionality
 
 **`templates/compare.html`**
 - Side-by-side comparison of multiple papers
-- Dynamic column count based on number of papers
 - Features listed vertically on left, papers on right
 - Download and save comparison functionality
-- Smart View Full button implementation
+- View Full button implementation
 
 **`templates/profile.html`**
 - User profile management page
@@ -214,20 +207,13 @@ database_wireframe/
 
 ## Running the Application
 
-### Development Mode
 ```bash
 python app.py
 ```
 - Runs on port 5001
 - Debug mode enabled
 - Auto-reload on code changes
-
-### Production Mode
-```bash
-python run.py
-```
-- Runs in background
-- Suitable for deployment
+- Access at: `http://localhost:5001`
 
 ### Stopping the Application
 - Press `Ctrl+C` in the terminal
@@ -400,11 +386,10 @@ python run.py
 - **Short features**: Should only include verbatim version
 - **Long features**: Should include both condensed and verbatim versions
 - **Naming convention**: Use `feature_name` and `feature_name_verbatim`
-- **Empty values**: Use empty string or "NOT SPECIFIED"
+- **Empty values**: Use "NOT SPECIFIED"
 
 ### View Full Logic
-- Button appears when verbatim differs from condensed
-- Automatically hides if content is identical
+- Button appears when there are both short condensed version and long verbatim text
 - Implemented in Article and Compare pages
 - Uses JavaScript content comparison
 
@@ -442,22 +427,4 @@ python run.py
 - Check CSV data format
 - Verify search logic in `app.py`
 - Clear browser cache
-
-## Next Steps
-
-### Potential Enhancements
-- User authentication system
-- Advanced analytics and visualizations
-- Export functionality for all data
-- Email notifications for request approval
-- Integration with feature extraction tools
-- Multi-language support
-- Enhanced mobile responsiveness
-
-### Integration Opportunities
-- Connect with feature extraction pipeline
-- Integrate with academic databases
-- Add citation management
-- Support for bulk imports
-- Automated quality checks
 

@@ -711,8 +711,8 @@ def upload_request():
         pdf_file = request.files.get("pdfFile")
         pdf_filename = None
         if pdf_file and pdf_file.filename:
-            # Save PDF to uploads directory
-            upload_dir = os.path.join("data", "output", "uploads")
+            # Save PDF to user uploads directory
+            upload_dir = os.path.join("data", "user_uploads")
             os.makedirs(upload_dir, exist_ok=True)
 
             # Generate unique filename
