@@ -233,7 +233,7 @@ python app.py
 - Three levels of information:
   1. Concise overviews in search results
   2. Condensed versions in article view
-  3. Full verbatim text with View Full
+  3. Full verbatim text with View Verbatim Text
 - Smart button display based on content comparison
 
 **2. Dynamic Content Loading**
@@ -256,7 +256,8 @@ python app.py
 
 ### Comparison Feature
 - CSS variable-based dynamic columns
-- Max 3 papers per comparison
+- Max 5 papers per comparison
+- Intelligent button labeling (View Full Text vs View Verbatim Text)
 - Feature categorization and display
 - Download and save functionality
 
@@ -388,7 +389,7 @@ python app.py
 - **Naming convention**: Use `feature_name` and `feature_name_verbatim`
 - **Empty values**: Use "NOT SPECIFIED"
 
-### View Full Logic
+### Expansion Logic (View Full Text & View Verbatim Text)
 - Button appears when there are both short condensed version and long verbatim text
 - Implemented in Article and Compare pages
 - Uses JavaScript content comparison

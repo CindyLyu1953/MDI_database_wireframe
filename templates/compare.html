@@ -6,6 +6,60 @@
 <link rel="stylesheet" href="{{ url_for('static', filename='css/compare.css') }}">
 {% endblock %}
 
+{% macro render_feature_cell(paper, summary_value, verbatim_value, feature_key, feature_label, study_index) %}
+    {% set summary_text = summary_value or '' %}
+    {% set verbatim_text = verbatim_value or '' %}
+    {% set has_verbatim = verbatim_text and verbatim_text != 'NOT SPECIFIED' %}
+    {% set summary_word_count = summary_text|word_count %}
+    {% set needs_truncation = summary_word_count > 30 %}
+    {% set display_text = needs_truncation and summary_text|truncate_words(30) or summary_text %}
+    {% set condensed_id = feature_key ~ '-condensed-' ~ study_index %}
+    {% set verbatim_id = feature_key ~ '-verbatim-' ~ study_index %}
+    <div class="feature-content">
+        <div class="feature-summary" data-full-text="{{ summary_text|e }}">
+            <p>{{ display_text }}</p>
+        </div>
+        {% if needs_truncation %}
+        <div class="feature-full-text hidden" id="{{ condensed_id }}">
+            <p>{{ summary_text }}</p>
+        </div>
+        {% endif %}
+        {% if has_verbatim %}
+        <div class="feature-full-text hidden" id="{{ verbatim_id }}">
+            <p>{{ verbatim_text }}</p>
+        </div>
+        {% endif %}
+        {% if has_verbatim or needs_truncation %}
+        <div class="feature-actions">
+            {% if needs_truncation %}
+            <button class="btn btn-outline btn-sm full-text-trigger"
+                data-full-text-id="{{ condensed_id }}"
+                data-feature-label="{{ feature_label }}"
+                data-study-title="{{ paper.title|e }}"
+                data-study-index="{{ study_index }}">
+                <span class="btn-text">View Full Text</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6,9 12,15 18,9"></polyline>
+                </svg>
+            </button>
+            {% endif %}
+            {% if has_verbatim %}
+            <button class="btn btn-outline btn-sm full-text-trigger"
+                data-full-text-id="{{ verbatim_id }}"
+                data-feature-label="{{ feature_label }} Verbatim"
+                data-study-title="{{ paper.title|e }}"
+                data-study-index="{{ study_index }}">
+                <span class="btn-text">View Verbatim Text</span>
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="6,9 12,15 18,9"></polyline>
+                </svg>
+            </button>
+            {% endif %}
+        </div>
+        {% endif %}
+    </div>
+{% endmacro %}
+
 {% block content %}
 <div class="container">
     <!-- Comparison Header -->
@@ -63,6 +117,9 @@
                     <div class="header-cell study-column">
                         <div class="study-header">
                             <h3>Study {{ loop.index }}</h3>
+                            <button class="remove-study-btn" type="button" onclick="removeStudy('{{ paper.id }}')" aria-label="Remove study {{ loop.index }}">
+                                &times;
+                            </button>
                         </div>
                         <div class="study-title">{{ paper.title }}</div>
                         <div class="study-meta">{{ paper.authors|join(', ') }}, {{ paper.year }}</div>
@@ -85,21 +142,15 @@
                         <div class="feature-name">Authors</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.authors|join(', ') }}</div>
-                            {% if paper.authors_verbatim and paper.authors_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('authors-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="authors-{{ loop.index }}-full">
-                                <p>{{ paper.authors_verbatim }}</p>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {% set authors_text = paper.authors|join(', ') %}
+                        {% if authors_text %}
+                            {{ render_feature_cell(paper, authors_text, paper.authors_verbatim, 'authors', 'Authors', loop.index) }}
+                        {% else %}
+                            <div class="feature-content">
+                                <div class="feature-summary"><p>—</p></div>
                             </div>
-                            {% endif %}
-                        </div>
+                        {% endif %}
                     </div>
                     {% endfor %}
                 </div>
@@ -109,21 +160,8 @@
                         <div class="feature-name">Title</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.title }}</div>
-                            {% if paper.title_verbatim and paper.title_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('title-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="title-{{ loop.index }}-full">
-                                <p>{{ paper.title_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.title, paper.title_verbatim, 'title', 'Title', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -133,21 +171,8 @@
                         <div class="feature-name">Journal</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.journal }}</div>
-                            {% if paper.journal_verbatim and paper.journal_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('journal-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="journal-{{ loop.index }}-full">
-                                <p>{{ paper.journal_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.journal, paper.journal_verbatim, 'journal', 'Journal', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -157,7 +182,7 @@
                         <div class="feature-name">Year</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">{{ paper.year }}</div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">{{ paper.year }}</div>
                     {% endfor %}
                 </div>
 
@@ -166,7 +191,7 @@
                         <div class="feature-name">Citation</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">{{ paper.citation or '' }}</div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">{{ paper.citation or '' }}</div>
                     {% endfor %}
                 </div>
 
@@ -175,21 +200,8 @@
                         <div class="feature-name">Abstract</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.abstract[:200] }}{% if paper.abstract|length > 200 %}...{% endif %}</div>
-                            {% if paper.abstract_verbatim and paper.abstract_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('abstract-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="abstract-{{ loop.index }}-full">
-                                <p>{{ paper.abstract_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.abstract, paper.abstract_verbatim, 'abstract', 'Abstract', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -209,21 +221,9 @@
                         <div class="feature-name">Sample Size</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ "{:,}".format(paper.sample_size) if paper.sample_size else '' }}</div>
-                            {% if paper.extracted_features.sample_size_verbatim and paper.extracted_features.sample_size_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('sample_size-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="sample_size-{{ loop.index }}-full">
-                                <p>{{ paper.extracted_features.sample_size_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {% set sample_summary = paper.sample_size and "{:,}".format(paper.sample_size) or '' %}
+                        {{ render_feature_cell(paper, sample_summary, paper.extracted_features.sample_size_verbatim, 'sample_size', 'Sample Size', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -233,21 +233,8 @@
                         <div class="feature-name">Country / Region</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.extracted_features.country_region or '' }}</div>
-                            {% if paper.extracted_features.country_region_verbatim and paper.extracted_features.country_region_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('country_region-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="country_region-{{ loop.index }}-full">
-                                <p>{{ paper.extracted_features.country_region_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.country_region, paper.extracted_features.country_region_verbatim, 'country_region', 'Country / Region', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -257,21 +244,8 @@
                         <div class="feature-name">Recruitment Source</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.extracted_features.recruitment_source or '' }}</div>
-                            {% if paper.extracted_features.recruitment_source_verbatim and paper.extracted_features.recruitment_source_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('recruitment_source-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="recruitment_source-{{ loop.index }}-full">
-                                <p>{{ paper.extracted_features.recruitment_source_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.recruitment_source, paper.extracted_features.recruitment_source_verbatim, 'recruitment_source', 'Recruitment Source', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -281,21 +255,8 @@
                         <div class="feature-name">Demographics</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.extracted_features.demographics or '' }}</div>
-                            {% if paper.extracted_features.demographics_verbatim and paper.extracted_features.demographics_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('demographics-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="demographics-{{ loop.index }}-full">
-                                <p>{{ paper.extracted_features.demographics_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.demographics, paper.extracted_features.demographics_verbatim, 'demographics', 'Demographics', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -305,21 +266,8 @@
                         <div class="feature-name">Incentive</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.extracted_features.incentive or '' }}</div>
-                            {% if paper.extracted_features.incentive_verbatim and paper.extracted_features.incentive_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('incentive-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="incentive-{{ loop.index }}-full">
-                                <p>{{ paper.extracted_features.incentive_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.incentive, paper.extracted_features.incentive_verbatim, 'incentive', 'Incentive', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -339,21 +287,8 @@
                         <div class="feature-name">Treatment / Independent variable(s)</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.extracted_features.independent_variables or '' }}</div>
-                            {% if paper.extracted_features.independent_variables_verbatim and paper.extracted_features.independent_variables_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('independent_variables-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="independent_variables-{{ loop.index }}-full">
-                                <p>{{ paper.extracted_features.independent_variables_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.independent_variables, paper.extracted_features.independent_variables_verbatim, 'independent_variables', 'Treatment / Independent variable(s)', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -363,21 +298,8 @@
                         <div class="feature-name">Survey Measures (treatment variables)</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.extracted_features.survey_questions or '' }}</div>
-                            {% if paper.extracted_features.survey_questions_verbatim and paper.extracted_features.survey_questions_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('survey_questions-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="survey_questions-{{ loop.index }}-full">
-                                <p>{{ paper.extracted_features.survey_questions_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.survey_questions, paper.extracted_features.survey_questions_verbatim, 'survey_questions_treatment', 'Survey Measures (treatment variables)', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -387,21 +309,8 @@
                         <div class="feature-name">Outcome / Dependent variable(s)</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.extracted_features.dependent_variables or '' }}</div>
-                            {% if paper.extracted_features.dependent_variables_verbatim and paper.extracted_features.dependent_variables_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('dependent_variables-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="dependent_variables-{{ loop.index }}-full">
-                                <p>{{ paper.extracted_features.dependent_variables_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.dependent_variables, paper.extracted_features.dependent_variables_verbatim, 'dependent_variables', 'Outcome / Dependent variable(s)', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -411,21 +320,8 @@
                         <div class="feature-name">Survey Measures (outcome variables)</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.extracted_features.survey_questions or '' }}</div>
-                            {% if paper.extracted_features.survey_questions_verbatim and paper.extracted_features.survey_questions_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('survey_questions_outcome-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="survey_questions_outcome-{{ loop.index }}-full">
-                                <p>{{ paper.extracted_features.survey_questions_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.survey_questions, paper.extracted_features.survey_questions_verbatim, 'survey_questions_outcome', 'Survey Measures (outcome variables)', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -435,21 +331,8 @@
                         <div class="feature-name">Analysis (estimating equation)</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.extracted_features.analysis_equations or '' }}</div>
-                            {% if paper.extracted_features.analysis_equations_verbatim and paper.extracted_features.analysis_equations_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('analysis_equations-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="analysis_equations-{{ loop.index }}-full">
-                                <p>{{ paper.extracted_features.analysis_equations_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.analysis_equations, paper.extracted_features.analysis_equations_verbatim, 'analysis_equations', 'Analysis (estimating equation)', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -469,21 +352,8 @@
                         <div class="feature-name">Main Effects</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.extracted_features.main_effects or '' }}</div>
-                            {% if paper.extracted_features.main_effects_verbatim and paper.extracted_features.main_effects_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('main_effects-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="main_effects-{{ loop.index }}-full">
-                                <p>{{ paper.extracted_features.main_effects_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.main_effects, paper.extracted_features.main_effects_verbatim, 'main_effects', 'Main Effects', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -493,21 +363,8 @@
                         <div class="feature-name">Moderators</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.extracted_features.moderators or '' }}</div>
-                            {% if paper.extracted_features.moderators_verbatim and paper.extracted_features.moderators_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('moderators-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="moderators-{{ loop.index }}-full">
-                                <p>{{ paper.extracted_features.moderators_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.moderators, paper.extracted_features.moderators_verbatim, 'moderators', 'Moderators', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -517,21 +374,8 @@
                         <div class="feature-name">Moderation Results</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.extracted_features.moderation_results or '' }}</div>
-                            {% if paper.extracted_features.moderation_results_verbatim and paper.extracted_features.moderation_results_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('moderation_results-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="moderation_results-{{ loop.index }}-full">
-                                <p>{{ paper.extracted_features.moderation_results_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.moderation_results, paper.extracted_features.moderation_results_verbatim, 'moderation_results', 'Moderation Results', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -551,21 +395,8 @@
                         <div class="feature-name">Socio-cultural context</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.extracted_features.sociocultural_context or '' }}</div>
-                            {% if paper.extracted_features.sociocultural_context_verbatim and paper.extracted_features.sociocultural_context_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('sociocultural_context-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="sociocultural_context-{{ loop.index }}-full">
-                                <p>{{ paper.extracted_features.sociocultural_context_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.sociocultural_context, paper.extracted_features.sociocultural_context_verbatim, 'sociocultural_context', 'Socio-cultural context', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -575,21 +406,8 @@
                         <div class="feature-name">Political context</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.extracted_features.political_context or '' }}</div>
-                            {% if paper.extracted_features.political_context_verbatim and paper.extracted_features.political_context_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('political_context-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="political_context-{{ loop.index }}-full">
-                                <p>{{ paper.extracted_features.political_context_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.political_context, paper.extracted_features.political_context_verbatim, 'political_context', 'Political context', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -599,21 +417,8 @@
                         <div class="feature-name">Platform / Technological context</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.extracted_features.platform_technological_context or '' }}</div>
-                            {% if paper.extracted_features.platform_technological_context_verbatim and paper.extracted_features.platform_technological_context_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('platform_technological_context-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="platform_technological_context-{{ loop.index }}-full">
-                                <p>{{ paper.extracted_features.platform_technological_context_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.platform_technological_context, paper.extracted_features.platform_technological_context_verbatim, 'platform_technological_context', 'Platform / Technological context', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -623,21 +428,8 @@
                         <div class="feature-name">Temporal context</div>
                     </div>
                     {% for paper in papers %}
-                    <div class="study-cell">
-                        <div class="feature-content">
-                            <div class="feature-summary">{{ paper.extracted_features.temporal_context or '' }}</div>
-                            {% if paper.extracted_features.temporal_context_verbatim and paper.extracted_features.temporal_context_verbatim != 'NOT SPECIFIED' %}
-                            <button class="btn btn-outline btn-sm" onclick="toggleFullText('temporal_context-{{ loop.index }}')">
-                                <span class="btn-text">View Full</span>
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <div class="feature-full-text hidden" id="temporal_context-{{ loop.index }}-full">
-                                <p>{{ paper.extracted_features.temporal_context_verbatim }}</p>
-                            </div>
-                            {% endif %}
-                        </div>
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.temporal_context, paper.extracted_features.temporal_context_verbatim, 'temporal_context', 'Temporal context', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -651,13 +443,70 @@
         </div>
         {% endif %}
     </section>
+
+    <div id="fullTextModal" class="full-text-modal hidden" aria-hidden="true">
+        <div class="modal-backdrop" role="presentation"></div>
+        <div class="modal-dialog" role="dialog" aria-modal="true">
+            <button type="button" class="modal-close" onclick="closeFullTextModal()" aria-label="Close full text">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <line x1="18" y1="6" x2="6" y2="18"></line>
+                    <line x1="6" y1="6" x2="18" y2="18"></line>
+                </svg>
+            </button>
+            <div class="modal-header">
+                <h3 class="modal-title" id="modalFeatureTitle">Full Text</h3>
+                <p class="modal-subtitle" id="modalStudyTitle"></p>
+            </div>
+            <div class="modal-body" id="modalBody"></div>
+        </div>
+    </div>
+
+    <script id="comparisonData" type="application/json">{{ papers|tojson }}</script>
 </div>
 {% endblock %}
 
 {% block scripts %}
 <script>
+    const modalElements = {
+        container: null,
+        title: null,
+        subtitle: null,
+        body: null
+    };
+
+    let comparisonPapersData = [];
+ 
     // Load comparison from localStorage if no papers are provided via URL
     document.addEventListener('DOMContentLoaded', function() {
+        modalElements.container = document.getElementById('fullTextModal');
+        modalElements.title = document.getElementById('modalFeatureTitle');
+        modalElements.subtitle = document.getElementById('modalStudyTitle');
+        modalElements.body = document.getElementById('modalBody');
+
+        const modalBackdrop = modalElements.container?.querySelector('.modal-backdrop');
+        if (modalBackdrop) {
+            modalBackdrop.addEventListener('click', closeFullTextModal);
+        }
+
+        document.querySelectorAll('.full-text-trigger').forEach(button => {
+            button.addEventListener('click', event => {
+                event.preventDefault();
+                openFullTextFromButton(button);
+            });
+        });
+ 
+         document.addEventListener('keydown', handleModalKeydown);
+
+        const comparisonDataElement = document.getElementById('comparisonData');
+        if (comparisonDataElement) {
+            try {
+                comparisonPapersData = JSON.parse(comparisonDataElement.textContent || '[]');
+            } catch (error) {
+                console.error('Failed to parse comparison data:', error);
+                comparisonPapersData = [];
+            }
+        }
+
         const urlParams = new URLSearchParams(window.location.search);
         const idsParam = urlParams.get('ids');
         
@@ -704,7 +553,33 @@
     function addStudy() {
         window.location.href = "{{ url_for('search') }}";
     }
-    
+
+    function removeStudy(paperId) {
+        if (!paperId) {
+            return;
+        }
+
+        const compareUrl = "{{ url_for('compare') }}";
+        const urlParams = new URLSearchParams(window.location.search);
+        const idsParam = urlParams.get('ids');
+
+        let comparisonIds = [];
+        if (idsParam) {
+            comparisonIds = idsParam.split(',').filter(Boolean);
+        } else {
+            comparisonIds = JSON.parse(localStorage.getItem('comparisonIds') || '[]');
+        }
+
+        const updatedIds = comparisonIds.filter(id => id !== paperId);
+        localStorage.setItem('comparisonIds', JSON.stringify(updatedIds));
+
+        if (updatedIds.length > 0) {
+            window.location.href = `${compareUrl}?ids=${updatedIds.join(',')}`;
+        } else {
+            window.location.href = compareUrl;
+        }
+    }
+ 
     function downloadComparison() {
         try {
             // Get comparison data
@@ -789,7 +664,7 @@
     }
     
     function generateComparisonData() {
-        const papers = {{ papers|tojson }};
+        const papers = Array.isArray(comparisonPapersData) ? comparisonPapersData : [];
         const features = [
             'Authors', 'Title', 'Journal', 'Year', 'Citation', 'Abstract',
             'Sample Size', 'Country / Region', 'Recruitment Source', 'Demographics', 'Incentive',
@@ -803,15 +678,16 @@
     }
     
     function generateCSV(data) {
-        const { papers, features } = data;
-        
+        const comparisonPapers = Array.isArray(data?.papers) ? data.papers : [];
+        const comparisonFeatures = Array.isArray(data?.features) ? data.features : [];
+         
         // Create header row
-        let csv = 'Feature,' + papers.map((paper, index) => `Study ${index + 1}`).join(',') + '\n';
+        let csv = 'Feature,' + comparisonPapers.map((paper, index) => `Study ${index + 1}`).join(',') + '\n';
         
         // Add data rows
-        features.forEach(feature => {
+        comparisonFeatures.forEach(feature => {
             const row = [feature];
-            papers.forEach(paper => {
+            comparisonPapers.forEach(paper => {
                 let value = '';
                 switch(feature) {
                     case 'Authors':
@@ -940,36 +816,95 @@
         }, 3000);
     }
     
-    function toggleFullText(featureId) {
-        const fullTextElement = document.getElementById(featureId + '-full');
-        const button = event.target.closest('button');
-        
-        if (fullTextElement.classList.contains('hidden')) {
-            fullTextElement.classList.remove('hidden');
-            button.querySelector('.btn-text').textContent = 'Hide Full';
+    function openFullTextFromButton(button) {
+        if (!button) {
+            return;
+        }
+
+        const targetId = button.dataset.fullTextId;
+        const featureLabel = button.dataset.featureLabel || 'Full Text';
+        const studyIndex = parseInt(button.dataset.studyIndex || '0', 10);
+        let studyLabel = button.dataset.studyTitle || '';
+
+        const fullTextElement = targetId ? document.getElementById(targetId) : null;
+        const htmlContent = fullTextElement ? fullTextElement.innerHTML.trim() : '';
+
+        if (!fullTextElement || !htmlContent) {
+            showNotification('Full text is not available for this feature.', 'warning');
+            return;
+        }
+
+        if (!studyLabel && Number.isInteger(studyIndex)) {
+            const headerRow = document.querySelector('.table-header');
+            const headerCell = headerRow?.children?.[studyIndex];
+            if (headerCell) {
+                const titleElement = headerCell.querySelector('.study-title');
+                const metaElement = headerCell.querySelector('.study-meta');
+                studyLabel = titleElement ? titleElement.textContent.trim() : `Study ${studyIndex}`;
+                const metaText = metaElement ? metaElement.textContent.trim() : '';
+                if (metaText) {
+                    studyLabel = studyLabel ? `${studyLabel} • ${metaText}` : metaText;
+                }
+            }
+        }
+
+        showFullTextModal(featureLabel, studyLabel, htmlContent);
+    }
+
+    function showFullTextModal(featureLabel, studyLabel, htmlContent) {
+        if (!modalElements.container) {
+            return;
+        }
+
+        modalElements.title.textContent = featureLabel || 'Full Text';
+
+        if (studyLabel) {
+            modalElements.subtitle.textContent = studyLabel;
+            modalElements.subtitle.style.display = 'block';
         } else {
-            fullTextElement.classList.add('hidden');
-            button.querySelector('.btn-text').textContent = 'View Full';
+            modalElements.subtitle.textContent = '';
+            modalElements.subtitle.style.display = 'none';
+        }
+
+        modalElements.body.innerHTML = htmlContent;
+        modalElements.container.classList.remove('hidden');
+        modalElements.container.setAttribute('aria-hidden', 'false');
+        document.body.classList.add('modal-open');
+    }
+
+    function closeFullTextModal() {
+        if (!modalElements.container) {
+            return;
+        }
+
+        modalElements.container.classList.add('hidden');
+        modalElements.container.setAttribute('aria-hidden', 'true');
+        modalElements.body.innerHTML = '';
+        document.body.classList.remove('modal-open');
+    }
+
+    function handleModalKeydown(event) {
+        if (event.key === 'Escape' && modalElements.container && !modalElements.container.classList.contains('hidden')) {
+            closeFullTextModal();
         }
     }
 
     function checkContentLength() {
-        // Hide View Full buttons when verbatim content is same as condensed content
-        // This handles cases where the database may have identical condensed and verbatim versions
+         // Hide View Full buttons when verbatim content is same as condensed content
+         // This handles cases where the database may have identical condensed and verbatim versions
         document.querySelectorAll('.feature-content').forEach(content => {
             const summary = content.querySelector('.feature-summary');
-            const fullText = content.querySelector('.feature-full-text');
-            const button = content.querySelector('button[onclick*="toggleFullText"]');
-            
-            if (summary && fullText && button) {
-                const summaryText = summary.textContent.trim();
-                const fullTextContent = fullText.textContent.trim();
-                
-                // Hide button if verbatim content is identical to condensed content
-                if (summaryText === fullTextContent) {
+            const summaryText = summary ? summary.textContent.trim() : '';
+
+            content.querySelectorAll('.full-text-trigger').forEach(button => {
+                const targetId = button.dataset.fullTextId;
+                const fullTextElement = targetId ? document.getElementById(targetId) : null;
+                const fullTextContent = fullTextElement ? fullTextElement.textContent.trim() : '';
+
+                if (summaryText && fullTextContent && summaryText === fullTextContent) {
                     button.style.display = 'none';
                 }
-            }
+            });
         });
     }
 </script>

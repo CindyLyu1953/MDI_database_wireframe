@@ -65,19 +65,44 @@
                         <!-- Abstract -->
                         <div class="content-section">
                             <h2 class="section-title">Abstract</h2>
+                            {% set abstract_text = paper.abstract or '' %}
+                            {% set abstract_verbatim = paper.abstract_verbatim or '' %}
+                            {% set has_abstract_verbatim = abstract_verbatim and abstract_verbatim != 'NOT SPECIFIED' %}
+                            {% set abstract_word_count = abstract_text|word_count %}
+                            {% set abstract_needs_truncation = abstract_word_count > 30 %}
+                            {% set abstract_display = abstract_needs_truncation and abstract_text|truncate_words(30) or abstract_text %}
                             <div class="feature-content">
-                                <div class="feature-summary">
-                                    <p>{{ paper.abstract }}</p>
+                                <div class="feature-summary" data-full-text="{{ abstract_text|e }}">
+                                    <p>{{ abstract_display }}</p>
                                 </div>
-                                {% if paper.abstract_verbatim and paper.abstract_verbatim != 'NOT SPECIFIED' %}
-                                <button class="btn btn-outline btn-sm" onclick="toggleFullText('abstract')">
-                                    <span class="btn-text">View Full Abstract</span>
-                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                        <polyline points="6,9 12,15 18,9"></polyline>
-                                    </svg>
-                                </button>
-                                <div class="feature-full-text hidden" id="abstract-full">
-                                    <p>{{ paper.abstract_verbatim }}</p>
+                                {% if abstract_needs_truncation %}
+                                <div class="feature-full-text hidden" id="abstract-condensed-full">
+                                    <p>{{ abstract_text }}</p>
+                                </div>
+                                {% endif %}
+                                {% if has_abstract_verbatim %}
+                                <div class="feature-full-text hidden" id="abstract-verbatim-full">
+                                    <p>{{ abstract_verbatim }}</p>
+                                </div>
+                                {% endif %}
+                                {% if has_abstract_verbatim or abstract_needs_truncation %}
+                                <div class="feature-actions">
+                                    {% if abstract_needs_truncation %}
+                                    <button class="btn btn-outline btn-sm full-text-trigger" data-full-text-id="abstract-condensed-full" data-feature-label="Abstract" data-study-title="{{ paper.title|e }}" data-study-index="1">
+                                        <span class="btn-text">View Full Text</span>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="6,9 12,15 18,9"></polyline>
+                                        </svg>
+                                    </button>
+                                    {% endif %}
+                                    {% if has_abstract_verbatim %}
+                                    <button class="btn btn-outline btn-sm full-text-trigger" data-full-text-id="abstract-verbatim-full" data-feature-label="Abstract Verbatim" data-study-title="{{ paper.title|e }}" data-study-index="1">
+                                        <span class="btn-text">View Verbatim Text</span>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="6,9 12,15 18,9"></polyline>
+                                        </svg>
+                                    </button>
+                                    {% endif %}
                                 </div>
                                 {% endif %}
                             </div>
@@ -89,24 +114,51 @@
                             <div class="features-container">
                                 {% for feature_name, feature_value in paper.extracted_features.items() %}
                                     {% if feature_value and feature_value != 'NOT SPECIFIED' and not feature_name.endswith('_verbatim') %}
+                                        {% set feature_label = feature_name.replace('_', ' ').title() %}
+                                        {% set verbatim_key = feature_name + '_verbatim' %}
+                                        {% set verbatim_value = paper.extracted_features.get(verbatim_key, '') %}
+                                        {% set has_verbatim = verbatim_value and verbatim_value != 'NOT SPECIFIED' %}
+                                        {% set summary_word_count = feature_value|word_count %}
+                                        {% set needs_truncation = summary_word_count > 30 %}
+                                        {% set display_summary = needs_truncation and feature_value|truncate_words(30) or feature_value %}
+                                        {% set button_label = has_verbatim and 'View Verbatim Text' or 'View Full Text' %}
                                         <div class="feature-item">
-                                            <h3 class="feature-title">{{ feature_name.replace('_', ' ').title() }}</h3>
+                                            <h3 class="feature-title">{{ feature_label }}</h3>
                                             <div class="feature-content">
-                                                <div class="feature-summary">
+                                                <div class="feature-summary" data-full-text="{{ feature_value|e }}">
+                                                    <p>{{ display_summary }}</p>
+                                                </div>
+
+                                                {% if needs_truncation %}
+                                                <div class="feature-full-text hidden" id="{{ feature_name }}-condensed-full">
                                                     <p>{{ feature_value }}</p>
                                                 </div>
-                                                
-                                                {% set verbatim_key = feature_name + '_verbatim' %}
-                                                {% if verbatim_key in paper.extracted_features and paper.extracted_features[verbatim_key] and paper.extracted_features[verbatim_key] != 'NOT SPECIFIED' %}
-                                                    <button class="btn btn-outline btn-sm" onclick="toggleFullText('{{ feature_name }}')">
-                                                        <span class="btn-text">View Full</span>
+                                                {% endif %}
+                                                {% if has_verbatim %}
+                                                <div class="feature-full-text hidden" id="{{ feature_name }}-verbatim-full">
+                                                    <p>{{ verbatim_value }}</p>
+                                                </div>
+                                                {% endif %}
+
+                                                {% if has_verbatim or needs_truncation %}
+                                                <div class="feature-actions">
+                                                    {% if needs_truncation %}
+                                                    <button class="btn btn-outline btn-sm full-text-trigger" data-full-text-id="{{ feature_name }}-condensed-full" data-feature-label="{{ feature_label }}" data-study-title="{{ paper.title|e }}" data-study-index="1">
+                                                        <span class="btn-text">View Full Text</span>
                                                         <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                                             <polyline points="6,9 12,15 18,9"></polyline>
                                                         </svg>
                                                     </button>
-                                                    <div class="feature-full-text hidden" id="{{ feature_name }}-full">
-                                                        <p>{{ paper.extracted_features[verbatim_key] }}</p>
-                                                    </div>
+                                                    {% endif %}
+                                                    {% if has_verbatim %}
+                                                    <button class="btn btn-outline btn-sm full-text-trigger" data-full-text-id="{{ feature_name }}-verbatim-full" data-feature-label="{{ feature_label }} Verbatim" data-study-title="{{ paper.title|e }}" data-study-index="1">
+                                                        <span class="btn-text">View Verbatim Text</span>
+                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                            <polyline points="6,9 12,15 18,9"></polyline>
+                                                        </svg>
+                                                    </button>
+                                                    {% endif %}
+                                                </div>
                                                 {% endif %}
                                             </div>
                                         </div>
@@ -146,6 +198,23 @@
                     </div>
                 </div>
             </section>
+
+            <div id="fullTextModal" class="full-text-modal hidden" aria-hidden="true">
+                <div class="modal-backdrop" role="presentation"></div>
+                <div class="modal-dialog" role="dialog" aria-modal="true">
+                    <button type="button" class="modal-close" onclick="closeFullTextModal()" aria-label="Close full text">
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"></line>
+                            <line x1="6" y1="6" x2="18" y2="18"></line>
+                        </svg>
+                    </button>
+                    <div class="modal-header">
+                        <h3 class="modal-title" id="modalFeatureTitle">Full Text</h3>
+                        <p class="modal-subtitle" id="modalStudyTitle"></p>
+                    </div>
+                    <div class="modal-body" id="modalBody"></div>
+                </div>
+            </div>
         </div>
     </main>
 
@@ -173,8 +242,34 @@
     </footer>
 
     <script>
+        const modalElements = {
+            container: null,
+            title: null,
+            subtitle: null,
+            body: null
+        };
+
         // Track article view on page load
         document.addEventListener('DOMContentLoaded', function() {
+            modalElements.container = document.getElementById('fullTextModal');
+            modalElements.title = document.getElementById('modalFeatureTitle');
+            modalElements.subtitle = document.getElementById('modalStudyTitle');
+            modalElements.body = document.getElementById('modalBody');
+
+            const modalBackdrop = modalElements.container?.querySelector('.modal-backdrop');
+            if (modalBackdrop) {
+                modalBackdrop.addEventListener('click', closeFullTextModal);
+            }
+
+            document.querySelectorAll('.full-text-trigger').forEach(button => {
+                button.addEventListener('click', event => {
+                    event.preventDefault();
+                    openFullTextFromButton(button);
+                });
+            });
+
+            document.addEventListener('keydown', handleModalKeydown);
+
             updateUserStats('articlesViewed');
             
             // Check content length and hide unnecessary View Full buttons
@@ -197,37 +292,80 @@
             
             localStorage.setItem('userStats', JSON.stringify(stats));
         }
+ 
+        function openFullTextFromButton(button) {
+            if (!button) {
+                return;
+            }
 
-        function toggleFullText(featureId) {
-            const fullTextElement = document.getElementById(featureId + '-full');
-            const button = event.target.closest('button');
-            
-            if (fullTextElement.classList.contains('hidden')) {
-                fullTextElement.classList.remove('hidden');
-                button.querySelector('.btn-text').textContent = 'Hide Full';
+            const targetId = button.dataset.fullTextId;
+            const featureLabel = button.dataset.featureLabel || 'Full Text';
+            const studyLabel = button.dataset.studyTitle || '';
+
+            const fullTextElement = targetId ? document.getElementById(targetId) : null;
+            const htmlContent = fullTextElement ? fullTextElement.innerHTML.trim() : '';
+
+            if (!fullTextElement || !htmlContent) {
+                return;
+            }
+
+            showFullTextModal(featureLabel, studyLabel, htmlContent);
+        }
+
+        function showFullTextModal(featureLabel, studyLabel, htmlContent) {
+            if (!modalElements.container) {
+                return;
+            }
+
+            modalElements.title.textContent = featureLabel || 'Full Text';
+
+            if (studyLabel) {
+                modalElements.subtitle.textContent = studyLabel;
+                modalElements.subtitle.style.display = 'block';
             } else {
-                fullTextElement.classList.add('hidden');
-                button.querySelector('.btn-text').textContent = 'View Full';
+                modalElements.subtitle.textContent = '';
+                modalElements.subtitle.style.display = 'none';
+            }
+
+            modalElements.body.innerHTML = htmlContent;
+            modalElements.container.classList.remove('hidden');
+            modalElements.container.setAttribute('aria-hidden', 'false');
+            document.body.classList.add('modal-open');
+        }
+
+        function closeFullTextModal() {
+            if (!modalElements.container) {
+                return;
+            }
+
+            modalElements.container.classList.add('hidden');
+            modalElements.container.setAttribute('aria-hidden', 'true');
+            modalElements.body.innerHTML = '';
+            document.body.classList.remove('modal-open');
+        }
+
+        function handleModalKeydown(event) {
+            if (event.key === 'Escape' && modalElements.container && !modalElements.container.classList.contains('hidden')) {
+                closeFullTextModal();
             }
         }
 
         function checkContentLength() {
-            // Hide View Full buttons when verbatim content is same as condensed content
-            // This handles cases where the database may have identical condensed and verbatim versions
+             // Hide View Full buttons when verbatim content is same as condensed content
+             // This handles cases where the database may have identical condensed and verbatim versions
             document.querySelectorAll('.feature-content').forEach(content => {
                 const summary = content.querySelector('.feature-summary');
-                const fullText = content.querySelector('.feature-full-text');
-                const button = content.querySelector('button[onclick*="toggleFullText"]');
-                
-                if (summary && fullText && button) {
-                    const summaryText = summary.textContent.trim();
-                    const fullTextContent = fullText.textContent.trim();
-                    
-                    // Hide button if verbatim content is identical to condensed content
-                    if (summaryText === fullTextContent) {
+                const summaryText = summary ? summary.textContent.trim() : '';
+
+                content.querySelectorAll('.full-text-trigger').forEach(button => {
+                    const targetId = button.dataset.fullTextId;
+                    const fullTextElement = targetId ? document.getElementById(targetId) : null;
+                    const fullTextContent = fullTextElement ? fullTextElement.textContent.trim() : '';
+
+                    if (summaryText && fullTextContent && summaryText === fullTextContent) {
                         button.style.display = 'none';
                     }
-                }
+                });
             });
         }
         

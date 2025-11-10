@@ -12,6 +12,29 @@ app.secret_key = (
     "your-secret-key-change-this-in-production"  # Change this in production!
 )
 
+
+def word_count(value):
+    """Return word count for a given string value."""
+    if not value:
+        return 0
+    if isinstance(value, (list, tuple)):
+        return len(value)
+    return len(str(value).split())
+
+
+def truncate_words(value, limit=30):
+    """Truncate text to a specific number of words, adding ellipsis when needed."""
+    if not value:
+        return ""
+    words = str(value).split()
+    if len(words) <= limit:
+        return str(value)
+    return " ".join(words[:limit]) + "..."
+
+
+app.jinja_env.filters["word_count"] = word_count
+app.jinja_env.filters["truncate_words"] = truncate_words
+
 # Admin credentials (in production, use environment variables or a proper auth system)
 ADMIN_USERNAME = "admin"
 ADMIN_PASSWORD = "admin123"  # Change this!
@@ -26,6 +49,10 @@ def load_papers_from_csv():
     papers_data = []
 
     csv_file = os.path.join("data", "input", "papers_extracted.csv")
+    if not os.path.exists(csv_file):
+        alt_path = os.path.join("data", "input", "paper_extracted.csv")
+        if os.path.exists(alt_path):
+            csv_file = alt_path
 
     try:
         with open(csv_file, "r", encoding="utf-8") as file:

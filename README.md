@@ -10,7 +10,7 @@ A structured database of social media effects studies enabling systematic compar
 - **Comprehensive Results**: View all relevant social media effects studies in one place
 
 ### Compare Studies
-- **Side-by-Side Comparison**: Compare up to 3 research papers simultaneously
+- **Side-by-Side Comparison**: Compare up to 5 research papers simultaneously
 - **Organized Features**: Compare bibliographic information, research design, measurement & analysis, findings, and context
 - **Download Results**: Export comparisons as CSV files
 - **Save Comparisons**: Save comparison results for future reference
@@ -18,7 +18,8 @@ A structured database of social media effects studies enabling systematic compar
 ### Progressive Information Disclosure
 - **Search Results**: View concise overviews with key information
 - **Article Details**: See condensed versions of all extracted features
-- **View Full**: Expand to see complete verbatim text (button only appears when additional details are available)
+- **View Full Text**: Expand condensed content when it exceeds the preview length.
+- **View Verbatim Text**: Read the original verbatim excerpt when provided.
 
 ### Personal Management
 - **User Profile**: Set your username and institution
@@ -42,14 +43,16 @@ A structured database of social media effects studies enabling systematic compar
 ### Viewing Article Details
 - **Click "View Details"**: Opens the detailed article page
 - **Review Features**: See condensed versions of all extracted features
-- **View Full Content**: Click "View Full" to see complete verbatim text (when available)
+- **View Full Text**: Expand condensed content when it exceeds the preview length.
+- **View Verbatim Text**: Expand to read the verbatim version when available.
 - **Add to Favorites**: Mark articles as favorites for quick access
 - **Compare Papers**: Add papers to your comparison list
 
 ### Comparing Multiple Studies
 - **Select Papers**: Click "Compare" on up to 3 papers from search results
 - **View Comparison**: See side-by-side comparison table
-- **View Full Text**: Click "View Full" buttons to see complete verbatim text for any feature
+- **View Full Text**: Open truncated content when a preview is shortened.
+- **View Verbatim Text**: Access the original verbatim excerpt when available.
 - **Save Comparison**: Save comparison results for future reference
 - **Download**: Export comparison as a CSV file
 

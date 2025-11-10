@@ -180,6 +180,8 @@
 
 {% block scripts %}
 <script>
+    const MAX_COMPARISON_PAPERS = 5;
+
     function performSearch() {
         const searchInput = document.getElementById('searchInput');
         const query = searchInput.value.trim();
@@ -294,10 +296,10 @@
         if (!comparisonIds.includes(paperId)) {
             comparisonIds.push(paperId);
             
-            // Limit to maximum 3 papers for comparison
-            if (comparisonIds.length > 3) {
-                comparisonIds = comparisonIds.slice(-3);
-                alert('Maximum 3 papers can be compared. The oldest paper has been removed.');
+            // Limit to maximum 5 papers for comparison
+            if (comparisonIds.length > MAX_COMPARISON_PAPERS) {
+                comparisonIds = comparisonIds.slice(-MAX_COMPARISON_PAPERS);
+                alert(`Maximum ${MAX_COMPARISON_PAPERS} papers can be compared. The oldest paper has been removed.`);
             }
             
             // Save to localStorage
@@ -311,7 +313,7 @@
             event.target.style.backgroundColor = '#28a745';
             
             // Show notification
-            showNotification(`Added to comparison (${comparisonIds.length}/3)`);
+            showNotification(`Added to comparison (${comparisonIds.length}/${MAX_COMPARISON_PAPERS})`);
         } else {
             alert('This paper is already in the comparison list.');
         }
