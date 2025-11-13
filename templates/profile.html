@@ -212,7 +212,13 @@
                             
                             <div class="form-group">
                                 <label for="pdfFile" class="form-label">Optional PDF of the Paper</label>
-                                <input type="file" id="pdfFile" name="pdfFile" class="form-file" accept=".pdf" />
+                                <div class="file-input-wrapper">
+                                    <input type="file" id="pdfFile" name="pdfFile" class="form-file" accept=".pdf" />
+                                    <label for="pdfFile" class="file-input-label">
+                                        <span class="file-input-button">Choose File</span>
+                                        <span class="file-input-text">No file chosen</span>
+                                    </label>
+                                </div>
                                 <small class="form-help">Upload the PDF file if you have permission to share it</small>
                             </div>
                             
@@ -715,8 +721,26 @@
     function resetUploadForm() {
         document.getElementById('uploadForm').reset();
         localStorage.removeItem('uploadFormData');
+        updateFileInputDisplay();
         showNotification('Upload form reset');
     }
+
+    function updateFileInputDisplay() {
+        const fileInput = document.getElementById('pdfFile');
+        const fileText = document.querySelector('.file-input-text');
+        if (fileInput && fileText) {
+            if (fileInput.files && fileInput.files.length > 0) {
+                fileText.textContent = fileInput.files[0].name;
+            } else {
+                fileText.textContent = 'No file chosen';
+            }
+        }
+    }
+
+    // Update file input display when file is selected
+    document.getElementById('pdfFile').addEventListener('change', function() {
+        updateFileInputDisplay();
+    });
 
     // Handle upload form submission
     document.getElementById('uploadForm').addEventListener('submit', function(e) {

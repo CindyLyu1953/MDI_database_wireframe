@@ -196,14 +196,61 @@
     color: #555;
     overflow-wrap: anywhere;
     width: 100%;
+    white-space: pre-line;
 }
 
 .feature-summary p {
     margin-bottom: 1rem;
+    white-space: pre-line;
 }
 
 .feature-summary p:last-child {
     margin-bottom: 0;
+}
+
+.summary-preview {
+    display: inline;
+    white-space: pre-line;
+}
+
+.summary-text {
+    white-space: pre-line;
+}
+
+.inline-expand-toggle {
+    border: 1px solid #2563eb;
+    background: rgba(37, 99, 235, 0.08);
+    padding: 0;
+    margin: 0;
+    width: 1.3rem;
+    height: 1.3rem;
+    aspect-ratio: 1 / 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    color: #2563eb;
+    border-radius: 50%;
+    line-height: 1;
+    margin-left: 0.25rem;
+    vertical-align: baseline;
+    transition: color 0.2s ease, background-color 0.2s ease, border-color 0.2s ease;
+}
+
+.inline-expand-toggle:hover,
+.inline-expand-toggle:focus-visible {
+    color: #1d4ed8;
+    border-color: #1d4ed8;
+    background: rgba(29, 78, 216, 0.15);
+}
+
+.inline-expand-toggle svg {
+    transition: transform 0.2s ease;
+    pointer-events: none;
+}
+
+.inline-expand-toggle.expanded svg {
+    transform: rotate(180deg);
 }
 
 .feature-full-text {
@@ -225,6 +272,7 @@
 
 .feature-full-text p {
     margin-bottom: 1rem;
+    white-space: pre-line;
 }
 
 .feature-full-text p:last-child {
@@ -526,6 +574,7 @@ body.modal-open {
 
 .modal-body p {
     margin-bottom: 1rem;
+    white-space: pre-line;
 }
 
 .modal-body p:last-child {
@@ -545,4 +594,5 @@ body.modal-open {
 .feature-summary p,
 .feature-full-text p {
     word-break: break-word;
+    white-space: pre-line;
 }

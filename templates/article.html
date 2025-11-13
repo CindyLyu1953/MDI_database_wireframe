@@ -72,37 +72,37 @@
                             {% set abstract_needs_truncation = abstract_word_count > 30 %}
                             {% set abstract_display = abstract_needs_truncation and abstract_text|truncate_words(30) or abstract_text %}
                             <div class="feature-content">
-                                <div class="feature-summary" data-full-text="{{ abstract_text|e }}">
+                                <div class="feature-summary">
+                                    {% if abstract_needs_truncation %}
+                                    <p>
+                                        <span class="summary-preview">
+                                            <span class="summary-text">{{ abstract_display }}</span>
+                                            <button type="button"
+                                                class="inline-expand-toggle"
+                                                data-full-text="{{ abstract_text|e }}"
+                                                data-truncated-text="{{ abstract_display|e }}"
+                                                aria-expanded="false"
+                                                aria-label="View full text">
+                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                    <polyline points="6,9 12,15 18,9"></polyline>
+                                                </svg>
+                                            </button>
+                                        </span>
+                                    </p>
+                                    {% else %}
                                     <p>{{ abstract_display }}</p>
+                                    {% endif %}
                                 </div>
-                                {% if abstract_needs_truncation %}
-                                <div class="feature-full-text hidden" id="abstract-condensed-full">
-                                    <p>{{ abstract_text }}</p>
-                                </div>
-                                {% endif %}
                                 {% if has_abstract_verbatim %}
                                 <div class="feature-full-text hidden" id="abstract-verbatim-full">
                                     <p>{{ abstract_verbatim }}</p>
                                 </div>
                                 {% endif %}
-                                {% if has_abstract_verbatim or abstract_needs_truncation %}
+                                {% if has_abstract_verbatim %}
                                 <div class="feature-actions">
-                                    {% if abstract_needs_truncation %}
-                                    <button class="btn btn-outline btn-sm full-text-trigger" data-full-text-id="abstract-condensed-full" data-feature-label="Abstract" data-study-title="{{ paper.title|e }}" data-study-index="1">
-                                        <span class="btn-text">View Full Text</span>
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <polyline points="6,9 12,15 18,9"></polyline>
-                                        </svg>
-                                    </button>
-                                    {% endif %}
-                                    {% if has_abstract_verbatim %}
                                     <button class="btn btn-outline btn-sm full-text-trigger" data-full-text-id="abstract-verbatim-full" data-feature-label="Abstract Verbatim" data-study-title="{{ paper.title|e }}" data-study-index="1">
                                         <span class="btn-text">View Verbatim Text</span>
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                            <polyline points="6,9 12,15 18,9"></polyline>
-                                        </svg>
                                     </button>
-                                    {% endif %}
                                 </div>
                                 {% endif %}
                             </div>
@@ -125,39 +125,38 @@
                                         <div class="feature-item">
                                             <h3 class="feature-title">{{ feature_label }}</h3>
                                             <div class="feature-content">
-                                                <div class="feature-summary" data-full-text="{{ feature_value|e }}">
+                                                <div class="feature-summary">
+                                                    {% if needs_truncation %}
+                                                    <p>
+                                                        <span class="summary-preview">
+                                                            <span class="summary-text">{{ display_summary }}</span>
+                                                            <button type="button"
+                                                                class="inline-expand-toggle"
+                                                                data-full-text="{{ feature_value|e }}"
+                                                                data-truncated-text="{{ display_summary|e }}"
+                                                                aria-expanded="false"
+                                                                aria-label="View full text">
+                                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                    <polyline points="6,9 12,15 18,9"></polyline>
+                                                                </svg>
+                                                            </button>
+                                                        </span>
+                                                    </p>
+                                                    {% else %}
                                                     <p>{{ display_summary }}</p>
+                                                    {% endif %}
                                                 </div>
-
-                                                {% if needs_truncation %}
-                                                <div class="feature-full-text hidden" id="{{ feature_name }}-condensed-full">
-                                                    <p>{{ feature_value }}</p>
-                                                </div>
-                                                {% endif %}
                                                 {% if has_verbatim %}
                                                 <div class="feature-full-text hidden" id="{{ feature_name }}-verbatim-full">
                                                     <p>{{ verbatim_value }}</p>
                                                 </div>
                                                 {% endif %}
 
-                                                {% if has_verbatim or needs_truncation %}
+                                                {% if has_verbatim %}
                                                 <div class="feature-actions">
-                                                    {% if needs_truncation %}
-                                                    <button class="btn btn-outline btn-sm full-text-trigger" data-full-text-id="{{ feature_name }}-condensed-full" data-feature-label="{{ feature_label }}" data-study-title="{{ paper.title|e }}" data-study-index="1">
-                                                        <span class="btn-text">View Full Text</span>
-                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                            <polyline points="6,9 12,15 18,9"></polyline>
-                                                        </svg>
-                                                    </button>
-                                                    {% endif %}
-                                                    {% if has_verbatim %}
                                                     <button class="btn btn-outline btn-sm full-text-trigger" data-full-text-id="{{ feature_name }}-verbatim-full" data-feature-label="{{ feature_label }} Verbatim" data-study-title="{{ paper.title|e }}" data-study-index="1">
                                                         <span class="btn-text">View Verbatim Text</span>
-                                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                            <polyline points="6,9 12,15 18,9"></polyline>
-                                                        </svg>
                                                     </button>
-                                                    {% endif %}
                                                 </div>
                                                 {% endif %}
                                             </div>
@@ -268,6 +267,8 @@
                 });
             });
 
+            setupInlineExpanders();
+
             document.addEventListener('keydown', handleModalKeydown);
 
             updateUserStats('articlesViewed');
@@ -347,6 +348,45 @@
         function handleModalKeydown(event) {
             if (event.key === 'Escape' && modalElements.container && !modalElements.container.classList.contains('hidden')) {
                 closeFullTextModal();
+            }
+        }
+
+        function setupInlineExpanders() {
+            document.querySelectorAll('.inline-expand-toggle').forEach(button => {
+                button.addEventListener('click', event => {
+                    event.preventDefault();
+                    toggleInlineExpansion(button);
+                });
+            });
+        }
+
+        function toggleInlineExpansion(button) {
+            if (!button) {
+                return;
+            }
+
+            const fullText = button.dataset.fullText;
+            const truncatedText = button.dataset.truncatedText;
+            const previewSpan = button.closest('.summary-preview');
+            const textSpan = previewSpan ? previewSpan.querySelector('.summary-text') : null;
+
+            if (!textSpan || !fullText || !truncatedText) {
+                return;
+            }
+
+            const isExpanded = button.getAttribute('aria-expanded') === 'true';
+            if (isExpanded) {
+                textSpan.textContent = truncatedText;
+                button.setAttribute('aria-expanded', 'false');
+                button.classList.remove('expanded');
+                button.setAttribute('aria-label', 'View full text');
+                button.setAttribute('title', 'View full text');
+            } else {
+                textSpan.textContent = fullText;
+                button.setAttribute('aria-expanded', 'true');
+                button.classList.add('expanded');
+                button.setAttribute('aria-label', 'Hide full text');
+                button.setAttribute('title', 'Hide full text');
             }
         }
 
