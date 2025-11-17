@@ -116,6 +116,57 @@ The platform displays research data with the following structure:
 - **Responsive Design**: Works on both desktop and mobile devices
 - **Maximum Comparison**: You can compare up to 3 papers simultaneously
 
+## How the Platform Was Set Up and Created
+
+### Technology Stack
+
+The platform is built using:
+- **Backend**: Flask (Python web framework) for server-side logic and API endpoints
+- **Frontend**: HTML5, CSS3, and JavaScript for user interface and interactions
+- **Templates**: Jinja2 templating engine for dynamic page rendering
+- **Database**: SQLite for tracking user activity and managing upload requests
+- **Data Storage**: CSV file-based storage for research paper data
+
+### Project Structure
+
+The platform is organized into the following key components:
+
+- **`app.py`**: Main Flask application handling all routes, search functionality, and data management
+- **`templates/`**: HTML templates for all pages (home, search, article details, comparison, profile, admin)
+- **`static/css/`**: Stylesheets for each page component
+- **`data/input/`**: CSV file containing extracted research features (`paper_extracted.csv` or `papers_extracted.csv`)
+- **`data/output/`**: SQLite database for usage tracking and analytics
+- **`data/user_uploads/`**: Directory for storing user-submitted PDF files
+- **`database/init_db.py`**: Database initialization script
+
+### Setup Process
+
+1. **Installation**: The platform requires Python 3.7+ and dependencies listed in `requirements.txt` (Flask, Werkzeug, pytz)
+
+2. **Database Initialization**: The SQLite tracking database is initialized using `database/init_db.py`, which creates tables for search logs, comparison views, downloads, and upload requests
+
+3. **Data Loading**: Research paper data is loaded from CSV files in `data/input/` directory at application startup. The system automatically detects files named `paper_extracted.csv`, `papers_extracted.csv`, or `papers.csv`
+
+4. **Running the Application**: The platform runs locally using `python app.py` on port 5001, with debug mode enabled for development
+
+### Key Design Principles
+
+- **Progressive Information Disclosure**: Information is presented in three levels - concise overviews in search results, condensed versions in article view, and full verbatim text when available
+- **Dynamic Content Loading**: CSV data is loaded at startup, enabling real-time search and filtering without database queries
+- **User State Management**: User preferences (profile, favorites, saved comparisons) are stored in browser localStorage, while activity tracking is stored in the SQLite database
+- **Responsive Design**: The interface adapts to different screen sizes using CSS Grid and Flexbox layouts
+
+### Data Format
+
+Research data is stored in CSV format with features organized into categories:
+- Bibliographic information (title, authors, journal, year, citation, abstract)
+- Research design and sample details
+- Measurement and analysis methods
+- Findings and results
+- Contextual information (socio-cultural, political, platform, temporal)
+
+Each feature can have both a condensed version (for quick viewing) and a verbatim version (original extracted text), following the naming convention: `feature_name` and `feature_name_verbatim`.
+
 ## Getting Help
 
 If you encounter any issues or have questions:

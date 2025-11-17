@@ -48,11 +48,24 @@ def load_papers_from_csv():
     global papers_data
     papers_data = []
 
-    csv_file = os.path.join("data", "input", "papers_extracted.csv")
-    if not os.path.exists(csv_file):
-        alt_path = os.path.join("data", "input", "paper_extracted.csv")
-        if os.path.exists(alt_path):
-            csv_file = alt_path
+    # Try multiple possible filenames
+    possible_files = [
+        os.path.join("data", "input", "paper_extracted.csv"),
+        os.path.join("data", "input", "papers_extracted.csv"),
+        os.path.join("data", "input", "papers.csv"),
+    ]
+
+    csv_file = None
+    for file_path in possible_files:
+        if os.path.exists(file_path):
+            csv_file = file_path
+            break
+
+    if not csv_file:
+        print(
+            "Error: No CSV file found in data/input/. Please ensure a CSV file exists."
+        )
+        return
 
     try:
         with open(csv_file, "r", encoding="utf-8") as file:
