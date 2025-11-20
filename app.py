@@ -48,22 +48,12 @@ def load_papers_from_csv():
     global papers_data
     papers_data = []
 
-    # Try multiple possible filenames
-    possible_files = [
-        os.path.join("data", "input", "paper_extracted.csv"),
-        os.path.join("data", "input", "papers_extracted.csv"),
-        os.path.join("data", "input", "papers.csv"),
-    ]
+    # Only allow paper_extracted.csv
+    csv_file = os.path.join("data", "input", "paper_extracted.csv")
 
-    csv_file = None
-    for file_path in possible_files:
-        if os.path.exists(file_path):
-            csv_file = file_path
-            break
-
-    if not csv_file:
+    if not os.path.exists(csv_file):
         print(
-            "Error: No CSV file found in data/input/. Please ensure a CSV file exists."
+            "Error: paper_extracted.csv not found in data/input/. Please ensure the file exists."
         )
         return
 
@@ -336,6 +326,13 @@ def compare():
 def profile():
     """Profile page"""
     return render_template("profile.html")
+
+
+@app.route("/database")
+def database():
+    """Display database information and list of all papers"""
+    paper_count = len(papers_data)
+    return render_template("database.html", paper_count=paper_count, papers=papers_data)
 
 
 # API endpoints

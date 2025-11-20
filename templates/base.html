@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>{% block title %}Questionnaire Database Platform{% endblock %}</title>
+    <title>{% block title %}StudyLens{% endblock %}</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     {% block extra_css %}{% endblock %}
 </head>
@@ -11,7 +11,7 @@
     <header class="header">
         <div class="container">
             <div class="logo">
-                <h1>Questionnaire Database Platform</h1>
+                <h1>StudyLens</h1>
                 <span class="tagline">Academic Research Tool</span>
             </div>
             <nav class="nav">
@@ -32,12 +32,11 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>About Us</h4>
-                    <p>To provide efficient tools and platforms for academic research</p>
+                    <p>StudyLens was built to enable users to compare and analyze research studies, focusing on methodology, measures, and context. By highlighting design differences, we aim to help users draw more informed conclusions from existing research.</p>
                 </div>
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <a href="{{ url_for('search') }}">Search Research</a>
-                    <a href="{{ url_for('compare') }}">Compare Features</a>
+                    <h4>Our Database</h4>
+                    <a href="{{ url_for('database') }}">View Database</a>
                 </div>
                 <div class="footer-section">
                     <h4>Contact Us</h4>
@@ -45,7 +44,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Questionnaire Database Platform. All rights reserved.</p>
+                <p>&copy; 2024 StudyLens. All rights reserved.</p>
             </div>
         </div>
     </footer>

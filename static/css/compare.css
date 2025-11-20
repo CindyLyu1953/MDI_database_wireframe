@@ -43,20 +43,24 @@
     justify-content: flex-start;
     align-items: flex-start;
     margin: 0;
-    margin-top: 0;
+    margin-top: 0 !important;
     padding: 0;
-    padding-top: 0;
+    padding-top: 0 !important;
     line-height: 1.6;
 }
 
-.feature-summary {
-    margin: 0;
+.feature-text-region .feature-summary {
     margin-top: 0;
+    padding-top: 0;
+}
+
+.feature-summary {
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
     padding: 0;
     padding-top: 0;
     overflow-wrap: anywhere;
     word-break: break-word;
-    white-space: pre-line;
     line-height: 1.6;
     width: 100%;
 }
@@ -65,20 +69,23 @@
 .feature-full-text p {
     word-break: break-word;
     overflow-wrap: anywhere;
-    white-space: pre-line;
     line-height: 1.6;
-    margin: 0;
-    margin-top: 0;
+    margin-top: 1rem !important;
+    margin-bottom: 1rem !important;
     padding: 0;
     padding-top: 0;
 }
 
 .summary-preview {
-    display: inline;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
     white-space: pre-line;
-    margin: 0;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
     padding: 0;
     line-height: 1.6;
+    gap: 0.25rem;
 }
 
 .summary-text {
@@ -86,7 +93,7 @@
     line-height: 1.6;
     margin: 0;
     padding: 0;
-    display: inline;
+    flex: 1;
 }
 
 .inline-expand-toggle,
@@ -95,6 +102,8 @@
     background: rgba(37, 99, 235, 0.08);
     padding: 0;
     margin: 0;
+    margin-top: 0.25rem;
+    margin-bottom: 0;
     width: 1.3rem;
     height: 1.3rem;
     aspect-ratio: 1 / 1;
@@ -103,8 +112,7 @@
     justify-content: center;
     border-radius: 50%;
     line-height: 1;
-    margin-left: 0.25rem;
-    vertical-align: baseline;
+    align-self: center;
     flex-shrink: 0;
 }
 
@@ -159,18 +167,19 @@
 
 .feature-actions {
     flex: 0 0 auto;
-    margin-top: 0.5rem;
+    margin-top: 0.25rem !important;
+    margin-bottom: 0.75rem !important;
     padding: 0;
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
     width: 100%;
-    align-items: flex-start;
-    justify-content: flex-start;
+    align-items: center;
+    justify-content: center;
 }
 
 .feature-actions .btn {
-    align-self: flex-start;
+    align-self: center;
 }
 
 /* Long text handling */
@@ -283,7 +292,7 @@
 }
 
 .study-column {
-    text-align: center;
+    text-align: left;
     border-left: 1px solid #e1e8ed;
 }
 
@@ -347,18 +356,67 @@
     font-weight: 600;
     color: #2c3e50;
     border-top: 2px solid #bdc3c7;
+    padding: 1.2rem 1.5rem 1.4rem 1.5rem;
+    min-height: 4rem;
+    font-size: 1.05rem;
 }
+
 .section-header .study-cell {
     background: #ecf0f1;
     border-bottom: none;
     border-right: none;
+    padding: 1.2rem 1.75rem 1.4rem 1.75rem;
+    min-height: 4rem;
 }
+
 .section-header .study-cell:last-child {
     border-right: none;
 }
 
+.section-header .feature-name {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    flex-wrap: nowrap;
+}
+
+.section-toggle {
+    background: none;
+    border: none;
+    padding: 0.25rem;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: #2c3e50;
+    transition: transform 0.2s ease;
+    flex-shrink: 0;
+}
+
+.section-toggle:hover {
+    color: #3498db;
+}
+
+.section-arrow {
+    transition: transform 0.2s ease;
+    transform: rotate(0deg);
+}
+
+.section-toggle[aria-expanded="false"] .section-arrow {
+    transform: rotate(-90deg);
+}
+
+.section-content {
+    display: contents;
+}
+
+.section-content[style*="display: none"] {
+    display: none !important;
+}
+
 .feature-cell {
-    padding: 0.5rem 1.5rem 0.75rem 1.5rem;
+    padding: 0.4rem 1.5rem 0.5rem 1.5rem;
     background: #f8f9fa;
     border-bottom: 1px solid #e1e8ed;
     border-right: 1px solid #e1e8ed;
@@ -387,8 +445,22 @@
     font-style: italic;
 }
 
+/* Left-align text and button in study cells */
+.study-cell .feature-summary,
+.study-cell .summary-preview,
+.study-cell .feature-text-region {
+    text-align: left !important;
+    align-items: flex-start !important;
+}
+
+.study-cell .feature-actions {
+    display: flex;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
 .study-cell {
-    padding: 0.5rem 1.75rem 0.75rem 1.75rem;
+    padding: 0.4rem 1.75rem 0.5rem 1.75rem;
     background: white;
     border-bottom: 1px solid #e1e8ed;
     border-right: 1px solid #e1e8ed;
@@ -732,6 +804,7 @@ body.modal-open {
     color: #1f2937;
     line-height: 1.7;
     font-size: 0.95rem;
+    white-space: pre-line;
 }
 
 .modal-body p {

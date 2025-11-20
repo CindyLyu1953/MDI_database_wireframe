@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Research Comparison - Questionnaire Database Platform{% endblock %}
+{% block title %}Research Comparison - StudyLens{% endblock %}
 
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/compare.css') }}">
@@ -129,16 +129,23 @@
                 </div>
 
                 <!-- Bibliographic Section -->
-                <div class="table-row section-header">
+                <div class="table-row section-header" data-section="bibliographic">
                     <div class="feature-cell">
-                        <div class="feature-name">Bibliographic</div>
+                        <div class="feature-name">
+                            <button type="button" class="section-toggle" aria-expanded="true" aria-label="Toggle Bibliographic section">
+                                <svg class="section-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6,9 12,15 18,9"></polyline>
+                                </svg>
+                            </button>
+                            <span>Bibliographic</span>
+                        </div>
                     </div>
                     {% for paper in papers %}
                     <div class="study-cell"></div>
                     {% endfor %}
                 </div>
                 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="bibliographic">
                     <div class="feature-cell">
                         <div class="feature-name">Authors</div>
                     </div>
@@ -156,7 +163,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="bibliographic">
                     <div class="feature-cell">
                         <div class="feature-name">Title</div>
                     </div>
@@ -167,7 +174,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="bibliographic">
                     <div class="feature-cell">
                         <div class="feature-name">Journal</div>
                     </div>
@@ -178,7 +185,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="bibliographic">
                     <div class="feature-cell">
                         <div class="feature-name">Year</div>
                     </div>
@@ -193,7 +200,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="bibliographic">
                     <div class="feature-cell">
                         <div class="feature-name">Citation</div>
                     </div>
@@ -208,7 +215,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="bibliographic">
                     <div class="feature-cell">
                         <div class="feature-name">Abstract</div>
                     </div>
@@ -220,16 +227,23 @@
                 </div>
 
                 <!-- Research Design & Sample Section -->
-                <div class="table-row section-header">
+                <div class="table-row section-header" data-section="research-design">
                     <div class="feature-cell">
-                        <div class="feature-name">Research Design & Sample</div>
+                        <div class="feature-name">
+                            <button type="button" class="section-toggle" aria-expanded="true" aria-label="Toggle Research Design & Sample section">
+                                <svg class="section-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6,9 12,15 18,9"></polyline>
+                                </svg>
+                            </button>
+                            <span>Research Design & Sample</span>
+                        </div>
                     </div>
                     {% for paper in papers %}
                     <div class="study-cell"></div>
                     {% endfor %}
                 </div>
                 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="research-design">
                     <div class="feature-cell">
                         <div class="feature-name">Sample Size</div>
                     </div>
@@ -246,7 +260,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="research-design">
                     <div class="feature-cell">
                         <div class="feature-name">Country / Region</div>
                     </div>
@@ -257,7 +271,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="research-design">
                     <div class="feature-cell">
                         <div class="feature-name">Recruitment Source</div>
                     </div>
@@ -268,7 +282,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="research-design">
                     <div class="feature-cell">
                         <div class="feature-name">Demographics</div>
                     </div>
@@ -279,7 +293,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="research-design">
                     <div class="feature-cell">
                         <div class="feature-name">Incentive</div>
                     </div>
@@ -291,16 +305,23 @@
                 </div>
 
                 <!-- Measurement & Analysis Section -->
-                <div class="table-row section-header">
+                <div class="table-row section-header" data-section="measurement-analysis">
                     <div class="feature-cell">
-                        <div class="feature-name">Measurement & Analysis</div>
+                        <div class="feature-name">
+                            <button type="button" class="section-toggle" aria-expanded="true" aria-label="Toggle Measurement & Analysis section">
+                                <svg class="section-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6,9 12,15 18,9"></polyline>
+                                </svg>
+                            </button>
+                            <span>Measurement & Analysis</span>
+                        </div>
                     </div>
                     {% for paper in papers %}
                     <div class="study-cell"></div>
                     {% endfor %}
                 </div>
                 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="measurement-analysis">
                     <div class="feature-cell">
                         <div class="feature-name">Treatment / Independent variable(s)</div>
                     </div>
@@ -311,7 +332,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="measurement-analysis">
                     <div class="feature-cell">
                         <div class="feature-name">Survey Measures (treatment variables)</div>
                     </div>
@@ -322,7 +343,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="measurement-analysis">
                     <div class="feature-cell">
                         <div class="feature-name">Outcome / Dependent variable(s)</div>
                     </div>
@@ -333,7 +354,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="measurement-analysis">
                     <div class="feature-cell">
                         <div class="feature-name">Survey Measures (outcome variables)</div>
                     </div>
@@ -344,7 +365,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="measurement-analysis">
                     <div class="feature-cell">
                         <div class="feature-name">Analysis (estimating equation)</div>
                     </div>
@@ -356,16 +377,23 @@
                 </div>
                 
                 <!-- Findings Section -->
-                <div class="table-row section-header">
+                <div class="table-row section-header" data-section="findings">
                     <div class="feature-cell">
-                        <div class="feature-name">Findings</div>
+                        <div class="feature-name">
+                            <button type="button" class="section-toggle" aria-expanded="true" aria-label="Toggle Findings section">
+                                <svg class="section-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6,9 12,15 18,9"></polyline>
+                                </svg>
+                            </button>
+                            <span>Findings</span>
+                        </div>
                     </div>
                     {% for paper in papers %}
                     <div class="study-cell"></div>
                     {% endfor %}
                 </div>
                 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="findings">
                     <div class="feature-cell">
                         <div class="feature-name">Main Effects</div>
                     </div>
@@ -376,7 +404,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="findings">
                     <div class="feature-cell">
                         <div class="feature-name">Moderators</div>
                     </div>
@@ -387,7 +415,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="findings">
                     <div class="feature-cell">
                         <div class="feature-name">Moderation Results</div>
                     </div>
@@ -399,16 +427,23 @@
                 </div>
                 
                 <!-- Context Section -->
-                <div class="table-row section-header">
+                <div class="table-row section-header" data-section="context">
                     <div class="feature-cell">
-                        <div class="feature-name">Context</div>
+                        <div class="feature-name">
+                            <button type="button" class="section-toggle" aria-expanded="true" aria-label="Toggle Context section">
+                                <svg class="section-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6,9 12,15 18,9"></polyline>
+                                </svg>
+                            </button>
+                            <span>Context</span>
+                        </div>
                     </div>
                     {% for paper in papers %}
                     <div class="study-cell"></div>
                     {% endfor %}
                 </div>
                 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="context">
                     <div class="feature-cell">
                         <div class="feature-name">Socio-cultural context</div>
                     </div>
@@ -419,7 +454,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="context">
                     <div class="feature-cell">
                         <div class="feature-name">Political context</div>
                     </div>
@@ -430,7 +465,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="context">
                     <div class="feature-cell">
                         <div class="feature-name">Platform / Technological context</div>
                     </div>
@@ -441,7 +476,7 @@
                     {% endfor %}
                 </div>
 
-                <div class="table-row">
+                <div class="table-row section-content" data-section="context">
                     <div class="feature-cell">
                         <div class="feature-name">Temporal context</div>
                     </div>
@@ -965,6 +1000,44 @@
                 }
             });
         });
+    }
+
+    // Section collapse/expand functionality
+    function setupSectionToggles() {
+        document.querySelectorAll('.section-toggle').forEach(button => {
+            button.addEventListener('click', function() {
+                const sectionHeader = this.closest('.section-header');
+                const sectionName = sectionHeader.dataset.section;
+                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+                
+                // Toggle all rows with matching data-section
+                document.querySelectorAll(`.section-content[data-section="${sectionName}"]`).forEach(row => {
+                    if (isExpanded) {
+                        row.style.display = 'none';
+                    } else {
+                        row.style.display = '';
+                    }
+                });
+                
+                // Update button state
+                this.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+                const arrow = this.querySelector('.section-arrow');
+                if (arrow) {
+                    if (isExpanded) {
+                        arrow.style.transform = 'rotate(-90deg)';
+                    } else {
+                        arrow.style.transform = 'rotate(0deg)';
+                    }
+                }
+            });
+        });
+    }
+
+    // Initialize section toggles when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', setupSectionToggles);
+    } else {
+        setupSectionToggles();
     }
 </script>
 {% endblock %}

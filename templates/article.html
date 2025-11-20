@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Article Details - Questionnaire Database Platform</title>
+    <title>Article Details - StudyLens</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     <link rel="stylesheet" href="{{ url_for('static', filename='css/article.css') }}">
 </head>
@@ -11,7 +11,7 @@
     <header class="header">
         <div class="container">
             <div class="logo">
-                <h1>Questionnaire Database Platform</h1>
+                <h1>StudyLens</h1>
                 <span class="tagline">Academic Research Tool</span>
             </div>
             <nav class="nav">
@@ -68,30 +68,9 @@
                             {% set abstract_text = paper.abstract or '' %}
                             {% set abstract_verbatim = paper.abstract_verbatim or '' %}
                             {% set has_abstract_verbatim = abstract_verbatim and abstract_verbatim != 'NOT SPECIFIED' %}
-                            {% set abstract_word_count = abstract_text|word_count %}
-                            {% set abstract_needs_truncation = abstract_word_count > 30 %}
-                            {% set abstract_display = abstract_needs_truncation and abstract_text|truncate_words(30) or abstract_text %}
                             <div class="feature-content">
                                 <div class="feature-summary">
-                                    {% if abstract_needs_truncation %}
-                                    <p>
-                                        <span class="summary-preview">
-                                            <span class="summary-text">{{ abstract_display }}</span>
-                                            <button type="button"
-                                                class="inline-expand-toggle"
-                                                data-full-text="{{ abstract_text|e }}"
-                                                data-truncated-text="{{ abstract_display|e }}"
-                                                aria-expanded="false"
-                                                aria-label="View full text">
-                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                                </svg>
-                                            </button>
-                                        </span>
-                                    </p>
-                                    {% else %}
-                                    <p>{{ abstract_display }}</p>
-                                    {% endif %}
+                                    <p>{{ abstract_text }}</p>
                                 </div>
                                 {% if has_abstract_verbatim %}
                                 <div class="feature-full-text hidden" id="abstract-verbatim-full">
@@ -181,16 +160,8 @@
                                     <span class="info-value">{{ paper.year }}</span>
                                 </div>
                                 <div class="info-item">
-                                    <span class="info-label">Sample Size:</span>
-                                    <span class="info-value">{{ "{:,}".format(paper.sample_size) }}</span>
-                                </div>
-                                <div class="info-item">
                                     <span class="info-label">Countries:</span>
                                     <span class="info-value">{{ paper.countries|join(', ') }}</span>
-                                </div>
-                                <div class="info-item">
-                                    <span class="info-label">Methodology:</span>
-                                    <span class="info-value">{{ paper.methodology }}</span>
                                 </div>
                             </div>
                         </div>
@@ -225,9 +196,8 @@
                     <p>To provide efficient tools and platforms for academic research</p>
                 </div>
                 <div class="footer-section">
-                    <h4>Quick Links</h4>
-                    <a href="{{ url_for('search') }}">Search Research</a>
-                    <a href="{{ url_for('compare') }}">Compare Features</a>
+                    <h4>Our Database</h4>
+                    <a href="{{ url_for('database') }}">View Database</a>
                 </div>
                 <div class="footer-section">
                     <h4>Contact Us</h4>
@@ -235,7 +205,7 @@
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 Questionnaire Database Platform. All rights reserved.</p>
+                <p>&copy; 2024 StudyLens. All rights reserved.</p>
             </div>
         </div>
     </footer>

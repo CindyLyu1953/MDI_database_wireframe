@@ -5,6 +5,10 @@
     padding: 2rem 0;
     background: white;
     border-bottom: 1px solid #e1e8ed;
+    margin-left: calc(-50vw + 50%);
+    margin-right: calc(-50vw + 50%);
+    padding-left: calc(50vw - 50%);
+    padding-right: calc(50vw - 50%);
 }
 
 .search-box {
@@ -183,6 +187,13 @@
 .btn-sm {
     padding: 0.5rem 1rem;
     font-size: 0.75rem;
+}
+
+/* Make "View Verbatim Text" button slightly larger on Search page */
+.search-page .full-text-trigger,
+.results-section .full-text-trigger {
+    padding: 0.625rem 1.25rem !important;
+    font-size: 0.8125rem !important;
 }
 
 .result-meta {
