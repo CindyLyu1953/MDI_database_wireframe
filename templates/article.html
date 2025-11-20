@@ -91,9 +91,29 @@
                         <!-- Extracted Features -->
                         <div class="content-section">
                             <div class="features-container">
-                                {% for feature_name, feature_value in paper.extracted_features.items() %}
-                                    {% if feature_value and feature_value != 'NOT SPECIFIED' and not feature_name.endswith('_verbatim') %}
-                                        {% set feature_label = feature_name.replace('_', ' ').title() %}
+                                {% set feature_order = ['sample_size', 'country_region', 'recruitment_source', 'demographics', 'incentive', 'independent_variables', 'dependent_variables', 'survey_questions', 'analysis_equations', 'main_effects', 'moderators', 'moderation_results', 'sociocultural_context', 'political_context', 'platform_technological_context', 'temporal_context'] %}
+                                {% set feature_labels = {
+                                    'sample_size': 'Sample Size',
+                                    'country_region': 'Country / Region',
+                                    'recruitment_source': 'Recruitment Source',
+                                    'demographics': 'Demographics',
+                                    'incentive': 'Incentive',
+                                    'independent_variables': 'Treatment / Independent variable(s)',
+                                    'dependent_variables': 'Outcome / Dependent variable(s)',
+                                    'survey_questions': 'Survey Questions',
+                                    'analysis_equations': 'Analysis Equations',
+                                    'main_effects': 'Main Effects',
+                                    'moderators': 'Moderators',
+                                    'moderation_results': 'Moderation Results',
+                                    'sociocultural_context': 'Socio-cultural context',
+                                    'political_context': 'Political context',
+                                    'platform_technological_context': 'Platform / Technological context',
+                                    'temporal_context': 'Temporal context'
+                                } %}
+                                {% for feature_name in feature_order %}
+                                    {% set feature_value = paper.extracted_features.get(feature_name, '') %}
+                                    {% if feature_value and feature_value != 'NOT SPECIFIED' %}
+                                        {% set feature_label = feature_labels.get(feature_name, feature_name.replace('_', ' ').title()) %}
                                         {% set verbatim_key = feature_name + '_verbatim' %}
                                         {% set verbatim_value = paper.extracted_features.get(verbatim_key, '') %}
                                         {% set has_verbatim = verbatim_value and verbatim_value != 'NOT SPECIFIED' %}

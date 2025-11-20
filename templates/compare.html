@@ -334,17 +334,6 @@
 
                 <div class="table-row section-content" data-section="measurement-analysis">
                     <div class="feature-cell">
-                        <div class="feature-name">Survey Measures (treatment variables)</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.survey_questions, paper.extracted_features.survey_questions_verbatim, 'survey_questions_treatment', 'Survey Measures (treatment variables)', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="measurement-analysis">
-                    <div class="feature-cell">
                         <div class="feature-name">Outcome / Dependent variable(s)</div>
                     </div>
                     {% for paper in papers %}
@@ -356,22 +345,22 @@
 
                 <div class="table-row section-content" data-section="measurement-analysis">
                     <div class="feature-cell">
-                        <div class="feature-name">Survey Measures (outcome variables)</div>
+                        <div class="feature-name">Survey Questions</div>
                     </div>
                     {% for paper in papers %}
                     <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.survey_questions, paper.extracted_features.survey_questions_verbatim, 'survey_questions_outcome', 'Survey Measures (outcome variables)', loop.index) }}
+                        {{ render_feature_cell(paper, paper.extracted_features.survey_questions, paper.extracted_features.survey_questions_verbatim, 'survey_questions', 'Survey Questions', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
 
                 <div class="table-row section-content" data-section="measurement-analysis">
                     <div class="feature-cell">
-                        <div class="feature-name">Analysis (estimating equation)</div>
+                        <div class="feature-name">Analysis Equations</div>
                     </div>
                     {% for paper in papers %}
                     <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.analysis_equations, paper.extracted_features.analysis_equations_verbatim, 'analysis_equations', 'Analysis (estimating equation)', loop.index) }}
+                        {{ render_feature_cell(paper, paper.extracted_features.analysis_equations, paper.extracted_features.analysis_equations_verbatim, 'analysis_equations', 'Analysis Equations', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -723,8 +712,8 @@
         const features = [
             'Authors', 'Title', 'Journal', 'Year', 'Citation', 'Abstract',
             'Sample Size', 'Country / Region', 'Recruitment Source', 'Demographics', 'Incentive',
-            'Treatment / Independent variable(s)', 'Survey Measures (treatment variables)',
-            'Outcome / Dependent variable(s)', 'Survey Measures (outcome variables)', 'Analysis (estimating equation)',
+            'Treatment / Independent variable(s)',
+            'Outcome / Dependent variable(s)', 'Survey Questions', 'Analysis Equations',
             'Main Effects', 'Moderators', 'Moderation Results',
             'Socio-cultural context', 'Political context', 'Platform / Technological context', 'Temporal context'
         ];
@@ -781,16 +770,13 @@
                     case 'Treatment / Independent variable(s)':
                         value = paper.extracted_features.independent_variables || '';
                         break;
-                    case 'Survey Measures (treatment variables)':
-                        value = paper.extracted_features.survey_questions || '';
-                        break;
                     case 'Outcome / Dependent variable(s)':
                         value = paper.extracted_features.dependent_variables || '';
                         break;
-                    case 'Survey Measures (outcome variables)':
+                    case 'Survey Questions':
                         value = paper.extracted_features.survey_questions || '';
                         break;
-                    case 'Analysis (estimating equation)':
+                    case 'Analysis Equations':
                         value = paper.extracted_features.analysis_equations || '';
                         break;
                     case 'Main Effects':
