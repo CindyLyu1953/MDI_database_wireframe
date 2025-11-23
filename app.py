@@ -1,3 +1,13 @@
+from pathlib import Path
+
+BASE_DIR = Path(__file__).resolve().parent
+DATA_DIR = BASE_DIR / "data"
+INPUT_CSV = DATA_DIR / "input" / "paper_extracted.csv"
+TRACKING_DB = DATA_DIR / "output" / "tracking.db"
+UPLOAD_DIR = DATA_DIR / "user_uploads"
+UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
+TRACKING_DB.parent.mkdir(parents=True, exist_ok=True)
+
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for
 import csv
 import os
@@ -48,12 +58,22 @@ def load_papers_from_csv():
     global papers_data
     papers_data = []
 
-    # Only allow paper_extracted.csv
-    csv_file = os.path.join("data", "input", "paper_extracted.csv")
+    # Try multiple possible filenames
+    possible_files = [
+        os.path.join("data", "input", "paper_extracted.csv"),
+        os.path.join("data", "input", "papers_extracted.csv"),
+        os.path.join("data", "input", "papers.csv"),
+    ]
 
-    if not os.path.exists(csv_file):
+    csv_file = None
+    for file_path in possible_files:
+        if os.path.exists(file_path):
+            csv_file = file_path
+            break
+
+    if not csv_file:
         print(
-            "Error: paper_extracted.csv not found in data/input/. Please ensure the file exists."
+            "Error: No CSV file found in data/input/. Please ensure a CSV file exists."
         )
         return
 
@@ -328,13 +348,6 @@ def profile():
     return render_template("profile.html")
 
 
-@app.route("/database")
-def database():
-    """Display database information and list of all papers"""
-    paper_count = len(papers_data)
-    return render_template("database.html", paper_count=paper_count, papers=papers_data)
-
-
 # API endpoints
 @app.route("/api/papers")
 def api_papers():
@@ -565,8 +578,8 @@ def get_search_logs():
         cursor = conn.cursor()
         cursor.execute(
             """
-            SELECT * FROM search_logs 
-            ORDER BY timestamp DESC 
+            SELECT * FROM search_logs
+            ORDER BY timestamp DESC
             LIMIT 1000
         """
         )
@@ -586,8 +599,8 @@ def get_compare_view_logs():
         cursor = conn.cursor()
         cursor.execute(
             """
-            SELECT * FROM compare_view_logs 
-            ORDER BY timestamp DESC 
+            SELECT * FROM compare_view_logs
+            ORDER BY timestamp DESC
             LIMIT 1000
         """
         )
@@ -607,8 +620,8 @@ def get_download_logs():
         cursor = conn.cursor()
         cursor.execute(
             """
-            SELECT * FROM download_logs 
-            ORDER BY timestamp DESC 
+            SELECT * FROM download_logs
+            ORDER BY timestamp DESC
             LIMIT 1000
         """
         )
@@ -640,7 +653,7 @@ def get_admin_stats():
         # Get recent activity (last 7 days)
         cursor.execute(
             """
-            SELECT COUNT(*) as count FROM search_logs 
+            SELECT COUNT(*) as count FROM search_logs
             WHERE timestamp >= datetime('now', '-7 days')
         """
         )
@@ -648,7 +661,7 @@ def get_admin_stats():
 
         cursor.execute(
             """
-            SELECT COUNT(*) as count FROM compare_view_logs 
+            SELECT COUNT(*) as count FROM compare_view_logs
             WHERE timestamp >= datetime('now', '-7 days')
         """
         )
@@ -656,7 +669,7 @@ def get_admin_stats():
 
         cursor.execute(
             """
-            SELECT COUNT(*) as count FROM download_logs 
+            SELECT COUNT(*) as count FROM download_logs
             WHERE timestamp >= datetime('now', '-7 days')
         """
         )
@@ -665,11 +678,11 @@ def get_admin_stats():
         # Get top search queries
         cursor.execute(
             """
-            SELECT search_query, COUNT(*) as count 
-            FROM search_logs 
-            WHERE search_query != '' 
-            GROUP BY search_query 
-            ORDER BY count DESC 
+            SELECT search_query, COUNT(*) as count
+            FROM search_logs
+            WHERE search_query != ''
+            GROUP BY search_query
+            ORDER BY count DESC
             LIMIT 10
         """
         )
@@ -702,9 +715,9 @@ def my_requests():
 
         cursor.execute(
             """
-            SELECT id, timestamp, request_name, institution, email, paper_info, 
+            SELECT id, timestamp, request_name, institution, email, paper_info,
                    change_requests, pdf_filename, status
-            FROM upload_requests 
+            FROM upload_requests
             ORDER BY timestamp DESC
         """
         )
@@ -765,7 +778,7 @@ def upload_request():
 
         cursor.execute(
             """
-            INSERT INTO upload_requests 
+            INSERT INTO upload_requests
             (timestamp, request_name, institution, email, paper_info, change_requests, pdf_filename)
             VALUES (?, ?, ?, ?, ?, ?, ?)
         """,
@@ -801,9 +814,9 @@ def get_admin_requests():
 
         cursor.execute(
             """
-            SELECT id, timestamp, request_name, institution, email, paper_info, 
+            SELECT id, timestamp, request_name, institution, email, paper_info,
                    change_requests, pdf_filename, status
-            FROM upload_requests 
+            FROM upload_requests
             ORDER BY timestamp DESC
         """
         )
@@ -861,10 +874,9 @@ def update_request_status(request_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+load_papers_from_csv()
 
 if __name__ == "__main__":
-    # Load data on startup
-    load_papers_from_csv()
+    app.run(debug=True, host="127.0.0.1", port=5001)
 
-    # Run the app
-    app.run(debug=True, host="0.0.0.0", port=5001)
+
