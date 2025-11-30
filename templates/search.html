@@ -132,7 +132,12 @@
                             <strong>Journal:</strong> {{ paper.journal }}, {{ paper.year }}
                         </div>
                         <div class="result-citations">
-                            <strong>Citations:</strong> {{ paper.citations }} times
+                            {% set citation_url = paper.citation|extract_url %}
+                            {% if citation_url %}
+                                <strong>Link:</strong> <a href="{{ citation_url }}" target="_blank" rel="noopener noreferrer" class="citation-link">View Article</a>
+                            {% else %}
+                                <strong>Link:</strong> Not available
+                            {% endif %}
                         </div>
                     </div>
 

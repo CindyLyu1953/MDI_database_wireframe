@@ -42,8 +42,22 @@ def truncate_words(value, limit=30):
     return " ".join(words[:limit]) + "..."
 
 
+def extract_url(value):
+    """Extract URL from citation text."""
+    import re
+    if not value:
+        return ""
+    # Look for URLs starting with http:// or https://
+    url_pattern = r'https?://[^\s\)]+(?:\([^\)]*\))?'
+    match = re.search(url_pattern, str(value))
+    if match:
+        return match.group(0).rstrip('.,;:')
+    return ""
+
+
 app.jinja_env.filters["word_count"] = word_count
 app.jinja_env.filters["truncate_words"] = truncate_words
+app.jinja_env.filters["extract_url"] = extract_url
 
 # Admin credentials (in production, use environment variables or a proper auth system)
 ADMIN_USERNAME = "admin"
