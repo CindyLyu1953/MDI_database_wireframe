@@ -362,6 +362,13 @@ def profile():
     return render_template("profile.html")
 
 
+@app.route("/database")
+def database():
+    """Database page showing all papers"""
+    paper_count = len(papers_data)
+    return render_template("database.html", papers=papers_data, paper_count=paper_count)
+
+
 # API endpoints
 @app.route("/api/papers")
 def api_papers():
