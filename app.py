@@ -8,7 +8,7 @@ UPLOAD_DIR = DATA_DIR / "user_uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 TRACKING_DB.parent.mkdir(parents=True, exist_ok=True)
 
-from flask import Flask, render_template, request, jsonify, session, redirect, url_for
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for, send_from_directory
 import csv
 import os
 import json
@@ -765,6 +765,14 @@ def my_requests():
 
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+
+@app.route("/uploads/<filename>")
+@require_admin
+def download_upload(filename):
+    """Serve uploaded PDF files (admin only)"""
+    upload_dir = os.path.join("data", "user_uploads")
+    return send_from_directory(upload_dir, filename, as_attachment=True)
 
 
 @app.route("/api/upload-request", methods=["POST"])
