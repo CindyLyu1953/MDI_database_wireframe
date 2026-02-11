@@ -1,0 +1,68 @@
+
+============================================================
+DATA SUMMARY
+============================================================
+
+Total records: 520
+Countries: 5
+Year range: 2010 - 2025
+Indicators: 8
+
+--- Records by Indicator ---
+  Covid Period: 80
+  Election Period: 80
+  Governance Quality: 75
+  Internet Penetration: 72
+  Liberal Democracy: 75
+  Polarization: 75
+  Trust in News: 33
+  Internet Freedom: 30
+
+--- Records by Country ---
+  Bosnia and Herzegovina: 92
+  Cyprus: 91
+  Denmark: 103
+  United Kingdom: 117
+  United States: 117
+
+--- Data Coverage Check ---
+  Denmark - Liberal Democracy: 15 years (2010-2024)
+  Missing: Denmark - Internet Freedom
+  Denmark - Governance Quality: 15 years (2010-2024)
+  Denmark - Polarization: 15 years (2010-2024)
+  Denmark - Internet Penetration: 15 years (2010-2024)
+  Denmark - Election Period: 16 years (2010-2025)
+  Denmark - Covid Period: 16 years (2010-2025)
+  Denmark - Trust in News: 11 years (2015-2025)
+  United States - Liberal Democracy: 15 years (2010-2024)
+  United States - Internet Freedom: 15 years (2011-2025)
+  United States - Governance Quality: 15 years (2010-2024)
+  United States - Polarization: 15 years (2010-2024)
+  United States - Internet Penetration: 14 years (2010-2023)
+  United States - Election Period: 16 years (2010-2025)
+  United States - Covid Period: 16 years (2010-2025)
+  United States - Trust in News: 11 years (2015-2025)
+  United Kingdom - Liberal Democracy: 15 years (2010-2024)
+  United Kingdom - Internet Freedom: 15 years (2011-2025)
+  United Kingdom - Governance Quality: 15 years (2010-2024)
+  United Kingdom - Polarization: 15 years (2010-2024)
+  United Kingdom - Internet Penetration: 14 years (2010-2023)
+  United Kingdom - Election Period: 16 years (2010-2025)
+  United Kingdom - Covid Period: 16 years (2010-2025)
+  United Kingdom - Trust in News: 11 years (2015-2025)
+  Bosnia and Herzegovina - Liberal Democracy: 15 years (2010-2024)
+  Missing: Bosnia and Herzegovina - Internet Freedom
+  Bosnia and Herzegovina - Governance Quality: 15 years (2010-2024)
+  Bosnia and Herzegovina - Polarization: 15 years (2010-2024)
+  Bosnia and Herzegovina - Internet Penetration: 15 years (2010-2024)
+  Bosnia and Herzegovina - Election Period: 16 years (2010-2025)
+  Bosnia and Herzegovina - Covid Period: 16 years (2010-2025)
+  Missing: Bosnia and Herzegovina - Trust in News
+  Cyprus - Liberal Democracy: 15 years (2010-2024)
+  Missing: Cyprus - Internet Freedom
+  Cyprus - Governance Quality: 15 years (2010-2024)
+  Cyprus - Polarization: 15 years (2010-2024)
+  Cyprus - Internet Penetration: 14 years (2010-2023)
+  Cyprus - Election Period: 16 years (2010-2025)
+  Cyprus - Covid Period: 16 years (2010-2025)
+  Missing: Cyprus - Trust in News

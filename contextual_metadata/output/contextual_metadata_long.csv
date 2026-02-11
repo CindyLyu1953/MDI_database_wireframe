@@ -1,0 +1,521 @@
+country,year,indicator,value,source
+Bosnia and Herzegovina,2010,Covid Period,0.0,Manual
+Bosnia and Herzegovina,2010,Election Period,1.0,Manual
+Bosnia and Herzegovina,2010,Governance Quality,55.068748,WGI
+Bosnia and Herzegovina,2010,Internet Penetration,42.75,World Bank
+Bosnia and Herzegovina,2010,Liberal Democracy,0.378,V-Dem
+Bosnia and Herzegovina,2010,Polarization,0.416,V-Dem
+Bosnia and Herzegovina,2011,Covid Period,0.0,Manual
+Bosnia and Herzegovina,2011,Election Period,0.0,Manual
+Bosnia and Herzegovina,2011,Governance Quality,54.4509441,WGI
+Bosnia and Herzegovina,2011,Internet Penetration,43.89,World Bank
+Bosnia and Herzegovina,2011,Liberal Democracy,0.381,V-Dem
+Bosnia and Herzegovina,2011,Polarization,0.416,V-Dem
+Bosnia and Herzegovina,2012,Covid Period,0.0,Manual
+Bosnia and Herzegovina,2012,Election Period,0.0,Manual
+Bosnia and Herzegovina,2012,Governance Quality,55.8057131,WGI
+Bosnia and Herzegovina,2012,Internet Penetration,45.06,World Bank
+Bosnia and Herzegovina,2012,Liberal Democracy,0.38,V-Dem
+Bosnia and Herzegovina,2012,Polarization,0.418,V-Dem
+Bosnia and Herzegovina,2013,Covid Period,0.0,Manual
+Bosnia and Herzegovina,2013,Election Period,0.0,Manual
+Bosnia and Herzegovina,2013,Governance Quality,58.148534899999994,WGI
+Bosnia and Herzegovina,2013,Internet Penetration,48.52,World Bank
+Bosnia and Herzegovina,2013,Liberal Democracy,0.376,V-Dem
+Bosnia and Herzegovina,2013,Polarization,0.403,V-Dem
+Bosnia and Herzegovina,2014,Covid Period,0.0,Manual
+Bosnia and Herzegovina,2014,Election Period,1.0,Manual
+Bosnia and Herzegovina,2014,Governance Quality,64.8606336,WGI
+Bosnia and Herzegovina,2014,Internet Penetration,49.92,World Bank
+Bosnia and Herzegovina,2014,Liberal Democracy,0.375,V-Dem
+Bosnia and Herzegovina,2014,Polarization,0.397,V-Dem
+Bosnia and Herzegovina,2015,Covid Period,0.0,Manual
+Bosnia and Herzegovina,2015,Election Period,0.0,Manual
+Bosnia and Herzegovina,2015,Governance Quality,61.5368736,WGI
+Bosnia and Herzegovina,2015,Internet Penetration,52.6,World Bank
+Bosnia and Herzegovina,2015,Liberal Democracy,0.369,V-Dem
+Bosnia and Herzegovina,2015,Polarization,0.345,V-Dem
+Bosnia and Herzegovina,2016,Covid Period,0.0,Manual
+Bosnia and Herzegovina,2016,Election Period,0.0,Manual
+Bosnia and Herzegovina,2016,Governance Quality,59.5572972,WGI
+Bosnia and Herzegovina,2016,Internet Penetration,60.26,World Bank
+Bosnia and Herzegovina,2016,Liberal Democracy,0.364,V-Dem
+Bosnia and Herzegovina,2016,Polarization,0.362,V-Dem
+Bosnia and Herzegovina,2017,Covid Period,0.0,Manual
+Bosnia and Herzegovina,2017,Election Period,0.0,Manual
+Bosnia and Herzegovina,2017,Governance Quality,60.5803364,WGI
+Bosnia and Herzegovina,2017,Internet Penetration,64.89,World Bank
+Bosnia and Herzegovina,2017,Liberal Democracy,0.364,V-Dem
+Bosnia and Herzegovina,2017,Polarization,0.369,V-Dem
+Bosnia and Herzegovina,2018,Covid Period,0.0,Manual
+Bosnia and Herzegovina,2018,Election Period,1.0,Manual
+Bosnia and Herzegovina,2018,Governance Quality,60.9490035,WGI
+Bosnia and Herzegovina,2018,Internet Penetration,70.12,World Bank
+Bosnia and Herzegovina,2018,Liberal Democracy,0.347,V-Dem
+Bosnia and Herzegovina,2018,Polarization,0.343,V-Dem
+Bosnia and Herzegovina,2019,Covid Period,1.0,Manual
+Bosnia and Herzegovina,2019,Election Period,0.0,Manual
+Bosnia and Herzegovina,2019,Governance Quality,60.6128666,WGI
+Bosnia and Herzegovina,2019,Internet Penetration,69.95,World Bank
+Bosnia and Herzegovina,2019,Liberal Democracy,0.347,V-Dem
+Bosnia and Herzegovina,2019,Polarization,0.36,V-Dem
+Bosnia and Herzegovina,2020,Covid Period,1.0,Manual
+Bosnia and Herzegovina,2020,Election Period,0.0,Manual
+Bosnia and Herzegovina,2020,Governance Quality,61.298956,WGI
+Bosnia and Herzegovina,2020,Internet Penetration,73.21,World Bank
+Bosnia and Herzegovina,2020,Liberal Democracy,0.34,V-Dem
+Bosnia and Herzegovina,2020,Polarization,0.332,V-Dem
+Bosnia and Herzegovina,2021,Covid Period,1.0,Manual
+Bosnia and Herzegovina,2021,Election Period,0.0,Manual
+Bosnia and Herzegovina,2021,Governance Quality,60.5871127,WGI
+Bosnia and Herzegovina,2021,Internet Penetration,75.68,World Bank
+Bosnia and Herzegovina,2021,Liberal Democracy,0.335,V-Dem
+Bosnia and Herzegovina,2021,Polarization,0.326,V-Dem
+Bosnia and Herzegovina,2022,Covid Period,1.0,Manual
+Bosnia and Herzegovina,2022,Election Period,1.0,Manual
+Bosnia and Herzegovina,2022,Governance Quality,61.657193,WGI
+Bosnia and Herzegovina,2022,Internet Penetration,78.85,World Bank
+Bosnia and Herzegovina,2022,Liberal Democracy,0.344,V-Dem
+Bosnia and Herzegovina,2022,Polarization,0.334,V-Dem
+Bosnia and Herzegovina,2023,Covid Period,1.0,Manual
+Bosnia and Herzegovina,2023,Election Period,0.0,Manual
+Bosnia and Herzegovina,2023,Governance Quality,62.4793902,WGI
+Bosnia and Herzegovina,2023,Internet Penetration,83.38,World Bank
+Bosnia and Herzegovina,2023,Liberal Democracy,0.337,V-Dem
+Bosnia and Herzegovina,2023,Polarization,0.344,V-Dem
+Bosnia and Herzegovina,2024,Covid Period,0.0,Manual
+Bosnia and Herzegovina,2024,Election Period,0.0,Manual
+Bosnia and Herzegovina,2024,Governance Quality,57.3354627,WGI
+Bosnia and Herzegovina,2024,Internet Penetration,86.1,World Bank
+Bosnia and Herzegovina,2024,Liberal Democracy,0.342,V-Dem
+Bosnia and Herzegovina,2024,Polarization,0.343,V-Dem
+Bosnia and Herzegovina,2025,Covid Period,0.0,Manual
+Bosnia and Herzegovina,2025,Election Period,0.0,Manual
+Cyprus,2010,Covid Period,0.0,Manual
+Cyprus,2010,Election Period,0.0,Manual
+Cyprus,2010,Governance Quality,78.98844439999999,WGI
+Cyprus,2010,Internet Penetration,52.99,World Bank
+Cyprus,2010,Liberal Democracy,0.736,V-Dem
+Cyprus,2010,Polarization,0.753,V-Dem
+Cyprus,2011,Covid Period,0.0,Manual
+Cyprus,2011,Election Period,1.0,Manual
+Cyprus,2011,Governance Quality,79.287685,WGI
+Cyprus,2011,Internet Penetration,56.86,World Bank
+Cyprus,2011,Liberal Democracy,0.735,V-Dem
+Cyprus,2011,Polarization,0.749,V-Dem
+Cyprus,2012,Covid Period,0.0,Manual
+Cyprus,2012,Election Period,0.0,Manual
+Cyprus,2012,Governance Quality,79.4455839,WGI
+Cyprus,2012,Internet Penetration,60.69,World Bank
+Cyprus,2012,Liberal Democracy,0.733,V-Dem
+Cyprus,2012,Polarization,0.752,V-Dem
+Cyprus,2013,Covid Period,0.0,Manual
+Cyprus,2013,Election Period,1.0,Manual
+Cyprus,2013,Governance Quality,78.13100779999999,WGI
+Cyprus,2013,Internet Penetration,65.45,World Bank
+Cyprus,2013,Liberal Democracy,0.733,V-Dem
+Cyprus,2013,Polarization,0.729,V-Dem
+Cyprus,2014,Covid Period,0.0,Manual
+Cyprus,2014,Election Period,0.0,Manual
+Cyprus,2014,Governance Quality,77.9047176,WGI
+Cyprus,2014,Internet Penetration,69.33,World Bank
+Cyprus,2014,Liberal Democracy,0.732,V-Dem
+Cyprus,2014,Polarization,0.729,V-Dem
+Cyprus,2015,Covid Period,0.0,Manual
+Cyprus,2015,Election Period,0.0,Manual
+Cyprus,2015,Governance Quality,77.5634733,WGI
+Cyprus,2015,Internet Penetration,71.72,World Bank
+Cyprus,2015,Liberal Democracy,0.74,V-Dem
+Cyprus,2015,Polarization,0.739,V-Dem
+Cyprus,2016,Covid Period,0.0,Manual
+Cyprus,2016,Election Period,1.0,Manual
+Cyprus,2016,Governance Quality,78.9998839,WGI
+Cyprus,2016,Internet Penetration,75.9,World Bank
+Cyprus,2016,Liberal Democracy,0.739,V-Dem
+Cyprus,2016,Polarization,0.736,V-Dem
+Cyprus,2017,Covid Period,0.0,Manual
+Cyprus,2017,Election Period,0.0,Manual
+Cyprus,2017,Governance Quality,77.40415159999999,WGI
+Cyprus,2017,Internet Penetration,80.74,World Bank
+Cyprus,2017,Liberal Democracy,0.733,V-Dem
+Cyprus,2017,Polarization,0.707,V-Dem
+Cyprus,2018,Covid Period,0.0,Manual
+Cyprus,2018,Election Period,1.0,Manual
+Cyprus,2018,Governance Quality,77.1017013,WGI
+Cyprus,2018,Internet Penetration,84.43,World Bank
+Cyprus,2018,Liberal Democracy,0.723,V-Dem
+Cyprus,2018,Polarization,0.722,V-Dem
+Cyprus,2019,Covid Period,1.0,Manual
+Cyprus,2019,Election Period,0.0,Manual
+Cyprus,2019,Governance Quality,78.5331873,WGI
+Cyprus,2019,Internet Penetration,86.06,World Bank
+Cyprus,2019,Liberal Democracy,0.715,V-Dem
+Cyprus,2019,Polarization,0.713,V-Dem
+Cyprus,2020,Covid Period,1.0,Manual
+Cyprus,2020,Election Period,0.0,Manual
+Cyprus,2020,Governance Quality,73.6462217,WGI
+Cyprus,2020,Internet Penetration,90.8,World Bank
+Cyprus,2020,Liberal Democracy,0.693,V-Dem
+Cyprus,2020,Polarization,0.634,V-Dem
+Cyprus,2021,Covid Period,1.0,Manual
+Cyprus,2021,Election Period,1.0,Manual
+Cyprus,2021,Governance Quality,74.0794418,WGI
+Cyprus,2021,Internet Penetration,90.76,World Bank
+Cyprus,2021,Liberal Democracy,0.657,V-Dem
+Cyprus,2021,Polarization,0.659,V-Dem
+Cyprus,2022,Covid Period,1.0,Manual
+Cyprus,2022,Election Period,0.0,Manual
+Cyprus,2022,Governance Quality,72.40480099999999,WGI
+Cyprus,2022,Internet Penetration,89.6,World Bank
+Cyprus,2022,Liberal Democracy,0.651,V-Dem
+Cyprus,2022,Polarization,0.645,V-Dem
+Cyprus,2023,Covid Period,1.0,Manual
+Cyprus,2023,Election Period,1.0,Manual
+Cyprus,2023,Governance Quality,72.6175899,WGI
+Cyprus,2023,Internet Penetration,91.22,World Bank
+Cyprus,2023,Liberal Democracy,0.645,V-Dem
+Cyprus,2023,Polarization,0.655,V-Dem
+Cyprus,2024,Covid Period,0.0,Manual
+Cyprus,2024,Election Period,0.0,Manual
+Cyprus,2024,Governance Quality,72.4855218,WGI
+Cyprus,2024,Liberal Democracy,0.651,V-Dem
+Cyprus,2024,Polarization,0.645,V-Dem
+Cyprus,2025,Covid Period,0.0,Manual
+Cyprus,2025,Election Period,0.0,Manual
+Denmark,2010,Covid Period,0.0,Manual
+Denmark,2010,Election Period,0.0,Manual
+Denmark,2010,Governance Quality,85.8853352,WGI
+Denmark,2010,Internet Penetration,88.72,World Bank
+Denmark,2010,Liberal Democracy,0.897,V-Dem
+Denmark,2010,Polarization,0.874,V-Dem
+Denmark,2011,Covid Period,0.0,Manual
+Denmark,2011,Election Period,1.0,Manual
+Denmark,2011,Governance Quality,85.62524739999999,WGI
+Denmark,2011,Internet Penetration,89.81,World Bank
+Denmark,2011,Liberal Democracy,0.896,V-Dem
+Denmark,2011,Polarization,0.884,V-Dem
+Denmark,2012,Covid Period,0.0,Manual
+Denmark,2012,Election Period,0.0,Manual
+Denmark,2012,Governance Quality,83.7172224,WGI
+Denmark,2012,Internet Penetration,92.26,World Bank
+Denmark,2012,Liberal Democracy,0.897,V-Dem
+Denmark,2012,Polarization,0.884,V-Dem
+Denmark,2013,Covid Period,0.0,Manual
+Denmark,2013,Election Period,0.0,Manual
+Denmark,2013,Governance Quality,83.32398169999999,WGI
+Denmark,2013,Internet Penetration,94.63,World Bank
+Denmark,2013,Liberal Democracy,0.896,V-Dem
+Denmark,2013,Polarization,0.881,V-Dem
+Denmark,2014,Covid Period,0.0,Manual
+Denmark,2014,Election Period,0.0,Manual
+Denmark,2014,Governance Quality,85.2102567,WGI
+Denmark,2014,Internet Penetration,95.99,World Bank
+Denmark,2014,Liberal Democracy,0.896,V-Dem
+Denmark,2014,Polarization,0.883,V-Dem
+Denmark,2015,Covid Period,0.0,Manual
+Denmark,2015,Election Period,1.0,Manual
+Denmark,2015,Governance Quality,83.3159021,WGI
+Denmark,2015,Internet Penetration,96.33,World Bank
+Denmark,2015,Liberal Democracy,0.896,V-Dem
+Denmark,2015,Polarization,0.882,V-Dem
+Denmark,2015,Trust in News,57.0,Reuters Institute
+Denmark,2016,Covid Period,0.0,Manual
+Denmark,2016,Election Period,0.0,Manual
+Denmark,2016,Governance Quality,81.8158814,WGI
+Denmark,2016,Internet Penetration,96.97,World Bank
+Denmark,2016,Liberal Democracy,0.894,V-Dem
+Denmark,2016,Polarization,0.881,V-Dem
+Denmark,2016,Trust in News,54.0,Reuters Institute
+Denmark,2017,Covid Period,0.0,Manual
+Denmark,2017,Election Period,0.0,Manual
+Denmark,2017,Governance Quality,81.5224092,WGI
+Denmark,2017,Internet Penetration,97.1,World Bank
+Denmark,2017,Liberal Democracy,0.893,V-Dem
+Denmark,2017,Polarization,0.88,V-Dem
+Denmark,2017,Trust in News,50.0,Reuters Institute
+Denmark,2018,Covid Period,0.0,Manual
+Denmark,2018,Election Period,0.0,Manual
+Denmark,2018,Governance Quality,83.00735379999999,WGI
+Denmark,2018,Internet Penetration,97.32,World Bank
+Denmark,2018,Liberal Democracy,0.893,V-Dem
+Denmark,2018,Polarization,0.877,V-Dem
+Denmark,2018,Trust in News,56.0,Reuters Institute
+Denmark,2019,Covid Period,1.0,Manual
+Denmark,2019,Election Period,1.0,Manual
+Denmark,2019,Governance Quality,81.242189,WGI
+Denmark,2019,Internet Penetration,98.05,World Bank
+Denmark,2019,Liberal Democracy,0.889,V-Dem
+Denmark,2019,Polarization,0.876,V-Dem
+Denmark,2019,Trust in News,57.0,Reuters Institute
+Denmark,2020,Covid Period,1.0,Manual
+Denmark,2020,Election Period,0.0,Manual
+Denmark,2020,Governance Quality,80.7263059,WGI
+Denmark,2020,Internet Penetration,96.55,World Bank
+Denmark,2020,Liberal Democracy,0.886,V-Dem
+Denmark,2020,Polarization,0.883,V-Dem
+Denmark,2020,Trust in News,56.0,Reuters Institute
+Denmark,2021,Covid Period,1.0,Manual
+Denmark,2021,Election Period,0.0,Manual
+Denmark,2021,Governance Quality,80.25911219999999,WGI
+Denmark,2021,Internet Penetration,98.87,World Bank
+Denmark,2021,Liberal Democracy,0.887,V-Dem
+Denmark,2021,Polarization,0.878,V-Dem
+Denmark,2021,Trust in News,59.0,Reuters Institute
+Denmark,2022,Covid Period,1.0,Manual
+Denmark,2022,Election Period,1.0,Manual
+Denmark,2022,Governance Quality,80.2709531,WGI
+Denmark,2022,Internet Penetration,97.86,World Bank
+Denmark,2022,Liberal Democracy,0.89,V-Dem
+Denmark,2022,Polarization,0.879,V-Dem
+Denmark,2022,Trust in News,58.0,Reuters Institute
+Denmark,2023,Covid Period,1.0,Manual
+Denmark,2023,Election Period,0.0,Manual
+Denmark,2023,Governance Quality,81.2779733,WGI
+Denmark,2023,Internet Penetration,98.78,World Bank
+Denmark,2023,Liberal Democracy,0.884,V-Dem
+Denmark,2023,Polarization,0.873,V-Dem
+Denmark,2023,Trust in News,57.0,Reuters Institute
+Denmark,2024,Covid Period,0.0,Manual
+Denmark,2024,Election Period,0.0,Manual
+Denmark,2024,Governance Quality,79.0280276,WGI
+Denmark,2024,Internet Penetration,99.77,World Bank
+Denmark,2024,Liberal Democracy,0.883,V-Dem
+Denmark,2024,Polarization,0.874,V-Dem
+Denmark,2024,Trust in News,57.0,Reuters Institute
+Denmark,2025,Covid Period,0.0,Manual
+Denmark,2025,Election Period,0.0,Manual
+Denmark,2025,Trust in News,56.0,Reuters Institute
+United Kingdom,2010,Covid Period,0.0,Manual
+United Kingdom,2010,Election Period,1.0,Manual
+United Kingdom,2010,Governance Quality,76.0365679,WGI
+United Kingdom,2010,Internet Penetration,85.0,World Bank
+United Kingdom,2010,Liberal Democracy,0.803,V-Dem
+United Kingdom,2010,Polarization,0.748,V-Dem
+United Kingdom,2011,Covid Period,0.0,Manual
+United Kingdom,2011,Election Period,0.0,Manual
+United Kingdom,2011,Governance Quality,73.2702147,WGI
+United Kingdom,2011,Internet Freedom,75.0,Freedom House
+United Kingdom,2011,Internet Penetration,85.38,World Bank
+United Kingdom,2011,Liberal Democracy,0.803,V-Dem
+United Kingdom,2011,Polarization,0.748,V-Dem
+United Kingdom,2012,Covid Period,0.0,Manual
+United Kingdom,2012,Election Period,0.0,Manual
+United Kingdom,2012,Governance Quality,73.8956575,WGI
+United Kingdom,2012,Internet Freedom,75.0,Freedom House
+United Kingdom,2012,Internet Penetration,87.48,World Bank
+United Kingdom,2012,Liberal Democracy,0.804,V-Dem
+United Kingdom,2012,Polarization,0.749,V-Dem
+United Kingdom,2013,Covid Period,0.0,Manual
+United Kingdom,2013,Election Period,0.0,Manual
+United Kingdom,2013,Governance Quality,73.7518389,WGI
+United Kingdom,2013,Internet Freedom,76.0,Freedom House
+United Kingdom,2013,Internet Penetration,89.84,World Bank
+United Kingdom,2013,Liberal Democracy,0.799,V-Dem
+United Kingdom,2013,Polarization,0.74,V-Dem
+United Kingdom,2014,Covid Period,0.0,Manual
+United Kingdom,2014,Election Period,0.0,Manual
+United Kingdom,2014,Governance Quality,75.180368,WGI
+United Kingdom,2014,Internet Freedom,76.0,Freedom House
+United Kingdom,2014,Internet Penetration,91.61,World Bank
+United Kingdom,2014,Liberal Democracy,0.8,V-Dem
+United Kingdom,2014,Polarization,0.739,V-Dem
+United Kingdom,2015,Covid Period,0.0,Manual
+United Kingdom,2015,Election Period,1.0,Manual
+United Kingdom,2015,Governance Quality,75.0691258,WGI
+United Kingdom,2015,Internet Freedom,76.0,Freedom House
+United Kingdom,2015,Internet Penetration,92.0,World Bank
+United Kingdom,2015,Liberal Democracy,0.791,V-Dem
+United Kingdom,2015,Polarization,0.733,V-Dem
+United Kingdom,2015,Trust in News,51.0,Reuters Institute
+United Kingdom,2016,Covid Period,0.0,Manual
+United Kingdom,2016,Election Period,0.0,Manual
+United Kingdom,2016,Governance Quality,73.5786913,WGI
+United Kingdom,2016,Internet Freedom,77.0,Freedom House
+United Kingdom,2016,Internet Penetration,94.78,World Bank
+United Kingdom,2016,Liberal Democracy,0.788,V-Dem
+United Kingdom,2016,Polarization,0.73,V-Dem
+United Kingdom,2016,Trust in News,50.0,Reuters Institute
+United Kingdom,2017,Covid Period,0.0,Manual
+United Kingdom,2017,Election Period,1.0,Manual
+United Kingdom,2017,Governance Quality,73.42161399999999,WGI
+United Kingdom,2017,Internet Freedom,76.0,Freedom House
+United Kingdom,2017,Internet Penetration,90.42,World Bank
+United Kingdom,2017,Liberal Democracy,0.804,V-Dem
+United Kingdom,2017,Polarization,0.741,V-Dem
+United Kingdom,2017,Trust in News,43.0,Reuters Institute
+United Kingdom,2018,Covid Period,0.0,Manual
+United Kingdom,2018,Election Period,0.0,Manual
+United Kingdom,2018,Governance Quality,70.72153229999999,WGI
+United Kingdom,2018,Internet Freedom,77.0,Freedom House
+United Kingdom,2018,Internet Penetration,90.69,World Bank
+United Kingdom,2018,Liberal Democracy,0.809,V-Dem
+United Kingdom,2018,Polarization,0.751,V-Dem
+United Kingdom,2018,Trust in News,42.0,Reuters Institute
+United Kingdom,2019,Covid Period,1.0,Manual
+United Kingdom,2019,Election Period,1.0,Manual
+United Kingdom,2019,Governance Quality,75.59929939999999,WGI
+United Kingdom,2019,Internet Freedom,77.0,Freedom House
+United Kingdom,2019,Internet Penetration,92.52,World Bank
+United Kingdom,2019,Liberal Democracy,0.787,V-Dem
+United Kingdom,2019,Polarization,0.719,V-Dem
+United Kingdom,2019,Trust in News,40.0,Reuters Institute
+United Kingdom,2020,Covid Period,1.0,Manual
+United Kingdom,2020,Election Period,0.0,Manual
+United Kingdom,2020,Governance Quality,74.6097896,WGI
+United Kingdom,2020,Internet Freedom,78.0,Freedom House
+United Kingdom,2020,Internet Penetration,94.82,World Bank
+United Kingdom,2020,Liberal Democracy,0.8,V-Dem
+United Kingdom,2020,Polarization,0.748,V-Dem
+United Kingdom,2020,Trust in News,35.0,Reuters Institute
+United Kingdom,2021,Covid Period,1.0,Manual
+United Kingdom,2021,Election Period,0.0,Manual
+United Kingdom,2021,Governance Quality,73.3482195,WGI
+United Kingdom,2021,Internet Freedom,78.0,Freedom House
+United Kingdom,2021,Internet Penetration,96.2,World Bank
+United Kingdom,2021,Liberal Democracy,0.782,V-Dem
+United Kingdom,2021,Polarization,0.764,V-Dem
+United Kingdom,2021,Trust in News,36.0,Reuters Institute
+United Kingdom,2022,Covid Period,1.0,Manual
+United Kingdom,2022,Election Period,0.0,Manual
+United Kingdom,2022,Governance Quality,72.1751474,WGI
+United Kingdom,2022,Internet Freedom,79.0,Freedom House
+United Kingdom,2022,Internet Penetration,96.3,World Bank
+United Kingdom,2022,Liberal Democracy,0.766,V-Dem
+United Kingdom,2022,Polarization,0.735,V-Dem
+United Kingdom,2022,Trust in News,34.0,Reuters Institute
+United Kingdom,2023,Covid Period,1.0,Manual
+United Kingdom,2023,Election Period,0.0,Manual
+United Kingdom,2023,Governance Quality,72.1862761,WGI
+United Kingdom,2023,Internet Freedom,79.0,Freedom House
+United Kingdom,2023,Internet Penetration,96.3,World Bank
+United Kingdom,2023,Liberal Democracy,0.768,V-Dem
+United Kingdom,2023,Polarization,0.725,V-Dem
+United Kingdom,2023,Trust in News,33.0,Reuters Institute
+United Kingdom,2024,Covid Period,0.0,Manual
+United Kingdom,2024,Election Period,1.0,Manual
+United Kingdom,2024,Governance Quality,70.2964669,WGI
+United Kingdom,2024,Internet Freedom,78.0,Freedom House
+United Kingdom,2024,Liberal Democracy,0.752,V-Dem
+United Kingdom,2024,Polarization,0.723,V-Dem
+United Kingdom,2024,Trust in News,36.0,Reuters Institute
+United Kingdom,2025,Covid Period,0.0,Manual
+United Kingdom,2025,Election Period,0.0,Manual
+United Kingdom,2025,Internet Freedom,24.0,Freedom House
+United Kingdom,2025,Trust in News,35.0,Reuters Institute
+United States,2010,Covid Period,0.0,Manual
+United States,2010,Election Period,1.0,Manual
+United States,2010,Governance Quality,76.4226565,WGI
+United States,2010,Internet Penetration,71.69,World Bank
+United States,2010,Liberal Democracy,0.85,V-Dem
+United States,2010,Polarization,0.862,V-Dem
+United States,2011,Covid Period,0.0,Manual
+United States,2011,Election Period,0.0,Manual
+United States,2011,Governance Quality,76.5625941,WGI
+United States,2011,Internet Freedom,87.0,Freedom House
+United States,2011,Internet Penetration,69.73,World Bank
+United States,2011,Liberal Democracy,0.848,V-Dem
+United States,2011,Polarization,0.86,V-Dem
+United States,2012,Covid Period,0.0,Manual
+United States,2012,Election Period,1.0,Manual
+United States,2012,Governance Quality,76.4977694,WGI
+United States,2012,Internet Freedom,88.0,Freedom House
+United States,2012,Internet Penetration,74.7,World Bank
+United States,2012,Liberal Democracy,0.847,V-Dem
+United States,2012,Polarization,0.859,V-Dem
+United States,2013,Covid Period,0.0,Manual
+United States,2013,Election Period,0.0,Manual
+United States,2013,Governance Quality,75.7935684,WGI
+United States,2013,Internet Freedom,83.0,Freedom House
+United States,2013,Internet Penetration,71.4,World Bank
+United States,2013,Liberal Democracy,0.85,V-Dem
+United States,2013,Polarization,0.862,V-Dem
+United States,2014,Covid Period,0.0,Manual
+United States,2014,Election Period,1.0,Manual
+United States,2014,Governance Quality,77.3070017,WGI
+United States,2014,Internet Freedom,81.0,Freedom House
+United States,2014,Internet Penetration,73.0,World Bank
+United States,2014,Liberal Democracy,0.847,V-Dem
+United States,2014,Polarization,0.858,V-Dem
+United States,2015,Covid Period,0.0,Manual
+United States,2015,Election Period,0.0,Manual
+United States,2015,Governance Quality,77.2686791,WGI
+United States,2015,Internet Freedom,81.0,Freedom House
+United States,2015,Internet Penetration,74.55,World Bank
+United States,2015,Liberal Democracy,0.848,V-Dem
+United States,2015,Polarization,0.853,V-Dem
+United States,2015,Trust in News,32.0,Reuters Institute
+United States,2016,Covid Period,0.0,Manual
+United States,2016,Election Period,1.0,Manual
+United States,2016,Governance Quality,71.49570969999999,WGI
+United States,2016,Internet Freedom,82.0,Freedom House
+United States,2016,Internet Penetration,85.54,World Bank
+United States,2016,Liberal Democracy,0.832,V-Dem
+United States,2016,Polarization,0.813,V-Dem
+United States,2016,Trust in News,33.0,Reuters Institute
+United States,2017,Covid Period,0.0,Manual
+United States,2017,Election Period,0.0,Manual
+United States,2017,Governance Quality,67.7755797,WGI
+United States,2017,Internet Freedom,79.0,Freedom House
+United States,2017,Internet Penetration,87.27,World Bank
+United States,2017,Liberal Democracy,0.745,V-Dem
+United States,2017,Polarization,0.63,V-Dem
+United States,2017,Trust in News,38.0,Reuters Institute
+United States,2018,Covid Period,0.0,Manual
+United States,2018,Election Period,1.0,Manual
+United States,2018,Governance Quality,70.8565316,WGI
+United States,2018,Internet Freedom,78.0,Freedom House
+United States,2018,Internet Penetration,88.5,World Bank
+United States,2018,Liberal Democracy,0.742,V-Dem
+United States,2018,Polarization,0.629,V-Dem
+United States,2018,Trust in News,34.0,Reuters Institute
+United States,2019,Covid Period,1.0,Manual
+United States,2019,Election Period,0.0,Manual
+United States,2019,Governance Quality,66.8276892,WGI
+United States,2019,Internet Freedom,77.0,Freedom House
+United States,2019,Internet Penetration,89.43,World Bank
+United States,2019,Liberal Democracy,0.735,V-Dem
+United States,2019,Polarization,0.616,V-Dem
+United States,2019,Trust in News,32.0,Reuters Institute
+United States,2020,Covid Period,1.0,Manual
+United States,2020,Election Period,1.0,Manual
+United States,2020,Governance Quality,63.386694799999994,WGI
+United States,2020,Internet Freedom,76.0,Freedom House
+United States,2020,Internet Penetration,90.34,World Bank
+United States,2020,Liberal Democracy,0.725,V-Dem
+United States,2020,Polarization,0.593,V-Dem
+United States,2020,Trust in News,30.0,Reuters Institute
+United States,2021,Covid Period,1.0,Manual
+United States,2021,Election Period,0.0,Manual
+United States,2021,Governance Quality,63.735279,WGI
+United States,2021,Internet Freedom,75.0,Freedom House
+United States,2021,Internet Penetration,91.27,World Bank
+United States,2021,Liberal Democracy,0.752,V-Dem
+United States,2021,Polarization,0.708,V-Dem
+United States,2021,Trust in News,29.0,Reuters Institute
+United States,2022,Covid Period,1.0,Manual
+United States,2022,Election Period,1.0,Manual
+United States,2022,Governance Quality,63.1167764,WGI
+United States,2022,Internet Freedom,76.0,Freedom House
+United States,2022,Internet Penetration,92.2,World Bank
+United States,2022,Liberal Democracy,0.763,V-Dem
+United States,2022,Polarization,0.718,V-Dem
+United States,2022,Trust in News,26.0,Reuters Institute
+United States,2023,Covid Period,1.0,Manual
+United States,2023,Election Period,0.0,Manual
+United States,2023,Governance Quality,62.5953145,WGI
+United States,2023,Internet Freedom,76.0,Freedom House
+United States,2023,Internet Penetration,93.14,World Bank
+United States,2023,Liberal Democracy,0.771,V-Dem
+United States,2023,Polarization,0.72,V-Dem
+United States,2023,Trust in News,32.0,Reuters Institute
+United States,2024,Covid Period,0.0,Manual
+United States,2024,Election Period,1.0,Manual
+United States,2024,Governance Quality,64.2697196,WGI
+United States,2024,Internet Freedom,76.0,Freedom House
+United States,2024,Liberal Democracy,0.748,V-Dem
+United States,2024,Polarization,0.739,V-Dem
+United States,2024,Trust in News,32.0,Reuters Institute
+United States,2025,Covid Period,0.0,Manual
+United States,2025,Election Period,0.0,Manual
+United States,2025,Internet Freedom,27.0,Freedom House
+United States,2025,Trust in News,30.0,Reuters Institute

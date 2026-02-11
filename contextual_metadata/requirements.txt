@@ -1,0 +1,20 @@
+# Data extraction dependencies
+pandas>=2.0.0
+openpyxl>=3.1.0  # For Excel file reading
+xlrd>=2.0.0       # For older Excel formats
+pycountry>=22.3.5 # For country code standardization
+
+# V-Dem data
+vdemdata>=0.1.0   # May need to install from source if not available
+
+# For PDF extraction with Gemini
+google-generativeai>=0.3.0
+PyPDF2>=3.0.0     # For PDF text extraction (backup)
+pdfplumber>=0.10.0 # Alternative PDF extraction
+
+# Utilities
+requests>=2.28.0
+tqdm>=4.65.0      # Progress bars
+python-dotenv>=1.0.0  # For API key management
+
+

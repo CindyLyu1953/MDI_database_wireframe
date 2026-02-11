@@ -1,0 +1,161 @@
+country,year,indicator,value,source
+Denmark,2010,Election Period,0,Manual
+Denmark,2011,Election Period,1,Manual
+Denmark,2012,Election Period,0,Manual
+Denmark,2013,Election Period,0,Manual
+Denmark,2014,Election Period,0,Manual
+Denmark,2015,Election Period,1,Manual
+Denmark,2016,Election Period,0,Manual
+Denmark,2017,Election Period,0,Manual
+Denmark,2018,Election Period,0,Manual
+Denmark,2019,Election Period,1,Manual
+Denmark,2020,Election Period,0,Manual
+Denmark,2021,Election Period,0,Manual
+Denmark,2022,Election Period,1,Manual
+Denmark,2023,Election Period,0,Manual
+Denmark,2024,Election Period,0,Manual
+Denmark,2025,Election Period,0,Manual
+United States,2010,Election Period,1,Manual
+United States,2011,Election Period,0,Manual
+United States,2012,Election Period,1,Manual
+United States,2013,Election Period,0,Manual
+United States,2014,Election Period,1,Manual
+United States,2015,Election Period,0,Manual
+United States,2016,Election Period,1,Manual
+United States,2017,Election Period,0,Manual
+United States,2018,Election Period,1,Manual
+United States,2019,Election Period,0,Manual
+United States,2020,Election Period,1,Manual
+United States,2021,Election Period,0,Manual
+United States,2022,Election Period,1,Manual
+United States,2023,Election Period,0,Manual
+United States,2024,Election Period,1,Manual
+United States,2025,Election Period,0,Manual
+United Kingdom,2010,Election Period,1,Manual
+United Kingdom,2011,Election Period,0,Manual
+United Kingdom,2012,Election Period,0,Manual
+United Kingdom,2013,Election Period,0,Manual
+United Kingdom,2014,Election Period,0,Manual
+United Kingdom,2015,Election Period,1,Manual
+United Kingdom,2016,Election Period,0,Manual
+United Kingdom,2017,Election Period,1,Manual
+United Kingdom,2018,Election Period,0,Manual
+United Kingdom,2019,Election Period,1,Manual
+United Kingdom,2020,Election Period,0,Manual
+United Kingdom,2021,Election Period,0,Manual
+United Kingdom,2022,Election Period,0,Manual
+United Kingdom,2023,Election Period,0,Manual
+United Kingdom,2024,Election Period,1,Manual
+United Kingdom,2025,Election Period,0,Manual
+Bosnia and Herzegovina,2010,Election Period,1,Manual
+Bosnia and Herzegovina,2011,Election Period,0,Manual
+Bosnia and Herzegovina,2012,Election Period,0,Manual
+Bosnia and Herzegovina,2013,Election Period,0,Manual
+Bosnia and Herzegovina,2014,Election Period,1,Manual
+Bosnia and Herzegovina,2015,Election Period,0,Manual
+Bosnia and Herzegovina,2016,Election Period,0,Manual
+Bosnia and Herzegovina,2017,Election Period,0,Manual
+Bosnia and Herzegovina,2018,Election Period,1,Manual
+Bosnia and Herzegovina,2019,Election Period,0,Manual
+Bosnia and Herzegovina,2020,Election Period,0,Manual
+Bosnia and Herzegovina,2021,Election Period,0,Manual
+Bosnia and Herzegovina,2022,Election Period,1,Manual
+Bosnia and Herzegovina,2023,Election Period,0,Manual
+Bosnia and Herzegovina,2024,Election Period,0,Manual
+Bosnia and Herzegovina,2025,Election Period,0,Manual
+Cyprus,2010,Election Period,0,Manual
+Cyprus,2011,Election Period,1,Manual
+Cyprus,2012,Election Period,0,Manual
+Cyprus,2013,Election Period,1,Manual
+Cyprus,2014,Election Period,0,Manual
+Cyprus,2015,Election Period,0,Manual
+Cyprus,2016,Election Period,1,Manual
+Cyprus,2017,Election Period,0,Manual
+Cyprus,2018,Election Period,1,Manual
+Cyprus,2019,Election Period,0,Manual
+Cyprus,2020,Election Period,0,Manual
+Cyprus,2021,Election Period,1,Manual
+Cyprus,2022,Election Period,0,Manual
+Cyprus,2023,Election Period,1,Manual
+Cyprus,2024,Election Period,0,Manual
+Cyprus,2025,Election Period,0,Manual
+Denmark,2010,Covid Period,0,Manual
+Denmark,2011,Covid Period,0,Manual
+Denmark,2012,Covid Period,0,Manual
+Denmark,2013,Covid Period,0,Manual
+Denmark,2014,Covid Period,0,Manual
+Denmark,2015,Covid Period,0,Manual
+Denmark,2016,Covid Period,0,Manual
+Denmark,2017,Covid Period,0,Manual
+Denmark,2018,Covid Period,0,Manual
+Denmark,2019,Covid Period,1,Manual
+Denmark,2020,Covid Period,1,Manual
+Denmark,2021,Covid Period,1,Manual
+Denmark,2022,Covid Period,1,Manual
+Denmark,2023,Covid Period,1,Manual
+Denmark,2024,Covid Period,0,Manual
+Denmark,2025,Covid Period,0,Manual
+United States,2010,Covid Period,0,Manual
+United States,2011,Covid Period,0,Manual
+United States,2012,Covid Period,0,Manual
+United States,2013,Covid Period,0,Manual
+United States,2014,Covid Period,0,Manual
+United States,2015,Covid Period,0,Manual
+United States,2016,Covid Period,0,Manual
+United States,2017,Covid Period,0,Manual
+United States,2018,Covid Period,0,Manual
+United States,2019,Covid Period,1,Manual
+United States,2020,Covid Period,1,Manual
+United States,2021,Covid Period,1,Manual
+United States,2022,Covid Period,1,Manual
+United States,2023,Covid Period,1,Manual
+United States,2024,Covid Period,0,Manual
+United States,2025,Covid Period,0,Manual
+United Kingdom,2010,Covid Period,0,Manual
+United Kingdom,2011,Covid Period,0,Manual
+United Kingdom,2012,Covid Period,0,Manual
+United Kingdom,2013,Covid Period,0,Manual
+United Kingdom,2014,Covid Period,0,Manual
+United Kingdom,2015,Covid Period,0,Manual
+United Kingdom,2016,Covid Period,0,Manual
+United Kingdom,2017,Covid Period,0,Manual
+United Kingdom,2018,Covid Period,0,Manual
+United Kingdom,2019,Covid Period,1,Manual
+United Kingdom,2020,Covid Period,1,Manual
+United Kingdom,2021,Covid Period,1,Manual
+United Kingdom,2022,Covid Period,1,Manual
+United Kingdom,2023,Covid Period,1,Manual
+United Kingdom,2024,Covid Period,0,Manual
+United Kingdom,2025,Covid Period,0,Manual
+Bosnia and Herzegovina,2010,Covid Period,0,Manual
+Bosnia and Herzegovina,2011,Covid Period,0,Manual
+Bosnia and Herzegovina,2012,Covid Period,0,Manual
+Bosnia and Herzegovina,2013,Covid Period,0,Manual
+Bosnia and Herzegovina,2014,Covid Period,0,Manual
+Bosnia and Herzegovina,2015,Covid Period,0,Manual
+Bosnia and Herzegovina,2016,Covid Period,0,Manual
+Bosnia and Herzegovina,2017,Covid Period,0,Manual
+Bosnia and Herzegovina,2018,Covid Period,0,Manual
+Bosnia and Herzegovina,2019,Covid Period,1,Manual
+Bosnia and Herzegovina,2020,Covid Period,1,Manual
+Bosnia and Herzegovina,2021,Covid Period,1,Manual
+Bosnia and Herzegovina,2022,Covid Period,1,Manual
+Bosnia and Herzegovina,2023,Covid Period,1,Manual
+Bosnia and Herzegovina,2024,Covid Period,0,Manual
+Bosnia and Herzegovina,2025,Covid Period,0,Manual
+Cyprus,2010,Covid Period,0,Manual
+Cyprus,2011,Covid Period,0,Manual
+Cyprus,2012,Covid Period,0,Manual
+Cyprus,2013,Covid Period,0,Manual
+Cyprus,2014,Covid Period,0,Manual
+Cyprus,2015,Covid Period,0,Manual
+Cyprus,2016,Covid Period,0,Manual
+Cyprus,2017,Covid Period,0,Manual
+Cyprus,2018,Covid Period,0,Manual
+Cyprus,2019,Covid Period,1,Manual
+Cyprus,2020,Covid Period,1,Manual
+Cyprus,2021,Covid Period,1,Manual
+Cyprus,2022,Covid Period,1,Manual
+Cyprus,2023,Covid Period,1,Manual
+Cyprus,2024,Covid Period,0,Manual
+Cyprus,2025,Covid Period,0,Manual
