@@ -9,7 +9,6 @@ UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 TRACKING_DB.parent.mkdir(parents=True, exist_ok=True)
 
 from flask import Flask, render_template, request, jsonify, session, redirect, url_for, send_from_directory
-
 import csv
 import os
 import json
@@ -21,9 +20,8 @@ import re
 import requests
 
 app = Flask(__name__)
-app.secret_key = (
-    "your-secret-key-change-this-in-production"  # Change this in production!
-)
+app.secret_key = "your-secret-key-change-this-in-production"  # Change this!
+
 
 @app.route("/api/admin/refresh-citations", methods=["POST"])
 def refresh_citations():
@@ -56,12 +54,12 @@ def extract_url(value):
     """Extract URL from citation text."""
     if not value:
         return ""
-    # Look for URLs starting with http:// or https://
     url_pattern = r'https?://[^\s\)]+(?:\([^\)]*\))?'
     match = re.search(url_pattern, str(value))
     if match:
         return match.group(0).rstrip('.,;:')
     return ""
+
 
 app.jinja_env.filters["word_count"] = word_count
 app.jinja_env.filters["truncate_words"] = truncate_words
@@ -73,11 +71,14 @@ ADMIN_PASSWORD = "admin123"  # Change this!
 
 # Global variable to store papers data
 papers_data = []
+
+
 def extract_doi(text):
     if not text:
         return None
     match = re.search(r'10\.\d{4,9}/[-._;()/:A-Z0-9]+', text, re.I)
     return match.group(0) if match else None
+
 
 def fetch_citation_count(doi):
     if not doi:
@@ -95,8 +96,9 @@ def fetch_citation_count(doi):
 
     return 0
 
+
 def load_papers_from_csv():
-    """Load papers data from CSV file"""
+    """Load papers data from CSV file."""
     global papers_data
     papers_data = []
 
@@ -113,17 +115,15 @@ def load_papers_from_csv():
             break
 
     if not csv_file:
-        print(
-            "Error: No CSV file found in data/input/. Please ensure a CSV file exists."
-        )
-        return
-
+        print("Error: No CSV file found in data/input/. Please ensure a CSV file exists.")
+        return []
 
     try:
         seen_keys = set()
 
         with open(csv_file, "r", encoding="utf-8") as file:
             reader = csv.DictReader(file)
+
             print(f"CSV columns found: {len(reader.fieldnames)}")
             print(f"First few columns: {reader.fieldnames[:5]}")
 
@@ -132,19 +132,22 @@ def load_papers_from_csv():
                     print(f"First row keys: {list(row.keys())[:5]}")
                     print(f"Title from first row: '{row.get('title', 'NOT_FOUND')}'")
 
-                # Skip fully empty rows
-                if not any(str(v).strip() for v in row.values() if v is not None):
-                    continue
+                title = (row.get("title") or "").strip()
+                citation = (row.get("citation") or "").strip()
+                abstract = (row.get("abstract") or "").strip()
 
-                title = row.get("title", "Untitled").strip()
-                citation = row.get("citation", "").strip()
                 doi = extract_doi(citation)
-                # Skip rows without a meaningful title
-                if not title or title.lower() in {"untitled", "nan", "none"}:
-                    continue
-                # Deduplicate: prefer DOI, otherwise use normalized title
-                dedupe_key = doi.lower() if doi else re.sub(r"\s+", " ", title.lower()).strip()
 
+                # Skip fully empty rows
+                if not title and not citation and not abstract:
+                    continue
+
+                # Skip rows without meaningful title
+                if not title or title.lower() in {"nan", "none"}:
+                    continue
+
+                # Deduplicate: prefer DOI, otherwise normalized title
+                dedupe_key = doi.lower() if doi else re.sub(r"[^a-z0-9 ]", "", title.lower()).strip()
                 if dedupe_key in seen_keys:
                     print(f"Skipping duplicate: {title}")
                     continue
@@ -172,7 +175,7 @@ def load_papers_from_csv():
                     "citation": citation,
                     "doi": doi,
                     "citations": citation_count,
-                    "abstract": row.get("abstract", ""),
+                    "abstract": abstract,
                     "abstract_verbatim": row.get("abstract_verbatim", ""),
                     "sample_size": (
                         int(row.get("sample_size", "0").replace(",", ""))
@@ -226,12 +229,22 @@ def load_papers_from_csv():
                         "recommended_moderators": row.get("recommended_moderators", ""),
                         "research_context": row.get("research_context", ""),
                         "intervention_insights": row.get("intervention_insights", ""),
+
+                        # Context / system metrics
                         "democracy": row.get("democracy", ""),
                         "press_freedom": row.get("press_freedom", ""),
                         "Internet_freedom": row.get("Internet_freedom", ""),
                         "internet_penetration": row.get("internet_penetration", ""),
                         "governance": row.get("governance", ""),
                         "polarization": row.get("polarization", ""),
+                        "deliberative_democracy": row.get("deliberative_democracy", ""),
+                        "economic_performance": row.get("economic_performance", ""),
+                        "election_period": row.get("election_period", ""),
+                        "covid_period": row.get("covid_period", ""),
+                        "high_salience_period": row.get("high_salience_period", ""),
+                        "interpersonal_trust": row.get("interpersonal_trust", ""),
+
+                        # Population / internet / platform metrics
                         "population_million": row.get("population_million", ""),
                         "internet_users_million": row.get("internet_users_million", ""),
                         "social_media_users_million": row.get("social_media_users_million", ""),
@@ -250,9 +263,8 @@ def load_papers_from_csv():
                 papers_data.append(paper)
 
         print(f"Successfully loaded {len(papers_data)} unique papers from CSV")
-        for p in papers_data:
-            print(p["id"], p["title"])
-
+        if papers_data:
+            print(f"First paper title: '{papers_data[0]['title']}'")
         return papers_data
 
     except Exception as e:
@@ -261,8 +273,9 @@ def load_papers_from_csv():
         traceback.print_exc()
         return []
 
+
 def search_papers(query="", filters=None):
-    """Search papers based on query and filters"""
+    """Search papers based on query and filters."""
     if filters is None:
         filters = {}
 
@@ -275,8 +288,7 @@ def search_papers(query="", filters=None):
             paper
             for paper in results
             if all(
-                term
-                in " ".join(
+                term in " ".join(
                     [
                         paper["title"],
                         paper["abstract"],
@@ -321,7 +333,7 @@ def search_papers(query="", filters=None):
 
 
 def get_statistics():
-    """Get platform statistics"""
+    """Get platform statistics."""
     total_studies = sum(paper["sample_size"] for paper in papers_data)
     total_countries = len(
         set(country for paper in papers_data for country in paper["countries"])
@@ -343,14 +355,14 @@ def get_statistics():
 # Routes
 @app.route("/")
 def index():
-    """Home page"""
+    """Home page."""
     stats = get_statistics()
     return render_template("index.html", stats=stats)
 
 
 @app.route("/search")
 def search():
-    """Search page"""
+    """Search page."""
     query = request.args.get("q", "")
     year_from = request.args.get("year_from", "")
     year_to = request.args.get("year_to", "")
@@ -364,12 +376,9 @@ def search():
         "country": country,
     }
 
-    # Remove empty filters
     filters = {k: v for k, v in filters.items() if v}
 
     results = search_papers(query, filters)
-
-    # Get unique journals for filter dropdown
     journals = sorted(list(set(p["journal"] for p in papers_data if p["journal"])))
 
     return render_template(
@@ -383,7 +392,7 @@ def search():
 
 @app.route("/article/<paper_id>")
 def article(paper_id):
-    """Article details page"""
+    """Article details page."""
     paper = next((p for p in papers_data if p["id"] == paper_id), None)
     if not paper:
         return "Paper not found", 404
@@ -393,8 +402,7 @@ def article(paper_id):
 
 @app.route("/compare")
 def compare():
-    """Compare page"""
-    # Get comparison list from query parameters
+    """Compare page."""
     ids_param = request.args.get("ids", "")
     if ids_param:
         comparison_ids = ids_param.split(",")
@@ -402,29 +410,32 @@ def compare():
         comparison_ids = []
 
     comparison_papers = [p for p in papers_data if p["id"] in comparison_ids]
-
     return render_template("compare.html", papers=comparison_papers)
 
 
 @app.route("/profile")
 def profile():
-    """Profile page"""
+    """Profile page."""
     return render_template("profile.html")
-
 
 
 @app.route("/database")
 def database():
-    """Database page showing all papers"""
+    """Database page showing all papers."""
     paper_count = len(papers_data)
     return render_template("database.html", papers=papers_data, paper_count=paper_count)
 
 
+# API endpoints
+@app.route("/api/papers")
+def api_papers():
+    """API endpoint to get all papers."""
+    return jsonify(papers_data)
 
 
 @app.route("/api/search")
 def api_search():
-    """API endpoint for search"""
+    """API endpoint for search."""
     query = request.args.get("q", "")
     filters = {
         "year": request.args.get("year", ""),
@@ -435,16 +446,14 @@ def api_search():
         "sortBy": request.args.get("sortBy", "relevance"),
     }
 
-    # Remove empty filters
     filters = {k: v for k, v in filters.items() if v}
-
     results = search_papers(query, filters)
     return jsonify(results)
 
 
 @app.route("/api/paper/<paper_id>")
 def api_paper(paper_id):
-    """API endpoint to get a specific paper"""
+    """API endpoint to get a specific paper."""
     paper = next((p for p in papers_data if p["id"] == paper_id), None)
     if not paper:
         return jsonify({"error": "Paper not found"}), 404
@@ -454,27 +463,27 @@ def api_paper(paper_id):
 
 @app.route("/api/statistics")
 def api_statistics():
-    """API endpoint to get statistics"""
+    """API endpoint to get statistics."""
     return jsonify(get_statistics())
 
 
 # Database helper functions
 def get_db_connection():
-    """Get database connection"""
+    """Get database connection."""
     db_path = os.path.join("data", "output", "tracking.db")
     conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row  # Enable column access by name
+    conn.row_factory = sqlite3.Row
     return conn
 
 
 def get_eastern_time():
-    """Get current time in US Eastern timezone"""
+    """Get current time in US Eastern timezone."""
     eastern = pytz.timezone("US/Eastern")
     return datetime.now(eastern).strftime("%Y-%m-%d %H:%M:%S")
 
 
 def require_admin(f):
-    """Decorator to require admin authentication"""
+    """Decorator to require admin authentication."""
 
     @wraps(f)
     def decorated_function(*args, **kwargs):
@@ -485,12 +494,10 @@ def require_admin(f):
     return decorated_function
 
 
-# Tracking functions (Database-based)
-
-
+# Tracking functions
 @app.route("/api/track/search", methods=["POST"])
 def track_search():
-    """Track a search query"""
+    """Track a search query."""
     try:
         data = request.json or {}
         search_query = data.get("search_query", "")
@@ -519,7 +526,7 @@ def track_search():
 
 @app.route("/api/track/compare_view", methods=["POST"])
 def track_compare_view():
-    """Track a comparison page view"""
+    """Track a comparison page view."""
     try:
         data = request.json or {}
         paper_ids = data.get("paper_ids", [])
@@ -546,7 +553,7 @@ def track_compare_view():
 
 @app.route("/api/track/download", methods=["POST"])
 def track_download():
-    """Track a comparison download"""
+    """Track a comparison download."""
     try:
         data = request.json or {}
         paper_ids = data.get("paper_ids", [])
@@ -573,7 +580,7 @@ def track_download():
 
 @app.route("/api/tracking/stats")
 def get_tracking_stats():
-    """Get tracking statistics (public endpoint for Profile page)"""
+    """Get tracking statistics (public endpoint for Profile page)."""
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -599,7 +606,7 @@ def get_tracking_stats():
 # Admin routes
 @app.route("/admin/login", methods=["GET", "POST"])
 def admin_login():
-    """Admin login page"""
+    """Admin login page."""
     if request.method == "POST":
         username = request.form.get("username")
         password = request.form.get("password")
@@ -616,7 +623,7 @@ def admin_login():
 
 @app.route("/admin/logout")
 def admin_logout():
-    """Admin logout"""
+    """Admin logout."""
     session.pop("is_admin", None)
     session.pop("user_id", None)
     return redirect(url_for("index"))
@@ -625,21 +632,21 @@ def admin_logout():
 @app.route("/admin/dashboard")
 @require_admin
 def admin_dashboard():
-    """Admin dashboard page"""
+    """Admin dashboard page."""
     return render_template("admin_dashboard.html")
 
 
 @app.route("/admin/requests")
 @require_admin
 def admin_requests():
-    """Admin requests review page"""
+    """Admin requests review page."""
     return render_template("admin_requests.html")
 
 
 @app.route("/api/admin/search_logs")
 @require_admin
 def get_search_logs():
-    """Get search logs for admin"""
+    """Get search logs for admin."""
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -660,7 +667,7 @@ def get_search_logs():
 @app.route("/api/admin/compare_view_logs")
 @require_admin
 def get_compare_view_logs():
-    """Get compare view logs for admin"""
+    """Get compare view logs for admin."""
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -681,7 +688,7 @@ def get_compare_view_logs():
 @app.route("/api/admin/download_logs")
 @require_admin
 def get_download_logs():
-    """Get download logs for admin"""
+    """Get download logs for admin."""
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -702,12 +709,11 @@ def get_download_logs():
 @app.route("/api/admin/stats")
 @require_admin
 def get_admin_stats():
-    """Get statistics for admin dashboard"""
+    """Get statistics for admin dashboard."""
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
 
-        # Get counts
         cursor.execute("SELECT COUNT(*) as count FROM search_logs")
         total_searches = cursor.fetchone()["count"]
 
@@ -717,7 +723,6 @@ def get_admin_stats():
         cursor.execute("SELECT COUNT(*) as count FROM download_logs")
         total_downloads = cursor.fetchone()["count"]
 
-        # Get recent activity (last 7 days)
         cursor.execute(
             """
             SELECT COUNT(*) as count FROM search_logs
@@ -742,7 +747,6 @@ def get_admin_stats():
         )
         recent_downloads = cursor.fetchone()["count"]
 
-        # Get top search queries
         cursor.execute(
             """
             SELECT search_query, COUNT(*) as count
@@ -774,9 +778,8 @@ def get_admin_stats():
 
 @app.route("/api/my-requests")
 def my_requests():
-    """Get user's upload requests"""
+    """Get user's upload requests."""
     try:
-        # For now, return all requests (in a real app, you'd filter by user session/email)
         conn = get_db_connection()
         cursor = conn.cursor()
 
@@ -806,7 +809,6 @@ def my_requests():
             )
 
         conn.close()
-
         return jsonify({"requests": requests})
 
     except Exception as e:
@@ -816,38 +818,32 @@ def my_requests():
 @app.route("/uploads/<filename>")
 @require_admin
 def download_upload(filename):
-    """Serve uploaded PDF files (admin only)"""
+    """Serve uploaded PDF files (admin only)."""
     upload_dir = os.path.join("data", "user_uploads")
     return send_from_directory(upload_dir, filename, as_attachment=True)
 
 
 @app.route("/api/upload-request", methods=["POST"])
 def upload_request():
-    """Handle paper upload requests"""
+    """Handle paper upload requests."""
     try:
-        # Get form data
         request_name = request.form.get("requestName")
         institution = request.form.get("institution")
         email = request.form.get("email")
         paper_info = request.form.get("paperInfo")
         change_requests = request.form.get("changeRequests", "")
 
-        # Handle PDF file upload
         pdf_file = request.files.get("pdfFile")
         pdf_filename = None
         if pdf_file and pdf_file.filename:
-            # Save PDF to user uploads directory
             upload_dir = os.path.join("data", "user_uploads")
             os.makedirs(upload_dir, exist_ok=True)
 
-            # Generate unique filename
             timestamp = datetime.now().strftime("%Y%m%d_%H%M%S")
             pdf_filename = f"upload_{timestamp}_{pdf_file.filename}"
             pdf_path = os.path.join(upload_dir, pdf_filename)
-
             pdf_file.save(pdf_path)
 
-        # Store request in database
         conn = get_db_connection()
         cursor = conn.cursor()
 
@@ -882,7 +878,7 @@ def upload_request():
 @app.route("/api/admin/requests")
 @require_admin
 def get_admin_requests():
-    """Get all upload requests for admin review"""
+    """Get all upload requests for admin review."""
     try:
         conn = get_db_connection()
         cursor = conn.cursor()
@@ -913,7 +909,6 @@ def get_admin_requests():
             )
 
         conn.close()
-
         return jsonify({"requests": requests})
 
     except Exception as e:
@@ -923,7 +918,7 @@ def get_admin_requests():
 @app.route("/api/admin/requests/<int:request_id>/status", methods=["POST"])
 @require_admin
 def update_request_status(request_id):
-    """Update request status (approve/reject)"""
+    """Update request status (approve/reject)."""
     try:
         data = request.get_json()
         new_status = data.get("status")
@@ -949,8 +944,8 @@ def update_request_status(request_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+
 load_papers_from_csv()
 
 if __name__ == "__main__":
     app.run(debug=True, host="127.0.0.1", port=5001)
-
