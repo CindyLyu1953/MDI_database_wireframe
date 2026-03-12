@@ -9,6 +9,51 @@
     border-radius: 4px;
 }
 
+.info-tooltip {
+  position: relative;
+  display: inline-block;
+  margin-left: 6px;
+  cursor: help;
+  color: #667085;
+  font-size: 0.9rem;
+  font-weight: 600;
+  vertical-align: middle;
+}
+
+.info-tooltip .tooltip-text {
+  visibility: hidden;
+  opacity: 0;
+  width: 240px;
+  background: #1f2937;
+  color: #fff;
+  text-align: left;
+  border-radius: 6px;
+  padding: 8px 10px;
+  position: absolute;
+  z-index: 1000;
+  bottom: 125%;
+  left: 50%;
+  transform: translateX(-50%);
+  transition: opacity 0.2s ease;
+  font-size: 0.8rem;
+  line-height: 1.4;
+  font-weight: 400;
+  white-space: normal;
+  pointer-events: none;
+}
+
+.info-tooltip:hover .tooltip-text,
+.info-tooltip:focus .tooltip-text,
+.info-tooltip:focus-within .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
+
+.info-tooltip:hover .tooltip-text,
+.info-tooltip:focus-within .tooltip-text {
+  visibility: visible;
+  opacity: 1;
+}
 .comparison-section-header h4 {
     margin: 0;
     color: #2c3e50;
@@ -205,11 +250,11 @@
         max-width: 200px;
         font-size: 0.9rem;
     }
-    
+
     .comparison-section-header {
         padding: 0.8rem 1rem;
     }
-    
+
     .comparison-section-header h4 {
         font-size: 1rem;
     }
@@ -629,7 +674,7 @@
     .comparison-table {
         grid-template-columns: 200px repeat(var(--paper-count, 3), minmax(200px, 1fr));
     }
-    
+
     .feature-cell,
     .study-cell {
         padding: 1rem;
@@ -641,44 +686,44 @@
         grid-template-columns: 1fr;
         gap: 0;
     }
-    
+
     .header-cell,
     .feature-cell,
     .study-cell {
         padding: 1rem;
     }
-    
+
     .feature-column {
         order: -1;
     }
-    
+
     .study-column {
         border-left: none;
         border-top: 1px solid #e1e8ed;
     }
-    
+
     .study-cell {
         border-right: none;
     }
-    
+
     .study-header {
         justify-content: center;
     }
-    
+
     .remove-study-btn {
         position: absolute;
         top: 1rem;
         right: 1rem;
     }
-    
+
     .study-column {
         position: relative;
     }
-    
+
     .compare-actions {
         flex-direction: column;
     }
-    
+
     .summary-content {
         grid-template-columns: 1fr;
     }
@@ -702,20 +747,20 @@
     .page-title {
         font-size: 2rem;
     }
-    
+
     .page-description {
         font-size: 1rem;
     }
-    
+
     .feature-cell,
     .study-cell {
         padding: 0.75rem;
     }
-    
+
     .study-title {
         font-size: 0.8rem;
     }
-    
+
     .study-meta {
         font-size: 0.7rem;
     }

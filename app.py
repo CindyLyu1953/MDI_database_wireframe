@@ -8,7 +8,8 @@ UPLOAD_DIR = DATA_DIR / "user_uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 TRACKING_DB.parent.mkdir(parents=True, exist_ok=True)
 
-from flask import Flask, render_template, request, jsonify, session, redirect, url_for
+from flask import Flask, render_template, request, jsonify, session, redirect, url_for, send_from_directory
+
 import csv
 import os
 import json
@@ -16,11 +17,20 @@ import sqlite3
 from datetime import datetime
 from functools import wraps
 import pytz
+import re
+import requests
 
 app = Flask(__name__)
 app.secret_key = (
     "your-secret-key-change-this-in-production"  # Change this in production!
 )
+
+@app.route("/api/admin/refresh-citations", methods=["POST"])
+def refresh_citations():
+    for paper in papers_data:
+        if paper.get("doi"):
+            paper["citations"] = fetch_citation_count(paper["doi"])
+    return jsonify({"success": True})
 
 
 def word_count(value):
@@ -42,8 +52,20 @@ def truncate_words(value, limit=30):
     return " ".join(words[:limit]) + "..."
 
 
+def extract_url(value):
+    """Extract URL from citation text."""
+    if not value:
+        return ""
+    # Look for URLs starting with http:// or https://
+    url_pattern = r'https?://[^\s\)]+(?:\([^\)]*\))?'
+    match = re.search(url_pattern, str(value))
+    if match:
+        return match.group(0).rstrip('.,;:')
+    return ""
+
 app.jinja_env.filters["word_count"] = word_count
 app.jinja_env.filters["truncate_words"] = truncate_words
+app.jinja_env.filters["extract_url"] = extract_url
 
 # Admin credentials (in production, use environment variables or a proper auth system)
 ADMIN_USERNAME = "admin"
@@ -51,14 +73,33 @@ ADMIN_PASSWORD = "admin123"  # Change this!
 
 # Global variable to store papers data
 papers_data = []
+def extract_doi(text):
+    if not text:
+        return None
+    match = re.search(r'10\.\d{4,9}/[-._;()/:A-Z0-9]+', text, re.I)
+    return match.group(0) if match else None
 
+def fetch_citation_count(doi):
+    if not doi:
+        return 0
+
+    url = f"https://api.semanticscholar.org/graph/v1/paper/DOI:{doi}"
+    params = {"fields": "citationCount"}
+
+    try:
+        r = requests.get(url, params=params, timeout=10)
+        if r.status_code == 200:
+            return r.json().get("citationCount", 0)
+    except Exception as e:
+        print(f"Citation fetch failed for {doi}: {e}")
+
+    return 0
 
 def load_papers_from_csv():
     """Load papers data from CSV file"""
     global papers_data
     papers_data = []
 
-    # Try multiple possible filenames
     possible_files = [
         os.path.join("data", "input", "paper_extracted.csv"),
         os.path.join("data", "input", "papers_extracted.csv"),
@@ -77,21 +118,43 @@ def load_papers_from_csv():
         )
         return
 
+
     try:
+        seen_keys = set()
+
         with open(csv_file, "r", encoding="utf-8") as file:
             reader = csv.DictReader(file)
             print(f"CSV columns found: {len(reader.fieldnames)}")
             print(f"First few columns: {reader.fieldnames[:5]}")
 
             for i, row in enumerate(reader, 1):
-                # Debug: print first row to see structure
                 if i == 1:
                     print(f"First row keys: {list(row.keys())[:5]}")
                     print(f"Title from first row: '{row.get('title', 'NOT_FOUND')}'")
 
+                # Skip fully empty rows
+                if not any(str(v).strip() for v in row.values() if v is not None):
+                    continue
+
+                title = row.get("title", "Untitled").strip()
+                citation = row.get("citation", "").strip()
+                doi = extract_doi(citation)
+                # Skip rows without a meaningful title
+                if not title or title.lower() in {"untitled", "nan", "none"}:
+                    continue
+                # Deduplicate: prefer DOI, otherwise use normalized title
+                dedupe_key = doi.lower() if doi else re.sub(r"\s+", " ", title.lower()).strip()
+
+                if dedupe_key in seen_keys:
+                    print(f"Skipping duplicate: {title}")
+                    continue
+                seen_keys.add(dedupe_key)
+
+                citation_count = fetch_citation_count(doi)
+
                 paper = {
-                    "id": f"paper_{str(i).zfill(3)}",
-                    "title": row.get("title", "Untitled"),
+                    "id": f"paper_{str(len(papers_data) + 1).zfill(3)}",
+                    "title": title,
                     "title_verbatim": row.get("title_verbatim", ""),
                     "authors": [
                         author.strip()
@@ -106,7 +169,9 @@ def load_papers_from_csv():
                         if row.get("year", "").isdigit()
                         else 2023
                     ),
-                    "citation": row.get("citation", ""),
+                    "citation": citation,
+                    "doi": doi,
+                    "citations": citation_count,
                     "abstract": row.get("abstract", ""),
                     "abstract_verbatim": row.get("abstract_verbatim", ""),
                     "sample_size": (
@@ -122,80 +187,79 @@ def load_papers_from_csv():
                     ),
                     "methodology": row.get("study_type", "Unknown"),
                     "research_type": "Experimental Research",
-                    "citations": 0,
                     "impact_factor": 0,
                     "keywords": ["social media", "politics"],
                     "extracted_features": {
                         "independent_variables": row.get("independent_variables", ""),
-                        "independent_variables_verbatim": row.get(
-                            "independent_variables_verbatim", ""
-                        ),
+                        "independent_variables_verbatim": row.get("independent_variables_verbatim", ""),
                         "dependent_variables": row.get("dependent_variables", ""),
-                        "dependent_variables_verbatim": row.get(
-                            "dependent_variables_verbatim", ""
-                        ),
+                        "dependent_variables_verbatim": row.get("dependent_variables_verbatim", ""),
                         "survey_questions": row.get("survey_questions", ""),
-                        "survey_questions_verbatim": row.get(
-                            "survey_questions_verbatim", ""
-                        ),
+                        "survey_questions_verbatim": row.get("survey_questions_verbatim", ""),
                         "incentive": row.get("incentive", ""),
                         "incentive_verbatim": row.get("incentive_verbatim", ""),
                         "study_type": row.get("study_type", ""),
                         "study_type_verbatim": row.get("study_type_verbatim", ""),
                         "analysis_equations": row.get("analysis_equations", ""),
-                        "analysis_equations_verbatim": row.get(
-                            "analysis_equations_verbatim", ""
-                        ),
+                        "analysis_equations_verbatim": row.get("analysis_equations_verbatim", ""),
                         "level_of_analysis": row.get("level_of_analysis", ""),
-                        "level_of_analysis_verbatim": row.get(
-                            "level_of_analysis_verbatim", ""
-                        ),
+                        "level_of_analysis_verbatim": row.get("level_of_analysis_verbatim", ""),
                         "main_effects": row.get("main_effects", ""),
                         "main_effects_verbatim": row.get("main_effects_verbatim", ""),
                         "statistical_power": row.get("statistical_power", ""),
-                        "statistical_power_verbatim": row.get(
-                            "statistical_power_verbatim", ""
-                        ),
+                        "statistical_power_verbatim": row.get("statistical_power_verbatim", ""),
                         "moderators": row.get("moderators", ""),
                         "moderators_verbatim": row.get("moderators_verbatim", ""),
                         "moderation_results": row.get("moderation_results", ""),
-                        "moderation_results_verbatim": row.get(
-                            "moderation_results_verbatim", ""
-                        ),
+                        "moderation_results_verbatim": row.get("moderation_results_verbatim", ""),
                         "demographics": row.get("demographics", ""),
                         "demographics_verbatim": row.get("demographics_verbatim", ""),
                         "recruitment_source": row.get("recruitment_source", ""),
-                        "recruitment_source_verbatim": row.get(
-                            "recruitment_source_verbatim", ""
-                        ),
+                        "recruitment_source_verbatim": row.get("recruitment_source_verbatim", ""),
                         "sample_size": row.get("sample_size", ""),
                         "sample_size_verbatim": row.get("sample_size_verbatim", ""),
                         "country_region": row.get("country_region", ""),
                         "sociocultural_context": row.get("sociocultural_context", ""),
                         "political_context": row.get("political_context", ""),
-                        "platform_technological_context": row.get(
-                            "platform_technological_context", ""
-                        ),
+                        "platform_technological_context": row.get("platform_technological_context", ""),
                         "temporal_context": row.get("temporal_context", ""),
                         "recommended_moderators": row.get("recommended_moderators", ""),
                         "research_context": row.get("research_context", ""),
                         "intervention_insights": row.get("intervention_insights", ""),
+                        "democracy": row.get("democracy", ""),
+                        "press_freedom": row.get("press_freedom", ""),
+                        "Internet_freedom": row.get("Internet_freedom", ""),
+                        "internet_penetration": row.get("internet_penetration", ""),
+                        "governance": row.get("governance", ""),
+                        "polarization": row.get("polarization", ""),
+                        "population_million": row.get("population_million", ""),
+                        "internet_users_million": row.get("internet_users_million", ""),
+                        "social_media_users_million": row.get("social_media_users_million", ""),
+                        "youtube_users_million": row.get("youtube_users_million", ""),
+                        "facebook_users_million": row.get("facebook_users_million", ""),
+                        "instagram_users_million": row.get("instagram_users_million", ""),
+                        "x_users_million": row.get("x_users_million", ""),
+                        "tiktok_users_million": row.get("tiktok_users_million", ""),
+                        "linkedin_users_million": row.get("linkedin_users_million", ""),
+                        "messenger_users_million": row.get("messenger_users_million", ""),
+                        "snapchat_users_million": row.get("snapchat_users_million", ""),
+                        "pinterest_users_million": row.get("pinterest_users_million", ""),
                     },
                 }
+
                 papers_data.append(paper)
 
-        print(f"Successfully loaded {len(papers_data)} papers from CSV")
-        if papers_data:
-            print(f"First paper title: '{papers_data[0]['title']}'")
+        print(f"Successfully loaded {len(papers_data)} unique papers from CSV")
+        for p in papers_data:
+            print(p["id"], p["title"])
+
         return papers_data
 
     except Exception as e:
         print(f"Error loading CSV: {e}")
         import traceback
-
         traceback.print_exc()
         return []
-
 
 def search_papers(query="", filters=None):
     """Search papers based on query and filters"""
@@ -348,11 +412,14 @@ def profile():
     return render_template("profile.html")
 
 
-# API endpoints
-@app.route("/api/papers")
-def api_papers():
-    """API endpoint to get all papers"""
-    return jsonify(papers_data)
+
+@app.route("/database")
+def database():
+    """Database page showing all papers"""
+    paper_count = len(papers_data)
+    return render_template("database.html", papers=papers_data, paper_count=paper_count)
+
+
 
 
 @app.route("/api/search")
@@ -746,6 +813,14 @@ def my_requests():
         return jsonify({"error": str(e)}), 500
 
 
+@app.route("/uploads/<filename>")
+@require_admin
+def download_upload(filename):
+    """Serve uploaded PDF files (admin only)"""
+    upload_dir = os.path.join("data", "user_uploads")
+    return send_from_directory(upload_dir, filename, as_attachment=True)
+
+
 @app.route("/api/upload-request", methods=["POST"])
 def upload_request():
     """Handle paper upload requests"""
@@ -878,5 +953,4 @@ load_papers_from_csv()
 
 if __name__ == "__main__":
     app.run(debug=True, host="127.0.0.1", port=5001)
-
 

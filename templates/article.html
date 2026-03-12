@@ -91,25 +91,80 @@
                         <!-- Extracted Features -->
                         <div class="content-section">
                             <div class="features-container">
-                                {% set feature_order = ['sample_size', 'country_region', 'recruitment_source', 'demographics', 'incentive', 'independent_variables', 'dependent_variables', 'survey_questions', 'analysis_equations', 'main_effects', 'moderators', 'moderation_results', 'sociocultural_context', 'political_context', 'platform_technological_context', 'temporal_context'] %}
-                                {% set feature_labels = {
-                                    'sample_size': 'Sample Size',
-                                    'country_region': 'Country / Region',
-                                    'recruitment_source': 'Recruitment Source',
-                                    'demographics': 'Demographics',
-                                    'incentive': 'Incentive',
-                                    'independent_variables': 'Treatment / Independent variable(s)',
-                                    'dependent_variables': 'Outcome / Dependent variable(s)',
-                                    'survey_questions': 'Survey Questions',
-                                    'analysis_equations': 'Analysis Equations',
-                                    'main_effects': 'Main Effects',
-                                    'moderators': 'Moderators',
-                                    'moderation_results': 'Moderation Results',
-                                    'sociocultural_context': 'Socio-cultural context',
-                                    'political_context': 'Political context',
-                                    'platform_technological_context': 'Platform / Technological context',
-                                    'temporal_context': 'Temporal context'
-                                } %}
+                                {% set feature_order = [
+                                  'sample_size',
+                                  'country_region',
+                                  'recruitment_source',
+                                  'demographics',
+                                  'incentive',
+                                  'independent_variables',
+                                  'dependent_variables',
+                                  'survey_questions',
+                                  'analysis_equations',
+                                  'main_effects',
+                                  'moderators',
+                                  'moderation_results',
+                                  'sociocultural_context',
+                                  'political_context',
+                                  'platform_technological_context',
+                                  'temporal_context',
+
+                                  'democracy',
+                                  'press_freedom',
+                                  'Internet_freedom',
+                                  'internet_penetration',
+                                  'governance',
+                                  'polarization',
+
+                                  'population_million',
+                                  'internet_users_million',
+                                  'social_media_users_million',
+                                  'youtube_users_million',
+                                  'facebook_users_million',
+                                  'instagram_users_million',
+                                  'x_users_million',
+                                  'tiktok_users_million',
+                                  'linkedin_users_million',
+                                  'messenger_users_million',
+                                  'snapchat_users_million',
+                                  'pinterest_users_million'
+                                ] %}
+                                {% set feature_labels =
+                                { 'sample_size': 'Sample Size',
+                                'country_region': 'Country / Region',
+                                'recruitment_source': 'Recruitment Source',
+                                'demographics': 'Demographics',
+                                'incentive': 'Incentive',
+                                'independent_variables': 'Treatment / Independent variable(s)',
+                                'dependent_variables': 'Outcome / Dependent variable(s)',
+                                'survey_questions': 'Survey Questions',
+                                'analysis_equations': 'Analysis Equations',
+                                'main_effects': 'Main Effects',
+                                'moderators': 'Moderators',
+                                'moderation_results': 'Moderation Results',
+                                'sociocultural_context': 'Socio-cultural context',
+                                'political_context': 'Political context',
+                                'platform_technological_context': 'Platform / Technological context',
+                                'temporal_context': 'Temporal context',
+                                'democracy': 'Liberal Democracy Index',
+                                'press_freedom': 'Press Freedom Index',
+                                'Internet_freedom': 'Internet Freedom Score',
+                                'internet_penetration': 'Internet Penetration',
+                                'governance': 'Political Stability Score',
+                                'polarization': 'Deliberative Democracy Index ',
+                                'population_million': 'Population (Million)',
+                                'internet_users_million': 'Internet Users (Million)',
+                                'social_media_users_million': 'Social Media Users (Million)',
+                                'youtube_users_million': 'Youtube Users (Million)',
+                                'facebook_users_million': 'Facebook Users (Million)',
+                                'instagram_users_million': 'Instagram Users (Million)',
+                                'x_users_million': 'X Users (Million)',
+                                'tiktok_users_million': 'Tiktok Users (Million)',
+                                'linkedin_users_million': 'Linkedin Users (Million)',
+                                'messenger_users_million': 'Messenger Users (Million)',
+                                'snapchat_users_million': 'Snapchat Users (Million)',
+                                'pinterest_users_million': 'Pinterest Users (Million)'
+                                }%}
                                 {% for feature_name in feature_order %}
                                     {% set feature_value = paper.extracted_features.get(feature_name, '') %}
                                     {% if feature_value and feature_value != 'NOT SPECIFIED' %}
@@ -125,31 +180,66 @@
                                             <h3 class="feature-title">{{ feature_label }}</h3>
                                             <div class="feature-content">
                                                 <div class="feature-summary">
-                                                    {% if needs_truncation %}
-                                                    <p>
-                                                        <span class="summary-preview">
-                                                            <span class="summary-text">{{ display_summary }}</span>
-                                                            <button type="button"
-                                                                class="inline-expand-toggle"
-                                                                data-full-text="{{ feature_value|e }}"
-                                                                data-truncated-text="{{ display_summary|e }}"
-                                                                aria-expanded="false"
-                                                                aria-label="View full text">
-                                                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                                                </svg>
-                                                            </button>
-                                                        </span>
-                                                    </p>
+                                                {% set v = display_summary|string %}
+                                                {% set is_platform_metric = feature_name in [
+                                                    'internet_users_million',
+                                                    'social_media_users_million',
+                                                    'youtube_users_million',
+                                                    'facebook_users_million',
+                                                    'instagram_users_million',
+                                                    'x_users_million',
+                                                    'tiktok_users_million',
+                                                    'linkedin_users_million',
+                                                    'messenger_users_million',
+                                                    'snapchat_users_million',
+                                                    'pinterest_users_million'
+                                                ] %}
+
+                                                {% if needs_truncation %}
+                                                    <div class="summary-preview">
+                                                        <div class="summary-text">
+                                                            {% if is_platform_metric and '%' in v %}
+                                                                {% set parts = v.rsplit(' ', 1) %}
+                                                                {% if parts|length == 2 %}
+                                                                    <div class="metric-breakdown">
+                                                                        <strong>{{ feature_label }}:</strong> {{ parts[0] }}<br>
+                                                                        <strong>% of Platform Users based on Population:</strong> {{ parts[1] }}
+                                                                    </div>
+                                                                {% else %}
+                                                                    {{ v }}
+                                                                {% endif %}
+                                                            {% else %}
+                                                                {{ v }}
+                                                            {% endif %}
+                                                        </div>
+
+                                                        <button type="button"
+                                                            class="inline-expand-toggle"
+                                                            data-full-text="{{ feature_value|e }}"
+                                                            data-truncated-text="{{ display_summary|e }}"
+                                                            aria-expanded="false"
+                                                            aria-label="View full text">
+                                                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                                                <polyline points="6,9 12,15 18,9"></polyline>
+                                                            </svg>
+                                                        </button>
+                                                    </div>
+                                                {% else %}
+                                                    {% if is_platform_metric and '%' in v %}
+                                                        {% set parts = v.rsplit(' ', 1) %}
+                                                        {% if parts|length == 2 %}
+                                                            <div class="metric-breakdown">
+                                                                <strong>{{ feature_label }}:</strong> {{ parts[0] }}<br>
+                                                                <strong>% of Platform Users based on Population:</strong> {{ parts[1] }}
+                                                            </div>
+                                                        {% else %}
+                                                            <p>{{ v }}</p>
+                                                        {% endif %}
                                                     {% else %}
-                                                    <p>{{ display_summary }}</p>
+                                                        <p>{{ v }}</p>
                                                     {% endif %}
-                                                </div>
-                                                {% if has_verbatim %}
-                                                <div class="feature-full-text hidden" id="{{ feature_name }}-verbatim-full">
-                                                    <p>{{ verbatim_value }}</p>
-                                                </div>
                                                 {% endif %}
+                                            </div>
 
                                                 {% if has_verbatim %}
                                                 <div class="feature-actions">
