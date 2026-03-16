@@ -20,7 +20,32 @@
             <div class="feature-summary">
                 <p>
                     <span class="summary-preview">
-                        <span class="summary-text">{{ display_text }}</span>
+                        {% set v = display_text|string %}
+                        {% if feature_key in [
+                            'internet_users_million',
+                            'social_media_users_million',
+                            'youtube_users_million',
+                            'facebook_users_million',
+                            'instagram_users_million',
+                            'x_users_million',
+                            'tiktok_users_million',
+                            'linkedin_users_million',
+                            'messenger_users_million',
+                            'snapchat_users_million',
+                            'pinterest_users_million'
+                        ] and '%' in v %}
+                            {% set parts = v.rsplit(' ', 1) %}
+                            {% if parts|length == 2 %}
+                                <span class="summary-text metric-breakdown">
+                                    <span class="metric-line"><strong>{{ feature_label }}:</strong> {{ parts[0] }}</span><br>
+                                    <span class="metric-line"><strong>% of Platform Users based on Population:</strong> {{ parts[1] }}</span>
+                                </span>
+                            {% else %}
+                                <span class="summary-text">{{ v }}</span>
+                            {% endif %}
+                        {% else %}
+                            <span class="summary-text">{{ v }}</span>
+                        {% endif %}
                         {% if needs_truncation %}
                         <button type="button"
                             class="inline-expand-toggle"
@@ -62,13 +87,20 @@
     </div>
 {% endmacro %}
 
+{% macro info_tooltip(text) %}
+    <span class="info-tooltip" tabindex="0">
+        ⓘ
+        <span class="tooltip-text">{{ text }}</span>
+    </span>
+{% endmacro %}
+
 {% block content %}
 <div class="container">
     <!-- Comparison Header -->
     <section class="compare-header">
         <h1 class="page-title">Research Comparison</h1>
         <p class="page-description">Side-by-side comparison of key features from different studies, discovering operationalization differences and measurement method variations</p>
-        
+
         <div class="compare-actions">
             <button class="btn btn-primary" onclick="addStudy()">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
@@ -144,7 +176,7 @@
                     <div class="study-cell"></div>
                     {% endfor %}
                 </div>
-                
+
                 <div class="table-row section-content" data-section="bibliographic">
                     <div class="feature-cell">
                         <div class="feature-name">Authors</div>
@@ -242,7 +274,7 @@
                     <div class="study-cell"></div>
                     {% endfor %}
                 </div>
-                
+
                 <div class="table-row section-content" data-section="research-design">
                     <div class="feature-cell">
                         <div class="feature-name">Sample Size</div>
@@ -320,7 +352,7 @@
                     <div class="study-cell"></div>
                     {% endfor %}
                 </div>
-                
+
                 <div class="table-row section-content" data-section="measurement-analysis">
                     <div class="feature-cell">
                         <div class="feature-name">Treatment / Independent variable(s)</div>
@@ -364,7 +396,7 @@
                     </div>
                     {% endfor %}
                 </div>
-                
+
                 <!-- Findings Section -->
                 <div class="table-row section-header" data-section="findings">
                     <div class="feature-cell">
@@ -381,7 +413,7 @@
                     <div class="study-cell"></div>
                     {% endfor %}
                 </div>
-                
+
                 <div class="table-row section-content" data-section="findings">
                     <div class="feature-cell">
                         <div class="feature-name">Main Effects</div>
@@ -414,7 +446,7 @@
                     </div>
                     {% endfor %}
                 </div>
-                
+
                 <!-- Context Section -->
                 <div class="table-row section-header" data-section="context">
                     <div class="feature-cell">
@@ -431,7 +463,7 @@
                     <div class="study-cell"></div>
                     {% endfor %}
                 </div>
-                
+
                 <div class="table-row section-content" data-section="context">
                     <div class="feature-cell">
                         <div class="feature-name">Socio-cultural context</div>
@@ -475,6 +507,208 @@
                     </div>
                     {% endfor %}
                 </div>
+                                <!-- NEW Context Metrics -->
+                <div class="table-row section-content" data-section="context">
+                    <div class="feature-cell">
+                        <div class="feature-name">
+                            Liberal Democracy Index {{ info_tooltip('Liberal Democracy Index (V-Dem LDI)') }}
+                        </div>
+                    </div>
+                    {% for paper in papers %}
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.democracy, '', 'democracy', 'Democracy', loop.index) }}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="table-row section-content" data-section="context">
+                    <div class="feature-cell">
+                        <div class="feature-name">
+                            Press Freedom Index {{ info_tooltip('Press Freedom Index (Reporters Without Borders)') }}
+                        </div>
+                    </div>
+                    {% for paper in papers %}
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.press_freedom, '', 'press_freedom', 'Press Freedom', loop.index) }}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="table-row section-content" data-section="context">
+                    <div class="feature-cell">
+                        <div class="feature-name">
+                            Internet Freedom Score {{ info_tooltip('Internet Freedom Score (Freedom on the Net)') }}
+                        </div>
+                    </div>
+                    {% for paper in papers %}
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.Internet_freedom, '', 'Internet_freedom', 'Internet Freedom', loop.index) }}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="table-row section-content" data-section="context">
+                    <div class="feature-cell">
+                        <div class="feature-name">Internet Penetration</div>
+                    </div>
+                    {% for paper in papers %}
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.internet_penetration, '', 'internet_penetration', 'Internet Penetration', loop.index) }}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="table-row section-content" data-section="context">
+                    <div class="feature-cell">
+                        <div class="feature-name">
+                            Political Stability Score {{ info_tooltip('Political Stability Score (World Governance Indicators)') }}
+                        </div>
+                    </div>
+                    {% for paper in papers %}
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.governance, '', 'governance', 'Governance', loop.index) }}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="table-row section-content" data-section="context">
+                    <div class="feature-cell">
+                        <div class="feature-name">
+                            Deliberative Democracy Index {{ info_tooltip('Deliberative Democracy Index (V-Dem)') }}
+                        </div>
+                    </div>
+                    {% for paper in papers %}
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.deliberative_democracy, '', 'deliberative_democracy', 'Deliberative Democracy Index', loop.index) }}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="table-row section-header" data-section="internet-social-media">
+                    <div class="feature-cell">
+                        <div class="feature-name">
+                            <button type="button" class="section-toggle" aria-expanded="true" aria-label="Toggle Internet and Social Media Usage section">
+                                <svg class="section-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <polyline points="6,9 12,15 18,9"></polyline>
+                                </svg>
+                            </button>
+                            <span>Internet and Social Media Usage</span>
+                        </div>
+                    </div>
+                    {% for paper in papers %}
+                    <div class="study-cell"></div>
+                    {% endfor %}
+                </div>
+
+                <div class="table-row section-content" data-section="internet-social-media">
+                    <div class="feature-cell">
+                        <div class="feature-name">Population (Million)</div>
+                    </div>
+                    {% for paper in papers %}
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.population_million, '', 'population_million', 'Population (Million)', loop.index) }}
+                    </div>
+                    {% endfor %}
+                </div>
+
+                <div class="table-row section-content" data-section="internet-social-media">
+                  <div class="feature-cell"><div class="feature-name">Internet Users (Million)</div></div>
+                  {% for paper in papers %}
+                  <div class="study-cell" data-study-index="{{ loop.index }}">
+                    {{ render_feature_cell(paper, paper.extracted_features.internet_users_million, '', 'internet_users_million', 'Internet Users (Million)', loop.index) }}
+                  </div>
+                  {% endfor %}
+                </div>
+
+                <div class="table-row section-content" data-section="internet-social-media">
+                  <div class="feature-cell"><div class="feature-name">Social Media Users (Million)</div></div>
+                  {% for paper in papers %}
+                  <div class="study-cell" data-study-index="{{ loop.index }}">
+                    {{ render_feature_cell(paper, paper.extracted_features.social_media_users_million, '', 'social_media_users_million', 'Social Media Users (Million)', loop.index) }}
+                  </div>
+                  {% endfor %}
+                </div>
+
+                <div class="table-row section-content" data-section="internet-social-media">
+                  <div class="feature-cell"><div class="feature-name">YouTube Users (Million)</div></div>
+                  {% for paper in papers %}
+                  <div class="study-cell" data-study-index="{{ loop.index }}">
+                    {{ render_feature_cell(paper, paper.extracted_features.youtube_users_million, '', 'youtube_users_million', 'YouTube Users (Million)', loop.index) }}
+                  </div>
+                  {% endfor %}
+                </div>
+
+                <div class="table-row section-content" data-section="internet-social-media">
+                  <div class="feature-cell"><div class="feature-name">Facebook Users (Million)</div></div>
+                  {% for paper in papers %}
+                  <div class="study-cell" data-study-index="{{ loop.index }}">
+                    {{ render_feature_cell(paper, paper.extracted_features.facebook_users_million, '', 'facebook_users_million', 'Facebook Users (Million)', loop.index) }}
+                  </div>
+                  {% endfor %}
+                </div>
+
+                <div class="table-row section-content" data-section="internet-social-media">
+                  <div class="feature-cell"><div class="feature-name">Instagram Users (Million)</div></div>
+                  {% for paper in papers %}
+                  <div class="study-cell" data-study-index="{{ loop.index }}">
+                    {{ render_feature_cell(paper, paper.extracted_features.instagram_users_million, '', 'instagram_users_million', 'Instagram Users (Million)', loop.index) }}
+                  </div>
+                  {% endfor %}
+                </div>
+
+                <div class="table-row section-content" data-section="internet-social-media">
+                  <div class="feature-cell"><div class="feature-name">X Users (Million)</div></div>
+                  {% for paper in papers %}
+                  <div class="study-cell" data-study-index="{{ loop.index }}">
+                    {{ render_feature_cell(paper, paper.extracted_features.x_users_million, '', 'x_users_million', 'X Users (Million)', loop.index) }}
+                  </div>
+                  {% endfor %}
+                </div>
+
+                <div class="table-row section-content" data-section="internet-social-media">
+                  <div class="feature-cell"><div class="feature-name">TikTok Users (Million)</div></div>
+                  {% for paper in papers %}
+                  <div class="study-cell" data-study-index="{{ loop.index }}">
+                    {{ render_feature_cell(paper, paper.extracted_features.tiktok_users_million, '', 'tiktok_users_million', 'TikTok Users (Million)', loop.index) }}
+                  </div>
+                  {% endfor %}
+                </div>
+
+                <div class="table-row section-content" data-section="internet-social-media">
+                  <div class="feature-cell"><div class="feature-name">LinkedIn Users (Million)</div></div>
+                  {% for paper in papers %}
+                  <div class="study-cell" data-study-index="{{ loop.index }}">
+                    {{ render_feature_cell(paper, paper.extracted_features.linkedin_users_million, '', 'linkedin_users_million', 'LinkedIn Users (Million)', loop.index) }}
+                  </div>
+                  {% endfor %}
+                </div>
+
+                <div class="table-row section-content" data-section="internet-social-media">
+                  <div class="feature-cell"><div class="feature-name">Messenger Users (Million)</div></div>
+                  {% for paper in papers %}
+                  <div class="study-cell" data-study-index="{{ loop.index }}">
+                    {{ render_feature_cell(paper, paper.extracted_features.messenger_users_million, '', 'messenger_users_million', 'Messenger Users (Million)', loop.index) }}
+                  </div>
+                  {% endfor %}
+                </div>
+
+                <div class="table-row section-content" data-section="internet-social-media">
+                  <div class="feature-cell"><div class="feature-name">Snapchat Users (Million)</div></div>
+                  {% for paper in papers %}
+                  <div class="study-cell" data-study-index="{{ loop.index }}">
+                    {{ render_feature_cell(paper, paper.extracted_features.snapchat_users_million, '', 'snapchat_users_million', 'Snapchat Users (Million)', loop.index) }}
+                  </div>
+                  {% endfor %}
+                </div>
+
+                <div class="table-row section-content" data-section="internet-social-media">
+                  <div class="feature-cell"><div class="feature-name">Pinterest Users (Million)</div></div>
+                  {% for paper in papers %}
+                  <div class="study-cell" data-study-index="{{ loop.index }}">
+                    {{ render_feature_cell(paper, paper.extracted_features.pinterest_users_million, '', 'pinterest_users_million', 'Pinterest Users (Million)', loop.index) }}
+                  </div>
+                  {% endfor %}
+                </div>
             </div>
         </div>
         {% else %}
@@ -517,7 +751,7 @@
     };
 
     let comparisonPapersData = [];
- 
+
     // Load comparison from localStorage if no papers are provided via URL
     document.addEventListener('DOMContentLoaded', function() {
         modalElements.container = document.getElementById('fullTextModal');
@@ -536,7 +770,7 @@
                 openFullTextFromButton(button);
             });
         });
- 
+
         setupInlineExpanders();
 
          document.addEventListener('keydown', handleModalKeydown);
@@ -553,7 +787,7 @@
 
         const urlParams = new URLSearchParams(window.location.search);
         const idsParam = urlParams.get('ids');
-        
+
         if (!idsParam) {
             // Load from localStorage
             const comparisonIds = JSON.parse(localStorage.getItem('comparisonIds') || '[]');
@@ -567,15 +801,15 @@
             console.log('Setting paper count to:', paperCount);
             document.documentElement.style.setProperty('--paper-count', paperCount);
             console.log('CSS variable set:', document.documentElement.style.getPropertyValue('--paper-count'));
-            
+
             // Track comparison page visit
             trackVisit(idsParam.split(','));
         }
-        
+
         // Check content length and hide unnecessary View Full buttons
         setTimeout(checkContentLength, 100);
     });
-    
+
     // Track comparison page visit
     function trackVisit(paperIds) {
         fetch('/api/track/compare_view', {
@@ -593,7 +827,7 @@
             console.error('Error tracking compare view:', error);
         });
     }
-    
+
     function addStudy() {
         window.location.href = "{{ url_for('search') }}";
     }
@@ -623,24 +857,24 @@
             window.location.href = compareUrl;
         }
     }
- 
+
     function downloadComparison() {
         try {
             // Get comparison data
             const comparisonData = generateComparisonData();
-            
+
             if (!comparisonData.papers || comparisonData.papers.length === 0) {
                 showNotification('No studies to download. Please add studies to compare first.', 'warning');
                 return;
             }
-            
+
             // Create CSV content
             const csvContent = generateCSV(comparisonData);
-            
+
             // Create timestamp for filename
             const timestamp = new Date().toISOString().split('T')[0];
             const filename = `comparison_${timestamp}.csv`;
-            
+
             // Create and download file
             const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
             const link = document.createElement('a');
@@ -651,21 +885,21 @@
             document.body.appendChild(link);
             link.click();
             document.body.removeChild(link);
-            
+
             // Clean up the URL object
             setTimeout(() => URL.revokeObjectURL(url), 100);
-            
+
             // Track download
             const paperIds = comparisonData.papers.map(p => p.id);
             trackDownload(paperIds);
-            
+
             showNotification('Comparison downloaded successfully as ' + filename, 'success');
         } catch (error) {
             console.error('Error downloading comparison:', error);
             showNotification('Failed to download comparison. Please try again.', 'error');
         }
     }
-    
+
     // Track comparison download
     function trackDownload(paperIds) {
         fetch('/api/track/download', {
@@ -683,14 +917,14 @@
             console.error('Error tracking download:', error);
         });
     }
-    
+
     function saveComparison() {
         // Get comparison data
         const comparisonData = generateComparisonData();
-        
+
         // Get saved comparisons
         let savedComparisons = JSON.parse(localStorage.getItem('savedComparisons') || '[]');
-        
+
         // Create new comparison entry
         const comparisonEntry = {
             id: Date.now().toString(),
@@ -699,35 +933,41 @@
             papers: comparisonData.papers,
             features: comparisonData.features
         };
-        
+
         // Add to saved comparisons
         savedComparisons.push(comparisonEntry);
         localStorage.setItem('savedComparisons', JSON.stringify(savedComparisons));
-        
+
         showNotification('Comparison saved successfully');
     }
-    
+
     function generateComparisonData() {
         const papers = Array.isArray(comparisonPapersData) ? comparisonPapersData : [];
         const features = [
-            'Authors', 'Title', 'Journal', 'Year', 'Citation', 'Abstract',
-            'Sample Size', 'Country / Region', 'Recruitment Source', 'Demographics', 'Incentive',
-            'Treatment / Independent variable(s)',
-            'Outcome / Dependent variable(s)', 'Survey Questions', 'Analysis Equations',
-            'Main Effects', 'Moderators', 'Moderation Results',
-            'Socio-cultural context', 'Political context', 'Platform / Technological context', 'Temporal context'
-        ];
-        
+              'Authors', 'Title', 'Journal', 'Year', 'Citation', 'Abstract',
+              'Sample Size', 'Country / Region', 'Recruitment Source', 'Demographics', 'Incentive',
+              'Treatment / Independent variable(s)',
+              'Outcome / Dependent variable(s)', 'Survey Questions', 'Analysis Equations',
+              'Main Effects', 'Moderators', 'Moderation Results',
+              'Socio-cultural context', 'Political context', 'Platform / Technological context', 'Temporal context',
+
+              'Democracy', 'Press Freedom', 'Internet Freedom', 'Internet Penetration', 'Governance', 'Polarization',
+              'Population (Million)', 'Internet Users (Million)', 'Social Media Users (Million)',
+              'YouTube Users (Million)', 'Facebook Users (Million)', 'Instagram Users (Million)',
+              'X Users (Million)', 'TikTok Users (Million)', 'LinkedIn Users (Million)',
+              'Messenger Users (Million)', 'Snapchat Users (Million)', 'Pinterest Users (Million)'
+            ];
+
         return { papers, features };
     }
-    
+
     function generateCSV(data) {
         const comparisonPapers = Array.isArray(data?.papers) ? data.papers : [];
         const comparisonFeatures = Array.isArray(data?.features) ? data.features : [];
-         
+
         // Create header row
         let csv = 'Feature,' + comparisonPapers.map((paper, index) => `Study ${index + 1}`).join(',') + '\n';
-        
+
         // Add data rows
         comparisonFeatures.forEach(feature => {
             const row = [feature];
@@ -800,6 +1040,61 @@
                     case 'Temporal context':
                         value = paper.extracted_features.temporal_context || '';
                         break;
+                    case 'Democracy':
+                      value = paper.extracted_features.democracy || '';
+                      break;
+                    case 'Press Freedom':
+                      value = paper.extracted_features.press_freedom || '';
+                      break;
+                    case 'Internet Freedom':
+                      value = paper.extracted_features.Internet_freedom || '';
+                      break;
+                    case 'Internet Penetration':
+                      value = paper.extracted_features.internet_penetration || '';
+                      break;
+                    case 'Governance':
+                      value = paper.extracted_features.governance || '';
+                      break;
+                    case 'Polarization':
+                      value = paper.extracted_features.polarization || '';
+                      break;
+
+                    case 'Population (Million)':
+                      value = paper.extracted_features.population_million || '';
+                      break;
+                    case 'Internet Users (Million)':
+                      value = paper.extracted_features.internet_users_million || '';
+                      break;
+                    case 'Social Media Users (Million)':
+                      value = paper.extracted_features.social_media_users_million || '';
+                      break;
+                    case 'YouTube Users (Million)':
+                      value = paper.extracted_features.youtube_users_million || '';
+                      break;
+                    case 'Facebook Users (Million)':
+                      value = paper.extracted_features.facebook_users_million || '';
+                      break;
+                    case 'Instagram Users (Million)':
+                      value = paper.extracted_features.instagram_users_million || '';
+                      break;
+                    case 'X Users (Million)':
+                      value = paper.extracted_features.x_users_million || '';
+                      break;
+                    case 'TikTok Users (Million)':
+                      value = paper.extracted_features.tiktok_users_million || '';
+                      break;
+                    case 'LinkedIn Users (Million)':
+                      value = paper.extracted_features.linkedin_users_million || '';
+                      break;
+                    case 'Messenger Users (Million)':
+                      value = paper.extracted_features.messenger_users_million || '';
+                      break;
+                    case 'Snapchat Users (Million)':
+                      value = paper.extracted_features.snapchat_users_million || '';
+                      break;
+                    case 'Pinterest Users (Million)':
+                      value = paper.extracted_features.pinterest_users_million || '';
+                      break;
                 }
                 // Convert to string and escape commas and quotes in CSV
                 value = String(value || '');
@@ -811,15 +1106,15 @@
             });
             csv += row.join(',') + '\n';
         });
-        
+
         return csv;
     }
-    
+
     function clearComparison() {
         localStorage.removeItem('comparisonIds');
         window.location.href = "{{ url_for('compare') }}";
     }
-    
+
     function showNotification(message, type = 'success') {
         // Define colors for different types
         const colors = {
@@ -828,7 +1123,7 @@
             error: '#dc3545',
             info: '#17a2b8'
         };
-        
+
         // Create notification element
         const notification = document.createElement('div');
         notification.style.cssText = `
@@ -848,7 +1143,7 @@
         `;
         notification.textContent = message;
         document.body.appendChild(notification);
-        
+
         // Remove after 3 seconds
         setTimeout(() => {
             if (document.body.contains(notification)) {
@@ -856,7 +1151,7 @@
             }
         }, 3000);
     }
-    
+
     function openFullTextFromButton(button) {
         if (!button) {
             return;
@@ -995,7 +1290,7 @@
                 const sectionHeader = this.closest('.section-header');
                 const sectionName = sectionHeader.dataset.section;
                 const isExpanded = this.getAttribute('aria-expanded') === 'true';
-                
+
                 // Toggle all rows with matching data-section
                 document.querySelectorAll(`.section-content[data-section="${sectionName}"]`).forEach(row => {
                     if (isExpanded) {
@@ -1004,7 +1299,7 @@
                         row.style.display = '';
                     }
                 });
-                
+
                 // Update button state
                 this.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
                 const arrow = this.querySelector('.section-arrow');
