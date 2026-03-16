@@ -3,7 +3,7 @@
 DATA SUMMARY
 ============================================================
 
-Total records: 520
+Total records: 502
 Countries: 5
 Year range: 2010 - 2025
 Indicators: 8
@@ -16,14 +16,14 @@ Indicators: 8
   Liberal Democracy: 75
   Polarization: 75
   Trust in News: 33
-  Internet Freedom: 30
+  Internet Freedom: 12
 
 --- Records by Country ---
   Bosnia and Herzegovina: 92
   Cyprus: 91
   Denmark: 103
-  United Kingdom: 117
-  United States: 117
+  United Kingdom: 108
+  United States: 108
 
 --- Data Coverage Check ---
   Denmark - Liberal Democracy: 15 years (2010-2024)
@@ -35,7 +35,7 @@ Indicators: 8
   Denmark - Covid Period: 16 years (2010-2025)
   Denmark - Trust in News: 11 years (2015-2025)
   United States - Liberal Democracy: 15 years (2010-2024)
-  United States - Internet Freedom: 15 years (2011-2025)
+  United States - Internet Freedom: 6 years (2019-2024)
   United States - Governance Quality: 15 years (2010-2024)
   United States - Polarization: 15 years (2010-2024)
   United States - Internet Penetration: 14 years (2010-2023)
@@ -43,7 +43,7 @@ Indicators: 8
   United States - Covid Period: 16 years (2010-2025)
   United States - Trust in News: 11 years (2015-2025)
   United Kingdom - Liberal Democracy: 15 years (2010-2024)
-  United Kingdom - Internet Freedom: 15 years (2011-2025)
+  United Kingdom - Internet Freedom: 6 years (2019-2024)
   United Kingdom - Governance Quality: 15 years (2010-2024)
   United Kingdom - Polarization: 15 years (2010-2024)
   United Kingdom - Internet Penetration: 14 years (2010-2023)

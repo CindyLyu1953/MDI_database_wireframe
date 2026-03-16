@@ -294,35 +294,30 @@ United Kingdom,2010,Polarization,0.748,V-Dem
 United Kingdom,2011,Covid Period,0.0,Manual
 United Kingdom,2011,Election Period,0.0,Manual
 United Kingdom,2011,Governance Quality,73.2702147,WGI
-United Kingdom,2011,Internet Freedom,75.0,Freedom House
 United Kingdom,2011,Internet Penetration,85.38,World Bank
 United Kingdom,2011,Liberal Democracy,0.803,V-Dem
 United Kingdom,2011,Polarization,0.748,V-Dem
 United Kingdom,2012,Covid Period,0.0,Manual
 United Kingdom,2012,Election Period,0.0,Manual
 United Kingdom,2012,Governance Quality,73.8956575,WGI
-United Kingdom,2012,Internet Freedom,75.0,Freedom House
 United Kingdom,2012,Internet Penetration,87.48,World Bank
 United Kingdom,2012,Liberal Democracy,0.804,V-Dem
 United Kingdom,2012,Polarization,0.749,V-Dem
 United Kingdom,2013,Covid Period,0.0,Manual
 United Kingdom,2013,Election Period,0.0,Manual
 United Kingdom,2013,Governance Quality,73.7518389,WGI
-United Kingdom,2013,Internet Freedom,76.0,Freedom House
 United Kingdom,2013,Internet Penetration,89.84,World Bank
 United Kingdom,2013,Liberal Democracy,0.799,V-Dem
 United Kingdom,2013,Polarization,0.74,V-Dem
 United Kingdom,2014,Covid Period,0.0,Manual
 United Kingdom,2014,Election Period,0.0,Manual
 United Kingdom,2014,Governance Quality,75.180368,WGI
-United Kingdom,2014,Internet Freedom,76.0,Freedom House
 United Kingdom,2014,Internet Penetration,91.61,World Bank
 United Kingdom,2014,Liberal Democracy,0.8,V-Dem
 United Kingdom,2014,Polarization,0.739,V-Dem
 United Kingdom,2015,Covid Period,0.0,Manual
 United Kingdom,2015,Election Period,1.0,Manual
 United Kingdom,2015,Governance Quality,75.0691258,WGI
-United Kingdom,2015,Internet Freedom,76.0,Freedom House
 United Kingdom,2015,Internet Penetration,92.0,World Bank
 United Kingdom,2015,Liberal Democracy,0.791,V-Dem
 United Kingdom,2015,Polarization,0.733,V-Dem
@@ -330,7 +325,6 @@ United Kingdom,2015,Trust in News,51.0,Reuters Institute
 United Kingdom,2016,Covid Period,0.0,Manual
 United Kingdom,2016,Election Period,0.0,Manual
 United Kingdom,2016,Governance Quality,73.5786913,WGI
-United Kingdom,2016,Internet Freedom,77.0,Freedom House
 United Kingdom,2016,Internet Penetration,94.78,World Bank
 United Kingdom,2016,Liberal Democracy,0.788,V-Dem
 United Kingdom,2016,Polarization,0.73,V-Dem
@@ -338,7 +332,6 @@ United Kingdom,2016,Trust in News,50.0,Reuters Institute
 United Kingdom,2017,Covid Period,0.0,Manual
 United Kingdom,2017,Election Period,1.0,Manual
 United Kingdom,2017,Governance Quality,73.42161399999999,WGI
-United Kingdom,2017,Internet Freedom,76.0,Freedom House
 United Kingdom,2017,Internet Penetration,90.42,World Bank
 United Kingdom,2017,Liberal Democracy,0.804,V-Dem
 United Kingdom,2017,Polarization,0.741,V-Dem
@@ -346,7 +339,6 @@ United Kingdom,2017,Trust in News,43.0,Reuters Institute
 United Kingdom,2018,Covid Period,0.0,Manual
 United Kingdom,2018,Election Period,0.0,Manual
 United Kingdom,2018,Governance Quality,70.72153229999999,WGI
-United Kingdom,2018,Internet Freedom,77.0,Freedom House
 United Kingdom,2018,Internet Penetration,90.69,World Bank
 United Kingdom,2018,Liberal Democracy,0.809,V-Dem
 United Kingdom,2018,Polarization,0.751,V-Dem
@@ -400,7 +392,6 @@ United Kingdom,2024,Polarization,0.723,V-Dem
 United Kingdom,2024,Trust in News,36.0,Reuters Institute
 United Kingdom,2025,Covid Period,0.0,Manual
 United Kingdom,2025,Election Period,0.0,Manual
-United Kingdom,2025,Internet Freedom,24.0,Freedom House
 United Kingdom,2025,Trust in News,35.0,Reuters Institute
 United States,2010,Covid Period,0.0,Manual
 United States,2010,Election Period,1.0,Manual
@@ -411,35 +402,30 @@ United States,2010,Polarization,0.862,V-Dem
 United States,2011,Covid Period,0.0,Manual
 United States,2011,Election Period,0.0,Manual
 United States,2011,Governance Quality,76.5625941,WGI
-United States,2011,Internet Freedom,87.0,Freedom House
 United States,2011,Internet Penetration,69.73,World Bank
 United States,2011,Liberal Democracy,0.848,V-Dem
 United States,2011,Polarization,0.86,V-Dem
 United States,2012,Covid Period,0.0,Manual
 United States,2012,Election Period,1.0,Manual
 United States,2012,Governance Quality,76.4977694,WGI
-United States,2012,Internet Freedom,88.0,Freedom House
 United States,2012,Internet Penetration,74.7,World Bank
 United States,2012,Liberal Democracy,0.847,V-Dem
 United States,2012,Polarization,0.859,V-Dem
 United States,2013,Covid Period,0.0,Manual
 United States,2013,Election Period,0.0,Manual
 United States,2013,Governance Quality,75.7935684,WGI
-United States,2013,Internet Freedom,83.0,Freedom House
 United States,2013,Internet Penetration,71.4,World Bank
 United States,2013,Liberal Democracy,0.85,V-Dem
 United States,2013,Polarization,0.862,V-Dem
 United States,2014,Covid Period,0.0,Manual
 United States,2014,Election Period,1.0,Manual
 United States,2014,Governance Quality,77.3070017,WGI
-United States,2014,Internet Freedom,81.0,Freedom House
 United States,2014,Internet Penetration,73.0,World Bank
 United States,2014,Liberal Democracy,0.847,V-Dem
 United States,2014,Polarization,0.858,V-Dem
 United States,2015,Covid Period,0.0,Manual
 United States,2015,Election Period,0.0,Manual
 United States,2015,Governance Quality,77.2686791,WGI
-United States,2015,Internet Freedom,81.0,Freedom House
 United States,2015,Internet Penetration,74.55,World Bank
 United States,2015,Liberal Democracy,0.848,V-Dem
 United States,2015,Polarization,0.853,V-Dem
@@ -447,7 +433,6 @@ United States,2015,Trust in News,32.0,Reuters Institute
 United States,2016,Covid Period,0.0,Manual
 United States,2016,Election Period,1.0,Manual
 United States,2016,Governance Quality,71.49570969999999,WGI
-United States,2016,Internet Freedom,82.0,Freedom House
 United States,2016,Internet Penetration,85.54,World Bank
 United States,2016,Liberal Democracy,0.832,V-Dem
 United States,2016,Polarization,0.813,V-Dem
@@ -455,7 +440,6 @@ United States,2016,Trust in News,33.0,Reuters Institute
 United States,2017,Covid Period,0.0,Manual
 United States,2017,Election Period,0.0,Manual
 United States,2017,Governance Quality,67.7755797,WGI
-United States,2017,Internet Freedom,79.0,Freedom House
 United States,2017,Internet Penetration,87.27,World Bank
 United States,2017,Liberal Democracy,0.745,V-Dem
 United States,2017,Polarization,0.63,V-Dem
@@ -463,7 +447,6 @@ United States,2017,Trust in News,38.0,Reuters Institute
 United States,2018,Covid Period,0.0,Manual
 United States,2018,Election Period,1.0,Manual
 United States,2018,Governance Quality,70.8565316,WGI
-United States,2018,Internet Freedom,78.0,Freedom House
 United States,2018,Internet Penetration,88.5,World Bank
 United States,2018,Liberal Democracy,0.742,V-Dem
 United States,2018,Polarization,0.629,V-Dem
@@ -517,5 +500,4 @@ United States,2024,Polarization,0.739,V-Dem
 United States,2024,Trust in News,32.0,Reuters Institute
 United States,2025,Covid Period,0.0,Manual
 United States,2025,Election Period,0.0,Manual
-United States,2025,Internet Freedom,27.0,Freedom House
 United States,2025,Trust in News,30.0,Reuters Institute
