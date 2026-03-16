@@ -115,11 +115,11 @@
                                 </svg>
                                 <span class="favorite-text">Favorite</span>
                             </button>
-                            <button class="btn btn-outline btn-sm" onclick="addToCompare('{{ paper.id }}')">
+                            <button class="btn btn-outline btn-sm compare-btn" data-paper-id="{{ paper.id }}" onclick="toggleCompare('{{ paper.id }}')">
                                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                     <path d="M9 11H5a2 2 0 0 0-2 2v3c0 1.1.9 2 2 2h4m0-7v7m0-7h10a2 2 0 0 1 2 2v3c0 1.1-.9 2-2 2H9m0-7V9a2 2 0 0 1 2-2h2a2 2 0 0 1 2 2v2"></path>
                                 </svg>
-                                Compare
+                                <span class="compare-text">Compare</span>
                             </button>
                         </div>
                     </div>
@@ -275,7 +275,7 @@
         window.location.href = "{{ url_for('search') }}?q=" + encodeURIComponent(query);
     }
     
-    // Restore filters from URL
+    // Restore filters from URL and init Compare button states
     document.addEventListener('DOMContentLoaded', function() {
         const urlParams = new URLSearchParams(window.location.search);
         
@@ -291,37 +291,55 @@
         if (urlParams.get('country')) {
             document.getElementById('countryFilter').value = urlParams.get('country');
         }
+        
+        initCompareButtons();
     });
 
-    function addToCompare(paperId) {
-        // Get current comparison list from localStorage
+    function toggleCompare(paperId) {
+        const button = event.target.closest('button.compare-btn');
         let comparisonIds = JSON.parse(localStorage.getItem('comparisonIds') || '[]');
         
-        // Add new paper if not already in list
-        if (!comparisonIds.includes(paperId)) {
+        if (comparisonIds.includes(paperId)) {
+            // Remove from comparison
+            comparisonIds = comparisonIds.filter(id => id !== paperId);
+            localStorage.setItem('comparisonIds', JSON.stringify(comparisonIds));
+            setCompareButtonState(button, false);
+            showNotification('Removed from comparison');
+        } else {
+            // Add to comparison
             comparisonIds.push(paperId);
-            
-            // Limit to maximum 5 papers for comparison
             if (comparisonIds.length > MAX_COMPARISON_PAPERS) {
                 comparisonIds = comparisonIds.slice(-MAX_COMPARISON_PAPERS);
                 alert(`Maximum ${MAX_COMPARISON_PAPERS} papers can be compared. The oldest paper has been removed.`);
             }
-            
-            // Save to localStorage
             localStorage.setItem('comparisonIds', JSON.stringify(comparisonIds));
-            
-            // Update comparisons count
             updateUserStats('comparisons');
-            
-            // Update button text to show it's been added
-            event.target.textContent = 'Added';
-            event.target.style.backgroundColor = '#28a745';
-            
-            // Show notification
+            setCompareButtonState(button, true);
             showNotification(`Added to comparison (${comparisonIds.length}/${MAX_COMPARISON_PAPERS})`);
-        } else {
-            alert('This paper is already in the comparison list.');
         }
+    }
+    
+    function setCompareButtonState(button, isAdded) {
+        const textSpan = button.querySelector('.compare-text');
+        if (isAdded) {
+            button.classList.add('compare-btn-added');
+            button.classList.remove('btn-outline');
+            textSpan.textContent = 'Added';
+        } else {
+            button.classList.remove('compare-btn-added');
+            button.classList.add('btn-outline');
+            textSpan.textContent = 'Compare';
+        }
+    }
+    
+    function initCompareButtons() {
+        const comparisonIds = JSON.parse(localStorage.getItem('comparisonIds') || '[]');
+        document.querySelectorAll('button.compare-btn').forEach(button => {
+            const paperId = button.getAttribute('data-paper-id');
+            if (comparisonIds.includes(paperId)) {
+                setCompareButtonState(button, true);
+            }
+        });
     }
     
     function updateUserStats(action) {

@@ -189,6 +189,23 @@
     font-size: 0.75rem;
 }
 
+/* Compare button - Added state (green) when in comparison list */
+.compare-btn-added {
+    background-color: #28a745 !important;
+    border-color: #28a745 !important;
+    color: white !important;
+}
+
+.compare-btn-added:hover {
+    background-color: #218838 !important;
+    border-color: #1e7e34 !important;
+    color: white !important;
+}
+
+.compare-btn-added svg {
+    stroke: white;
+}
+
 /* Make "View Verbatim Text" button slightly larger on Search page */
 .search-page .full-text-trigger,
 .results-section .full-text-trigger {

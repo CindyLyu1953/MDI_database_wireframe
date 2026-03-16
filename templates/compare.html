@@ -2,6 +2,8 @@
 
 {% block title %}Research Comparison - StudyLens{% endblock %}
 
+{% block body_class %}compare-page{% endblock %}
+
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/compare.css') }}">
 {% endblock %}
@@ -94,6 +96,125 @@
     </span>
 {% endmacro %}
 
+{% macro render_feature_by_key(paper, feature_key, feature_label, study_index) %}
+    {% set summary = '' %}
+    {% set verbatim = '' %}
+
+    {% if feature_key == 'authors' %}
+        {% set summary = paper.authors|join(', ') %}
+        {% set verbatim = paper.authors_verbatim %}
+    {% elif feature_key == 'title' %}
+        {% set summary = paper.title %}
+        {% set verbatim = paper.title_verbatim %}
+    {% elif feature_key == 'journal' %}
+        {% set summary = paper.journal %}
+        {% set verbatim = paper.journal_verbatim %}
+    {% elif feature_key == 'year' %}
+        {% set summary = paper.year %}
+    {% elif feature_key == 'citation' %}
+        {% set summary = paper.citation or '' %}
+    {% elif feature_key == 'abstract' %}
+        {% set summary = paper.abstract %}
+        {% set verbatim = paper.abstract_verbatim %}
+    {% elif feature_key == 'sample_size' %}
+        {% if paper.sample_size and paper.sample_size > 0 %}
+            {% set summary = "{:,}".format(paper.sample_size) %}
+        {% elif paper.extracted_features.sample_size %}
+            {% set summary = paper.extracted_features.sample_size %}
+        {% endif %}
+        {% set verbatim = paper.extracted_features.sample_size_verbatim %}
+    {% elif feature_key == 'country_region' %}
+        {% set summary = paper.extracted_features.country_region %}
+        {% set verbatim = paper.extracted_features.country_region_verbatim %}
+    {% elif feature_key == 'recruitment_source' %}
+        {% set summary = paper.extracted_features.recruitment_source %}
+        {% set verbatim = paper.extracted_features.recruitment_source_verbatim %}
+    {% elif feature_key == 'demographics' %}
+        {% set summary = paper.extracted_features.demographics %}
+        {% set verbatim = paper.extracted_features.demographics_verbatim %}
+    {% elif feature_key == 'incentive' %}
+        {% set summary = paper.extracted_features.incentive %}
+        {% set verbatim = paper.extracted_features.incentive_verbatim %}
+    {% elif feature_key == 'independent_variables' %}
+        {% set summary = paper.extracted_features.independent_variables %}
+        {% set verbatim = paper.extracted_features.independent_variables_verbatim %}
+    {% elif feature_key == 'dependent_variables' %}
+        {% set summary = paper.extracted_features.dependent_variables %}
+        {% set verbatim = paper.extracted_features.dependent_variables_verbatim %}
+    {% elif feature_key == 'survey_questions' %}
+        {% set summary = paper.extracted_features.survey_questions %}
+        {% set verbatim = paper.extracted_features.survey_questions_verbatim %}
+    {% elif feature_key == 'analysis_equations' %}
+        {% set summary = paper.extracted_features.analysis_equations %}
+        {% set verbatim = paper.extracted_features.analysis_equations_verbatim %}
+    {% elif feature_key == 'main_effects' %}
+        {% set summary = paper.extracted_features.main_effects %}
+        {% set verbatim = paper.extracted_features.main_effects_verbatim %}
+    {% elif feature_key == 'moderators' %}
+        {% set summary = paper.extracted_features.moderators %}
+        {% set verbatim = paper.extracted_features.moderators_verbatim %}
+    {% elif feature_key == 'moderation_results' %}
+        {% set summary = paper.extracted_features.moderation_results %}
+        {% set verbatim = paper.extracted_features.moderation_results_verbatim %}
+    {% elif feature_key == 'sociocultural_context' %}
+        {% set summary = paper.extracted_features.sociocultural_context %}
+        {% set verbatim = paper.extracted_features.sociocultural_context_verbatim %}
+    {% elif feature_key == 'political_context' %}
+        {% set summary = paper.extracted_features.political_context %}
+        {% set verbatim = paper.extracted_features.political_context_verbatim %}
+    {% elif feature_key == 'platform_technological_context' %}
+        {% set summary = paper.extracted_features.platform_technological_context %}
+        {% set verbatim = paper.extracted_features.platform_technological_context_verbatim %}
+    {% elif feature_key == 'temporal_context' %}
+        {% set summary = paper.extracted_features.temporal_context %}
+        {% set verbatim = paper.extracted_features.temporal_context_verbatim %}
+    {% elif feature_key == 'democracy' %}
+        {% set summary = paper.extracted_features.democracy %}
+    {% elif feature_key == 'press_freedom' %}
+        {% set summary = paper.extracted_features.press_freedom %}
+    {% elif feature_key == 'Internet_freedom' %}
+        {% set summary = paper.extracted_features.Internet_freedom %}
+    {% elif feature_key == 'internet_penetration' %}
+        {% set summary = paper.extracted_features.internet_penetration %}
+    {% elif feature_key == 'governance' %}
+        {% set summary = paper.extracted_features.governance %}
+    {% elif feature_key == 'deliberative_democracy' %}
+        {% set summary = paper.extracted_features.deliberative_democracy %}
+    {% elif feature_key == 'population_million' %}
+        {% set summary = paper.extracted_features.population_million %}
+    {% elif feature_key == 'internet_users_million' %}
+        {% set summary = paper.extracted_features.internet_users_million %}
+    {% elif feature_key == 'social_media_users_million' %}
+        {% set summary = paper.extracted_features.social_media_users_million %}
+    {% elif feature_key == 'youtube_users_million' %}
+        {% set summary = paper.extracted_features.youtube_users_million %}
+    {% elif feature_key == 'facebook_users_million' %}
+        {% set summary = paper.extracted_features.facebook_users_million %}
+    {% elif feature_key == 'instagram_users_million' %}
+        {% set summary = paper.extracted_features.instagram_users_million %}
+    {% elif feature_key == 'x_users_million' %}
+        {% set summary = paper.extracted_features.x_users_million %}
+    {% elif feature_key == 'tiktok_users_million' %}
+        {% set summary = paper.extracted_features.tiktok_users_million %}
+    {% elif feature_key == 'linkedin_users_million' %}
+        {% set summary = paper.extracted_features.linkedin_users_million %}
+    {% elif feature_key == 'messenger_users_million' %}
+        {% set summary = paper.extracted_features.messenger_users_million %}
+    {% elif feature_key == 'snapchat_users_million' %}
+        {% set summary = paper.extracted_features.snapchat_users_million %}
+    {% elif feature_key == 'pinterest_users_million' %}
+        {% set summary = paper.extracted_features.pinterest_users_million %}
+    {% endif %}
+
+    {% if summary %}
+        {{ render_feature_cell(paper, summary, verbatim, feature_key, feature_label, study_index) }}
+    {% else %}
+        <div class="feature-content">
+            <div class="feature-summary"><p>—</p></div>
+        </div>
+    {% endif %}
+{% endmacro %}
+
 {% block content %}
 <div class="container">
     <!-- Comparison Header -->
@@ -142,572 +263,129 @@
     <!-- Comparison Content -->
     <section class="compare-content">
         {% if papers %}
-        <div class="comparison-table-container">
-            <div class="comparison-table">
-                <!-- Table Header -->
-                <div class="table-header">
-                    <div class="header-cell feature-column">Features</div>
-                    {% for paper in papers %}
-                    <div class="header-cell study-column">
-                        <div class="study-header">
-                            <h3>Study {{ loop.index }}</h3>
-                            <button class="remove-study-btn" type="button" onclick="removeStudy('{{ paper.id }}')" aria-label="Remove study {{ loop.index }}">
-                                &times;
-                            </button>
-                        </div>
-                        <div class="study-title">{{ paper.title }}</div>
-                    </div>
-                    {% endfor %}
-                </div>
+        {% set feature_groups = [
+            {
+                'id': 'bibliographic',
+                'label': 'Bibliographic',
+                'features': [
+                    {'key': 'authors', 'label': 'Authors'},
+                    {'key': 'title', 'label': 'Title'},
+                    {'key': 'journal', 'label': 'Journal'},
+                    {'key': 'year', 'label': 'Year'},
+                    {'key': 'citation', 'label': 'Citation'},
+                    {'key': 'abstract', 'label': 'Abstract'}
+                ]
+            },
+            {
+                'id': 'research-design',
+                'label': 'Research Design & Sample',
+                'features': [
+                    {'key': 'sample_size', 'label': 'Sample Size'},
+                    {'key': 'country_region', 'label': 'Country / Region'},
+                    {'key': 'recruitment_source', 'label': 'Recruitment Source'},
+                    {'key': 'demographics', 'label': 'Demographics'},
+                    {'key': 'incentive', 'label': 'Incentive'}
+                ]
+            },
+            {
+                'id': 'measurement-analysis',
+                'label': 'Measurement & Analysis',
+                'features': [
+                    {'key': 'independent_variables', 'label': 'Treatment / Independent variable(s)'},
+                    {'key': 'dependent_variables', 'label': 'Outcome / Dependent variable(s)'},
+                    {'key': 'survey_questions', 'label': 'Survey Questions'},
+                    {'key': 'analysis_equations', 'label': 'Analysis Equations'}
+                ]
+            },
+            {
+                'id': 'findings',
+                'label': 'Findings',
+                'features': [
+                    {'key': 'main_effects', 'label': 'Main Effects'},
+                    {'key': 'moderators', 'label': 'Moderators'},
+                    {'key': 'moderation_results', 'label': 'Moderation Results'}
+                ]
+            },
+            {
+                'id': 'context',
+                'label': 'Context',
+                'features': [
+                    {'key': 'sociocultural_context', 'label': 'Socio-cultural context'},
+                    {'key': 'political_context', 'label': 'Political context'},
+                    {'key': 'platform_technological_context', 'label': 'Platform / Technological context'},
+                    {'key': 'temporal_context', 'label': 'Temporal context'},
+                    {'key': 'democracy', 'label': 'Liberal Democracy Index'},
+                    {'key': 'press_freedom', 'label': 'Press Freedom Index'},
+                    {'key': 'Internet_freedom', 'label': 'Internet Freedom Score'},
+                    {'key': 'internet_penetration', 'label': 'Internet Penetration'},
+                    {'key': 'governance', 'label': 'Political Stability Score'},
+                    {'key': 'deliberative_democracy', 'label': 'Deliberative Democracy Index'}
+                ]
+            },
+            {
+                'id': 'internet-social-media',
+                'label': 'Internet and Social Media Usage',
+                'features': [
+                    {'key': 'population_million', 'label': 'Population (Million)'},
+                    {'key': 'internet_users_million', 'label': 'Internet Users (Million)'},
+                    {'key': 'social_media_users_million', 'label': 'Social Media Users (Million)'},
+                    {'key': 'youtube_users_million', 'label': 'YouTube Users (Million)'},
+                    {'key': 'facebook_users_million', 'label': 'Facebook Users (Million)'},
+                    {'key': 'instagram_users_million', 'label': 'Instagram Users (Million)'},
+                    {'key': 'x_users_million', 'label': 'X Users (Million)'},
+                    {'key': 'tiktok_users_million', 'label': 'TikTok Users (Million)'},
+                    {'key': 'linkedin_users_million', 'label': 'LinkedIn Users (Million)'},
+                    {'key': 'messenger_users_million', 'label': 'Messenger Users (Million)'},
+                    {'key': 'snapchat_users_million', 'label': 'Snapchat Users (Million)'},
+                    {'key': 'pinterest_users_million', 'label': 'Pinterest Users (Million)'}
+                ]
+            }
+        ] %}
 
-                <!-- Bibliographic Section -->
-                <div class="table-row section-header" data-section="bibliographic">
-                    <div class="feature-cell">
-                        <div class="feature-name">
-                            <button type="button" class="section-toggle" aria-expanded="true" aria-label="Toggle Bibliographic section">
-                                <svg class="section-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <span>Bibliographic</span>
-                        </div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell"></div>
-                    {% endfor %}
-                </div>
+        <div class="compare-layout">
+            <aside class="section-nav" aria-label="Feature groups">
+                {% for group in feature_groups %}
+                <button
+                    type="button"
+                    class="section-nav-btn group-{{ group.id }}{% if loop.first %} active{% endif %}"
+                    data-section="{{ group.id }}"
+                    aria-pressed="{% if loop.first %}true{% else %}false{% endif %}">
+                    {{ group.label }}
+                </button>
+                {% endfor %}
+            </aside>
 
-                <div class="table-row section-content" data-section="bibliographic">
-                    <div class="feature-cell">
-                        <div class="feature-name">Authors</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {% set authors_text = paper.authors|join(', ') %}
-                        {% if authors_text %}
-                            {{ render_feature_cell(paper, authors_text, paper.authors_verbatim, 'authors', 'Authors', loop.index) }}
-                        {% else %}
-                            <div class="feature-content">
-                                <div class="feature-summary"><p>—</p></div>
+            <div class="comparison-table-container">
+                <div class="comparison-table">
+                    <div class="table-header">
+                        {% for paper in papers %}
+                        <div class="header-cell study-column study-column-{{ loop.index }}">
+                            <div class="study-header">
+                                <h3>Study {{ loop.index }}</h3>
+                                <button class="remove-study-btn" type="button" onclick="removeStudy('{{ paper.id }}')" aria-label="Remove study {{ loop.index }}">
+                                    &times;
+                                </button>
                             </div>
-                        {% endif %}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="bibliographic">
-                    <div class="feature-cell">
-                        <div class="feature-name">Title</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.title, paper.title_verbatim, 'title', 'Title', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="bibliographic">
-                    <div class="feature-cell">
-                        <div class="feature-name">Journal</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.journal, paper.journal_verbatim, 'journal', 'Journal', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="bibliographic">
-                    <div class="feature-cell">
-                        <div class="feature-name">Year</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        <div class="feature-content">
-                            <div class="feature-summary">
-                                <p>{{ paper.year }}</p>
-                            </div>
+                            <div class="study-title">{{ paper.title }}</div>
                         </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
-                </div>
 
-                <div class="table-row section-content" data-section="bibliographic">
-                    <div class="feature-cell">
-                        <div class="feature-name">Citation</div>
+                    {% for group in feature_groups %}
+                    {% set group_is_first = loop.first %}
+                    {% for feature in group.features %}
+                    <div class="feature-title-row section-content{% if not group_is_first %} section-collapsed{% endif %}" data-section="{{ group.id }}">
+                        <div class="feature-row-title">{{ feature.label }}</div>
                     </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        <div class="feature-content">
-                            <div class="feature-summary">
-                                <p>{{ paper.citation or '' }}</p>
-                            </div>
+                    <div class="table-row section-content{% if not group_is_first %} section-collapsed{% endif %}" data-section="{{ group.id }}">
+                        {% for paper in papers %}
+                        <div class="study-cell" data-study-index="{{ loop.index }}">
+                            {{ render_feature_by_key(paper, feature.key, feature.label, loop.index) }}
                         </div>
+                        {% endfor %}
                     </div>
                     {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="bibliographic">
-                    <div class="feature-cell">
-                        <div class="feature-name">Abstract</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.abstract, paper.abstract_verbatim, 'abstract', 'Abstract', loop.index) }}
-                    </div>
                     {% endfor %}
-                </div>
-
-                <!-- Research Design & Sample Section -->
-                <div class="table-row section-header" data-section="research-design">
-                    <div class="feature-cell">
-                        <div class="feature-name">
-                            <button type="button" class="section-toggle" aria-expanded="true" aria-label="Toggle Research Design & Sample section">
-                                <svg class="section-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <span>Research Design & Sample</span>
-                        </div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell"></div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="research-design">
-                    <div class="feature-cell">
-                        <div class="feature-name">Sample Size</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {% set sample_summary = '' %}
-                        {% if paper.sample_size and paper.sample_size > 0 %}
-                            {% set sample_summary = "{:,}".format(paper.sample_size) %}
-                        {% elif paper.extracted_features.sample_size %}
-                            {% set sample_summary = paper.extracted_features.sample_size %}
-                        {% endif %}
-                        {{ render_feature_cell(paper, sample_summary, paper.extracted_features.sample_size_verbatim, 'sample_size', 'Sample Size', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="research-design">
-                    <div class="feature-cell">
-                        <div class="feature-name">Country / Region</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.country_region, paper.extracted_features.country_region_verbatim, 'country_region', 'Country / Region', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="research-design">
-                    <div class="feature-cell">
-                        <div class="feature-name">Recruitment Source</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.recruitment_source, paper.extracted_features.recruitment_source_verbatim, 'recruitment_source', 'Recruitment Source', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="research-design">
-                    <div class="feature-cell">
-                        <div class="feature-name">Demographics</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.demographics, paper.extracted_features.demographics_verbatim, 'demographics', 'Demographics', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="research-design">
-                    <div class="feature-cell">
-                        <div class="feature-name">Incentive</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.incentive, paper.extracted_features.incentive_verbatim, 'incentive', 'Incentive', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <!-- Measurement & Analysis Section -->
-                <div class="table-row section-header" data-section="measurement-analysis">
-                    <div class="feature-cell">
-                        <div class="feature-name">
-                            <button type="button" class="section-toggle" aria-expanded="true" aria-label="Toggle Measurement & Analysis section">
-                                <svg class="section-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <span>Measurement & Analysis</span>
-                        </div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell"></div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="measurement-analysis">
-                    <div class="feature-cell">
-                        <div class="feature-name">Treatment / Independent variable(s)</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.independent_variables, paper.extracted_features.independent_variables_verbatim, 'independent_variables', 'Treatment / Independent variable(s)', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="measurement-analysis">
-                    <div class="feature-cell">
-                        <div class="feature-name">Outcome / Dependent variable(s)</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.dependent_variables, paper.extracted_features.dependent_variables_verbatim, 'dependent_variables', 'Outcome / Dependent variable(s)', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="measurement-analysis">
-                    <div class="feature-cell">
-                        <div class="feature-name">Survey Questions</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.survey_questions, paper.extracted_features.survey_questions_verbatim, 'survey_questions', 'Survey Questions', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="measurement-analysis">
-                    <div class="feature-cell">
-                        <div class="feature-name">Analysis Equations</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.analysis_equations, paper.extracted_features.analysis_equations_verbatim, 'analysis_equations', 'Analysis Equations', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <!-- Findings Section -->
-                <div class="table-row section-header" data-section="findings">
-                    <div class="feature-cell">
-                        <div class="feature-name">
-                            <button type="button" class="section-toggle" aria-expanded="true" aria-label="Toggle Findings section">
-                                <svg class="section-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <span>Findings</span>
-                        </div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell"></div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="findings">
-                    <div class="feature-cell">
-                        <div class="feature-name">Main Effects</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.main_effects, paper.extracted_features.main_effects_verbatim, 'main_effects', 'Main Effects', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="findings">
-                    <div class="feature-cell">
-                        <div class="feature-name">Moderators</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.moderators, paper.extracted_features.moderators_verbatim, 'moderators', 'Moderators', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="findings">
-                    <div class="feature-cell">
-                        <div class="feature-name">Moderation Results</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.moderation_results, paper.extracted_features.moderation_results_verbatim, 'moderation_results', 'Moderation Results', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <!-- Context Section -->
-                <div class="table-row section-header" data-section="context">
-                    <div class="feature-cell">
-                        <div class="feature-name">
-                            <button type="button" class="section-toggle" aria-expanded="true" aria-label="Toggle Context section">
-                                <svg class="section-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <span>Context</span>
-                        </div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell"></div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="context">
-                    <div class="feature-cell">
-                        <div class="feature-name">Socio-cultural context</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.sociocultural_context, paper.extracted_features.sociocultural_context_verbatim, 'sociocultural_context', 'Socio-cultural context', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="context">
-                    <div class="feature-cell">
-                        <div class="feature-name">Political context</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.political_context, paper.extracted_features.political_context_verbatim, 'political_context', 'Political context', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="context">
-                    <div class="feature-cell">
-                        <div class="feature-name">Platform / Technological context</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.platform_technological_context, paper.extracted_features.platform_technological_context_verbatim, 'platform_technological_context', 'Platform / Technological context', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="context">
-                    <div class="feature-cell">
-                        <div class="feature-name">Temporal context</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.temporal_context, paper.extracted_features.temporal_context_verbatim, 'temporal_context', 'Temporal context', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-                                <!-- NEW Context Metrics -->
-                <div class="table-row section-content" data-section="context">
-                    <div class="feature-cell">
-                        <div class="feature-name">
-                            Liberal Democracy Index {{ info_tooltip('Liberal Democracy Index (V-Dem LDI)') }}
-                        </div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.democracy, '', 'democracy', 'Democracy', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="context">
-                    <div class="feature-cell">
-                        <div class="feature-name">
-                            Press Freedom Index {{ info_tooltip('Press Freedom Index (Reporters Without Borders)') }}
-                        </div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.press_freedom, '', 'press_freedom', 'Press Freedom', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="context">
-                    <div class="feature-cell">
-                        <div class="feature-name">
-                            Internet Freedom Score {{ info_tooltip('Internet Freedom Score (Freedom on the Net)') }}
-                        </div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.Internet_freedom, '', 'Internet_freedom', 'Internet Freedom', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="context">
-                    <div class="feature-cell">
-                        <div class="feature-name">Internet Penetration</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.internet_penetration, '', 'internet_penetration', 'Internet Penetration', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="context">
-                    <div class="feature-cell">
-                        <div class="feature-name">
-                            Political Stability Score {{ info_tooltip('Political Stability Score (World Governance Indicators)') }}
-                        </div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.governance, '', 'governance', 'Governance', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="context">
-                    <div class="feature-cell">
-                        <div class="feature-name">
-                            Deliberative Democracy Index {{ info_tooltip('Deliberative Democracy Index (V-Dem)') }}
-                        </div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.deliberative_democracy, '', 'deliberative_democracy', 'Deliberative Democracy Index', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-header" data-section="internet-social-media">
-                    <div class="feature-cell">
-                        <div class="feature-name">
-                            <button type="button" class="section-toggle" aria-expanded="true" aria-label="Toggle Internet and Social Media Usage section">
-                                <svg class="section-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <span>Internet and Social Media Usage</span>
-                        </div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell"></div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="internet-social-media">
-                    <div class="feature-cell">
-                        <div class="feature-name">Population (Million)</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.population_million, '', 'population_million', 'Population (Million)', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="internet-social-media">
-                  <div class="feature-cell"><div class="feature-name">Internet Users (Million)</div></div>
-                  {% for paper in papers %}
-                  <div class="study-cell" data-study-index="{{ loop.index }}">
-                    {{ render_feature_cell(paper, paper.extracted_features.internet_users_million, '', 'internet_users_million', 'Internet Users (Million)', loop.index) }}
-                  </div>
-                  {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="internet-social-media">
-                  <div class="feature-cell"><div class="feature-name">Social Media Users (Million)</div></div>
-                  {% for paper in papers %}
-                  <div class="study-cell" data-study-index="{{ loop.index }}">
-                    {{ render_feature_cell(paper, paper.extracted_features.social_media_users_million, '', 'social_media_users_million', 'Social Media Users (Million)', loop.index) }}
-                  </div>
-                  {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="internet-social-media">
-                  <div class="feature-cell"><div class="feature-name">YouTube Users (Million)</div></div>
-                  {% for paper in papers %}
-                  <div class="study-cell" data-study-index="{{ loop.index }}">
-                    {{ render_feature_cell(paper, paper.extracted_features.youtube_users_million, '', 'youtube_users_million', 'YouTube Users (Million)', loop.index) }}
-                  </div>
-                  {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="internet-social-media">
-                  <div class="feature-cell"><div class="feature-name">Facebook Users (Million)</div></div>
-                  {% for paper in papers %}
-                  <div class="study-cell" data-study-index="{{ loop.index }}">
-                    {{ render_feature_cell(paper, paper.extracted_features.facebook_users_million, '', 'facebook_users_million', 'Facebook Users (Million)', loop.index) }}
-                  </div>
-                  {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="internet-social-media">
-                  <div class="feature-cell"><div class="feature-name">Instagram Users (Million)</div></div>
-                  {% for paper in papers %}
-                  <div class="study-cell" data-study-index="{{ loop.index }}">
-                    {{ render_feature_cell(paper, paper.extracted_features.instagram_users_million, '', 'instagram_users_million', 'Instagram Users (Million)', loop.index) }}
-                  </div>
-                  {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="internet-social-media">
-                  <div class="feature-cell"><div class="feature-name">X Users (Million)</div></div>
-                  {% for paper in papers %}
-                  <div class="study-cell" data-study-index="{{ loop.index }}">
-                    {{ render_feature_cell(paper, paper.extracted_features.x_users_million, '', 'x_users_million', 'X Users (Million)', loop.index) }}
-                  </div>
-                  {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="internet-social-media">
-                  <div class="feature-cell"><div class="feature-name">TikTok Users (Million)</div></div>
-                  {% for paper in papers %}
-                  <div class="study-cell" data-study-index="{{ loop.index }}">
-                    {{ render_feature_cell(paper, paper.extracted_features.tiktok_users_million, '', 'tiktok_users_million', 'TikTok Users (Million)', loop.index) }}
-                  </div>
-                  {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="internet-social-media">
-                  <div class="feature-cell"><div class="feature-name">LinkedIn Users (Million)</div></div>
-                  {% for paper in papers %}
-                  <div class="study-cell" data-study-index="{{ loop.index }}">
-                    {{ render_feature_cell(paper, paper.extracted_features.linkedin_users_million, '', 'linkedin_users_million', 'LinkedIn Users (Million)', loop.index) }}
-                  </div>
-                  {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="internet-social-media">
-                  <div class="feature-cell"><div class="feature-name">Messenger Users (Million)</div></div>
-                  {% for paper in papers %}
-                  <div class="study-cell" data-study-index="{{ loop.index }}">
-                    {{ render_feature_cell(paper, paper.extracted_features.messenger_users_million, '', 'messenger_users_million', 'Messenger Users (Million)', loop.index) }}
-                  </div>
-                  {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="internet-social-media">
-                  <div class="feature-cell"><div class="feature-name">Snapchat Users (Million)</div></div>
-                  {% for paper in papers %}
-                  <div class="study-cell" data-study-index="{{ loop.index }}">
-                    {{ render_feature_cell(paper, paper.extracted_features.snapchat_users_million, '', 'snapchat_users_million', 'Snapchat Users (Million)', loop.index) }}
-                  </div>
-                  {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="internet-social-media">
-                  <div class="feature-cell"><div class="feature-name">Pinterest Users (Million)</div></div>
-                  {% for paper in papers %}
-                  <div class="study-cell" data-study-index="{{ loop.index }}">
-                    {{ render_feature_cell(paper, paper.extracted_features.pinterest_users_million, '', 'pinterest_users_million', 'Pinterest Users (Million)', loop.index) }}
-                  </div>
-                  {% endfor %}
                 </div>
             </div>
         </div>
@@ -1283,42 +961,39 @@
         });
     }
 
-    // Section collapse/expand functionality
-    function setupSectionToggles() {
-        document.querySelectorAll('.section-toggle').forEach(button => {
-            button.addEventListener('click', function() {
-                const sectionHeader = this.closest('.section-header');
-                const sectionName = sectionHeader.dataset.section;
-                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+    // Section selector behavior: only one subtitle group visible at a time
+    function setupSectionSelector() {
+        const sectionButtons = document.querySelectorAll('.section-nav-btn');
+        if (!sectionButtons.length) return;
 
-                // Toggle all rows with matching data-section
-                document.querySelectorAll(`.section-content[data-section="${sectionName}"]`).forEach(row => {
-                    if (isExpanded) {
-                        row.style.display = 'none';
-                    } else {
-                        row.style.display = '';
-                    }
-                });
+        function activateSection(sectionId) {
+            document.querySelectorAll('.section-nav-btn').forEach(button => {
+                const isActive = button.dataset.section === sectionId;
+                button.classList.toggle('active', isActive);
+                button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+            });
 
-                // Update button state
-                this.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
-                const arrow = this.querySelector('.section-arrow');
-                if (arrow) {
-                    if (isExpanded) {
-                        arrow.style.transform = 'rotate(-90deg)';
-                    } else {
-                        arrow.style.transform = 'rotate(0deg)';
-                    }
-                }
+            document.querySelectorAll('.section-content').forEach(row => {
+                const isActive = row.dataset.section === sectionId;
+                row.classList.toggle('section-collapsed', !isActive);
+            });
+        }
+
+        sectionButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                activateSection(button.dataset.section);
             });
         });
+
+        const defaultSection = sectionButtons[0].dataset.section;
+        activateSection(defaultSection);
     }
 
-    // Initialize section toggles when DOM is ready
+    // Initialize section selector when DOM is ready
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setupSectionToggles);
+        document.addEventListener('DOMContentLoaded', setupSectionSelector);
     } else {
-        setupSectionToggles();
+        setupSectionSelector();
     }
 </script>
 {% endblock %}
