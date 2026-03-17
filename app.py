@@ -131,7 +131,12 @@ def load_papers_from_csv():
                 if i == 1:
                     print(f"First row keys: {list(row.keys())[:5]}")
                     print(f"Title from first row: '{row.get('title', 'NOT_FOUND')}'")
-
+                # Normalize CSV row keys
+                normalized_row = {}
+                for k, v in row.items():
+                    clean_key = str(k).strip().replace('"', "")
+                    normalized_row[clean_key] = v
+                row = normalized_row
                 title = (row.get("title") or "").strip()
                 citation = (row.get("citation") or "").strip()
                 abstract = (row.get("abstract") or "").strip()
@@ -177,6 +182,7 @@ def load_papers_from_csv():
                     "citations": citation_count,
                     "abstract": abstract,
                     "abstract_verbatim": row.get("abstract_verbatim", ""),
+                    "ai_context_summary": row.get("ai_context_summary", ""),
                     "sample_size": (
                         int(row.get("sample_size", "0").replace(",", ""))
                         if row.get("sample_size", "").replace(",", "").isdigit()
@@ -233,16 +239,17 @@ def load_papers_from_csv():
                         # Context / system metrics
                         "democracy": row.get("democracy", ""),
                         "press_freedom": row.get("press_freedom", ""),
-                        "Internet_freedom": row.get("Internet_freedom", ""),
+                        "internet_freedom": row.get("internet_freedom", ""),
                         "internet_penetration": row.get("internet_penetration", ""),
                         "governance": row.get("governance", ""),
                         "polarization": row.get("polarization", ""),
-                        "deliberative_democracy": row.get("deliberative_democracy", ""),
+                        "deliberative_democracy": row.get("polarization", ""),
                         "economic_performance": row.get("economic_performance", ""),
                         "election_period": row.get("election_period", ""),
                         "covid_period": row.get("covid_period", ""),
                         "high_salience_period": row.get("high_salience_period", ""),
                         "interpersonal_trust": row.get("interpersonal_trust", ""),
+                        "ai_context_summary": row.get("ai_context_summary", ""),
 
                         # Population / internet / platform metrics
                         "population_million": row.get("population_million", ""),

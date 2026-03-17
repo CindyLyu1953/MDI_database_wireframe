@@ -542,7 +542,7 @@
                     </div>
                     {% for paper in papers %}
                     <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.extracted_features.Internet_freedom, '', 'Internet_freedom', 'Internet Freedom', loop.index) }}
+                        {{ render_feature_cell(paper, paper.extracted_features.internet_freedom, '', 'internet_freedom', 'Internet Freedom', loop.index) }}
                     </div>
                     {% endfor %}
                 </div>
@@ -708,6 +708,17 @@
                     {{ render_feature_cell(paper, paper.extracted_features.pinterest_users_million, '', 'pinterest_users_million', 'Pinterest Users (Million)', loop.index) }}
                   </div>
                   {% endfor %}
+                </div>
+
+                <div class="table-row section-content" data-section="context">
+                    <div class="feature-cell">
+                        <div class="feature-name">AI Context Summary</div>
+                    </div>
+                    {% for paper in papers %}
+                    <div class="study-cell" data-study-index="{{ loop.index }}">
+                        {{ render_feature_cell(paper, paper.extracted_features.ai_context_summary, '', 'ai_context_summary', 'AI Context Summary', loop.index) }}
+                    </div>
+                    {% endfor %}
                 </div>
             </div>
         </div>

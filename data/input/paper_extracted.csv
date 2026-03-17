@@ -1,8 +1,8 @@
 authors,authors_verbatim,title,journal,year,citation,abstract,independent_variables,independent_variables_verbatim,dependent_variables,dependent_variables_verbatim,survey_questions,incentive,incentive_verbatim,study_type,study_type_verbatim,analysis_equations,analysis_equations_verbatim,level_of_analysis,level_of_analysis_verbatim,main_effects,main_effects_verbatim,statistical_power,statistical_power_verbatim,moderators,moderators_verbatim,moderation_results,moderation_results_verbatim,demographics,demographics_verbatim,recruitment_source,recruitment_source_verbatim,sample_size,sample_size_verbatim,country_region,sociocultural_context,political_context,platform_technological_context,temporal_context,recommended_moderators,research_context,intervention_insights,"democracy
 ","press_freedom
-","Internet_freedom
+","internet_freedom
 ","internet_penetration
-",governance,polarization,population_million,internet_users_million,social_media_users_million,youtube_users_million,facebook_users_million,instagram_users_million,x_users_million,tiktok_users_million,linkedin_users_million,messenger_users_million,snapchat_users_million,pinterest_users_million,
+",governance,polarization,population_million,internet_users_million,social_media_users_million,youtube_users_million,facebook_users_million,instagram_users_million,x_users_million,tiktok_users_million,linkedin_users_million,messenger_users_million,snapchat_users_million,pinterest_users_million,ai_context_summary
 "Morten Tromholt, MSc","Morten Tromholt, MSc",The Facebook Experiment: Quitting Facebook Leads To Higher Levels Of Well-Being,"Cyberpsychology, Behavior, And Social Networking",2016,"Tromholt, M. (2016). The Facebook Experiment: Quitting Facebook Leads to Higher Levels of Well-Being. Cyberpsychology, Behavior, and Social Networking, 19(11), 661–666. https://doi.org/10.1089/cyber.2016.0259","Most people use Facebook on a daily basis; few are aware of the consequences. Based on a 1-week experiment with 1,095 participants in late 2015 in Denmark, this study provides causal evidence that Facebook use affects our well-being negatively. By comparing the treatment group (participants who took a break from Facebook) with the control group (participants who kept using Facebook), it was demonstrated that taking a break from Facebook has positive effects on the two dimensions of well-being: our life satisfaction increases and our emotions become more positive. Furthermore, it was demonstrated that these effects were significantly greater for heavy Facebook users, passive Facebook users, and users who tend to envy others on Facebook.",One-week Facebook abstention vs. usual use (random assignment),"To ensure ecological validity, the study was designed and conducted as a 1-week experiment. On the first day of the experiment, the participants (n = 1,095) answered the pretest (15-minute online questionnaire—questions were asked in Danish). They were then immediately assigned randomly to one of the following conditions: • Do not use Facebook in the following week (treatment group) • Keep using Facebook as usual in the following week (control group)","1. Life satisfaction 
 2. Emotions","Life satisfaction. Life satisfaction refers to the cognitive dimension of well-being and is considered to be a core measure of people’s well-being.15,24 To examine potential changes in the participants’ cognitive well-being, the following question was asked as the very first question in all questionnaires: “In general, how satisfied are you with your life today?” (1 [very dissatisfied] to 10 [very satisfied]) (the wording was borrowed from Eurofound25).b Emotions. Participants’ affective well-being (emotions) was measured on a total of nine items. To minimize participant burden, participants were asked to evaluate their emotions on a subset of five items from the Center for Epidemiologic Studies Depression (CES-D) Scale26 and a subset of four items from the Positive Affect Negative Affect Scale (PANAS).27 The chosen items were the ones that showed the strongest factorial loadings on negative/depressed affect and positive affect, according to the authors. On a 5-point Likert scale, the participants were asked to report to which degree they were experiencing enthusiasm, happiness, loneliness, enjoyment of life, depressiveness, sadness, decisiveness, anger, and worry (1 [not at all] to 5 [to a great extent]).","Outcome: Life satisfaction 
 
@@ -42,7 +42,7 @@ Emotions:
 
 ITT effect = 1.22, p<0.001, t(888)=5.01. 
 
-The treatment group reported significantly higher levels of positive emotions than the control group.","On the life satisfaction item, the treatment group reported a significantly higher level than the control group, t(888) = 4.03, p<0.001. This confirms H1; people’s life satisfaction increases significantly when they quit Facebook for 1 week. On the emotion items, the treatment group also reported significantly higher levels than the control group, t(888) = 5.01, p<0.001. This provides evidence to confirm H2; people’s emotional life improves significantly when they quit Facebook for 1 week. TABLE 1. MEANS AND STANDARD DEVIATIONS FOR LIFE SATISFACTION AND EMOTIONS Treatment (n = 516) | Control (n = 372) | ITT effect Life satisfaction (range: 1–10) | 8.11 (1.23) | 7.74 (1.43) | 0.37*** Emotions (range: 9–45) | 36.21 (6.09) | 33.99 (6.81) | 1.22***",NOT SPECIFIED,NOT SPECIFIED,"1. Intensity of Facebook use
+The treatment group reported significantly higher levels of positive emotions than the control group.","On the life satisfaction item, the treatment group reported a significantly higher level than the control group, t(888) = 4.03, p<0.001. This confirms H1; people’s life satisfaction increases significantly when they quit Facebook for 1 week. On the emotion items, the treatment group also reported significantly higher levels than the control group, t(888) = 5.01, p<0.001. This provides evidence to confirm H2; people’s emotional life improves significantly when they quit Facebook for 1 week. TABLE 1. MEANS AND STANDARD DEVIATIONS FOR LIFE SATISFACTION AND EMOTIONS Treatment (n = 516) | Control (n = 372) | ITT effect Life satisfaction (range: 1–10) | 8.11 (1.23) | 7.74 (1.43) | 0.37*** Emotions (range: 9–45) | 36.21 (6.09) | 33.99 (6.81) | 1.22***",None,None,"1. Intensity of Facebook use
 
 Moderator = Facebook use intensity
 
@@ -50,7 +50,7 @@ DV = Well-being (life satisfaction and emotions)
 
 Effect present: Yes
 
-Direction: Stronger for heavy users; nonexistent for light users
+Direction: Stronger for heavy users; Nonexistent for light users
 
 p-value = <0.001 (heavy users)
 
@@ -93,11 +93,11 @@ Direction: Positive effect for active users, but similar to reference group
 
 p-value = <0.001 (active users), <0.01 (reference group); difference marginal","Intensity of Facebook use. H3, H4, and H5 were tested by comparing the causal effects on relevant subgroups in each area. H3 predicted that the effect of quitting Facebook was greater for heavy Facebook users compared to light users. Facebook envy. H4 predicted that the well-being effect of quitting Facebook varied across feelings of Facebook envy. Active and passive Facebook use. H5 predicted that people using Facebook passively would have a greater wellbeing effect of quitting Facebook than people using Facebook actively.","Test/Interaction: Subgroup analysis by Intensity of Facebook use (light, medium, heavy) on a standardized well-being measure. 
 
-Result: The treatment effect was nonexistent for light users (ITT effect=0.02, p=0.46), present for medium users (ITT effect=0.04, p=0.002), and greatest for heavy users (ITT effect=0.08, p<0.001). 
+Result: The treatment effect was Nonexistent for light users (ITT effect=0.02, p=0.46), present for medium users (ITT effect=0.04, p=0.002), and greatest for heavy users (ITT effect=0.08, p<0.001). 
 
 Test/Interaction: Subgroup analysis by level of Facebook envy (low, medium, high) on a standardized well-being measure.
 
-Result: The treatment effect was nonexistent for users with low envy (ITT effect=-0.02, p=0.13), considerable for users with medium envy (ITT effect=0.07, p<0.001), and greatest for users with high envy (ITT effect=0.14, p<0.001). 
+Result: The treatment effect was Nonexistent for users with low envy (ITT effect=-0.02, p=0.13), considerable for users with medium envy (ITT effect=0.07, p<0.001), and greatest for users with high envy (ITT effect=0.14, p<0.001). 
 
 Test/Interaction: Subgroup analysis comparing passive users to their reference group (non-passive) on a standardized well-being measure. 
 
@@ -105,7 +105,7 @@ Result: Quitting Facebook had a significantly greater effect for passive users (
 
 Test/Interaction: Subgroup analysis comparing active users to their reference group (non-active) on a standardized well-being measure. 
 
-Result: Quitting Facebook had a positive effect for active users (ITT effect=0.06, p<0.001) compared to their reference group (ITT effect=0.05, p<0.01), but the difference was marginal.","Intensity of Facebook use. H3, H4, and H5 were tested by comparing the causal effects on relevant subgroups in each area. H3 predicted that the effect of quitting Facebook was greater for heavy Facebook users compared to light users. Three levels of Facebook usage intensity were identified and the participants were divided according to their answers on the Facebook Intensity Scale.21 The analyses were conducted on the combined, standardized wellbeing measure. Light Facebook users had no effect of quitting Facebook, t(152)=0.74, p=0.46. In contrast, medium users had some effect, t(462)=3.18, p=0.002. Heavy users experienced the greatest effect by quitting Facebook, t(265)=4.54, p<0.001. H3 is therefore supported, proving the effect of quitting Facebook to be greatest for heavy users and to be nonexistent for light Facebook users. The statistics is shown in Table 2. Facebook envy. H4 predicted that the well-being effect of quitting Facebook varied across feelings of Facebook envy. Three levels of Facebook envy were identified and the participants were divided according to their reported level of Facebook envy. Again, the analyses were conducted on the combined, standardized, well-being measure. Participants feeling low Facebook envy had no effect, t(280)=-1.53, p=0.13, while participants feeling medium Facebook envy had a considerable effect, t(419)=4.21, p<0.001. Participants who reported to feel high Facebook envy had a significant effect, t(189)=6.31, p<0.001. Therefore, H3 is supported. The effect of quitting Facebook is greatest for users feeling high levels of Facebook envy. The statistics is shown in Table 3. Active and passive Facebook use. H5 predicted that people using Facebook passively would have a greater wellbeing effect of quitting Facebook than people using Facebook actively. An important distinction should be mentioned here. Passive and active Facebook use refers to two kinds of behavior that are not mutually exclusive. A given Facebook user may use Facebook actively and passively. Hence, the present results should be examined as follows. Passive Facebook use refers to users who report using Facebook passively (and potentially also actively) and active Facebook use refers to users who report using Facebook actively (and potentially also passively). A t-test showed that the effect of quitting Facebook was significantly greater for people using Facebook passively compared to their reference group (users who do not use Facebook passively). This result is in line with previous studies that find correlational evidence that passive Facebook use affects users’ affective and cognitive well-being negatively.6,7 In general, people who report using Facebook actively did experience a positive effect compared to their reference group (users who do not use Facebook actively), but the difference was marginal, indicating that people using Facebook actively have more or less the same effect of quitting Facebook as their reference group. The statistics is shown in Table 4.","Age: Mean age 34 years (SD = 8.74).
+Result: Quitting Facebook had a positive effect for active users (ITT effect=0.06, p<0.001) compared to their reference group (ITT effect=0.05, p<0.01), but the difference was marginal.","Intensity of Facebook use. H3, H4, and H5 were tested by comparing the causal effects on relevant subgroups in each area. H3 predicted that the effect of quitting Facebook was greater for heavy Facebook users compared to light users. Three levels of Facebook usage intensity were identified and the participants were divided according to their answers on the Facebook Intensity Scale.21 The analyses were conducted on the combined, standardized wellbeing measure. Light Facebook users had no effect of quitting Facebook, t(152)=0.74, p=0.46. In contrast, medium users had some effect, t(462)=3.18, p=0.002. Heavy users experienced the greatest effect by quitting Facebook, t(265)=4.54, p<0.001. H3 is therefore supported, proving the effect of quitting Facebook to be greatest for heavy users and to be Nonexistent for light Facebook users. The statistics is shown in Table 2. Facebook envy. H4 predicted that the well-being effect of quitting Facebook varied across feelings of Facebook envy. Three levels of Facebook envy were identified and the participants were divided according to their reported level of Facebook envy. Again, the analyses were conducted on the combined, standardized, well-being measure. Participants feeling low Facebook envy had no effect, t(280)=-1.53, p=0.13, while participants feeling medium Facebook envy had a considerable effect, t(419)=4.21, p<0.001. Participants who reported to feel high Facebook envy had a significant effect, t(189)=6.31, p<0.001. Therefore, H3 is supported. The effect of quitting Facebook is greatest for users feeling high levels of Facebook envy. The statistics is shown in Table 3. Active and passive Facebook use. H5 predicted that people using Facebook passively would have a greater wellbeing effect of quitting Facebook than people using Facebook actively. An important distinction should be mentioned here. Passive and active Facebook use refers to two kinds of behavior that are not mutually exclusive. A given Facebook user may use Facebook actively and passively. Hence, the present results should be examined as follows. Passive Facebook use refers to users who report using Facebook passively (and potentially also actively) and active Facebook use refers to users who report using Facebook actively (and potentially also passively). A t-test showed that the effect of quitting Facebook was significantly greater for people using Facebook passively compared to their reference group (users who do not use Facebook passively). This result is in line with previous studies that find correlational evidence that passive Facebook use affects users’ affective and cognitive well-being negatively.6,7 In general, people who report using Facebook actively did experience a positive effect compared to their reference group (users who do not use Facebook actively), but the difference was marginal, indicating that people using Facebook actively have more or less the same effect of quitting Facebook as their reference group. The statistics is shown in Table 4.","Age: Mean age 34 years (SD = 8.74).
 
 Gender: 86% women. 
 
@@ -125,8 +125,8 @@ Social network size: Average of 350 Facebook friends.
 
 Daily Facebook use: Slightly over one hour per day.","The sample (n=1,095) consisted of 86 percent women, geographically residing throughout the country, with an average age of 34 years (SD=8.74), having an average of 350 Facebook friends and spending a bit over an hour on Facebook daily.",Facebook post by researcher (self-selected sign-ups),"One thousand three hundred Danish people were recruited on Facebook to participate in the experiment. One week before the experiment started, they signed up for the experiment through a link posted by the researcher conducting the experiment.","Pretest: N=1,095
 
-Posttest: N=888 (81%)","The sample (n=1,095) consisted of 86 percent women, geographically residing throughout the country, with an average age of 34 years (SD=8.74), having an average of 350 Facebook friends and spending a bit over an hour on Facebook daily. On the last day of the experiment, the posttest was conducted (15-minute online questionnaire—more or less identical with the pretest questionnaire), which 888 participants completed (81 percent completion rate).",Denmark,Danish adults; online survey in Danish,NOT SPECIFIED,Facebook; advised deletion of mobile app to reduce use,Late 2015,NOT SPECIFIED,Self-selected sample; 86% women; potential selection bias limits generalizability,"Short Facebook breaks improve well-being; benefits largest for heavy, passive, and envy-prone users",0.894,91.11,,84.1652,81.82,0.881,,,,,,,,,,,,,
-"Hunt Allcott, Luca Braghieri, Sarah Eichmeyer, and Matthew Gentzkow","By HUNT ALLCOTT, LUCA BRAGHIERI, SARAH EICHMEYER, AND MATTHEW GENTZKOW*",The Welfare Effects Of Social Media,American Economic Review,2020,"Allcott, H., Braghieri, L., Eichmeyer, S., & Gentzkow, M. (2018). The Welfare Effects of Social Media. SSRN Electronic Journal, 110(3). https://doi.org/10.2139/ssrn.3308640","The rise of social media has provoked both optimism about potential societal benefits and concern about harms such as addiction, depression, and political polarization. In a randomized experiment, we find that deactivating Facebook for the four weeks before the 2018 US midterm election (i) reduced online activity, while increasing offline activities such as watching TV alone and socializing with family and friends; (ii) reduced both factual news knowledge and political polarization; (iii) increased subjective well-being; and (iv) caused a large persistent reduction in post-experiment Facebook use. Deactivation reduced post-experiment valuations of Facebook, suggesting that traditional metrics may overstate consumer surplus. (JEL D12, D72, D90, I31, L82, L86, Z13)",Four-week Facebook deactivation (Treatment) vs. no deactivation (Control); paid deactivation offer,"We then randomly assigned the 61 percent of these subjects with WTA less than $102 to either a Treatment group that was paid to deactivate, or a Control group that was not. We verified compliance with deactivation by regularly checking participants’ public profile pages.","1. Time use
+Posttest: N=888 (81%)","The sample (n=1,095) consisted of 86 percent women, geographically residing throughout the country, with an average age of 34 years (SD=8.74), having an average of 350 Facebook friends and spending a bit over an hour on Facebook daily. On the last day of the experiment, the posttest was conducted (15-minute online questionnaire—more or less identical with the pretest questionnaire), which 888 participants completed (81 percent completion rate).",Denmark,Danish adults; online survey in Danish,None,Facebook; advised deletion of mobile app to reduce use,2015-10 to 2015-12,None,Self-selected sample; 86% women; potential selection bias limits generalizability,"Short Facebook breaks improve well-being; benefits largest for heavy, passive, and envy-prone users",0.894,91.11,None,84.1652,81.82,0.881,None,None,None,None,None,None,None,None,None,None,None,None,"The 2015 European refugee crisis dominated Danish political discourse, with debates over immigration, asylum policy, and border controls becoming central issues. The Danish parliamentary election in June 2015 brought immigration and integration policies to the forefront of media discussion and party competition. Public debate also focused on the role of social media in shaping attitudes toward refugees and national identity."
+"Hunt Allcott, Luca Braghieri, Sarah Eichmeyer, and Matthew Gentzkow","By HUNT ALLCOTT, LUCA BRAGHIERI, SARAH EICHMEYER, AND MATTHEW GENTZKOW",The Welfare Effects Of Social Media,American Economic Review,2020,"Allcott, H., Braghieri, L., Eichmeyer, S., & Gentzkow, M. (2018). The Welfare Effects of Social Media. SSRN Electronic Journal, 110(3). https://doi.org/10.2139/ssrn.3308640","The rise of social media has provoked both optimism about potential societal benefits and concern about harms such as addiction, depression, and political polarization. In a randomized experiment, we find that deactivating Facebook for the four weeks before the 2018 US midterm election (i) reduced online activity, while increasing offline activities such as watching TV alone and socializing with family and friends; (ii) reduced both factual news knowledge and political polarization; (iii) increased subjective well-being; and (iv) caused a large persistent reduction in post-experiment Facebook use. Deactivation reduced post-experiment valuations of Facebook, suggesting that traditional metrics may overstate consumer surplus. (JEL D12, D72, D90, I31, L82, L86, Z13)",Four-week Facebook deactivation (Treatment) vs. no deactivation (Control); paid deactivation offer,"We then randomly assigned the 61 percent of these subjects with WTA less than $102 to either a Treatment group that was paid to deactivate, or a Control group that was not. We verified compliance with deactivation by regularly checking participants’ public profile pages.","1. Time use
 2. Social interaction
 3. News sources
 4. News knowledge
@@ -151,7 +151,7 @@ Q: In the last 4 weeks, relative to what is typical for you, would you say you s
 
 Outcome: Social interaction 
 
-Q: List the first names of as many of the friends you met in person last week that you can think of in 1 minute (if none, enter ""none""). Separate the names using commas ("",""). 
+Q: List the first names of as many of the friends you met in person last week that you can think of in 1 minute (if None, enter ""None""). Separate the names using commas ("",""). 
 
 Outcome: Social interaction 
 
@@ -196,7 +196,7 @@ Q: Thinking back over the last 4 weeks, how warm or cold did you feel towards th
 
 Outcome: Political polarization 
 
-Q: List as many recent (last 4 weeks) news events you can think of that made you angry at the [Republican/Democratic] Party. (If more than 5, just list those 5 that left you most angry. If less than 5, list less. If none, enter “none” in the first textbox.) 
+Q: List as many recent (last 4 weeks) news events you can think of that made you angry at the [Republican/Democratic] Party. (If more than 5, just list those 5 that left you most angry. If less than 5, list less. If None, enter “None” in the first textbox.) 
 
 Outcome: Political polarization 
 
@@ -248,7 +248,7 @@ Outcome: Subjective well-being
 
 Q: Below are some ways you might have felt or behaved in the past 4 weeks. Please tell us how much of the time during the past 4 weeks: 
 
-Options: [1 None or almost none of the time, 2, 3, 4 All or almost all of the time] ... you felt depressed. ... you felt anxious. ... you were absorbed in doing something worthwhile. ... you felt bored.]
+Options: [1 None or almost None of the time, 2, 3, 4 All or almost all of the time] ... you felt depressed. ... you felt anxious. ... you were absorbed in doing something worthwhile. ... you felt bored.]
 
 Outcome: Subjective well-being 
 
@@ -419,7 +419,7 @@ Effect present: Yes
 
 Direction: Stronger polarization reduction for older participants
 
-p-value = Not specified
+p-value = None
 
 
 
@@ -466,7 +466,7 @@ Effect present: Yes
 
 Direction: Stronger polarization reduction for men
 
-p-value = Not specified
+p-value = None
 
 
 
@@ -478,7 +478,7 @@ Effect present: Yes
 
 Direction: Stronger polarization reduction for white participants
 
-p-value = Not specified
+p-value = None
 
 
 
@@ -491,7 +491,7 @@ Effect present: Yes
 
 Direction: Smaller well-being gains for participants already happier or with more offline social interaction; less post-study reduction among those with positive baseline Facebook opinions
 
-p-value = Not specified","Individual Moderators.—In our pre-analysis plan, we specified that we would present separate estimates for subgroups defined by four primary moderators. Figure 9 presents those estimates. The top panel presents estimates for heavy users versus light users: that is, people whose baseline reported Facebook use was above versus below median. The second panel presents estimates for heavy news users versus light news users: that is, those who get news from Facebook fairly often or very often versus never, hardly ever, or sometimes. The third panel presents separate estimates for active users versus passive users. Finally, the fourth panel presents separate estimates of effects on subjective well-being text message surveys for text messages sent during the time of day when the respondent reported using Facebook the most. The pre-analysis plan also specified two secondary moderators: age (for all outcomes) and political party (limited to the news and political outcomes). All Possible Moderators.— ... We consider 13 potential moderators: all 6 demographic variables listed in Table 2 (income, years of education, gender, race, age, and political party affiliation, which is on a seven-point scale from strongly Democratic to strongly Republican) and the baseline values of all 7 relevant indices.","Test/Interaction: Heavy vs. Light Facebook Users. 
+p-value = None","Individual Moderators.—In our pre-analysis plan, we specified that we would present separate estimates for subgroups defined by four primary moderators. Figure 9 presents those estimates. The top panel presents estimates for heavy users versus light users: that is, people whose baseline reported Facebook use was above versus below median. The second panel presents estimates for heavy news users versus light news users: that is, those who get news from Facebook fairly often or very often versus never, hardly ever, or sometimes. The third panel presents separate estimates for active users versus passive users. Finally, the fourth panel presents separate estimates of effects on subjective well-being text message surveys for text messages sent during the time of day when the respondent reported using Facebook the most. The pre-analysis plan also specified two secondary moderators: age (for all outcomes) and political party (limited to the news and political outcomes). All Possible Moderators.— ... We consider 13 potential moderators: all 6 demographic variables listed in Table 2 (income, years of education, gender, race, age, and political party affiliation, which is on a seven-point scale from strongly Democratic to strongly Republican) and the baseline values of all 7 relevant indices.","Test/Interaction: Heavy vs. Light Facebook Users. 
 
 Result: No consistent evidence that effects differ between heavy and light users. 
 
@@ -533,7 +533,7 @@ Other:
 
 Impact evaluation sample: N=1,661 (T=580, C=1,081)
  
-Endline in impact sample: N=1,637","TABLE 1—SAMPLE SIZES Phase Sample size Recruitment and baseline N = 1,892,191 were shown ads N = 32,201 clicked on ads ... N = 2,897 had valid baseline and were randomized, of which: Midline N = 2,897 began midline N = 2,743 received a price offer, of which: N = 1,661 were in impact evaluation sample Endline N = 2,710 began endline N = 2,684 finished endline, of which: N = 1,637 were in impact evaluation sample Post-endline N = 2,067 reported Facebook mobile app use, of which: N = 1,219 were in impact evaluation sample",USA,"US Facebook users; 
+Endline in impact sample: N=1,637","TABLE 1—SAMPLE SIZES Phase Sample size Recruitment and baseline N = 1,892,191 were shown ads N = 32,201 clicked on ads ... N = 2,897 had valid baseline and were randomized, of which: Midline N = 2,897 began midline N = 2,743 received a price offer, of which: N = 1,661 were in impact evaluation sample Endline N = 2,710 began endline N = 2,684 finished endline, of which: N = 1,637 were in impact evaluation sample Post-endline N = 2,067 reported Facebook mobile app use, of which: N = 1,219 were in impact evaluation sample",United States,"US Facebook users; 
 
 relatively young,
 more educated, 
@@ -544,19 +544,15 @@ Messenger allowed;
 
 compliance via profile checks; 
 
-reactivation triggered by FB login/SSO","Deactivation mid-Oct to early Nov 2018; 
-
-recruitment Sep 24–Oct 3, 2018; 
-
-follow-up through early Dec 2018",NOT SPECIFIED,Encouragement design estimating LATE for compliers; 48 randomization strata; compliance verified; sample skew toward young/educated/Democrats,Deactivation improves well-being and reduces polarization but lowers news knowledge; persistent post-experiment use reduction and lower platform valuation imply standard consumer-surplus metrics may overstate welfare; digital-use reductions can align behavior with preferences,0.725,76.15,76,90,63.12,0.593,330,"288.1
+reactivation triggered by FB login/SSO",2018-09 to 2018-12,None,Encouragement design estimating LATE for compliers; 48 randomization strata; compliance verified; sample skew toward young/educated/Democrats,Deactivation improves well-being and reduces polarization but lowers news knowledge; persistent post-experiment use reduction and lower platform valuation imply standard consumer-surplus metrics may overstate welfare; digital-use reductions can align behavior with preferences,0.725,76.15,76,90,63.12,0.593,330,"288.1
 87%","230.0
-70%",,"180.0 
+70%",None,"180.0 
 65%","120.0
 43%","59.35
-21%",,"160.0
-62%",,"101.3 
-36%",,
-"Hunt Allcott, Matthew Gentzkow, Benjamin Wittenbrink, Juan Carlos Cisneros, Adriana Crespo-Tenorio, Drew Dimmery, Deen Freelon, Sandra González-Bailón, Andrew M. Guess, Young Mie Kim, David Lazer, Neil Malhotra, Devra Moehler, Sameer Nair-Desai, Brendan Nyhan, Jennifer Pan, Jaime Settle, Emily Thorson, Rebekah Tromble, Carlos Velasco Rivera, Arjun Wilkins, Magdalena Wojcieszak, Annie Franco, Chad Kiewiet de Jonge, Winter Mason, Natalie Jomini Stroud, Joshua A. Tucker","Hunt Allcott,1,19 Matthew Gentzkow,1,19* Benjamin Wittenbrink,2,19 Juan Carlos Cisneros,¹ Adriana Crespo-Tenorio,³ Drew Dimmery,³ Deen Freelon,⁴ Sandra González-Bailón,⁵ Andrew M. Guess,⁶ Young Mie Kim,⁷ David Lazer,⁸ Neil Malhotra,⁹ Devra Moehler,³ Sameer Nair-Desai,¹ Brendan Nyhan,¹⁰ Jennifer Pan,¹¹ Jaime Settle,¹² Emily Thorson,¹³ Rebekah Tromble,¹⁴ Carlos Velasco Rivera³, Arjun Wilkins,³ Magdalena Wojcieszak,15,16 Annie Franco,3,20 Chad Kiewiet de Jonge,3,20 Winter Mason,3,20,21 Natalie Jomini Stroud,17,22 Joshua A. Tucker¹⁸,²²",The Effect Of Deactivating Facebook And Instagram On Users’ Emotional State,National Bureau Of Economic Research (Nber),2025,The Effect of Deactivating Facebook and Instagram on Users’ Emotional State. (2025). Stanford Institute for Economic Policy Research (SIEPR); Stanford University. https://siepr.stanford.edu/publications/working-paper/effect-deactivating-facebook-and-instagram-users-emotional-state,"We estimate the effect of social media deactivation on users' emotional state in two large randomized experiments before the 2020 U.S. election. People who deactivated Facebook for the six weeks before the election reported a 0.060 standard deviation improvement in an index of happiness, depression, and anxiety, relative to controls who deactivated for just the first of those six weeks. People who deactivated Instagram for those six weeks reported a 0.041 standard deviation improvement relative to controls. Exploratory analysis suggests the Facebook effect is driven by people over 35, while the Instagram effect is driven by women under 25.",Deactivation of Facebook or Instagram for 6 weeks vs. 1 week (incremental 5 weeks),"We randomly assigned 27 percent of participants to a treatment group that was offered payment for deactivating their accounts for the six weeks before the election. The remaining participants formed a control group that was paid to deactivate for just the first of those six weeks. Our baseline and endline surveys elicited three measures of self-reported emotional state—how much of the time during the past four weeks that people felt happy, depressed, or anxious—along with a large suite of political outcomes that we study separately in Allcott et al. (2024).","1. Self-reported emotional state (happiness, depression, and anxiety.) ","This paper focuses on the three emotional state questions that were also included: “Please tell us how much of the time during the past four weeks you felt [happy / depressed / anxious].” The response options were “All of the time,” “Often,” “Sometimes,” “Rarely,” and “Never.” We code these responses as 4, 3, 2, 1, and 0, respectively, and then standardize each to have a mean of zero and a standard deviation of one in the sample-weighted combined Control groups, giving the variables happy, depressed, and anxious. We re-sign depressed and anxious as depressed x (-1) and anxious x (-1), so that more positive values correspond to more positive emotional state. The emotional state index is the average of these three re-signed variables, re-standardized to have a standard deviation of one in the sample-weighted combined Control groups.","Outcome: happy 
+21%",None,"160.0
+62%",None,"101.3 
+36%",None,"The 2018 U.S. midterm election cycle dominated media discourse, with intense partisan campaigning and debates over the Trump administration’s policies. Issues such as misinformation, political advertising, and the influence of social media platforms became major topics of public discussion. Concerns about election interference and platform regulation were also widely debated."
+"Hunt Allcott, Matthew Gentzkow, Benjamin Wittenbrink, Juan Carlos Cisneros, Adriana Crespo-Tenorio, Drew Dimmery, Deen Freelon, Sandra González-Bailón, Andrew M. Guess, Young Mie Kim, David Lazer, Neil Malhotra, Devra Moehler, Sameer Nair-Desai, Brendan Nyhan, Jennifer Pan, Jaime Settle, Emily Thorson, Rebekah Tromble, Carlos Velasco Rivera, Arjun Wilkins, Magdalena Wojcieszak, Annie Franco, Chad Kiewiet de Jonge, Winter Mason, Natalie Jomini Stroud, Joshua A. Tucker","Hunt Allcott, Matthew Gentzkow, Benjamin Wittenbrink, Juan Carlos Cisneros, Adriana Crespo-Tenorio, Drew Dimmery, Deen Freelon, Sandra González-Bailón, Andrew M. Guess, Young Mie Kim, David Lazer, Neil Malhotra, Devra Moehler, Sameer Nair-Desai, Brendan Nyhan, Jennifer Pan, Jaime Settle, Emily Thorson, Rebekah Tromble, Carlos Velasco Rivera, Arjun Wilkins, Magdalena Wojcieszak, Annie Franco, Chad Kiewiet de Jonge, Winter Mason, Natalie Jomini Stroud, Joshua A. Tucker",The Effect Of Deactivating Facebook And Instagram On Users’ Emotional State,National Bureau Of Economic Research (Nber),2025,The Effect of Deactivating Facebook and Instagram on Users’ Emotional State. (2025). Stanford Institute for Economic Policy Research (SIEPR); Stanford University. https://siepr.stanford.edu/publications/working-paper/effect-deactivating-facebook-and-instagram-users-emotional-state,"We estimate the effect of social media deactivation on users' emotional state in two large randomized experiments before the 2020 U.S. election. People who deactivated Facebook for the six weeks before the election reported a 0.060 standard deviation improvement in an index of happiness, depression, and anxiety, relative to controls who deactivated for just the first of those six weeks. People who deactivated Instagram for those six weeks reported a 0.041 standard deviation improvement relative to controls. Exploratory analysis suggests the Facebook effect is driven by people over 35, while the Instagram effect is driven by women under 25.",Deactivation of Facebook or Instagram for 6 weeks vs. 1 week (incremental 5 weeks),"We randomly assigned 27 percent of participants to a treatment group that was offered payment for deactivating their accounts for the six weeks before the election. The remaining participants formed a control group that was paid to deactivate for just the first of those six weeks. Our baseline and endline surveys elicited three measures of self-reported emotional state—how much of the time during the past four weeks that people felt happy, depressed, or anxious—along with a large suite of political outcomes that we study separately in Allcott et al. (2024).","1. Self-reported emotional state (happiness, depression, and anxiety.) ","This paper focuses on the three emotional state questions that were also included: “Please tell us how much of the time during the past four weeks you felt [happy / depressed / anxious].” The response options were “All of the time,” “Often,” “Sometimes,” “Rarely,” and “Never.” We code these responses as 4, 3, 2, 1, and 0, respectively, and then standardize each to have a mean of zero and a standard deviation of one in the sample-weighted combined Control groups, giving the variables happy, depressed, and anxious. We re-sign depressed and anxious as depressed x (-1) and anxious x (-1), so that more positive values correspond to more positive emotional state. The emotional state index is the average of these three re-signed variables, re-standardized to have a standard deviation of one in the sample-weighted combined Control groups.","Outcome: happy 
 
 Q: Please tell us how much of the time during the past four weeks you felt happy. 
 
@@ -718,7 +714,7 @@ endline N=17,802.
 
 Instagram: 
 baseline N=15,585
-endline N=13,480.","On Facebook, a total of 10.6 million users were invited to the study... Of these, 19,857 completed the baseline survey, could be linked to platform data, and had at least 15 minutes of baseline use per day. This final group is our “primary analysis sample.” On Instagram, the analogous numbers are 2.6 million invites... 15,585 participants in the primary analysis sample. ... Of participants in the Facebook and Instagram primary analysis samples, respectively, 17,802 and 13,480 completed the endline survey.",USA,NOT SPECIFIED,The study was conducted in the six weeks immediately before the 2020 U.S. presidential election. The paper notes this was a period of heightened stress for Americans related to the election.,Core Facebook/Instagram products; six-week deactivation window; imperfect compliance addressed via IV,"Baseline Sep 8–21, 2020; deactivation Sep 23–Nov 4, 2020; endline Nov 4–18, 2020 (spans Nov 3 election)",NOT SPECIFIED,Pre-specified IV; strata FE; outcomes standardized on weighted Control; multiple-testing q-values reported alongside political outcomes (in companion work),Deactivating Facebook/Instagram for 5 additional weeks yields small but significant improvements in emotional state; gains larger for older FB users and young women on Instagram,,,73,,,65.487,346,"322
+endline N=13,480.","On Facebook, a total of 10.6 million users were invited to the study... Of these, 19,857 completed the baseline survey, could be linked to platform data, and had at least 15 minutes of baseline use per day. This final group is our “primary analysis sample.” On Instagram, the analogous numbers are 2.6 million invites... 15,585 participants in the primary analysis sample. ... Of participants in the Facebook and Instagram primary analysis samples, respectively, 17,802 and 13,480 completed the endline survey.",United States,None,The study was conducted in the six weeks immediately before the 2020 U.S. presidential election. The paper notes this was a period of heightened stress for Americans related to the election.,Core Facebook/Instagram products; six-week deactivation window; imperfect compliance addressed via IV,2020-09 to 2020-11,None,Pre-specified IV; strata FE; outcomes standardized on weighted Control; multiple-testing q-values reported alongside political outcomes (in companion work),Deactivating Facebook/Instagram for 5 additional weeks yields small but significant improvements in emotional state; gains larger for older FB users and young women on Instagram,None,None,73,None,None,65.487,346,"322
  93.1%","253
  73.0%","253
  73.0%","197
@@ -729,8 +725,8 @@ endline N=13,480.","On Facebook, a total of 10.6 million users were invited to t
  72.2%","4.25
  1.2%","106
  30.6%","96.0
- 27.7%",
-"Roberto Mosquera, Mofioluwasademi Odunowo, Trent McNamara, Xiongfei Guo, Ragan Petrie",Roberto Mosquera¹ · Mofioluwasademi Odunowo² · Trent McNamara² · Xiongfei Guo² · Ragan Petrie²,The Economic Effects Of Facebook,Experimental Economics,2020,"Mosquera, R., Odunowo, M., McNamara, T. et al. The economic effects of Facebook. Exp Econ 23, 575–602 (2020). https://doi.org/10.1007/s10683-019-09625-y","Social media permeates many aspects of our lives, including how we connect with others, where we get our news and how we spend our time. Yet, we know little about the economic effects for users. In 2017, we ran a large field experiment with over 1765 individuals to document the value of Facebook to users and its causal effect on news, well-being and daily activities. Participants reveal how much they value one week of Facebook usage and are then randomly assigned to a validated Facebook restriction or normal use. One week of Facebook is worth $67. Those who are off Facebook for one week reduce news consumption, are less likely to recognize politically-skewed news stories, report being less depressed and engage in healthier activities. These results are strongest for men. Our results further suggest that, after the restriction, Facebook’s value increases, consistent with information loss or that using Facebook may be addictive.",One-week Facebook restriction (Treatment) vs. normal use (Control),"Upon completion of the survey, participants were randomly assigned to either a one-week Facebook restriction or no restriction based on the last digit of the participant’s university-assigned ID number. All participants complied with their assigned treatment and associated protocols. The no restriction group is dismissed and asked to return the following Monday (one week later) to complete another survey and receive payment. The restriction group is required to log off of Facebook, and all its associated features, including Messenger, for one week.","1. Social media usage
+ 27.7%","The COVID‑19 pandemic shaped political and social discourse across the United States, influencing debates about public health measures, economic shutdowns, and federal authority. The 2020 U.S. presidential election, culminating on November 3, dominated media attention and heightened political polarization. Questions about misinformation, social media moderation, and election legitimacy were widely discussed in public and political arenas."
+"Roberto Mosquera, Mofioluwasademi Odunowo, Trent McNamara, Xiongfei Guo, Ragan Petrie","Roberto Mosquera, Mofioluwasademi Odunowo, Trent McNamara, Xiongfei Guo, Ragan Petrie",The Economic Effects Of Facebook,Experimental Economics,2020,"Mosquera, R., Odunowo, M., McNamara, T. et al. The economic effects of Facebook. Exp Econ 23, 575–602 (2020). https://doi.org/10.1007/s10683-019-09625-y","Social media permeates many aspects of our lives, including how we connect with others, where we get our news and how we spend our time. Yet, we know little about the economic effects for users. In 2017, we ran a large field experiment with over 1765 individuals to document the value of Facebook to users and its causal effect on news, well-being and daily activities. Participants reveal how much they value one week of Facebook usage and are then randomly assigned to a validated Facebook restriction or normal use. One week of Facebook is worth $67. Those who are off Facebook for one week reduce news consumption, are less likely to recognize politically-skewed news stories, report being less depressed and engage in healthier activities. These results are strongest for men. Our results further suggest that, after the restriction, Facebook’s value increases, consistent with information loss or that using Facebook may be addictive.",One-week Facebook restriction (Treatment) vs. normal use (Control),"Upon completion of the survey, participants were randomly assigned to either a one-week Facebook restriction or no restriction based on the last digit of the participant’s university-assigned ID number. All participants complied with their assigned treatment and associated protocols. The no restriction group is dismissed and asked to return the following Monday (one week later) to complete another survey and receive payment. The restriction group is required to log off of Facebook, and all its associated features, including Messenger, for one week.","1. Social media usage
 2. News consumption 
 3. News awareness
 4. Subjective well-being 
@@ -953,7 +949,7 @@ Healthy daily activities index: +0.84 SD (p<0.1)
 
 Value of Facebook: increased by 0.20 (p<0.1, likely a standardized measure or proportion, representing a 19.6% increase from $30.13 to $36.04) 
 
-Uncertainty about skewed news: +22.1 pp (significant, p-value not specified in text) Correctly identifying skewed news: -15.6 pp (significant, p-value not specified in text)",Full sample (Unweighted): Facebook use: -1.73*** News media index—traditional media: 0.07 News media index—social media: -0.66*** News consumption index: -0.64** Probability right answer—mainstream news: 0.01 Probability wrong answer—mainstream news: 0.002 Probability not sure answer—mainstream news: -0.01 Probability right answer—skewed news: -0.16** Probability wrong answer—skewed news: -0.06 Probability not sure answer—skewed news: 0.22* Overall satisfaction: 0.002 Life is worthwhile: 0.05 Feel happy: 0.03 Worry: 0.37 Depressed: -0.57** Healthy daily activities index: 0.84* Productive time index: 0.25 Efficient time index: 0.33 Expected healthy daily activities consumption index: 0.16 Value of Facebook: 0.20*,"The study notes it was not powered to detect significant results for the change in the value of Facebook. For other measures, the sample size allowed detection of effects up to 0.182 percentage points at the 5% level with a power of 80%.",The adjusted p value is 0.125. Our sample size allows us to detect effects up to 0.182 percentage points at the 5% level with a power of 80%. ...interpreted cautiously given that we are not powered to detect significant results.,"1. Moderator = Gender (men vs. women)
+Uncertainty about skewed news: +22.1 pp (significant, p-value None in text) Correctly identifying skewed news: -15.6 pp (significant, p-value None in text)",Full sample (Unweighted): Facebook use: -1.73*** News media index—traditional media: 0.07 News media index—social media: -0.66*** News consumption index: -0.64** Probability right answer—mainstream news: 0.01 Probability wrong answer—mainstream news: 0.002 Probability not sure answer—mainstream news: -0.01 Probability right answer—skewed news: -0.16** Probability wrong answer—skewed news: -0.06 Probability not sure answer—skewed news: 0.22* Overall satisfaction: 0.002 Life is worthwhile: 0.05 Feel happy: 0.03 Worry: 0.37 Depressed: -0.57** Healthy daily activities index: 0.84* Productive time index: 0.25 Efficient time index: 0.33 Expected healthy daily activities consumption index: 0.16 Value of Facebook: 0.20*,"The study notes it was not powered to detect significant results for the change in the value of Facebook. For other measures, the sample size allowed detection of effects up to 0.182 percentage points at the 5% level with a power of 80%.",The adjusted p value is 0.125. Our sample size allows us to detect effects up to 0.182 percentage points at the 5% level with a power of 80%. ...interpreted cautiously given that we are not powered to detect significant results.,"1. Moderator = Gender (men vs. women)
 
 DV = Depressed
 
@@ -1033,14 +1029,14 @@ Income: Average zip-code income (at age 15) approximately $72,000; no significan
 
 Lab pretest (Phase2):N=167 (T=77, C=90)
 
-Posttest (Phase3): N=151","Overall, 1929 individuals initiated the Phase 1 online survey and 1769 completed it... Of those individuals who completed the Phase 1 survey, 562 were eligible for Phase 2 of the study... For the Phase 2 sessions, 167 participants showed up and completed the survey. ...fifty-four percent (n=90) were randomly assigned to the no restriction control group, and 46% (n=77) were assigned to the Facebook restriction treatment group. After one week of treatment, 90% (n = 151) of the participants from Phase 2 returned to complete the Phase 3 survey.",USA,College student sample; English; heavy daily Facebook use typical for age group,Post-2016 US election environment; news quiz included politically skewed sources,Facebook and Messenger; treatment required logging off all FB features; compliance validated via Messenger “Last Active”,April-May 2017.,The paper suggests that future research should focus on 'untangling the direction of causality' between the reduction in depression and the changes in activities and consumption patterns observed when participants stop using Facebook.,Random assignment by ID last digit; all assigned complied; within-person pre/post measures; multiple-comparison adjustments,"Short-run FB restriction reduces depression and boosts healthy activities (especially for men); lowers social-media news and certainty about skewed news; little substitution to other news/social media; post-restriction valuation rises, consistent with information loss or addictive use",0.725,0.593,76,90,63.39,76.15,330,"288.1
+Posttest (Phase3): N=151","Overall, 1929 individuals initiated the Phase 1 online survey and 1769 completed it... Of those individuals who completed the Phase 1 survey, 562 were eligible for Phase 2 of the study... For the Phase 2 sessions, 167 participants showed up and completed the survey. ...fifty-four percent (n=90) were randomly assigned to the no restriction control group, and 46% (n=77) were assigned to the Facebook restriction treatment group. After one week of treatment, 90% (n = 151) of the participants from Phase 2 returned to complete the Phase 3 survey.",United States,College student sample; English; heavy daily Facebook use typical for age group,Post-2016 US election environment; news quiz included politically skewed sources,Facebook and Messenger; treatment required logging off all FB features; compliance validated via Messenger “Last Active”,2017-04 to 2017-05,The paper suggests that future research should focus on 'untangling the direction of causality' between the reduction in depression and the changes in activities and consumption patterns observed when participants stop using Facebook.,Random assignment by ID last digit; all assigned complied; within-person pre/post measures; multiple-comparison adjustments,"Short-run FB restriction reduces depression and boosts healthy activities (especially for men); lowers social-media news and certainty about skewed news; little substitution to other news/social media; post-restriction valuation rises, consistent with information loss or addictive use",0.725,0.593,76,90,63.39,76.15,330,"288.1
  87.0%","230.0
- 70.0%",,"180.0
+ 70.0%",None,"180.0
  65.0%","120.0
  43.0%","59.35
- 21.0%",,"160.0
- 62.0%",,"101.3
- 36.0%",,
+ 21.0%",None,"160.0
+ 62.0%",None,"101.3
+ 36.0%",None,"Early in the Trump presidency, U.S. political discourse was dominated by debates over immigration policies, executive orders, and the administration’s relationship with the media. Public conversations around misinformation, political polarization, and the role of social media platforms in shaping political attitudes intensified. Major policy debates such as healthcare reform and investigations related to Russian election interference also occupied national attention."
 "Jeffrey Lambert, PhD, George Barnstable, BSc, Eleanor Minter, BSc, Jemima Cooper, MSc, and Desmond McEwan, PhD","Jeffrey Lambert, PhD, George Barnstable, BSc, Eleanor Minter, BSc, Jemima Cooper, MSc, and Desmond McEwan, PhD","Taking A One-Week Break From Social Media Improves Well-Being, Depression, And Anxiety: A Randomized Controlled Trial","Cyberpsychology, Behavior, And Social Networking",2022,"Lambert, J., Barnstable, G., Minter, E., Cooper, J., & McEwan, D. (2022). Taking a One-Week Break from Social Media Improves Well-Being, Depression, and Anxiety: A Randomized Controlled Trial. Cyberpsychology, Behavior, and Social Networking, 25(5). https://doi.org/10.1089/cyber.2021.0324","The present study aimed to understand the effects of a 1-week break from social media (SM) (Facebook, Instagram, Twitter, and TikTok) on well-being, depression, and anxiety compared with using SM as usual. We also aimed to understand whether time spent on different SM platforms mediates the relationship between SM cessation and well-being, depression, and anxiety. We randomly allocated 154 participants (mean age of 29.6 years) to either stop using SM (Facebook, Twitter, Instagram, and TikTok) for 1 week or continue to use SM as usual. At a 1-week follow-up, significant between-group differences in well-being (mean difference [MD] 4.9, 95% confidence interval [CI] 3.0–6.8), depression (MD −2.2, 95% CI –3.3 to −1.1), and anxiety (MD −1.7, 95% CI-2.8 to −0.6) in favor of the intervention group were observed, after controlling for baseline scores, age, and gender. The intervention effect on well-being was partially mediated by a reduction in total weekly self-reported minutes on SM. The intervention effect on depression and anxiety was partially mediated by a reduction in total weekly self-reported minutes on Twitter and TikTok, and TikTok alone, respectively. The present study shows that asking people to stop using SM for 1 week leads to significant improvements in well-being, depression, and anxiety. Future research should extend this to clinical populations and examine effects over the longer term.","1-week social media break (Facebook, Instagram, Twitter, TikTok) vs. use-as-usual (randomized)","Participants allocated to the intervention group were asked to quit using SM sites: Facebook, Twitter, TikTok, and Instagram for 1 week. At this point, participants were provided with a tips sheet to help them stop using the relevant SM sites (both app and Web site versions) during the cessation period. These tips included signing out of the relevant SM sites, deleting relevant SM apps, turning their phone off, turning off SM notifications, disconnecting from Wi-Fi, and downloading an app blocker to block the use of the relevant SM sites. These tips were advisory and not compulsory to participate in the study. Alongside the tips sheet, participants were informed that a second survey would be e-mailed to them after 1 week. Participants in the control group were encouraged to continue using SM as usual for 1 week.","1. Well-being 
 2. Depression
 3. Anxiety","The present study aimed to understand the effects of a 1-week break from social media (SM) (Facebook, Instagram, Twitter, and TikTok) on well-being, depression, and anxiety compared with using SM as usual.","The paper does not provide the full verbatim text of the survey questions, but describes the scales used: 
@@ -1120,7 +1116,7 @@ Marital status: 47% single, 20% married overall.
 
 Baseline depression: 30% met criteria for major depressive disorder (PHQ-8 ≥ 10).","At baseline (Table 1), the mean age was 28.9 years, with females accounting for 62% of the study. The majority (64%) of participants classed their ethnicity as white and most were either employed (39%) or students (49%). Nearly all the participants were educated at or above A-level (90%). Nearly half the sample was single (47%) and 20% were married. Almost a third (30%) of the sample met the criteria for major depressive disorder (≥ 10 on the PHQ-8). TABLE 1. PARTICIPANT CHARACTERISTICS AT BASELINE Variable | Intervention N=81 Mean (SD) or N (%) | Control N=73 Mean (SD) or N (%) -- | -- | -- Age in years | 29.5 (13.6) | 28.3 (11.9) Gender | | Female | 50 (61.7) | 45 (61.6) Male | 30 (37.0) | 28 (38.4) Other | 1 (1.2) | 0 (0.0) Ethnicity | | English, Welsh, Scottish, or Irish | 51 (63.0) | 48 (65.8) Indian | 2 (2.5) | 4 (5.5) Chinese | 6 (7.4) | 5 (6.8) Arab | 2 (2.5) | 0 (0.0) Pakistani | 1 (1.2) | 0 (0.0) African | 0 (0.0) | 1 (1.4) Irish | 0 (0.0) | 2 (2.7) White Asian | 6 (7.4) | 4 (5.5) Other white background | 7 (8.6) | 7 (9.6) Other Asian background | 4 (4.9) | 1 (1.4) White and black African | 1 (1.2) | 0 (0.0) White and black Caribbean | 1 (1.2) | 0 (0.0) Other ethnic background | 0 (0.0) | 1 (1.4) Employment status | | Employed | 36 (44.4) | 24 (32.9) Student | 36 (44.4) | 40 (54.8) Self-employed | 4 (4.9) | 7 (9.6) Unemployed | 4 (4.9) | 1 (1.4) Prefer not to say | 1 (1.2) | 1 (1.4) Education status | | A level | 26 (32.1) | 18 (24.7) Undergraduate | 32 (39.5) | 36 (49.3) GCSE | 5 (6.2) | 7 (9.6) Postgraduate | 16 (19.8) | 11 (15.1) Doctorate | 2 (2.5) | 1 (1.4) Marital status | | Single | 44 (54.3) | 28 (38.4) Relationship | 15 (18.5) | 22 (30.1) Married | 14 (17.3) | 16 (21.9) Living with partner | 7 (8.6) | 4 (5.5) Separated/divorced | 1 (1.2) | 2 (2.7) Prefer not to say | 0 (0.0) | 1 (1.4) Moderate depression (≥10 on PHQ-8) | | Yes | 24 (29.6) | 22 (30.1) No | 57 (70.4) | 51 (69.9)","Participants were recruited via social media sites (Facebook, Twitter, and Instagram), word-of-mouth, local news advertisements, and radio broadcasts.","Participants were recruited via SM sites such as Facebook, Twitter, and Instagram and through word-of-mouth. The study also gained public attention through local news advertisements and radio broadcasts.","Randomized: N = 154 (81 intervention, 73 control)
 
-Completed 1-week follow-up: N = 140 (74 intervention, 66 control).","We randomly allocated 154 participants (mean age of 29.6 years) to either stop using SM (Facebook, Twitter, Instagram, and TikTok) for 1 week or continue to use SM as usual.",UK,"The sample consisted of predominantly young, white females in higher education. The study was conducted in English.",NOT SPECIFIED,"Focused on Facebook, Instagram, Twitter, TikTok. Participants used ActionDash (Android) and ScreenTime (iPhone) to provide screen-time evidence.","Data collection occurred between November 2020 and March 2021, which was during the COVID-19 pandemic.","The authors recommend future research should examine how participant-level psychological, social, behavioral, and individual factors moderate the effect of social media abstinence on mental health outcomes.","The study was conducted during the COVID-19 pandemic, which may have impacted results. There was a likely selection bias… The sample was not diverse… limits generalizability","The present study shows that asking people to stop using SM for 1 week leads to significant improvements in well-being and reductions in depression and anxiety… Reduced time on specific platforms (Twitter, TikTok) mediated depression/anxiety effects → platform-specific guidance may be useful for mental-health interventions (including primary care and child/adolescent contexts).",0.766,0.735,79,96,72.18,78.71,68.35,"66.99
+Completed 1-week follow-up: N = 140 (74 intervention, 66 control).","We randomly allocated 154 participants (mean age of 29.6 years) to either stop using SM (Facebook, Twitter, Instagram, and TikTok) for 1 week or continue to use SM as usual.",United Kingdom,"The sample consisted of predominantly young, white females in higher education. The study was conducted in English.",None,"Focused on Facebook, Instagram, Twitter, TikTok. Participants used ActionDash (Android) and ScreenTime (iPhone) to provide screen-time evidence.",2020-11 to 2021-03,"The authors recommend future research should examine how participant-level psychological, social, behavioral, and individual factors moderate the effect of social media abstinence on mental health outcomes.","The study was conducted during the COVID-19 pandemic, which may have impacted results. There was a likely selection bias… The sample was not diverse… limits generalizability","The present study shows that asking people to stop using SM for 1 week leads to significant improvements in well-being and reductions in depression and anxiety… Reduced time on specific platforms (Twitter, TikTok) mediated depression/anxiety effects → platform-specific guidance may be useful for mental-health interventions (including primary care and child/adolescent contexts).",0.766,0.735,79,96,72.18,78.71,68.35,"66.99
  98.0%","57.6
  84.3%","57.6
  84.3%","35.05
@@ -1131,8 +1127,8 @@ Completed 1-week follow-up: N = 140 (74 intervention, 66 control).","We randomly
  49.7%","27.3
  39.9%","20.65
  30.2%","8.76
- 12.8%",
-"Kevin Arceneaux, Martial Foucault, Kalli Giannelos, Jonathan Ladd and Can Zengin","Kevin Arceneaux¹, Martial Foucault¹, Kalli Giannelos¹², Jonathan Ladd³ and Can Zengin¹","Facebook Increases Political Knowledge, Reduces Well-Being And Informational Treatments Do Little To Help",Royal Society Open Science,2024,"Arceneaux, K., Foucault, M., Kalli Giannelos, Ladd, J., & Can Zengin. (2024). Facebook increases political knowledge, reduces well-being and informational treatments do little to help. Royal Society Open Science, 11(10). https://doi.org/10.1098/rsos.240280","Nearly three billion people actively use Facebook, making it the largest social media platform in the world. Previous research shows that the social media platform reduces users' happiness, while increasing political knowledge. It also may increase partisan polarization. Working to build a scientific consensus, we test whether the potential negative effects of Facebook use can be overcome with the help of minimalist informational interventions that a parallel line of research has shown to be effective at inducing people to be more accurate and civil. We conducted a pre-registered well-powered Facebook deactivation experiment during the 2022 French presidential election. In line with previous research, we find that deactivating Facebook increases subjective well-being and reduces political knowledge. However, deactivating Facebook had no overall effect on the level of political or social polarization during the election. Moreover, we find little evidence that minimalist informational interventions in a field setting helped individuals who deactivated Facebook to become better informed.","Control group (continued normal Facebook use)
+ 12.8%","The COVID‑19 pandemic and associated lockdown policies dominated political and media discourse in the United Kingdom during this period. Debates about government crisis management, economic relief measures, and vaccination strategy were central public issues. The aftermath of Brexit and the transition out of the European Union also continued to shape national political discussion."
+"Kevin Arceneaux, Martial Foucault, Kalli Giannelos, Jonathan Ladd and Can Zengin","Kevin Arceneaux, Martial Foucault, Kalli Giannelos, Jonathan Ladd and Can Zengin","Facebook Increases Political Knowledge, Reduces Well-Being And Informational Treatments Do Little To Help",Royal Society Open Science,2024,"Arceneaux, K., Foucault, M., Kalli Giannelos, Ladd, J., & Can Zengin. (2024). Facebook increases political knowledge, reduces well-being and informational treatments do little to help. Royal Society Open Science, 11(10). https://doi.org/10.1098/rsos.240280","Nearly three billion people actively use Facebook, making it the largest social media platform in the world. Previous research shows that the social media platform reduces users' happiness, while increasing political knowledge. It also may increase partisan polarization. Working to build a scientific consensus, we test whether the potential negative effects of Facebook use can be overcome with the help of minimalist informational interventions that a parallel line of research has shown to be effective at inducing people to be more accurate and civil. We conducted a pre-registered well-powered Facebook deactivation experiment during the 2022 French presidential election. In line with previous research, we find that deactivating Facebook increases subjective well-being and reduces political knowledge. However, deactivating Facebook had no overall effect on the level of political or social polarization during the election. Moreover, we find little evidence that minimalist informational interventions in a field setting helped individuals who deactivated Facebook to become better informed.","Control group (continued normal Facebook use)
 
 Deactivation Only group (incentivized to deactivate Facebook)
 
@@ -1388,17 +1384,17 @@ Deactivation Arms: N=1,117 (DO=547; DI=570)
 
 Midline n=1,955
 
-Endline n=2,246","Of the 2246 respondents who gave their informed consent to participate in such a lottery, we randomly assigned 1117 to be in the deactivation treatment arm (547 randomly assigned to the ‘deactivation only’ treatment and 570 to the deactivation + information treatment).",France,Highly salient two-round 2022 presidential election; social polarization measured incl. attitudes toward Maghreb/African-descent citizens,"The study was conducted during the 2022 French presidential election, a two-round contest between incumbent centrist Emmanuel Macron and far-right challenger Marine Le Pen. ",Facebook deactivation (Messenger allowed); possible substitution to other platforms,"Baseline Apr 1, 2022; 1st round Apr 10; midline Apr 19; 2nd round Apr 24; endline Apr 29",Social network context as a potential moderator. Geography/culture as a moderator for future study.,Minimalist info messages sent Apr 12/14/21/22; preregistered analyses; well-powered replication/extension of prior US/BiH deactivation studies,Deactivating Facebook yields small ↑ in well-being and ↓ in political knowledge; minimal “nudge” information adds little; polarization unchanged,0.799,0.799,76,89,61.77,78.65,64.82,"60.8
+Endline n=2,246","Of the 2246 respondents who gave their informed consent to participate in such a lottery, we randomly assigned 1117 to be in the deactivation treatment arm (547 randomly assigned to the ‘deactivation only’ treatment and 570 to the deactivation + information treatment).",France,Highly salient two-round 2022 presidential election; social polarization measured incl. attitudes toward Maghreb/African-descent citizens,"The study was conducted during the 2022 French presidential election, a two-round contest between incumbent centrist Emmanuel Macron and far-right challenger Marine Le Pen. ",Facebook deactivation (Messenger allowed); possible substitution to other platforms,2022-04,Social network context as a potential moderator. Geography/culture as a moderator for future study.,Minimalist info messages sent Apr 12/14/21/22; preregistered analyses; well-powered replication/extension of prior US/BiH deactivation studies,Deactivating Facebook yields small ↑ in well-being and ↓ in political knowledge; minimal “nudge” information adds little; polarization unchanged,0.799,0.799,76,89,61.77,78.65,64.82,"60.8
  93.8%","50.7
  78.2%","50.7
  78.2%","29.95
  46.2%","25.9
  40.0%","17.46
- 26.9%",,"29.0
- 44.7%",,"27.35
+ 26.9%",None,"29.0
+ 44.7%",None,"27.35
  42.2%","16.34
- 25.2%",
-"Nejla Asimovic, Jonathan Nagler, Richard Bonneau, and Joshua A. Tucker","Nejla Asimovica,b,1, Jonathan Naglera,b, Richard Bonneaub,c,d, and Joshua A. Tuckera,b,e",Testing The Effects Of Facebook Usage In An Ethnically Polarized Setting,Pnas,2021,"Asimovic, N., Nagler, J., Bonneau, R., & Tucker, J. A. (2021). Testing the effects of Facebook usage in an ethnically polarized setting. Proceedings of the National Academy of Sciences, 118(25), e2022819118. https://doi.org/10.1073/pnas.2022819118","Despite the belief that social media is altering intergroup dynamics—bringing people closer or further alienating them from one another—the impact of social media on interethnic attitudes has yet to be rigorously evaluated, especially within areas with tenuous interethnic relations. We report results from a randomized controlled trial in Bosnia and Herzegovina (BiH), exploring the effects of exposure to social media during 1 wk around genocide remembrance in July 2019 on a set of interethnic attitudes of Facebook users. We find evidence that, counter to preregistered expectations, people who deactivated their Facebook profiles report lower regard for ethnic outgroups than those who remained active. Moreover, we present additional evidence suggesting that this effect is likely conditional on the level of ethnic heterogeneity of respondents’ residence. We also extend the analysis to include measures of subjective well-being and knowledge of news. Here, we find that Facebook deactivation leads to suggestive improvements in subjective wellbeing and a decrease in knowledge of current events, replicating results from recent research in the United States in a very different context, thus increasing our confidence in the generalizability of these effects.",Deactivation from Facebook for one week (treatment) vs. continued normal Facebook use (control).,"Our treatment of Facebook deactivation took place from 7 July until 14 July 2019, encompassing the week around the Remembrance Day (11 July) of the genocide in Srebrenica. The genocide in Srebrenica is central and deeply intertwined with the memory of the Bosnian war as the worst atrocity in Europe after World War II. Online and offline discussions related to the war are held to a certain extent throughout the year, but significantly intensify during this period.","1. Interethnic regard (composite index and components) 
+ 25.2%","France’s 2022 presidential election dominated political and media discourse, with campaigns focusing on economic policy, immigration, and European integration. The two-round electoral process in April generated intense debate between candidates and across political parties. Issues such as populism, national identity, and France’s role within the European Union were frequently discussed in public forums."
+"Nejla Asimovic, Jonathan Nagler, Richard Bonneau, and Joshua A. Tucker","Nejla Asimovic, Jonathan Nagler, Richard Bonneau, and Joshua A. Tucker",Testing The Effects Of Facebook Usage In An Ethnically Polarized Setting,Pnas,2021,"Asimovic, N., Nagler, J., Bonneau, R., & Tucker, J. A. (2021). Testing the effects of Facebook usage in an ethnically polarized setting. Proceedings of the National Academy of Sciences, 118(25), e2022819118. https://doi.org/10.1073/pnas.2022819118","Despite the belief that social media is altering intergroup dynamics—bringing people closer or further alienating them from one another—the impact of social media on interethnic attitudes has yet to be rigorously evaluated, especially within areas with tenuous interethnic relations. We report results from a randomized controlled trial in Bosnia and Herzegovina (BiH), exploring the effects of exposure to social media during 1 wk around genocide remembrance in July 2019 on a set of interethnic attitudes of Facebook users. We find evidence that, counter to preregistered expectations, people who deactivated their Facebook profiles report lower regard for ethnic outgroups than those who remained active. Moreover, we present additional evidence suggesting that this effect is likely conditional on the level of ethnic heterogeneity of respondents’ residence. We also extend the analysis to include measures of subjective well-being and knowledge of news. Here, we find that Facebook deactivation leads to suggestive improvements in subjective wellbeing and a decrease in knowledge of current events, replicating results from recent research in the United States in a very different context, thus increasing our confidence in the generalizability of these effects.",Deactivation from Facebook for one week (treatment) vs. continued normal Facebook use (control).,"Our treatment of Facebook deactivation took place from 7 July until 14 July 2019, encompassing the week around the Remembrance Day (11 July) of the genocide in Srebrenica. The genocide in Srebrenica is central and deeply intertwined with the memory of the Bosnian war as the worst atrocity in Europe after World War II. Online and offline discussions related to the war are held to a certain extent throughout the year, but significantly intensify during this period.","1. Interethnic regard (composite index and components) 
 
 2. Subjective well-being (index and components)
 
@@ -1488,7 +1484,7 @@ p-value = <0.05
 
 3. Moderator = Age
 
-DV = Not specified
+DV = None
 
 Effect present: No evidence reported
 
@@ -1498,7 +1494,7 @@ p-value = NA
 
 4. Moderator = Gender
 
-DV = Not specified
+DV = None
 
 Effect present: No evidence reported
 
@@ -1508,7 +1504,7 @@ p-value = NA
 
 5. Moderator = Interest in politics
 
-DV = Not specified
+DV = None
 
 Effect present: No evidence reported
 
@@ -1518,7 +1514,7 @@ p-value = NA
 
 6. Moderator = Ethnicity
 
-DV = Not specified
+DV = None
 
 Effect present: No evidence reported
 
@@ -1528,7 +1524,7 @@ p-value = NA
 
 7. Moderator = Entity of residence
 
-DV = Not specified
+DV = None
 
 Effect present: No evidence reported
 
@@ -1540,7 +1536,7 @@ Result: The negative effect of Facebook deactivation on outgroup regard was foun
 
 Test/Interaction: Treatment effect on outgroup regard moderated by the difference between offline and online network diversity. 
 
-Result: Deactivating from Facebook had a significantly more negative effect on outgroup attitudes for users whose online networks were more diverse than their offline networks. For example, the interaction effect between treatment and a binary indicator for (offline more homogeneous than online) was significant and negative (β=-0.679**, SE=0.329, using the Shannon Entropy index).","Within the subsample of more homogeneous towns, the effect of deactivation on the composite index of outgroup regard is negative and highly statistically significant (SI Appendix, Tables S10–S12); on the contrary, for people living in more heterogeneous offline environments, there is no effect of deactivation on outgroup attitudes. Hence, it appears that the negative effect of Facebook deactivation on outgroup regard is almost entirely driven by users within the communities in which the opportunities for offline intergroup contact are limited (and in some cases possibly nonexistent), and they therefore may be living within offline echo chambers that are stronger than the ones users find online. ... Across all three methods of measuring diversity, the estimate on outgroup regard passes the Benjamini-Hochberg multiple-comparisons correction at the 0.05 level (SI Appendix, Tables S13–15).","Age: Mean age 29.2 years (SD = 8.96).
+Result: Deactivating from Facebook had a significantly more negative effect on outgroup attitudes for users whose online networks were more diverse than their offline networks. For example, the interaction effect between treatment and a binary indicator for (offline more homogeneous than online) was significant and negative (β=-0.679**, SE=0.329, using the Shannon Entropy index).","Within the subsample of more homogeneous towns, the effect of deactivation on the composite index of outgroup regard is negative and highly statistically significant (SI Appendix, Tables S10–S12); on the contrary, for people living in more heterogeneous offline environments, there is no effect of deactivation on outgroup attitudes. Hence, it appears that the negative effect of Facebook deactivation on outgroup regard is almost entirely driven by users within the communities in which the opportunities for offline intergroup contact are limited (and in some cases possibly Nonexistent), and they therefore may be living within offline echo chambers that are stronger than the ones users find online. ... Across all three methods of measuring diversity, the estimate on outgroup regard passes the Benjamini-Hochberg multiple-comparisons correction at the 0.05 level (SI Appendix, Tables S13–15).","Age: Mean age 29.2 years (SD = 8.96).
 
 Gender: Mean of 1.640 on a scale where 1 = male, 2 = female, and 0 = other/prefer not to say, indicating a majority of female participants.
 
@@ -1555,15 +1551,15 @@ Political affiliation / ideology: NA.
 Other: NA.
 ","Table S2. Ethnic composition of the sample, as self-reported in the pre-treatment survey. Numbers also include those who identified themselves by their religion (matching the ethnic category with the religion most frequently associated with members of that category). Ethnic Group, No. of people, Share Bosniak, 208, 58.92 % Serb, 59, 16.71 % Croat, 23, 6.52 % Bosnian (supraordinate identity), 46, 13.03 % Other or Do not want to say, 17, 4.82 % Table S1. Descriptive statistics of the overall sample... Variable, Mean (SD) Age, 29.200 (8.960) Gender, 1.640 (0.493) Education, 3.010 (1.110) Employment, 0.414 (0.493)",Recruited through Facebook advertisements.,"Participants were recruited through Facebook advertisements, which we ran across BiH (SI Appendix, Fig. S1B) in both Cyrillic and Latin alphabets.","Randomized: N = 556
  
-Analyzed endline: N = 353 (159 treatment, 194 control).","We block randomized the 556 resulting individuals into treatment and control, blocking on the variable from the baseline survey that measures the importance of ethnic identity to one’s self-identification. A total of 258 of individuals assigned to the control group and 263 of those assigned to the treatment group were successfully emailed. ... We received endline surveys from 159 participants in the treatment group and 194 participants in the control group, with their observable characteristics balanced between the treatment and the control group (SI Appendix, Table S3).",Bosnia and Herzegovina (BiH),"Post-conflict, highly ethnically polarized/segregated society; no language barrier among main groups.","Ethnonationalism dominates; timed around Srebrenica genocide remembrance (July 11), a period of elevated identity salience and political discourse.",Facebook only; dominant platform in BiH (~99% share at the time); intervention = account deactivation.,"July 7–14, 2019; week around Srebrenica remembrance.",Larger-scale replications to examine heterogeneous effects; compare diversity of online vs. offline networks more directly.,"Emotionally/politically charged remembrance period; online content likely “particularly emotional and distressing,” possibly amplifying effects (e.g., larger anxiety decrease).","Deactivation is not a universal remedy for ethnic polarization; in segregated contexts, Facebook may provide rare exposure to outgroups—removing it without substitutes can worsen outgroup attitudes. Policies should consider what replaces online contact and the surrounding social ecosystem.",0.335,0.326,,76,60.59,71.66,3.27,"2.32
+Analyzed endline: N = 353 (159 treatment, 194 control).","We block randomized the 556 resulting individuals into treatment and control, blocking on the variable from the baseline survey that measures the importance of ethnic identity to one’s self-identification. A total of 258 of individuals assigned to the control group and 263 of those assigned to the treatment group were successfully emailed. ... We received endline surveys from 159 participants in the treatment group and 194 participants in the control group, with their observable characteristics balanced between the treatment and the control group (SI Appendix, Table S3).",Bosnia and Herzegovina,"Post-conflict, highly ethnically polarized/segregated society; no language barrier among main groups.","Ethnonationalism dominates; timed around Srebrenica genocide remembrance (July 11), a period of elevated identity salience and political discourse.",Facebook only; dominant platform in BiH (~99% share at the time); intervention = account deactivation.,2019-07,Larger-scale replications to examine heterogeneous effects; compare diversity of online vs. offline networks more directly.,"Emotionally/politically charged remembrance period; online content likely “particularly emotional and distressing,” possibly amplifying effects (e.g., larger anxiety decrease).","Deactivation is not a universal remedy for ethnic polarization; in segregated contexts, Facebook may provide rare exposure to outgroups—removing it without substitutes can worsen outgroup attitudes. Policies should consider what replaces online contact and the surrounding social ecosystem.",0.335,0.326,None,76,60.59,71.66,3.27,"2.32
  71.0%","1.8
- 55.0%",,"1.5
+ 55.0%",None,"1.5
  52.2%","0.98
  34.1%","0.0716
- 2.5%",,"0.27
+ 2.5%",None,"0.27
  10.0%","1.2
- 41.8%",,,
-"Nejla Asimovic', Jonathan Nagler² and Joshua A. Tucker³","Nejla Asimovic', Jonathan Nagler² and Joshua A. Tucker³",Replicating The Effects Of Facebook Deactivation In An Ethnically Polarized Setting,Research And Politics,2023,"Nejla Asimovic, Nagler, J., & Tucker, J. A. (2023). Replicating the effects of Facebook deactivation in an ethnically polarized setting. Research & Politics, 10(4). https://doi.org/10.1177/20531680231205157","The question of how social media usage impacts societal polarization continues to generate great interest among both the research community and broader public. Nevertheless, there are still very few rigorous empirical studies of the causal impact of social media usage on polarization. To explore this question, we replicate the only published study to date that tests the effects of social media cessation on interethnic attitudes (Asimovic et al., 2021). In a study situated in Bosnia and Herzegovina, the authors found that deactivating from Facebook for a week around genocide commemoration in Bosnia and Herzegovina had a negative effect on users' attitudes toward ethnic outgroups, with the negative effect driven by users with more ethnically homogenous offline networks. Does this finding extend to other settings? In a pre-registered replication study, we implement the same research design in a different ethnically polarized setting: Cyprus. We are not able to replicate the main effect found in Asimovic et al. (2021): in Cyprus, we cannot reject the null hypothesis of no effect. We do, however, find a significant interaction between the heterogeneity of users' offline networks and the deactivation treatment within our 2021 subsample, consistent with the pattern from Bosnia and Herzegovina. We also find support for recent findings (Allcott et al., 2020; Asimovic et al., 2021) that Facebook deactivation leads to a reduction in anxiety levels and suggestive evidence of a reduction in knowledge of current news, though the latter is again limited to our 2021 subsample.",Facebook deactivation (7 days),"The treatment group was asked to deactivate from Facebook (and received instructions on how to do so), while the control group was asked to remain active as usual. ... TREATMENT GROUP: You are in group 1, and we ask that you deactivate your Facebook profile for seven days, starting July 18 (12pm) until July 25 (12pm). You are still allowed to use the Messenger application. Activating your Facebook account at any point over the period of the study will make you ineligible to receive the final prize... CONTROL GROUP: You are in group 2 that is asked to remain active on Facebook, but respond to our final survey and report to us the amount of time spent on Facebook during the week of the study.","1. Outgroup regard
+ 41.8%",None,None,"Public discourse in Bosnia and Herzegovina often centers on ethnic politics and the legacy of the 1990s conflict. The July commemoration of the Srebrenica genocide is a major symbolic event that shapes national and international political discussion. Debates about reconciliation, historical memory, and political divisions between ethnic groups frequently appear in media coverage."
+"Nejla Asimovic', Jonathan Nagler² and Joshua A. Tucker³","Nejla Asimovic, Jonathan Nagler and Joshua A. Tucker",Replicating The Effects Of Facebook Deactivation In An Ethnically Polarized Setting,Research And Politics,2023,"Nejla Asimovic, Nagler, J., & Tucker, J. A. (2023). Replicating the effects of Facebook deactivation in an ethnically polarized setting. Research & Politics, 10(4). https://doi.org/10.1177/20531680231205157","The question of how social media usage impacts societal polarization continues to generate great interest among both the research community and broader public. Nevertheless, there are still very few rigorous empirical studies of the causal impact of social media usage on polarization. To explore this question, we replicate the only published study to date that tests the effects of social media cessation on interethnic attitudes (Asimovic et al., 2021). In a study situated in Bosnia and Herzegovina, the authors found that deactivating from Facebook for a week around genocide commemoration in Bosnia and Herzegovina had a negative effect on users' attitudes toward ethnic outgroups, with the negative effect driven by users with more ethnically homogenous offline networks. Does this finding extend to other settings? In a pre-registered replication study, we implement the same research design in a different ethnically polarized setting: Cyprus. We are not able to replicate the main effect found in Asimovic et al. (2021): in Cyprus, we cannot reject the null hypothesis of no effect. We do, however, find a significant interaction between the heterogeneity of users' offline networks and the deactivation treatment within our 2021 subsample, consistent with the pattern from Bosnia and Herzegovina. We also find support for recent findings (Allcott et al., 2020; Asimovic et al., 2021) that Facebook deactivation leads to a reduction in anxiety levels and suggestive evidence of a reduction in knowledge of current news, though the latter is again limited to our 2021 subsample.",Facebook deactivation (7 days),"The treatment group was asked to deactivate from Facebook (and received instructions on how to do so), while the control group was asked to remain active as usual. ... TREATMENT GROUP: You are in group 1, and we ask that you deactivate your Facebook profile for seven days, starting July 18 (12pm) until July 25 (12pm). You are still allowed to use the Messenger application. Activating your Facebook account at any point over the period of the study will make you ineligible to receive the final prize... CONTROL GROUP: You are in group 2 that is asked to remain active on Facebook, but respond to our final survey and report to us the amount of time spent on Facebook during the week of the study.","1. Outgroup regard
 
 2. News knowledge
 
@@ -1730,15 +1726,15 @@ Political affiliation / ideology: NA.
 Other: 
 
 Residency status: 442 born and living in Cyprus, 61 diaspora participants, and 40 Turks & Greeks living in Turkey/Greece.
-","Table A3: Baseline characteristics: treatment vs. the control group. Age: Treatment 27.93 (9.467), Control 29.92 (9.791) Gender: Treatment 1.61 (0.488), Control 1.64 (0.481) Educ: Treatment 4.54 (1.184), Control 4.53 (1.108) Employ: Treatment 1.74 (0.893), Control 1.77 (0.902) Table A2: Composition of the final sample. Born and live in Cyprus: 442 Diaspora: 61 Turks & Greeks living in Turkey/Greece: 40",Facebook advertisements,"We recruited participants through Facebook advertisements that were circulated across the island in both Greek and Turkish (SI, Section A).",N = 543,"651 users received our treatment assignment information, 543 (273 control; 270 treatment) of whom ended up completing the final survey. [From Table A1]: 2020: 319 2021: 224 Observations: 543",Cyprus,Ethnic polarization; language barrier (Greek/Turkish),July 20 commemoration; divided island,Facebook; deactivation monitored; Messenger allowed,Summer 2020; Summer 2021,The authors suggest future research should explore the role of language barriers and the ease of accessing out-group content online as moderators of social media's effects.,2020 during COVID-19; checkpoint closures,No overall outgroup-attitude change; anxiety ↓; effects depend on offline network homogeneity,0.645,0.655,,91,68.62,1.26,"1.14
+","Table A3: Baseline characteristics: treatment vs. the control group. Age: Treatment 27.93 (9.467), Control 29.92 (9.791) Gender: Treatment 1.61 (0.488), Control 1.64 (0.481) Educ: Treatment 4.54 (1.184), Control 4.53 (1.108) Employ: Treatment 1.74 (0.893), Control 1.77 (0.902) Table A2: Composition of the final sample. Born and live in Cyprus: 442 Diaspora: 61 Turks & Greeks living in Turkey/Greece: 40",Facebook advertisements,"We recruited participants through Facebook advertisements that were circulated across the island in both Greek and Turkish (SI, Section A).",N = 543,"651 users received our treatment assignment information, 543 (273 control; 270 treatment) of whom ended up completing the final survey. [From Table A1]: 2020: 319 2021: 224 Observations: 543",Cyprus,Ethnic polarization; language barrier (Greek/Turkish),July 20 commemoration; divided island,Facebook; deactivation monitored; Messenger allowed,2020-06 to 2020-08; 2021-06 to 2021-08,The authors suggest future research should explore the role of language barriers and the ease of accessing out-group content online as moderators of social media's effects.,2020 during COVID-19; checkpoint closures,No overall outgroup-attitude change; anxiety ↓; effects depend on offline network homogeneity,0.645,0.655,None,91,68.62,1.26,"1.14
  90.9%","1.1
- 87.6%",,"0.7898
+ 87.6%",None,"0.7898
  62.9%","0.7229
  57.6%","0.2803
- 22.3%",,"0.41
+ 22.3%",None,"0.41
  32.6%","0.6697
- 53.3%",,"0.2155
- 17.2%",,
+ 53.3%",None,"0.2155
+ 17.2%",None,"The COVID‑19 pandemic significantly affected Cyprus, particularly through its impact on tourism and the national economy. Public debate focused on government restrictions, economic recovery, and public health measures. Discussions about regional geopolitics in the Eastern Mediterranean and tensions with Turkey over maritime boundaries also appeared in media discourse."
 "Ofir Turel, Daniel R. Cavagnaro, Dar Meshi","Ofir Turel, Daniel R. Cavagnaro, Dar Meshi","Short Abstinence From Online Social Networking Sites Reduces Perceived Stress, Especially In Excessive Users",Psychiatry Research,2018,"Turel, O., Cavagnaro, D. R., & Meshi, D. (2018). Short abstinence from online social networking sites reduces perceived stress, especially in excessive users. Psychiatry Research, 270, 947–953.
 
 https://doi.org/10.1016/j.psychres.2018.11.017","Online social networking sites (SNSs), such as Facebook, provide frequent and copious social reinforcers (e.g., “likes”) delivered at variable time intervals. As a result, some SNS users display excessive, maladaptive behaviors on these platforms. Excessive SNS users, and typical users alike, are often aware of their intense use and psychological dependence on these sites, which may lead to elevated stress. In fact, research has demonstrated that use of SNSs alone induces elevated stress. Other research has begun to investigate the effects of short periods of SNS abstinence, revealing beneficial effects on subjective wellbeing. We aligned these two lines of research and hypothesized that a short period of SNS abstinence would induce a reduction in perceived stress, especially in excessive users. The results confirmed our hypothesis and revealed that both typical and excessive SNS users experienced reduction in perceived stress following SNS abstinence of several days. The effects were particularly pronounced in excessive SNS users. The reduction in stress was not associated with academic performance increases. These results indicate a benefit—at least temporarily—of abstinence from SNSs and provide important information for therapists treating patients who struggle with excessive SNS use.","Abstinence instruction (yes vs. no)
@@ -1840,7 +1836,7 @@ Outcome = Relative stress difference:
 
 Sex: F=6.05, p=0.014, partial eta2=0.011
 
-Treatment (Abstinence): F=2.20, p=0.139, partial eta2=0.004.","Table 2. Analysis of covariance results for stress reduction. Model for testing H1: Sex F=4.35, Sig.=0.037, Partial Eta2=0.008; Treatment (Abstinence) F=4.49, Sig.=0.035, Partial Eta2=0.008.",NOT SPECIFIED,NOT SPECIFIED,"1. Moderator = SNS use type (typical vs. excessive users)
+Treatment (Abstinence): F=2.20, p=0.139, partial eta2=0.004.","Table 2. Analysis of covariance results for stress reduction. Model for testing H1: Sex F=4.35, Sig.=0.037, Partial Eta2=0.008; Treatment (Abstinence) F=4.49, Sig.=0.035, Partial Eta2=0.008.",None,None,"1. Moderator = SNS use type (typical vs. excessive users)
 
 DV = Perceived stress change
 
@@ -1880,20 +1876,18 @@ Other:
 
 Facebook contacts: mean 4.59 (SD = 1.54) on a 1–7 scale (0–10 to >1000 contacts).
 
-Prior GPA: mean 2.72 (SD = 0.55).","Students (n = 555, 238 women, Mage = 24.01)... Age [Mean, Range, (SD)] 23.29, 19–38 (3.24) [Control], 24.26, 20–54 (5.04) [Abstain]. Sex [Male/Female] 74/68 [Control], 243/170 [Abstain].",University course sample,"Students (n = 555, 238 women, Mage = 24.01) were recruited from a large introductory-level course at a university in the U.S. by an inclass announcement asking them to participate in a study about Facebook use behaviors.",N = 555 (413 abstain; 142 control),Students (n = 555... Control group (n = 142) Abstain group (n = 413),USA,North American university setting with heavy SNS usage for social rewards,NOT SPECIFIED,"Facebook (mobile & desktop)
+Prior GPA: mean 2.72 (SD = 0.55).","Students (n = 555, 238 women, Mage = 24.01)... Age [Mean, Range, (SD)] 23.29, 19–38 (3.24) [Control], 24.26, 20–54 (5.04) [Abstain]. Sex [Male/Female] 74/68 [Control], 243/170 [Abstain].",University course sample,"Students (n = 555, 238 women, Mage = 24.01) were recruited from a large introductory-level course at a university in the U.S. by an inclass announcement asking them to participate in a study about Facebook use behaviors.",N = 555 (413 abstain; 142 control),Students (n = 555... Control group (n = 142) Abstain group (n = 413),United States,North American university setting with heavy SNS usage for social rewards,None,"Facebook (mobile & desktop)
 
-Variable-ratio social reinforcement (“likes”)","Data collection occurred around 2017-2018
-
-Students followed for approximately one week during a semester.","Emotion regulation
+Variable-ratio social reinforcement (“likes”)",2017-01 to 2018-12,"Emotion regulation
 
 Cognitive reappraisal
 
 Suppression of emotion.",Study relied on a trust system for abstinence compliance (self-report). Abstinence targeted a period of one week.,"A simple, short Facebook break modestly lowers perceived stress—especially for heavy users—but does not improve short-term GPA; pairing abstinence with stress-management (e.g., mindfulness) may enhance benefits.",0.742,0.629,78,88,70.86,76.27,325.6,"286.9
  88.0%","230.0
- 71.0%",,"230.0
+ 71.0%",None,"230.0
 71%","110.0
- 34.0%",,,,,,,
-"Jeffrey A. Hall, Dong Liu",Jeffrey A. Hall1 and Dong Liu2,"Social Media Use, Social Displacement, And Well-Being",Current Opinion In Psychology,2022,"Hall, J. A., & Liu, D. (2022). Social media use, social displacement, and well-being. Current Opinion in Psychology, 46, 101339. https://doi.org/10.1016/j.copsyc.2022.101339","Social displacement is the proposition that time spent on social media replaces time spent in face-to-face interaction, particularly with close friends and family, thus reducing well-being. There is clear evidence of growing mobile and social media use, and some evidence of a decline in face-to-face communication. This essay concludes, however, there is very little direct or causal evidence of social media time displacing face-to-face time. This article concludes that increasing social media use most likely displaces other media activities. To explain findings that seem to support social displacement, this essay examines the difference between population-level trends and within-individual behavior, and the difference between within-person and between-person displacement.","Social media use
+ 34.0%",None,None,None,None,None,None,"The 2018 U.S. midterm election cycle dominated media discourse, with intense partisan campaigning and debates over the Trump administration’s policies. Issues such as misinformation, political advertising, and the influence of social media platforms became major topics of public discussion. Concerns about election interference and platform regulation were also widely debated."
+"Jeffrey A. Hall, Dong Liu","Jeffrey A. Hall, Dong Liu","Social Media Use, Social Displacement, And Well-Being",Current Opinion In Psychology,2022,"Hall, J. A., & Liu, D. (2022). Social media use, social displacement, and well-being. Current Opinion in Psychology, 46, 101339. https://doi.org/10.1016/j.copsyc.2022.101339","Social displacement is the proposition that time spent on social media replaces time spent in face-to-face interaction, particularly with close friends and family, thus reducing well-being. There is clear evidence of growing mobile and social media use, and some evidence of a decline in face-to-face communication. This essay concludes, however, there is very little direct or causal evidence of social media time displacing face-to-face time. This article concludes that increasing social media use most likely displaces other media activities. To explain findings that seem to support social displacement, this essay examines the difference between population-level trends and within-individual behavior, and the difference between within-person and between-person displacement.","Social media use
 
 Time spent on social media
 
@@ -1915,7 +1909,7 @@ Q: Socialization includes FtF conversation, hosting or attending parties, and vi
 
 Outcome: Socializing with friends
 
-Q: Estimates extracted from interval-scale responses suggest incoming college students spent 13.5 h a week socializing with friends in 1987, but this had shrunk to 9.1 h a week by 2016, with most of the decline occurring in more recent years.",NOT SPECIFIED,NOT SPECIFIED,Narrative review,"This essay concludes, however, there is very little direct or causal evidence of social media time displacing face-to-face time. ... To explain findings that seem to support social displacement, this essay examines the difference between population-level trends and within-individual behavior, and the difference between within-person and between-person displacement effects, followed by conclusions and future directions.","The review synthesizes population-level trends from time use surveys (e.g., ATUS) and within-person effects from longitudinal and experience sampling studies. It contrasts population-level declines in FtF socializing with within-person behavioral changes. It differentiates between between-person effects (social people being active both online/offline) and within-person displacement.","To explain findings that seem to support social displacement, this essay examines the difference between population-level trends and within-individual behavior, and the difference between within-person and between-person displacement effects, followed by conclusions and future directions.","Population-level
+Q: Estimates extracted from interval-scale responses suggest incoming college students spent 13.5 h a week socializing with friends in 1987, but this had shrunk to 9.1 h a week by 2016, with most of the decline occurring in more recent years.",None,None,Narrative review,"This essay concludes, however, there is very little direct or causal evidence of social media time displacing face-to-face time. ... To explain findings that seem to support social displacement, this essay examines the difference between population-level trends and within-individual behavior, and the difference between within-person and between-person displacement effects, followed by conclusions and future directions.","The review synthesizes population-level trends from time use surveys (e.g., ATUS) and within-person effects from longitudinal and experience sampling studies. It contrasts population-level declines in FtF socializing with within-person behavioral changes. It differentiates between between-person effects (social people being active both online/offline) and within-person displacement.","To explain findings that seem to support social displacement, this essay examines the difference between population-level trends and within-individual behavior, and the difference between within-person and between-person displacement effects, followed by conclusions and future directions.","Population-level
 
 Individual-level","In the past 25 years, there has been an approximate 10-min per day decline in time spent socializing across these three countries (1.2 h/wk). ... average worldwide daily social media use was 2.4 h per day in 2020. ... incoming college students spent 13.5 h a week socializing with friends in 1987, but this had shrunk to 9.1 h a week by 2016.","Decline in socialization: 
 
@@ -1927,7 +1921,7 @@ Declined from 13.5 h/wk (1987) to 9.1 h/wk (2016).
 
 Global social media use: 
 
-2.4 h/day (2020); Mobile device use (April 2020): 4.3 h/day (up 20% from 2019).","Including the use of messaging apps, the average worldwide daily social media use was 2.4 h per day in 2020. ... In the past 25 years, there has been an approximate 10-min per day decline in time spent socializing across these three countries (1.2 h/wk). ... incoming college students spent 13.5 h a week socializing with friends in 1987, but this had shrunk to 9.1 h a week by 2016, with most of the decline occurring in more recent years.",NOT SPECIFIED,NOT SPECIFIED,"1. Moderator = Type of social media use (active communication vs. passive use)
+2.4 h/day (2020); Mobile device use (April 2020): 4.3 h/day (up 20% from 2019).","Including the use of messaging apps, the average worldwide daily social media use was 2.4 h per day in 2020. ... In the past 25 years, there has been an approximate 10-min per day decline in time spent socializing across these three countries (1.2 h/wk). ... incoming college students spent 13.5 h a week socializing with friends in 1987, but this had shrunk to 9.1 h a week by 2016, with most of the decline occurring in more recent years.",None,None,"1. Moderator = Type of social media use (active communication vs. passive use)
 
 DV = Face-to-face communication / well-being
 
@@ -1979,19 +1973,11 @@ Political affiliation / ideology: NA.
 
 Other:
 
-Nationality/Region: United States, United Kingdom, Australia, Netherlands, Germany.","Secondary analyses of large datasets of American adolescents [13] ... incoming college students ... U.S. American Time Use Survey [15], the Australian government, and four time use surveys from the UK ... Dutch adults [36] ... German adolescents [33].",U.S. American Time Use Survey (ATUS); Australian government surveys; UK time use surveys (1995-2020); Longitudinal Study of American Youth; Longitudinal Study of American Youth panel; secondary datasets.,"drawn from the U.S. American Time Use Survey [15], the Australian government, and four time use surveys from the UK ... Longitudinal Study of American Youth [40].",Secondary Datasets and National surveys,"Secondary analyses of large datasets of American adolescents [13] ... U.S. American Time Use Survey [15], the Australian government, and four time use surveys from the UK ... A meta-analysis of 43 studies [6] ... A nine-year longitudinal study of German adolescents [33] ... Longitudinal Study of American Youth [40].","USA
-
-United Kingdom
-
-Australia
-
-Germany
-
-Netherlands.","Developed Nations
+Nationality/Region: United States, United Kingdom, Australia, Netherlands, Germany.","Secondary analyses of large datasets of American adolescents [13] ... incoming college students ... U.S. American Time Use Survey [15], the Australian government, and four time use surveys from the UK ... Dutch adults [36] ... German adolescents [33].",U.S. American Time Use Survey (ATUS); Australian government surveys; UK time use surveys (1995-2020); Longitudinal Study of American Youth; Longitudinal Study of American Youth panel; secondary datasets.,"drawn from the U.S. American Time Use Survey [15], the Australian government, and four time use surveys from the UK ... Longitudinal Study of American Youth [40].",Secondary Datasets and National surveys,"Secondary analyses of large datasets of American adolescents [13] ... U.S. American Time Use Survey [15], the Australian government, and four time use surveys from the UK ... A meta-analysis of 43 studies [6] ... A nine-year longitudinal study of German adolescents [33] ... Longitudinal Study of American Youth [40].",United States; United Kingdom; Australia; Germany; Netherlands,"Developed Nations
 
 High digital literacy
 
-Shift from traditional media (TV, books) to digital/mobile media.",NOT SPECIFIED,"Platforms mentioned: Facebook, Twitter, LinkedIn, Instagram, Tik Tok, YouTube, WhatsApp, WeChat. Context includes mobile device integration and feed algorithms serving entertainment.",Historical trends from 1987 to 2020; COVID-19 pandemic (April 2020).,"Structural barriers (e.g., time spent working, lack of places to socialize); deficient social skills; poor quality or few relational partners.","The review argues against the ecological fallacy, noting that population-level declines in socializing do not prove social media is the cause for individuals.",Social media contact may be a net gain when communication partners are physically unavailable; private direct messaging with close others is more beneficial for well-being than passive consumption.,"USA:
+Shift from traditional media (TV, books) to digital/mobile media.",None,"Platforms mentioned: Facebook, Twitter, LinkedIn, Instagram, Tik Tok, YouTube, WhatsApp, WeChat. Context includes mobile device integration and feed algorithms serving entertainment.",1987-01 to 2020-12,"Structural barriers (e.g., time spent working, lack of places to socialize); deficient social skills; poor quality or few relational partners.","The review argues against the ecological fallacy, noting that population-level declines in socializing do not prove social media is the cause for individuals.",Social media contact may be a net gain when communication partners are physically unavailable; private direct messaging with close others is more beneficial for well-being than passive consumption.,"USA:
 159.8
  47.8%
 
@@ -2301,1025 +2287,4 @@ GER
 
 NETH
 4.36
- 25.4%",
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-0.805
-
-NETH
-0.797
-
-NETH
-0.797","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-0.817
-
-NETH
-0.803
-
-NETH
-0.803","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-77
-
-NETH
-
-
-NETH
-","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-92
-
-NETH
-93
-
-NETH
-93","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-74.92
-
-NETH
-76.57
-
-NETH
-76.57","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-82.04
-
-NETH
-77.93
-
-NETH
-77.93","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-83.89
-
-NETH
-17.19
-
-NETH
-17.19","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-78.02
- 93.0%
-
-NETH
-16.5
- 96.0%
-
-NETH
-16.5
- 96.0%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-72.6
- 86.5%
-
-NETH
-15.6
- 90.7%
-
-NETH
-15.6
- 90.7%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-72.6
- 86.5%
-
-NETH
-15.6
- 90.7%
-
-NETH
-15.6
- 90.7%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-25.75
- 30.7%
-
-NETH
-8.5
- 49.4%
-
-NETH
-8.5
- 49.4%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-29.85
- 35.6%
-
-NETH
-8.5
- 49.4%
-
-NETH
-8.5
- 49.4%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-7.75
- 9.2%
-
-NETH
-4.2
- 24.4%
-
-NETH
-4.2
- 24.4%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-16.99
- 20.2%
-
-NETH
-4.8
-27.9%
-
-NETH
-4.8
-27.9%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-13.0
- 15.5%
-
-NETH
-9.7
- 56.4%
-
-NETH
-9.7
- 56.4%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-14.35
- 17.1%
-
-NETH
-4.8
- 27.9%
-
-NETH
-4.8
- 27.9%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-15.3
- 18.2%
-
-NETH
-6.1
- 35.5%
-
-NETH
-6.1
- 35.5%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-15.12
- 18.0%
-
-NETH
-4.36
- 25.4%
-
-NETH
-4.36
- 25.4%",
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-0.805
-
-NETH
-0.797","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-0.817
-
-NETH
-0.803","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-77
-
-NETH
-","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-92
-
-NETH
-93","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-74.92
-
-NETH
-76.57","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-82.04
-
-NETH
-77.93","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-83.89
-
-NETH
-17.19","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-78.02
- 93.0%
-
-NETH
-16.5
- 96.0%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-72.6
- 86.5%
-
-NETH
-15.6
- 90.7%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-72.6
- 86.5%
-
-NETH
-15.6
- 90.7%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-25.75
- 30.7%
-
-NETH
-8.5
- 49.4%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-29.85
- 35.6%
-
-NETH
-8.5
- 49.4%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-7.75
- 9.2%
-
-NETH
-4.2
- 24.4%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-16.99
- 20.2%
-
-NETH
-4.8
-27.9%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-13.0
- 15.5%
-
-NETH
-9.7
- 56.4%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-14.35
- 17.1%
-
-NETH
-4.8
- 27.9%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-15.3
- 18.2%
-
-NETH
-6.1
- 35.5%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%
-
-GER
-15.12
- 18.0%
-
-NETH
-4.36
- 25.4%",
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%","USA:
-159.8
- 47.8%
-
-UK
-31.75
- 46.5%
-
-AUS
-12.75
- 49.2%",
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.797,0.803,,93,76.57,77.93,17.19,"16.5
- 96.0%","15.6
- 90.7%","15.6
- 90.7%","8.5
- 49.4%","8.5
- 49.4%","4.2
- 24.4%","4.8
-27.9%","9.7
- 56.4%","4.8
- 27.9%","6.1
- 35.5%","4.36
- 25.4%",
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.797,0.797,0.803,,93,77.93,17.19,"[16.5, 96.0]","[15.6, 90.7]","[15.6, 90.7]","[8.5, 49.4]","[8.5, 49.4]","[4.2, 24.4]","[4.8, None]","[9.7, 56.4]","[4.8, 27.9]","[6.1, 35.5]","[4.36, 25.4]"
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,0.803,,,,,,,"[16.5
- 96.0%","[15.6
- 90.7%","[15.6
- 90.7%","[8.5
- 49.4%","[8.5
- 49.4%","[4.2
- 24.4%","[4.8
- None%","[9.7
- 56.4%","[4.8
- 27.9%","[6.1
- 35.5%","[4.36
- 25.4%"
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,93,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,77.93,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,17.19,,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"[16.5, 96.0]",,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"[15.6, 90.7]",,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"[15.6, 90.7]",,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"[8.5, 49.4]",,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"[8.5, 49.4]",,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"[4.2, 24.4]",,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"[4.8, None]",,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"[9.7, 56.4]",,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"[4.8, 27.9]",,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"[6.1, 35.5]",,,,,,,,,,,,,,,,,
-,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,"[4.36, 25.4]",,,,,,,,,,,,,,,,,
+ 25.4%","The COVID‑19 pandemic shaped political and social discourse across the United States, influencing debates about public health measures, economic shutdowns, and federal authority. The 2020 U.S. presidential election, culminating on November 3, dominated media attention and heightened political polarization. Questions about misinformation, social media moderation, and election legitimacy were widely discussed in public and political arenas."
