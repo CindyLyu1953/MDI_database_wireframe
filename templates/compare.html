@@ -257,6 +257,17 @@
                 </svg>
                 Clear Comparison
             </button>
+            <button class="btn btn-outline" id="createOwnComparisonBtn" onclick="enterCustomComparisonMode()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                Create Your Own Comparison
+            </button>
+            <button class="btn btn-outline hidden" id="backToStandardBtn" onclick="exitCustomComparisonMode()">
+                ← Back to standard view
+            </button>
         </div>
     </section>
 
@@ -342,8 +353,8 @@
             }
         ] %}
 
-        <div class="compare-layout">
-            <aside class="section-nav" aria-label="Feature groups">
+        <div class="compare-layout" id="compareLayout">
+            <aside class="section-nav" aria-label="Feature groups" id="sectionNav">
                 {% for group in feature_groups %}
                 <button
                     type="button"
@@ -354,6 +365,39 @@
                 </button>
                 {% endfor %}
             </aside>
+
+            <div class="compare-main-area">
+            <div class="indicator-selector-panel hidden" id="indicatorSelectorPanel" aria-label="Select indicators">
+                <div class="indicator-selector-header">
+                    <span class="indicator-selector-label">Select indicators to compare:</span>
+                    <button type="button" class="btn btn-outline btn-sm" id="indicatorDropdownToggle" aria-expanded="false" aria-haspopup="listbox">
+                        <span id="indicatorDropdownLabel">All selected</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>
+                    </button>
+                </div>
+                <div class="indicator-selector-dropdown hidden" id="indicatorDropdown" role="listbox">
+                    <div class="indicator-dropdown-actions">
+                        <button type="button" class="indicator-clear-all" id="indicatorClearAll">Clear all</button>
+                    </div>
+                    {% for group in feature_groups %}
+                    <div class="indicator-section" data-section-id="{{ group.id }}">
+                        <button type="button" class="indicator-section-header group-{{ group.id }}" data-section-id="{{ group.id }}" aria-label="Toggle {{ group.label }}">
+                            <span class="indicator-section-checkbox" aria-hidden="true"></span>
+                            <span class="indicator-section-label">{{ group.label }}</span>
+                        </button>
+                        <div class="indicator-section-items">
+                            {% for f in group.features %}
+                            <label class="indicator-checkbox-item" role="option">
+                                <input type="checkbox" class="indicator-checkbox" value="{{ f.key }}" data-label="{{ f.label|e }}" data-section-id="{{ group.id }}">
+                                <span>{{ f.label }}</span>
+                            </label>
+                            {% endfor %}
+                        </div>
+                    </div>
+                    {% endfor %}
+                </div>
+                <div class="indicator-tags" id="indicatorTags"></div>
+            </div>
 
             <div class="comparison-table-container">
                 <div class="comparison-table">
@@ -374,10 +418,10 @@
                     {% for group in feature_groups %}
                     {% set group_is_first = loop.first %}
                     {% for feature in group.features %}
-                    <div class="feature-title-row section-content{% if not group_is_first %} section-collapsed{% endif %}" data-section="{{ group.id }}">
+                    <div class="feature-title-row section-content{% if not group_is_first %} section-collapsed{% endif %}" data-section="{{ group.id }}" data-feature-key="{{ feature.key }}">
                         <div class="feature-row-title">{{ feature.label }}</div>
                     </div>
-                    <div class="table-row section-content{% if not group_is_first %} section-collapsed{% endif %}" data-section="{{ group.id }}">
+                    <div class="table-row section-content{% if not group_is_first %} section-collapsed{% endif %}" data-section="{{ group.id }}" data-feature-key="{{ feature.key }}">
                         {% for paper in papers %}
                         <div class="study-cell" data-study-index="{{ loop.index }}">
                             {{ render_feature_by_key(paper, feature.key, feature.label, loop.index) }}
@@ -387,6 +431,7 @@
                     {% endfor %}
                     {% endfor %}
                 </div>
+            </div>
             </div>
         </div>
         {% else %}
@@ -989,11 +1034,165 @@
         activateSection(defaultSection);
     }
 
-    // Initialize section selector when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setupSectionSelector);
-    } else {
+    // Create Your Own Comparison - custom mode
+    let customComparisonMode = false;
+
+    function enterCustomComparisonMode() {
+        customComparisonMode = true;
+        const layout = document.getElementById('compareLayout');
+        const sectionNav = document.getElementById('sectionNav');
+        const panel = document.getElementById('indicatorSelectorPanel');
+        const createBtn = document.getElementById('createOwnComparisonBtn');
+        const backBtn = document.getElementById('backToStandardBtn');
+
+        if (!layout || !sectionNav || !panel) return;
+
+        layout.classList.add('compare-custom-mode');
+        sectionNav.classList.add('hidden');
+        panel.classList.remove('hidden');
+        createBtn.classList.add('hidden');
+        backBtn.classList.remove('hidden');
+
+        // Expand all sections (remove section-collapsed)
+        document.querySelectorAll('.section-content').forEach(row => {
+            row.classList.remove('section-collapsed');
+        });
+
+        // Select all indicators by default
+        document.querySelectorAll('.indicator-checkbox').forEach(cb => {
+            cb.checked = true;
+        });
+        updateIndicatorTags();
+        applyIndicatorFilter();
+        updateSectionHeaderStates();
+    }
+
+    function exitCustomComparisonMode() {
+        customComparisonMode = false;
+        const layout = document.getElementById('compareLayout');
+        const sectionNav = document.getElementById('sectionNav');
+        const panel = document.getElementById('indicatorSelectorPanel');
+        const createBtn = document.getElementById('createOwnComparisonBtn');
+        const backBtn = document.getElementById('backToStandardBtn');
+        const dropdown = document.getElementById('indicatorDropdown');
+
+        if (!layout || !sectionNav || !panel) return;
+
+        layout.classList.remove('compare-custom-mode');
+        sectionNav.classList.remove('hidden');
+        panel.classList.add('hidden');
+        createBtn.classList.remove('hidden');
+        backBtn.classList.add('hidden');
+        if (dropdown) dropdown.classList.add('hidden');
+
         setupSectionSelector();
+    }
+
+    function getSelectedIndicatorKeys() {
+        return Array.from(document.querySelectorAll('.indicator-checkbox:checked')).map(cb => cb.value);
+    }
+
+    function applyIndicatorFilter() {
+        const selected = getSelectedIndicatorKeys();
+        document.querySelectorAll('[data-feature-key]').forEach(el => {
+            const key = el.dataset.featureKey;
+            el.classList.toggle('indicator-hidden', !selected.includes(key));
+        });
+    }
+
+    function updateIndicatorTags() {
+        const container = document.getElementById('indicatorTags');
+        if (!container) return;
+        const selected = Array.from(document.querySelectorAll('.indicator-checkbox:checked'));
+        const label = document.getElementById('indicatorDropdownLabel');
+        if (label) label.textContent = selected.length + ' indicator(s) selected';
+        container.innerHTML = selected.slice(0, 8).map(cb => {
+            const l = cb.dataset.label || cb.value;
+            return '<span class="indicator-tag">' + escapeHtml(l) + '</span>';
+        }).join('') + (selected.length > 8 ? '<span class="indicator-tag">+'+ (selected.length - 8) +' more</span>' : '');
+    }
+
+    function escapeHtml(s) {
+        const div = document.createElement('div');
+        div.textContent = s;
+        return div.innerHTML;
+    }
+
+    function setupIndicatorSelector() {
+        const toggle = document.getElementById('indicatorDropdownToggle');
+        const dropdown = document.getElementById('indicatorDropdown');
+        const clearAllBtn = document.getElementById('indicatorClearAll');
+        if (!toggle || !dropdown) return;
+
+        toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const open = dropdown.classList.toggle('hidden');
+            toggle.setAttribute('aria-expanded', !open);
+        });
+
+        document.addEventListener('click', () => {
+            dropdown.classList.add('hidden');
+            toggle.setAttribute('aria-expanded', 'false');
+        });
+        dropdown.addEventListener('click', (e) => e.stopPropagation());
+
+        if (clearAllBtn) {
+            clearAllBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                document.querySelectorAll('.indicator-checkbox').forEach(cb => { cb.checked = false; });
+                updateIndicatorTags();
+                applyIndicatorFilter();
+                updateSectionHeaderStates();
+            });
+        }
+
+        document.querySelectorAll('.indicator-section-header').forEach(header => {
+            header.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const section = header.closest('.indicator-section');
+                if (!section) return;
+                const checkboxes = section.querySelectorAll('.indicator-checkbox');
+                const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+                checkboxes.forEach(cb => { cb.checked = !allChecked; });
+                updateIndicatorTags();
+                applyIndicatorFilter();
+                updateSectionHeaderStates();
+            });
+        });
+
+        document.querySelectorAll('.indicator-checkbox').forEach(cb => {
+            cb.addEventListener('change', () => {
+                updateIndicatorTags();
+                applyIndicatorFilter();
+                updateSectionHeaderStates();
+            });
+        });
+    }
+
+    function updateSectionHeaderStates() {
+        document.querySelectorAll('.indicator-section').forEach(section => {
+            const sectionId = section.dataset.sectionId;
+            const checkboxes = section.querySelectorAll('.indicator-checkbox');
+            const checked = section.querySelectorAll('.indicator-checkbox:checked');
+            const header = section.querySelector('.indicator-section-header');
+            const box = header && header.querySelector('.indicator-section-checkbox');
+            if (!box) return;
+            box.classList.remove('indicator-section-all', 'indicator-section-none', 'indicator-section-some');
+            if (checked.length === 0) box.classList.add('indicator-section-none');
+            else if (checked.length === checkboxes.length) box.classList.add('indicator-section-all');
+            else box.classList.add('indicator-section-some');
+        });
+    }
+
+    // Initialize section selector when DOM is ready
+    function initComparePage() {
+        setupSectionSelector();
+        setupIndicatorSelector();
+    }
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initComparePage);
+    } else {
+        initComparePage();
     }
 </script>
 {% endblock %}

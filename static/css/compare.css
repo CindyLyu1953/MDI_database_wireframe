@@ -513,7 +513,193 @@ body.compare-page .footer {
 .section-nav-btn.group-context { border-left-color: #0891b2; }
 .section-nav-btn.group-internet-social-media { border-left-color: #d97706; }
 
+/* Create Your Own Comparison - custom mode */
+.compare-custom-mode.compare-layout {
+    grid-template-columns: 1fr;
+}
+
+.compare-custom-mode .section-nav {
+    display: none !important;
+}
+
+.compare-main-area {
+    display: flex;
+    flex-direction: column;
+    min-height: 0;
+    min-width: 0;
+}
+
+.indicator-selector-panel {
+    flex-shrink: 0;
+    background: #f8fafc;
+    border: 1px solid #e5e7eb;
+    border-bottom: none;
+    padding: 0.75rem 1rem;
+    position: relative;
+}
+
+.indicator-selector-header {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.indicator-selector-label {
+    font-weight: 600;
+    color: #334155;
+    font-size: 0.9rem;
+}
+
+.indicator-selector-dropdown {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    right: 0;
+    margin-top: 0.25rem;
+    max-height: 320px;
+    overflow-y: auto;
+    background: white;
+    border: 1px solid #e5e7eb;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.15);
+    z-index: 50;
+    padding: 0.5rem 0;
+}
+
+.indicator-dropdown-actions {
+    padding: 0.25rem 1rem 0.5rem;
+    border-bottom: 1px solid #e5e7eb;
+    margin-bottom: 0.25rem;
+}
+
+.indicator-clear-all {
+    background: none;
+    border: none;
+    color: #64748b;
+    font-size: 0.85rem;
+    cursor: pointer;
+    padding: 0.2rem 0;
+}
+
+.indicator-clear-all:hover {
+    color: #ef4444;
+}
+
+.indicator-section {
+    margin-bottom: 0.25rem;
+}
+
+.indicator-section:last-child {
+    margin-bottom: 0;
+}
+
+.indicator-section-header {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    padding: 0.5rem 1rem;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-weight: 600;
+    font-size: 0.9rem;
+    color: #334155;
+    text-align: left;
+    border-left: 3px solid transparent;
+}
+
+.indicator-section-header:hover {
+    background: #f8fafc;
+}
+
+.indicator-section-header.group-bibliographic { border-left-color: #2563eb; }
+.indicator-section-header.group-research-design { border-left-color: #059669; }
+.indicator-section-header.group-measurement-analysis { border-left-color: #7c3aed; }
+.indicator-section-header.group-findings { border-left-color: #db2777; }
+.indicator-section-header.group-context { border-left-color: #0891b2; }
+.indicator-section-header.group-internet-social-media { border-left-color: #d97706; }
+
+.indicator-section-checkbox {
+    width: 14px;
+    height: 14px;
+    border: 2px solid #94a3b8;
+    border-radius: 3px;
+    flex-shrink: 0;
+}
+
+.indicator-section-checkbox.indicator-section-all {
+    background: #2563eb;
+    border-color: #2563eb;
+    position: relative;
+}
+
+.indicator-section-checkbox.indicator-section-all::after {
+    content: "✓";
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: white;
+    font-size: 9px;
+    font-weight: bold;
+    line-height: 1;
+}
+
+.indicator-section-checkbox.indicator-section-none {
+    background: white;
+}
+
+.indicator-section-checkbox.indicator-section-some {
+    background: #94a3b8;
+    border-color: #94a3b8;
+}
+
+.indicator-section-items {
+    padding-left: 1.75rem;
+}
+
+.indicator-checkbox-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    padding: 0.4rem 1rem;
+    cursor: pointer;
+    font-size: 0.9rem;
+    color: #334155;
+}
+
+.indicator-checkbox-item:hover {
+    background: #f1f5f9;
+}
+
+.indicator-checkbox-item input {
+    flex-shrink: 0;
+}
+
+.indicator-tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.35rem;
+    margin-top: 0.5rem;
+}
+
+.indicator-tag {
+    font-size: 0.75rem;
+    padding: 0.2rem 0.5rem;
+    background: #e2e8f0;
+    color: #475569;
+    border-radius: 4px;
+}
+
+[data-feature-key].indicator-hidden {
+    display: none !important;
+}
+
 .comparison-table-container {
+    flex: 1;
+    min-height: 0;
     background: white;
     border-radius: 12px;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
