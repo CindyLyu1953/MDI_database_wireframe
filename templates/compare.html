@@ -370,7 +370,7 @@
             <div class="indicator-selector-panel hidden" id="indicatorSelectorPanel" aria-label="Select indicators">
                 <div class="indicator-selector-header">
                     <span class="indicator-selector-label">Select indicators to compare:</span>
-                    <button type="button" class="btn btn-outline btn-sm" id="indicatorDropdownToggle" aria-expanded="false" aria-haspopup="listbox">
+                    <button type="button" class="btn btn-outline indicator-dropdown-toggle" id="indicatorDropdownToggle" aria-expanded="false" aria-haspopup="listbox">
                         <span id="indicatorDropdownLabel">All selected</span>
                         <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>
                     </button>
@@ -378,6 +378,7 @@
                 <div class="indicator-selector-dropdown hidden" id="indicatorDropdown" role="listbox">
                     <div class="indicator-dropdown-actions">
                         <button type="button" class="indicator-clear-all" id="indicatorClearAll">Clear all</button>
+                        <button type="button" class="indicator-select-all" id="indicatorSelectAll">Select all</button>
                     </div>
                     {% for group in feature_groups %}
                     <div class="indicator-section" data-section-id="{{ group.id }}">
@@ -1059,6 +1060,7 @@
         });
 
         // Select all indicators by default
+        indicatorTagsExpanded = false;
         document.querySelectorAll('.indicator-checkbox').forEach(cb => {
             cb.checked = true;
         });
@@ -1100,16 +1102,35 @@
         });
     }
 
+    let indicatorTagsExpanded = false;
+
     function updateIndicatorTags() {
         const container = document.getElementById('indicatorTags');
         if (!container) return;
         const selected = Array.from(document.querySelectorAll('.indicator-checkbox:checked'));
         const label = document.getElementById('indicatorDropdownLabel');
         if (label) label.textContent = selected.length + ' indicator(s) selected';
-        container.innerHTML = selected.slice(0, 8).map(cb => {
+        const showAll = indicatorTagsExpanded || selected.length <= 8;
+        const tagsToShow = showAll ? selected : selected.slice(0, 8);
+        const moreCount = selected.length - 8;
+        let html = tagsToShow.map(cb => {
             const l = cb.dataset.label || cb.value;
             return '<span class="indicator-tag">' + escapeHtml(l) + '</span>';
-        }).join('') + (selected.length > 8 ? '<span class="indicator-tag">+'+ (selected.length - 8) +' more</span>' : '');
+        }).join('');
+        if (!showAll && moreCount > 0) {
+            html += '<button type="button" class="indicator-tag indicator-tag-expand">+' + moreCount + ' more</button>';
+        } else if (showAll && moreCount > 0) {
+            html += '<button type="button" class="indicator-tag indicator-tag-collapse">Collapse</button>';
+        }
+        container.innerHTML = html;
+        container.querySelector('.indicator-tag-expand')?.addEventListener('click', () => {
+            indicatorTagsExpanded = true;
+            updateIndicatorTags();
+        });
+        container.querySelector('.indicator-tag-collapse')?.addEventListener('click', () => {
+            indicatorTagsExpanded = false;
+            updateIndicatorTags();
+        });
     }
 
     function escapeHtml(s) {
@@ -1140,6 +1161,17 @@
             clearAllBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 document.querySelectorAll('.indicator-checkbox').forEach(cb => { cb.checked = false; });
+                updateIndicatorTags();
+                applyIndicatorFilter();
+                updateSectionHeaderStates();
+            });
+        }
+
+        const selectAllBtn = document.getElementById('indicatorSelectAll');
+        if (selectAllBtn) {
+            selectAllBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                document.querySelectorAll('.indicator-checkbox').forEach(cb => { cb.checked = true; });
                 updateIndicatorTags();
                 applyIndicatorFilter();
                 updateSectionHeaderStates();

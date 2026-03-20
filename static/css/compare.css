@@ -551,6 +551,16 @@ body.compare-page .footer {
     font-size: 0.9rem;
 }
 
+.indicator-dropdown-toggle {
+    padding: 0.35rem 0.65rem;
+    font-size: 0.8rem;
+}
+
+.indicator-dropdown-toggle svg {
+    width: 10px;
+    height: 10px;
+}
+
 .indicator-selector-dropdown {
     position: absolute;
     top: 100%;
@@ -571,19 +581,28 @@ body.compare-page .footer {
     padding: 0.25rem 1rem 0.5rem;
     border-bottom: 1px solid #e5e7eb;
     margin-bottom: 0.25rem;
+    display: flex;
+    flex-direction: column;
+    gap: 0.15rem;
 }
 
-.indicator-clear-all {
+.indicator-clear-all,
+.indicator-select-all {
     background: none;
     border: none;
     color: #64748b;
     font-size: 0.85rem;
     cursor: pointer;
     padding: 0.2rem 0;
+    text-align: left;
 }
 
 .indicator-clear-all:hover {
     color: #ef4444;
+}
+
+.indicator-select-all:hover {
+    color: #2563eb;
 }
 
 .indicator-section {
@@ -691,6 +710,24 @@ body.compare-page .footer {
     background: #e2e8f0;
     color: #475569;
     border-radius: 4px;
+}
+
+.indicator-tag-expand,
+.indicator-tag-collapse {
+    border: none;
+    cursor: pointer;
+    font-size: 0.75rem;
+    font-weight: 400;
+}
+
+.indicator-tag-expand:hover {
+    background: #cbd5e1;
+    color: #2563eb;
+}
+
+.indicator-tag-collapse:hover {
+    background: #cbd5e1;
+    color: #475569;
 }
 
 [data-feature-key].indicator-hidden {
