@@ -32,12 +32,12 @@ app = Flask(__name__)
 app.secret_key = "your-secret-key-change-this-in-production"  # Change this!
 
 
-@app.route("/api/admin/refresh-citations", methods=["POST"])
-def refresh_citations():
-    for paper in papers_data:
-        if paper.get("doi"):
-            paper["citations"] = fetch_citation_count(paper["doi"])
-    return jsonify({"success": True})
+# @app.route("/api/admin/refresh-citations", methods=["POST"])
+# def refresh_citations():
+#     for paper in papers_data:
+#         if paper.get("doi"):
+#             paper["citations"] = fetch_citation_count(paper["doi"])
+#     return jsonify({"success": True})
 
 
 def word_count(value):
@@ -89,21 +89,21 @@ def extract_doi(text):
     return match.group(0) if match else None
 
 
-def fetch_citation_count(doi):
-    if not doi:
-        return 0
+# def fetch_citation_count(doi):
+#     if not doi:
+#         return 0
 
-    url = f"https://api.semanticscholar.org/graph/v1/paper/DOI:{doi}"
-    params = {"fields": "citationCount"}
+#     url = f"https://api.semanticscholar.org/graph/v1/paper/DOI:{doi}"
+#     params = {"fields": "citationCount"}
 
-    try:
-        r = requests.get(url, params=params, timeout=10)
-        if r.status_code == 200:
-            return r.json().get("citationCount", 0)
-    except Exception as e:
-        print(f"Citation fetch failed for {doi}: {e}")
+#     try:
+#         r = requests.get(url, params=params, timeout=10)
+#         if r.status_code == 200:
+#             return r.json().get("citationCount", 0)
+#     except Exception as e:
+#         print(f"Citation fetch failed for {doi}: {e}")
 
-    return 0
+#     return 0
 
 
 def load_papers_from_csv():
@@ -173,7 +173,7 @@ def load_papers_from_csv():
                     continue
                 seen_keys.add(dedupe_key)
 
-                citation_count = fetch_citation_count(doi)
+                #citation_count = fetch_citation_count(doi)
 
                 paper = {
                     "id": f"paper_{str(len(papers_data) + 1).zfill(3)}",
@@ -194,7 +194,7 @@ def load_papers_from_csv():
                     ),
                     "citation": citation,
                     "doi": doi,
-                    "citations": citation_count,
+                    #"citations": citation_count,
                     "abstract": abstract,
                     "abstract_verbatim": row.get("abstract_verbatim", ""),
                     "ai_context_summary": row.get("ai_context_summary", ""),

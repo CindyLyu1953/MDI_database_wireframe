@@ -2288,3 +2288,116 @@ GER
 NETH
 4.36
  25.4%","The COVID‑19 pandemic shaped political and social discourse across the United States, influencing debates about public health measures, economic shutdowns, and federal authority. The 2020 U.S. presidential election, culminating on November 3, dominated media attention and heightened political polarization. Questions about misinformation, social media moderation, and election legitimacy were widely discussed in public and political arenas."
+"Kevin Arceneaux, Can Zengin, Jonathan M. Ladd","Kevin Arceneaux, Can Zengin, Jonathan M. Ladd,",The Minimal Political and Social Effects of Facebook,The Minimal Political and Social Effects of Facebook,2026,"Arceneaux, K., Zengin, C., & Ladd, J. (2026). The Minimal Political and Social Effects of Facebook *. https://www.jonathanmladd.com/uploads/5/3/6/6/5366295/facebook_field_experiment_2024_u_s_.pdf","Social media platforms are ubiquitous, with billions across the world using them to connect with others and learn about the world. Many accuse these platforms of spreading misinformation, polarizing polities, undermining democracy, and making their users miserable. We conducted a randomized field experiment during the 2024 United States presidential campaign (N=4,971 assigned, N=4,278 observed) that incentivized half of participants to deactivate their Facebook accounts for the two weeks before the election. This is the largest social media field experiment ever conducted completely independently of the ownership of the platform under study. Our factorial experiment design also encouraged a randomly selected half of the participants to install an application that gave them daily reminders to consume more news about the election, which was conveniently provided in that application. In contrast to some previous experiments with smaller sample sizes, we find null effects of Facebook on political attitudes and only small effects on subjective well-being. The encouragements to consume more news also had mostly null effects. We conclude with thoughts about why research on social media should move past an often implicit theoretical model that treats ordinary people as passive users and treat them as active agents.","Facebook deactivation for two weeks
+
+Encouragement to use the AllSides news aggregator application with banner notifications
+
+Full factorial crossing of both treatments.","First, those in the Deactivation condition were asked to deactivate their Facebook account in return for a $50 gift certificate (i.e., the same weekly rate used by Allcott et al. 2024). ... Second, those assigned to the News Encouragement condition were asked to install and enable banner notifications of the AllSides news application, but they were not asked to deactivate their Facebook account and could continue using it if they so desired. ... Third, participants assigned to the Deactivation+News Encouragement condition were asked to deactivate their Facebook account and install the Allsides app. Fourth, those assigned to the Control condition were neither asked to deactivate their Facebook account nor install the Allsides app.","1. Turnout
+
+2. Vote choice
+
+3. Election outcome belief
+
+4. Affective polarization (Partisan, Ideological, Racial)
+
+5. Support for political violence
+
+6. Support for democracy
+
+7. News knowledge (True news, Misinformation)
+
+8. Agenda setting
+
+9. Exposure to uncongenial information
+
+10. Media trust
+
+11. Subjective well-being
+
+12. Depression
+
+13. Social trust (Trust in people, Conversation frequency).","The conceptual categories were: 1) voting behavior, 2) support for democracy, 3) political violence, 4) polarization, 5) media agenda setting, 6) news knowledge, 7) subjective well-being, 8) trust in people, 9) substitution effects in media and time use, 10) echo chambers and media trust, 11) self-conscious emotions.","Outcome: Support for political violence
+
+Q: how often is it okay for individuals to use violence to pursue political ends? 
+
+Options: [Very often, often, sometimes, rarely, never, creating a 5-point scale]
+
+Outcome: Affective Polarization 
+
+Q: asking participants to self-report how they feel about partisan (Democrats, Republicans), ideological (conservatives, liberals), and racial groups (blacks, Latinos, and whites) on an 11-point scale that ranges from 0 (“I do not like them at all”) to 10 (“I have very warming feelings toward this group”)
+
+Outcome: Support for democracy
+
+Q: 
+
+1. satisfaction with democracy in the US 
+2. support for the rule of law 
+3. support for the notion that the law can constrain majorities 
+4. support for a free press.
+
+Outcome: News Knowledge
+
+Q: presented participants with a list of 12 possible news events asked them to say whether each event happened in the last month.
+
+Outcome: Substitution Effects 
+
+Q: online activities (spending time on YouTube, Facebook, Instagram, TikTok, Twitter/X), watching television (national programming, local programming, and streaming), offline social activities (walking outside, exercising, talking to friends, going to a coffee shop, eating out at a restaurant), and offline reading activities (reading a book or newspaper). 
+
+Options: [no time, less than 30 minutes. between 30 and 60 minutes, between 1 and 2 hours, between 2 and 5 hours, and more than 5 hours.]",$50 gift certificate for account deactivation.,"those in the Deactivation condition were asked to deactivate their Facebook account in return for a $50 gift certificate (i.e., the same weekly rate used by Allcott et al. 2024).",Randomized field experiment using a factorial design.,We conducted a randomized field experiment during the 2024 United States presidential campaign ... Our factorial experiment design also encouraged a randomly selected half of the participants to install an application...,Intent to treat (ITT) effects estimated via two-tailed t-tests (alpha=0.05); False Discovery Q rates calculated within and across categories; Bayes Factors (threshold < 0.03) used to collapse factorial arms; Compiler Average Causal Effects (CACE) planned for significant ITT.,"we report intent to treat (ITT) effects using two-tailed t-tests to establish statistical significance (α = 0.05). ... To guard against this possibility, we preregistered that we would calculate False Discovery Q rates for treatment effects within and across categories. ... we defined as having a Bayes Factor < 0.03, we would collapse across the factorial conditions.",Individual level,"We conducted a randomized field experiment during the 2024 United States presidential campaign (N=4,971 assigned, N=4,278 observed)","Subjective Well-being: Combined (d=0.11, p=0.012, Q_within=0.081)
+
+Depression: Combined (d=0.09, p<0.032, Q_within=0.088)
+
+Political Violence: Combined (d=-0.10, p=0.016, Q_within=0.051)
+
+Ideological Polarization: News only (d=-0.13, p<0.006, Q_within=0.085)
+
+Conversation Frequency: FB (d=0.10, p=0.034), Combined (d=0.15, p=0.001)
+
+Trust in Social Media: Combined (d=0.10, p=0.016)
+
+All other political and media effects were statistically insignificant.","[Table 17, Subjective Well-being]: FB Deactivation + News Encouragement 0.108** (0.043); [Table 17, Depression]: FB Deactivation + News Encouragement -0.092** (0.043); [Table 13, Political Violence]: FB Deactivation + News Encouragement -0.104** (0.043); [Table 12, Ideological Polarization]: News Encouragement -0.127*** (0.046); [Table 18, Conversations (frequency)]: FB Deactivation 0.096** (0.045), FB Deactivation + News Encouragement 0.153*** (0.045); [Table 21, TrustSM]: FB Deactivation 0.093*** (0.031).","Adequately powered to detect meaningfully small effects (d = 0.1); N=4,278.","replicate previous research with an adequately powered sample to detect meaningfully small effects (d = 0.1) ... our study is the largest (in statistical terminology, the most well-powered) social media deactivation field experiment ever conducted completely independently of the platform(s) being studied.","News interest
+
+Gender (Female)
+
+Age (Young: less than 26).",Table 24: News interest as a moderator on news knowledge ... Table 25: Heterogeneous Treatment Effects by Gender ... Table 26: Heterogeneous Treatment Effects by Age (Young: less than 26),"Test/Interaction: News interest as a moderator on news knowledge
+
+Result: News interest had a strong main effect (0.423, SE 0.028, p<0.01) but all interaction terms with experimental treatments were statistically non-significant (p>0.1).
+
+
+Test/Interaction: Gender (Female) as a moderator for depression and emotions 
+
+Result: No statistically significant interaction effects were found for treatment arms by gender (p>0.1).]
+
+
+Test/Interaction: [Age (Young < 26) as a moderator for depression and emotions
+
+Result: FB Deactivation + News Encouragement had a significant negative effect on depression (coeff -0.081, SE 0.045, p<0.1) and positive effect on emotions (coeff 0.098, SE 0.045, p<0.05) relative to the baseline Young effect, but the overall interaction terms were not significant.",News interest 0.423*** (0.028) ... Female -0.105* (0.062) ... Young 0.200* (0.119) ... FB Deactivation + News Encouragement -0.081* (0.045) ... FB Deactivation + News Encouragement 0.098** (0.045),"Age: Mean 48.76 (SD 15.90) in full sample, 49.01 (SD 15.86) in end-line sample 
+
+Gender: 52.6% female 
+
+Race: 69.5% white, 13.3% black, 7% Hispanic, 3.2% Asian 
+
+Education: Mean 4.05 on categorical scale; 46.7% had a college degree
+
+Income: Median income fell in the $60,000-$69,999 range
+
+Politics: 57.8% self-identifying as Democrats, 29.2% as Republicans, 13% as Independents","The unweighted sample was balanced with respect to gender (52.6% female) as well as racially diverse (69.5% white, 13.3% black, 7% Hispanic, 3.2% Asian, with the rest identifying as multiracial or something else). The sample was also similar to the US adult population with respect to socioeconomic characteristics (46.7% had a college degree) and the median income fell in the $60,000-$69,999 range.",YouGov American survey panel.,"We engaged a respected survey research firm, YouGov, to recruit adult participants from their American panel who regularly use Facebook.","4,971 assigned
+
+4,278 observed.","(N=4,971 assigned, N=4,278 observed)",United States,Western democratic context; high social media usage; culture of media skepticism and concerns regarding polarization and misinformation.,2024 Presidential Election cycle; high political polarization; Harris vs. Trump contest; high salience of election fraud claims.,Facebook (algorithmic news feed); AllSides (ideological news aggregator); mobile banner notifications.,"October 24, 2024 to November 7, 2024 (including Election Day).",Political activists and elites; longer treatment durations (quitting for years).,Completely independent of platform ownership (no funding or cooperation with Meta).,Facebook deactivation has mostly null effects on political attitudes; users act as active agents rather than passive dupes; small benefits for well-being are noted but do not justify extreme claims of social media misery; elite overestimation of media effects (third-person effect) may be more impactful than user-level effects.,None,None,None,None,None,None,348,"324
+93.1%","254
+73.0%","254
+73.0%","198
+56.8%","182
+52.3%","99.0
+28.5%","153
+44.0%","270
+77.6%","6.2
+1.8%","104
+29.8%","96.9 
+27.9%","1. The 2024 United States presidential election dominated public discourse, marked by intense media coverage, high voter engagement, and heightened political polarization across partisan lines.
+2. Concerns about misinformation, election integrity, and the role of social media platforms—particularly Facebook—were highly salient, with ongoing debates about algorithmic amplification and content moderation.
+3. Political polarization and partisan distrust remained central societal dynamics, influencing attitudes toward democracy, political violence, and media credibility during the election period.
+4. Public and academic scrutiny of social media’s impact on democracy intensified, with increasing skepticism toward claims that platforms strongly shape political attitudes or behaviors.
+5. Broader debates focused on the influence of large technology companies, including discussions on regulation, platform accountability, and whether users act as passive consumers or active interpreters of political information."
+,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
+,,,,,‌,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,,
