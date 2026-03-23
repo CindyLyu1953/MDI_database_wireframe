@@ -2,6 +2,8 @@
 
 {% block title %}Research Comparison - StudyLens{% endblock %}
 
+{% block body_class %}compare-page{% endblock %}
+
 {% block extra_css %}
 <link rel="stylesheet" href="{{ url_for('static', filename='css/compare.css') }}">
 {% endblock %}
@@ -94,6 +96,125 @@
     </span>
 {% endmacro %}
 
+{% macro render_feature_by_key(paper, feature_key, feature_label, study_index) %}
+    {% set summary = '' %}
+    {% set verbatim = '' %}
+
+    {% if feature_key == 'authors' %}
+        {% set summary = paper.authors|join(', ') %}
+        {% set verbatim = paper.authors_verbatim %}
+    {% elif feature_key == 'title' %}
+        {% set summary = paper.title %}
+        {% set verbatim = paper.title_verbatim %}
+    {% elif feature_key == 'journal' %}
+        {% set summary = paper.journal %}
+        {% set verbatim = paper.journal_verbatim %}
+    {% elif feature_key == 'year' %}
+        {% set summary = paper.year %}
+    {% elif feature_key == 'citation' %}
+        {% set summary = paper.citation or '' %}
+    {% elif feature_key == 'abstract' %}
+        {% set summary = paper.abstract %}
+        {% set verbatim = paper.abstract_verbatim %}
+    {% elif feature_key == 'sample_size' %}
+        {% if paper.sample_size and paper.sample_size > 0 %}
+            {% set summary = "{:,}".format(paper.sample_size) %}
+        {% elif paper.extracted_features.sample_size %}
+            {% set summary = paper.extracted_features.sample_size %}
+        {% endif %}
+        {% set verbatim = paper.extracted_features.sample_size_verbatim %}
+    {% elif feature_key == 'country_region' %}
+        {% set summary = paper.extracted_features.country_region %}
+        {% set verbatim = paper.extracted_features.country_region_verbatim %}
+    {% elif feature_key == 'recruitment_source' %}
+        {% set summary = paper.extracted_features.recruitment_source %}
+        {% set verbatim = paper.extracted_features.recruitment_source_verbatim %}
+    {% elif feature_key == 'demographics' %}
+        {% set summary = paper.extracted_features.demographics %}
+        {% set verbatim = paper.extracted_features.demographics_verbatim %}
+    {% elif feature_key == 'incentive' %}
+        {% set summary = paper.extracted_features.incentive %}
+        {% set verbatim = paper.extracted_features.incentive_verbatim %}
+    {% elif feature_key == 'independent_variables' %}
+        {% set summary = paper.extracted_features.independent_variables %}
+        {% set verbatim = paper.extracted_features.independent_variables_verbatim %}
+    {% elif feature_key == 'dependent_variables' %}
+        {% set summary = paper.extracted_features.dependent_variables %}
+        {% set verbatim = paper.extracted_features.dependent_variables_verbatim %}
+    {% elif feature_key == 'survey_questions' %}
+        {% set summary = paper.extracted_features.survey_questions %}
+        {% set verbatim = paper.extracted_features.survey_questions_verbatim %}
+    {% elif feature_key == 'analysis_equations' %}
+        {% set summary = paper.extracted_features.analysis_equations %}
+        {% set verbatim = paper.extracted_features.analysis_equations_verbatim %}
+    {% elif feature_key == 'main_effects' %}
+        {% set summary = paper.extracted_features.main_effects %}
+        {% set verbatim = paper.extracted_features.main_effects_verbatim %}
+    {% elif feature_key == 'moderators' %}
+        {% set summary = paper.extracted_features.moderators %}
+        {% set verbatim = paper.extracted_features.moderators_verbatim %}
+    {% elif feature_key == 'moderation_results' %}
+        {% set summary = paper.extracted_features.moderation_results %}
+        {% set verbatim = paper.extracted_features.moderation_results_verbatim %}
+    {% elif feature_key == 'sociocultural_context' %}
+        {% set summary = paper.extracted_features.sociocultural_context %}
+        {% set verbatim = paper.extracted_features.sociocultural_context_verbatim %}
+    {% elif feature_key == 'political_context' %}
+        {% set summary = paper.extracted_features.political_context %}
+        {% set verbatim = paper.extracted_features.political_context_verbatim %}
+    {% elif feature_key == 'platform_technological_context' %}
+        {% set summary = paper.extracted_features.platform_technological_context %}
+        {% set verbatim = paper.extracted_features.platform_technological_context_verbatim %}
+    {% elif feature_key == 'temporal_context' %}
+        {% set summary = paper.extracted_features.temporal_context %}
+        {% set verbatim = paper.extracted_features.temporal_context_verbatim %}
+    {% elif feature_key == 'democracy' %}
+        {% set summary = paper.extracted_features.democracy %}
+    {% elif feature_key == 'press_freedom' %}
+        {% set summary = paper.extracted_features.press_freedom %}
+    {% elif feature_key == 'Internet_freedom' %}
+        {% set summary = paper.extracted_features.Internet_freedom %}
+    {% elif feature_key == 'internet_penetration' %}
+        {% set summary = paper.extracted_features.internet_penetration %}
+    {% elif feature_key == 'governance' %}
+        {% set summary = paper.extracted_features.governance %}
+    {% elif feature_key == 'deliberative_democracy' %}
+        {% set summary = paper.extracted_features.deliberative_democracy %}
+    {% elif feature_key == 'population_million' %}
+        {% set summary = paper.extracted_features.population_million %}
+    {% elif feature_key == 'internet_users_million' %}
+        {% set summary = paper.extracted_features.internet_users_million %}
+    {% elif feature_key == 'social_media_users_million' %}
+        {% set summary = paper.extracted_features.social_media_users_million %}
+    {% elif feature_key == 'youtube_users_million' %}
+        {% set summary = paper.extracted_features.youtube_users_million %}
+    {% elif feature_key == 'facebook_users_million' %}
+        {% set summary = paper.extracted_features.facebook_users_million %}
+    {% elif feature_key == 'instagram_users_million' %}
+        {% set summary = paper.extracted_features.instagram_users_million %}
+    {% elif feature_key == 'x_users_million' %}
+        {% set summary = paper.extracted_features.x_users_million %}
+    {% elif feature_key == 'tiktok_users_million' %}
+        {% set summary = paper.extracted_features.tiktok_users_million %}
+    {% elif feature_key == 'linkedin_users_million' %}
+        {% set summary = paper.extracted_features.linkedin_users_million %}
+    {% elif feature_key == 'messenger_users_million' %}
+        {% set summary = paper.extracted_features.messenger_users_million %}
+    {% elif feature_key == 'snapchat_users_million' %}
+        {% set summary = paper.extracted_features.snapchat_users_million %}
+    {% elif feature_key == 'pinterest_users_million' %}
+        {% set summary = paper.extracted_features.pinterest_users_million %}
+    {% endif %}
+
+    {% if summary %}
+        {{ render_feature_cell(paper, summary, verbatim, feature_key, feature_label, study_index) }}
+    {% else %}
+        <div class="feature-content">
+            <div class="feature-summary"><p>—</p></div>
+        </div>
+    {% endif %}
+{% endmacro %}
+
 {% block content %}
 <div class="container">
     <!-- Comparison Header -->
@@ -136,127 +257,182 @@
                 </svg>
                 Clear Comparison
             </button>
+            <button class="btn btn-outline" id="createOwnComparisonBtn" onclick="enterCustomComparisonMode()">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"></circle>
+                    <line x1="12" y1="8" x2="12" y2="16"></line>
+                    <line x1="8" y1="12" x2="16" y2="12"></line>
+                </svg>
+                Create Your Own Comparison
+            </button>
+            <button class="btn btn-outline hidden" id="backToStandardBtn" onclick="exitCustomComparisonMode()">
+                ← Back to standard view
+            </button>
         </div>
     </section>
 
     <!-- Comparison Content -->
     <section class="compare-content">
         {% if papers %}
-        <div class="comparison-table-container">
-            <div class="comparison-table">
-                <!-- Table Header -->
-                <div class="table-header">
-                    <div class="header-cell feature-column">Features</div>
-                    {% for paper in papers %}
-                    <div class="header-cell study-column">
-                        <div class="study-header">
-                            <h3>Study {{ loop.index }}</h3>
-                            <button class="remove-study-btn" type="button" onclick="removeStudy('{{ paper.id }}')" aria-label="Remove study {{ loop.index }}">
-                                &times;
-                            </button>
+        {% set feature_groups = [
+            {
+                'id': 'bibliographic',
+                'label': 'Bibliographic',
+                'features': [
+                    {'key': 'authors', 'label': 'Authors'},
+                    {'key': 'title', 'label': 'Title'},
+                    {'key': 'journal', 'label': 'Journal'},
+                    {'key': 'year', 'label': 'Year'},
+                    {'key': 'citation', 'label': 'Citation'},
+                    {'key': 'abstract', 'label': 'Abstract'}
+                ]
+            },
+            {
+                'id': 'research-design',
+                'label': 'Research Design & Sample',
+                'features': [
+                    {'key': 'sample_size', 'label': 'Sample Size'},
+                    {'key': 'country_region', 'label': 'Country / Region'},
+                    {'key': 'recruitment_source', 'label': 'Recruitment Source'},
+                    {'key': 'demographics', 'label': 'Demographics'},
+                    {'key': 'incentive', 'label': 'Incentive'}
+                ]
+            },
+            {
+                'id': 'measurement-analysis',
+                'label': 'Measurement & Analysis',
+                'features': [
+                    {'key': 'independent_variables', 'label': 'Treatment / Independent variable(s)'},
+                    {'key': 'dependent_variables', 'label': 'Outcome / Dependent variable(s)'},
+                    {'key': 'survey_questions', 'label': 'Survey Questions'},
+                    {'key': 'analysis_equations', 'label': 'Analysis Equations'}
+                ]
+            },
+            {
+                'id': 'findings',
+                'label': 'Findings',
+                'features': [
+                    {'key': 'main_effects', 'label': 'Main Effects'},
+                    {'key': 'moderators', 'label': 'Moderators'},
+                    {'key': 'moderation_results', 'label': 'Moderation Results'}
+                ]
+            },
+            {
+                'id': 'context',
+                'label': 'Context',
+                'features': [
+                    {'key': 'sociocultural_context', 'label': 'Socio-cultural context'},
+                    {'key': 'political_context', 'label': 'Political context'},
+                    {'key': 'platform_technological_context', 'label': 'Platform / Technological context'},
+                    {'key': 'temporal_context', 'label': 'Temporal context'},
+                    {'key': 'democracy', 'label': 'Liberal Democracy Index'},
+                    {'key': 'press_freedom', 'label': 'Press Freedom Index'},
+                    {'key': 'Internet_freedom', 'label': 'Internet Freedom Score'},
+                    {'key': 'internet_penetration', 'label': 'Internet Penetration'},
+                    {'key': 'governance', 'label': 'Political Stability Score'},
+                    {'key': 'deliberative_democracy', 'label': 'Deliberative Democracy Index'}
+                ]
+            },
+            {
+                'id': 'internet-social-media',
+                'label': 'Internet and Social Media Usage',
+                'features': [
+                    {'key': 'population_million', 'label': 'Population (Million)'},
+                    {'key': 'internet_users_million', 'label': 'Internet Users (Million)'},
+                    {'key': 'social_media_users_million', 'label': 'Social Media Users (Million)'},
+                    {'key': 'youtube_users_million', 'label': 'YouTube Users (Million)'},
+                    {'key': 'facebook_users_million', 'label': 'Facebook Users (Million)'},
+                    {'key': 'instagram_users_million', 'label': 'Instagram Users (Million)'},
+                    {'key': 'x_users_million', 'label': 'X Users (Million)'},
+                    {'key': 'tiktok_users_million', 'label': 'TikTok Users (Million)'},
+                    {'key': 'linkedin_users_million', 'label': 'LinkedIn Users (Million)'},
+                    {'key': 'messenger_users_million', 'label': 'Messenger Users (Million)'},
+                    {'key': 'snapchat_users_million', 'label': 'Snapchat Users (Million)'},
+                    {'key': 'pinterest_users_million', 'label': 'Pinterest Users (Million)'}
+                ]
+            }
+        ] %}
+
+        <div class="compare-layout" id="compareLayout">
+            <aside class="section-nav" aria-label="Feature groups" id="sectionNav">
+                {% for group in feature_groups %}
+                <button
+                    type="button"
+                    class="section-nav-btn group-{{ group.id }}{% if loop.first %} active{% endif %}"
+                    data-section="{{ group.id }}"
+                    aria-pressed="{% if loop.first %}true{% else %}false{% endif %}">
+                    {{ group.label }}
+                </button>
+                {% endfor %}
+            </aside>
+
+            <div class="compare-main-area">
+            <div class="indicator-selector-panel hidden" id="indicatorSelectorPanel" aria-label="Select indicators">
+                <div class="indicator-selector-header">
+                    <span class="indicator-selector-label">Select indicators to compare:</span>
+                    <button type="button" class="btn btn-outline indicator-dropdown-toggle" id="indicatorDropdownToggle" aria-expanded="false" aria-haspopup="listbox">
+                        <span id="indicatorDropdownLabel">All selected</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="6,9 12,15 18,9"></polyline></svg>
+                    </button>
+                </div>
+                <div class="indicator-selector-dropdown hidden" id="indicatorDropdown" role="listbox">
+                    <div class="indicator-dropdown-actions">
+                        <button type="button" class="indicator-clear-all" id="indicatorClearAll">Clear all</button>
+                        <button type="button" class="indicator-select-all" id="indicatorSelectAll">Select all</button>
+                    </div>
+                    {% for group in feature_groups %}
+                    <div class="indicator-section" data-section-id="{{ group.id }}">
+                        <button type="button" class="indicator-section-header group-{{ group.id }}" data-section-id="{{ group.id }}" aria-label="Toggle {{ group.label }}">
+                            <span class="indicator-section-checkbox" aria-hidden="true"></span>
+                            <span class="indicator-section-label">{{ group.label }}</span>
+                        </button>
+                        <div class="indicator-section-items">
+                            {% for f in group.features %}
+                            <label class="indicator-checkbox-item" role="option">
+                                <input type="checkbox" class="indicator-checkbox" value="{{ f.key }}" data-label="{{ f.label|e }}" data-section-id="{{ group.id }}">
+                                <span>{{ f.label }}</span>
+                            </label>
+                            {% endfor %}
                         </div>
-                        <div class="study-title">{{ paper.title }}</div>
                     </div>
                     {% endfor %}
                 </div>
+                <div class="indicator-tags" id="indicatorTags"></div>
+            </div>
 
-                <!-- Bibliographic Section -->
-                <div class="table-row section-header" data-section="bibliographic">
-                    <div class="feature-cell">
-                        <div class="feature-name">
-                            <button type="button" class="section-toggle" aria-expanded="true" aria-label="Toggle Bibliographic section">
-                                <svg class="section-arrow" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                                    <polyline points="6,9 12,15 18,9"></polyline>
-                                </svg>
-                            </button>
-                            <span>Bibliographic</span>
-                        </div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell"></div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="bibliographic">
-                    <div class="feature-cell">
-                        <div class="feature-name">Authors</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {% set authors_text = paper.authors|join(', ') %}
-                        {% if authors_text %}
-                            {{ render_feature_cell(paper, authors_text, paper.authors_verbatim, 'authors', 'Authors', loop.index) }}
-                        {% else %}
-                            <div class="feature-content">
-                                <div class="feature-summary"><p>—</p></div>
+            <div class="comparison-table-container">
+                <div class="comparison-table">
+                    <div class="table-header">
+                        {% for paper in papers %}
+                        <div class="header-cell study-column study-column-{{ loop.index }}">
+                            <div class="study-header">
+                                <h3>Study {{ loop.index }}</h3>
+                                <button class="remove-study-btn" type="button" onclick="removeStudy('{{ paper.id }}')" aria-label="Remove study {{ loop.index }}">
+                                    &times;
+                                </button>
                             </div>
-                        {% endif %}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="bibliographic">
-                    <div class="feature-cell">
-                        <div class="feature-name">Title</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.title, paper.title_verbatim, 'title', 'Title', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="bibliographic">
-                    <div class="feature-cell">
-                        <div class="feature-name">Journal</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.journal, paper.journal_verbatim, 'journal', 'Journal', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
-
-                <div class="table-row section-content" data-section="bibliographic">
-                    <div class="feature-cell">
-                        <div class="feature-name">Year</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        <div class="feature-content">
-                            <div class="feature-summary">
-                                <p>{{ paper.year }}</p>
-                            </div>
+                            <div class="study-title">{{ paper.title }}</div>
                         </div>
+                        {% endfor %}
                     </div>
-                    {% endfor %}
-                </div>
 
-                <div class="table-row section-content" data-section="bibliographic">
-                    <div class="feature-cell">
-                        <div class="feature-name">Citation</div>
+                    {% for group in feature_groups %}
+                    {% set group_is_first = loop.first %}
+                    {% for feature in group.features %}
+                    <div class="feature-title-row section-content{% if not group_is_first %} section-collapsed{% endif %}" data-section="{{ group.id }}" data-feature-key="{{ feature.key }}">
+                        <div class="feature-row-title">{{ feature.label }}</div>
                     </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        <div class="feature-content">
-                            <div class="feature-summary">
-                                <p>{{ paper.citation or '' }}</p>
-                            </div>
+                    <div class="table-row section-content{% if not group_is_first %} section-collapsed{% endif %}" data-section="{{ group.id }}" data-feature-key="{{ feature.key }}">
+                        {% for paper in papers %}
+                        <div class="study-cell" data-study-index="{{ loop.index }}">
+                            {{ render_feature_by_key(paper, feature.key, feature.label, loop.index) }}
                         </div>
+                        {% endfor %}
                     </div>
+                    {% endfor %}
                     {% endfor %}
                 </div>
 
-                <div class="table-row section-content" data-section="bibliographic">
-                    <div class="feature-cell">
-                        <div class="feature-name">Abstract</div>
-                    </div>
-                    {% for paper in papers %}
-                    <div class="study-cell" data-study-index="{{ loop.index }}">
-                        {{ render_feature_cell(paper, paper.abstract, paper.abstract_verbatim, 'abstract', 'Abstract', loop.index) }}
-                    </div>
-                    {% endfor %}
-                </div>
 
                 <!-- Research Design & Sample Section -->
                 <div class="table-row section-header" data-section="research-design">
@@ -720,6 +896,9 @@
                     </div>
                     {% endfor %}
                 </div>
+
+            </div>
+
             </div>
         </div>
         {% else %}
@@ -1294,42 +1473,224 @@
         });
     }
 
-    // Section collapse/expand functionality
-    function setupSectionToggles() {
-        document.querySelectorAll('.section-toggle').forEach(button => {
-            button.addEventListener('click', function() {
-                const sectionHeader = this.closest('.section-header');
-                const sectionName = sectionHeader.dataset.section;
-                const isExpanded = this.getAttribute('aria-expanded') === 'true';
+    // Section selector behavior: only one subtitle group visible at a time
+    function setupSectionSelector() {
+        const sectionButtons = document.querySelectorAll('.section-nav-btn');
+        if (!sectionButtons.length) return;
 
-                // Toggle all rows with matching data-section
-                document.querySelectorAll(`.section-content[data-section="${sectionName}"]`).forEach(row => {
-                    if (isExpanded) {
-                        row.style.display = 'none';
-                    } else {
-                        row.style.display = '';
-                    }
-                });
+        function activateSection(sectionId) {
+            document.querySelectorAll('.section-nav-btn').forEach(button => {
+                const isActive = button.dataset.section === sectionId;
+                button.classList.toggle('active', isActive);
+                button.setAttribute('aria-pressed', isActive ? 'true' : 'false');
+            });
 
-                // Update button state
-                this.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
-                const arrow = this.querySelector('.section-arrow');
-                if (arrow) {
-                    if (isExpanded) {
-                        arrow.style.transform = 'rotate(-90deg)';
-                    } else {
-                        arrow.style.transform = 'rotate(0deg)';
-                    }
-                }
+            document.querySelectorAll('.section-content').forEach(row => {
+                const isActive = row.dataset.section === sectionId;
+                row.classList.toggle('section-collapsed', !isActive);
+            });
+        }
+
+        sectionButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                activateSection(button.dataset.section);
+            });
+        });
+
+        const defaultSection = sectionButtons[0].dataset.section;
+        activateSection(defaultSection);
+    }
+
+    // Create Your Own Comparison - custom mode
+    let customComparisonMode = false;
+
+    function enterCustomComparisonMode() {
+        customComparisonMode = true;
+        const layout = document.getElementById('compareLayout');
+        const sectionNav = document.getElementById('sectionNav');
+        const panel = document.getElementById('indicatorSelectorPanel');
+        const createBtn = document.getElementById('createOwnComparisonBtn');
+        const backBtn = document.getElementById('backToStandardBtn');
+
+        if (!layout || !sectionNav || !panel) return;
+
+        layout.classList.add('compare-custom-mode');
+        sectionNav.classList.add('hidden');
+        panel.classList.remove('hidden');
+        createBtn.classList.add('hidden');
+        backBtn.classList.remove('hidden');
+
+        // Expand all sections (remove section-collapsed)
+        document.querySelectorAll('.section-content').forEach(row => {
+            row.classList.remove('section-collapsed');
+        });
+
+        // Select all indicators by default
+        indicatorTagsExpanded = false;
+        document.querySelectorAll('.indicator-checkbox').forEach(cb => {
+            cb.checked = true;
+        });
+        updateIndicatorTags();
+        applyIndicatorFilter();
+        updateSectionHeaderStates();
+    }
+
+    function exitCustomComparisonMode() {
+        customComparisonMode = false;
+        const layout = document.getElementById('compareLayout');
+        const sectionNav = document.getElementById('sectionNav');
+        const panel = document.getElementById('indicatorSelectorPanel');
+        const createBtn = document.getElementById('createOwnComparisonBtn');
+        const backBtn = document.getElementById('backToStandardBtn');
+        const dropdown = document.getElementById('indicatorDropdown');
+
+        if (!layout || !sectionNav || !panel) return;
+
+        layout.classList.remove('compare-custom-mode');
+        sectionNav.classList.remove('hidden');
+        panel.classList.add('hidden');
+        createBtn.classList.remove('hidden');
+        backBtn.classList.add('hidden');
+        if (dropdown) dropdown.classList.add('hidden');
+
+        setupSectionSelector();
+    }
+
+    function getSelectedIndicatorKeys() {
+        return Array.from(document.querySelectorAll('.indicator-checkbox:checked')).map(cb => cb.value);
+    }
+
+    function applyIndicatorFilter() {
+        const selected = getSelectedIndicatorKeys();
+        document.querySelectorAll('[data-feature-key]').forEach(el => {
+            const key = el.dataset.featureKey;
+            el.classList.toggle('indicator-hidden', !selected.includes(key));
+        });
+    }
+
+    let indicatorTagsExpanded = false;
+
+    function updateIndicatorTags() {
+        const container = document.getElementById('indicatorTags');
+        if (!container) return;
+        const selected = Array.from(document.querySelectorAll('.indicator-checkbox:checked'));
+        const label = document.getElementById('indicatorDropdownLabel');
+        if (label) label.textContent = selected.length + ' indicator(s) selected';
+        const showAll = indicatorTagsExpanded || selected.length <= 8;
+        const tagsToShow = showAll ? selected : selected.slice(0, 8);
+        const moreCount = selected.length - 8;
+        let html = tagsToShow.map(cb => {
+            const l = cb.dataset.label || cb.value;
+            return '<span class="indicator-tag">' + escapeHtml(l) + '</span>';
+        }).join('');
+        if (!showAll && moreCount > 0) {
+            html += '<button type="button" class="indicator-tag indicator-tag-expand">+' + moreCount + ' more</button>';
+        } else if (showAll && moreCount > 0) {
+            html += '<button type="button" class="indicator-tag indicator-tag-collapse">Collapse</button>';
+        }
+        container.innerHTML = html;
+        container.querySelector('.indicator-tag-expand')?.addEventListener('click', () => {
+            indicatorTagsExpanded = true;
+            updateIndicatorTags();
+        });
+        container.querySelector('.indicator-tag-collapse')?.addEventListener('click', () => {
+            indicatorTagsExpanded = false;
+            updateIndicatorTags();
+        });
+    }
+
+    function escapeHtml(s) {
+        const div = document.createElement('div');
+        div.textContent = s;
+        return div.innerHTML;
+    }
+
+    function setupIndicatorSelector() {
+        const toggle = document.getElementById('indicatorDropdownToggle');
+        const dropdown = document.getElementById('indicatorDropdown');
+        const clearAllBtn = document.getElementById('indicatorClearAll');
+        if (!toggle || !dropdown) return;
+
+        toggle.addEventListener('click', (e) => {
+            e.stopPropagation();
+            const open = dropdown.classList.toggle('hidden');
+            toggle.setAttribute('aria-expanded', !open);
+        });
+
+        document.addEventListener('click', () => {
+            dropdown.classList.add('hidden');
+            toggle.setAttribute('aria-expanded', 'false');
+        });
+        dropdown.addEventListener('click', (e) => e.stopPropagation());
+
+        if (clearAllBtn) {
+            clearAllBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                document.querySelectorAll('.indicator-checkbox').forEach(cb => { cb.checked = false; });
+                updateIndicatorTags();
+                applyIndicatorFilter();
+                updateSectionHeaderStates();
+            });
+        }
+
+        const selectAllBtn = document.getElementById('indicatorSelectAll');
+        if (selectAllBtn) {
+            selectAllBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                document.querySelectorAll('.indicator-checkbox').forEach(cb => { cb.checked = true; });
+                updateIndicatorTags();
+                applyIndicatorFilter();
+                updateSectionHeaderStates();
+            });
+        }
+
+        document.querySelectorAll('.indicator-section-header').forEach(header => {
+            header.addEventListener('click', (e) => {
+                e.stopPropagation();
+                const section = header.closest('.indicator-section');
+                if (!section) return;
+                const checkboxes = section.querySelectorAll('.indicator-checkbox');
+                const allChecked = Array.from(checkboxes).every(cb => cb.checked);
+                checkboxes.forEach(cb => { cb.checked = !allChecked; });
+                updateIndicatorTags();
+                applyIndicatorFilter();
+                updateSectionHeaderStates();
+            });
+        });
+
+        document.querySelectorAll('.indicator-checkbox').forEach(cb => {
+            cb.addEventListener('change', () => {
+                updateIndicatorTags();
+                applyIndicatorFilter();
+                updateSectionHeaderStates();
             });
         });
     }
 
-    // Initialize section toggles when DOM is ready
+    function updateSectionHeaderStates() {
+        document.querySelectorAll('.indicator-section').forEach(section => {
+            const sectionId = section.dataset.sectionId;
+            const checkboxes = section.querySelectorAll('.indicator-checkbox');
+            const checked = section.querySelectorAll('.indicator-checkbox:checked');
+            const header = section.querySelector('.indicator-section-header');
+            const box = header && header.querySelector('.indicator-section-checkbox');
+            if (!box) return;
+            box.classList.remove('indicator-section-all', 'indicator-section-none', 'indicator-section-some');
+            if (checked.length === 0) box.classList.add('indicator-section-none');
+            else if (checked.length === checkboxes.length) box.classList.add('indicator-section-all');
+            else box.classList.add('indicator-section-some');
+        });
+    }
+
+    // Initialize section selector when DOM is ready
+    function initComparePage() {
+        setupSectionSelector();
+        setupIndicatorSelector();
+    }
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', setupSectionToggles);
+        document.addEventListener('DOMContentLoaded', initComparePage);
     } else {
-        setupSectionToggles();
+        initComparePage();
     }
 </script>
 {% endblock %}

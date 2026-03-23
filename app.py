@@ -8,7 +8,16 @@ UPLOAD_DIR = DATA_DIR / "user_uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 TRACKING_DB.parent.mkdir(parents=True, exist_ok=True)
 
-from flask import Flask, render_template, request, jsonify, session, redirect, url_for, send_from_directory
+from flask import (
+    Flask,
+    render_template,
+    request,
+    jsonify,
+    session,
+    redirect,
+    url_for,
+    send_from_directory,
+)
 import csv
 import os
 import json
@@ -54,10 +63,10 @@ def extract_url(value):
     """Extract URL from citation text."""
     if not value:
         return ""
-    url_pattern = r'https?://[^\s\)]+(?:\([^\)]*\))?'
+    url_pattern = r"https?://[^\s\)]+(?:\([^\)]*\))?"
     match = re.search(url_pattern, str(value))
     if match:
-        return match.group(0).rstrip('.,;:')
+        return match.group(0).rstrip(".,;:")
     return ""
 
 
@@ -76,7 +85,7 @@ papers_data = []
 def extract_doi(text):
     if not text:
         return None
-    match = re.search(r'10\.\d{4,9}/[-._;()/:A-Z0-9]+', text, re.I)
+    match = re.search(r"10\.\d{4,9}/[-._;()/:A-Z0-9]+", text, re.I)
     return match.group(0) if match else None
 
 
@@ -115,7 +124,9 @@ def load_papers_from_csv():
             break
 
     if not csv_file:
-        print("Error: No CSV file found in data/input/. Please ensure a CSV file exists.")
+        print(
+            "Error: No CSV file found in data/input/. Please ensure a CSV file exists."
+        )
         return []
 
     try:
@@ -152,7 +163,11 @@ def load_papers_from_csv():
                     continue
 
                 # Deduplicate: prefer DOI, otherwise normalized title
-                dedupe_key = doi.lower() if doi else re.sub(r"[^a-z0-9 ]", "", title.lower()).strip()
+                dedupe_key = (
+                    doi.lower()
+                    if doi
+                    else re.sub(r"[^a-z0-9 ]", "", title.lower()).strip()
+                )
                 if dedupe_key in seen_keys:
                     print(f"Skipping duplicate: {title}")
                     continue
@@ -200,42 +215,59 @@ def load_papers_from_csv():
                     "keywords": ["social media", "politics"],
                     "extracted_features": {
                         "independent_variables": row.get("independent_variables", ""),
-                        "independent_variables_verbatim": row.get("independent_variables_verbatim", ""),
+                        "independent_variables_verbatim": row.get(
+                            "independent_variables_verbatim", ""
+                        ),
                         "dependent_variables": row.get("dependent_variables", ""),
-                        "dependent_variables_verbatim": row.get("dependent_variables_verbatim", ""),
+                        "dependent_variables_verbatim": row.get(
+                            "dependent_variables_verbatim", ""
+                        ),
                         "survey_questions": row.get("survey_questions", ""),
-                        "survey_questions_verbatim": row.get("survey_questions_verbatim", ""),
+                        "survey_questions_verbatim": row.get(
+                            "survey_questions_verbatim", ""
+                        ),
                         "incentive": row.get("incentive", ""),
                         "incentive_verbatim": row.get("incentive_verbatim", ""),
                         "study_type": row.get("study_type", ""),
                         "study_type_verbatim": row.get("study_type_verbatim", ""),
                         "analysis_equations": row.get("analysis_equations", ""),
-                        "analysis_equations_verbatim": row.get("analysis_equations_verbatim", ""),
+                        "analysis_equations_verbatim": row.get(
+                            "analysis_equations_verbatim", ""
+                        ),
                         "level_of_analysis": row.get("level_of_analysis", ""),
-                        "level_of_analysis_verbatim": row.get("level_of_analysis_verbatim", ""),
+                        "level_of_analysis_verbatim": row.get(
+                            "level_of_analysis_verbatim", ""
+                        ),
                         "main_effects": row.get("main_effects", ""),
                         "main_effects_verbatim": row.get("main_effects_verbatim", ""),
                         "statistical_power": row.get("statistical_power", ""),
-                        "statistical_power_verbatim": row.get("statistical_power_verbatim", ""),
+                        "statistical_power_verbatim": row.get(
+                            "statistical_power_verbatim", ""
+                        ),
                         "moderators": row.get("moderators", ""),
                         "moderators_verbatim": row.get("moderators_verbatim", ""),
                         "moderation_results": row.get("moderation_results", ""),
-                        "moderation_results_verbatim": row.get("moderation_results_verbatim", ""),
+                        "moderation_results_verbatim": row.get(
+                            "moderation_results_verbatim", ""
+                        ),
                         "demographics": row.get("demographics", ""),
                         "demographics_verbatim": row.get("demographics_verbatim", ""),
                         "recruitment_source": row.get("recruitment_source", ""),
-                        "recruitment_source_verbatim": row.get("recruitment_source_verbatim", ""),
+                        "recruitment_source_verbatim": row.get(
+                            "recruitment_source_verbatim", ""
+                        ),
                         "sample_size": row.get("sample_size", ""),
                         "sample_size_verbatim": row.get("sample_size_verbatim", ""),
                         "country_region": row.get("country_region", ""),
                         "sociocultural_context": row.get("sociocultural_context", ""),
                         "political_context": row.get("political_context", ""),
-                        "platform_technological_context": row.get("platform_technological_context", ""),
+                        "platform_technological_context": row.get(
+                            "platform_technological_context", ""
+                        ),
                         "temporal_context": row.get("temporal_context", ""),
                         "recommended_moderators": row.get("recommended_moderators", ""),
                         "research_context": row.get("research_context", ""),
                         "intervention_insights": row.get("intervention_insights", ""),
-
                         # Context / system metrics
                         "democracy": row.get("democracy", ""),
                         "press_freedom": row.get("press_freedom", ""),
@@ -249,21 +281,30 @@ def load_papers_from_csv():
                         "covid_period": row.get("covid_period", ""),
                         "high_salience_period": row.get("high_salience_period", ""),
                         "interpersonal_trust": row.get("interpersonal_trust", ""),
+
                         "ai_context_summary": row.get("ai_context_summary", ""),
 
                         # Population / internet / platform metrics
                         "population_million": row.get("population_million", ""),
                         "internet_users_million": row.get("internet_users_million", ""),
-                        "social_media_users_million": row.get("social_media_users_million", ""),
+                        "social_media_users_million": row.get(
+                            "social_media_users_million", ""
+                        ),
                         "youtube_users_million": row.get("youtube_users_million", ""),
                         "facebook_users_million": row.get("facebook_users_million", ""),
-                        "instagram_users_million": row.get("instagram_users_million", ""),
+                        "instagram_users_million": row.get(
+                            "instagram_users_million", ""
+                        ),
                         "x_users_million": row.get("x_users_million", ""),
                         "tiktok_users_million": row.get("tiktok_users_million", ""),
                         "linkedin_users_million": row.get("linkedin_users_million", ""),
-                        "messenger_users_million": row.get("messenger_users_million", ""),
+                        "messenger_users_million": row.get(
+                            "messenger_users_million", ""
+                        ),
                         "snapchat_users_million": row.get("snapchat_users_million", ""),
-                        "pinterest_users_million": row.get("pinterest_users_million", ""),
+                        "pinterest_users_million": row.get(
+                            "pinterest_users_million", ""
+                        ),
                     },
                 }
 
@@ -277,6 +318,7 @@ def load_papers_from_csv():
     except Exception as e:
         print(f"Error loading CSV: {e}")
         import traceback
+
         traceback.print_exc()
         return []
 
@@ -295,7 +337,8 @@ def search_papers(query="", filters=None):
             paper
             for paper in results
             if all(
-                term in " ".join(
+                term
+                in " ".join(
                     [
                         paper["title"],
                         paper["abstract"],

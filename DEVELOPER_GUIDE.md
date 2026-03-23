@@ -262,10 +262,14 @@ python app.py
 - Download and save functionality
 
 ### Request Management
-- User upload request system
-- File upload handling
-- Admin approval workflow
+- User upload request system through Profile page
+- PDF file upload handling with secure storage
+- Unique filename generation using timestamps
+- Admin approval workflow with status updates
 - Status tracking (pending, approved, rejected)
+- Admin-only PDF download route with authentication
+- Files stored in `data/user_uploads/` (outside static directory)
+- Database tracking of all requests
 
 ### Admin Interface
 - Authentication and authorization
@@ -302,6 +306,7 @@ python app.py
 - `GET /api/admin/stats` - Get admin statistics
 - `GET /api/admin/requests` - Get all upload requests
 - `POST /api/admin/requests/<id>/status` - Update request status
+- `GET /uploads/<filename>` - Download uploaded PDF (admin only)
 
 ## Database Schema
 
@@ -381,6 +386,14 @@ python app.py
 3. Create corresponding template
 4. Update `ADMIN_GUIDE.md`
 
+**Processing Upload Requests**:
+1. Admin reviews request in `/admin/requests`
+2. Download PDF from request (if provided)
+3. Extract features using your extraction pipeline
+4. Add extracted data to `data/input/papers_extracted.csv`
+5. Update request status to "approved"
+6. Paper becomes available to all users
+
 ## Important Notes
 
 ### Feature Extraction Requirements
@@ -405,6 +418,13 @@ python app.py
 - Uses pytz for conversion
 - Applies to search logs and upload requests
 
+### Upload Security
+- PDF files stored outside `static/` directory for security
+- Only admins can download files via `/uploads/` route
+- Route protected with `@require_admin` decorator
+- Unique timestamped filenames prevent collisions
+- File upload uses Flask's secure file handling
+
 ## Troubleshooting
 
 ### Common Issues
@@ -428,4 +448,16 @@ python app.py
 - Check CSV data format
 - Verify search logic in `app.py`
 - Clear browser cache
+
+**File upload failing**:
+- Check `data/user_uploads/` directory exists and is writable
+- Verify file size limits (default Flask limit is 16MB)
+- Check browser console for JavaScript errors
+- Verify form has `enctype="multipart/form-data"`
+
+**PDF download not working**:
+- Ensure admin is logged in
+- Check file exists in `data/user_uploads/`
+- Verify `/uploads/<filename>` route is working
+- Check Flask logs for permission errors
 

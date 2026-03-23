@@ -16,6 +16,54 @@ ADMIN_USERNAME = "your-username"
 ADMIN_PASSWORD = "your-secure-password"
 ```
 
+## Admin Navigation
+
+The admin dashboard has multiple sections:
+- **Dashboard**: View usage statistics and analytics
+- **Requests**: Review and manage user upload requests
+- **Logout**: End admin session
+
+## User Upload Request Management
+
+### Overview
+Users can submit requests to add new papers to the database through the Profile page. As an admin, you can review these requests, download submitted PDFs, and approve or reject them.
+
+### Accessing Upload Requests
+1. Login to admin dashboard
+2. Click "Requests" in the navigation menu
+3. View all pending and processed requests
+
+### Request Information
+Each upload request contains:
+- **Request Name**: User-provided description
+- **Institution**: Requester's institution
+- **Email**: Contact email
+- **Paper Information**: Details about the paper to be added (title, authors, DOI, etc.)
+- **Change Requests**: Any issues reported with existing papers (optional)
+- **PDF File**: Uploaded PDF document (optional)
+- **Status**: pending, approved, or rejected
+- **Timestamp**: When the request was submitted
+
+### Downloading PDFs
+When a user submits a PDF file:
+1. The PDF is stored securely in `data/user_uploads/`
+2. In the Requests page, you'll see the filename with a download icon
+3. Click the PDF filename to download and review the file
+4. PDFs are only accessible to admins (protected route)
+
+### Approving/Rejecting Requests
+1. Review the request details and PDF (if provided)
+2. Click **"Approve"** to accept the request
+3. Click **"Reject"** to decline the request
+4. Status updates immediately and user can see it in their profile
+
+### After Approval
+Once a request is approved:
+1. The PDF should be processed through your feature extraction pipeline
+2. Extract all required features from the paper
+3. Add the extracted data to `data/input/papers_extracted.csv`
+4. The paper will then appear in the database for all users
+
 ## What's Being Tracked
 
 ### 1. Search Logs
@@ -73,6 +121,7 @@ All tables show up to 1,000 recent records and are sorted by timestamp (newest f
   - `search_logs`
   - `compare_view_logs`
   - `download_logs`
+  - `upload_requests`
 
 ### Database Schema
 
@@ -105,6 +154,19 @@ file_format       TEXT DEFAULT 'CSV'
 user_session      TEXT
 ```
 
+#### upload_requests
+```sql
+id                INTEGER PRIMARY KEY
+timestamp         DATETIME DEFAULT CURRENT_TIMESTAMP
+request_name      TEXT NOT NULL
+institution       TEXT NOT NULL
+email             TEXT NOT NULL
+paper_info        TEXT NOT NULL
+change_requests   TEXT
+pdf_filename      TEXT
+status            TEXT DEFAULT 'pending'
+```
+
 ## Exporting Data
 
 ### Using SQL Queries
@@ -132,6 +194,16 @@ FROM compare_view_logs
 GROUP BY paper_ids
 ORDER BY times_compared DESC
 LIMIT 10;
+
+-- Get all pending upload requests
+SELECT * FROM upload_requests
+WHERE status = 'pending'
+ORDER BY timestamp DESC;
+
+-- Count requests by status
+SELECT status, COUNT(*) as count
+FROM upload_requests
+GROUP BY status;
 ```
 
 ### Programmatic Export
@@ -139,7 +211,13 @@ The admin API endpoints return JSON data that can be exported:
 - `/api/admin/search_logs` - All search logs
 - `/api/admin/compare_view_logs` - All compare view logs
 - `/api/admin/download_logs` - All download logs
+- `/api/admin/requests` - All upload requests
 - `/api/admin/stats` - Summary statistics
+
+### Accessing Upload Request Files
+- `/uploads/<filename>` - Download PDF files (admin only)
+- Files are stored in `data/user_uploads/`
+- Only accessible to authenticated admins
 
 ## Privacy & Security
 
@@ -165,8 +243,23 @@ DELETE FROM search_logs WHERE timestamp < datetime('now', '-1 year');
 DELETE FROM compare_view_logs WHERE timestamp < datetime('now', '-1 year');
 DELETE FROM download_logs WHERE timestamp < datetime('now', '-1 year');
 
+-- Delete processed upload requests older than 1 year (keep pending)
+DELETE FROM upload_requests 
+WHERE timestamp < datetime('now', '-1 year') 
+AND status != 'pending';
+
 -- Vacuum to reclaim space
 VACUUM;
+```
+
+### Managing Upload Files
+To clean up old uploaded PDF files:
+```bash
+# List files older than 1 year
+find data/user_uploads/ -name "upload_*.pdf" -mtime +365
+
+# Delete files older than 1 year (be careful!)
+find data/user_uploads/ -name "upload_*.pdf" -mtime +365 -delete
 ```
 
 ### Backup
@@ -200,6 +293,17 @@ Use the tracked data to:
 - Close any other SQLite connections
 - Restart the Flask app
 - Check file permissions
+
+### Can't Download PDFs
+- Ensure you're logged in as admin
+- Check that the file exists in `data/user_uploads/`
+- Verify file permissions are correct
+- Check Flask logs for errors
+
+### Upload Requests Not Showing
+- Verify database is initialized: `python database/init_db.py`
+- Check that `upload_requests` table exists
+- Try submitting a test request from Profile page
 
 ## Future Enhancements
 

@@ -7,7 +7,7 @@
     <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
     {% block extra_css %}{% endblock %}
 </head>
-<body>
+<body class="{% block body_class %}{% endblock %}">
     <header class="header">
         <div class="container">
             <div class="logo">
@@ -36,11 +36,7 @@
                 </div>
                 <div class="footer-section">
                     <h4>Our Database</h4>
-                    <a href="{{ url_for('search') }}">View Database</a>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact Us</h4>
-                    <p>support@questionnaire-platform.com</p>
+                    <a href="{{ url_for('database') }}">View Database</a>
                 </div>
             </div>
             <div class="footer-bottom">
