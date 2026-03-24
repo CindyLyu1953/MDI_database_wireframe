@@ -32,12 +32,12 @@ app = Flask(__name__)
 app.secret_key = "your-secret-key-change-this-in-production"  # Change this!
 
 
-@app.route("/api/admin/refresh-citations", methods=["POST"])
-def refresh_citations():
-    for paper in papers_data:
-        if paper.get("doi"):
-            paper["citations"] = fetch_citation_count(paper["doi"])
-    return jsonify({"success": True})
+# @app.route("/api/admin/refresh-citations", methods=["POST"])
+# def refresh_citations():
+#     for paper in papers_data:
+#         if paper.get("doi"):
+#             paper["citations"] = fetch_citation_count(paper["doi"])
+#     return jsonify({"success": True})
 
 
 def word_count(value):
@@ -89,21 +89,21 @@ def extract_doi(text):
     return match.group(0) if match else None
 
 
-def fetch_citation_count(doi):
-    if not doi:
-        return 0
+# def fetch_citation_count(doi):
+#     if not doi:
+#         return 0
 
-    url = f"https://api.semanticscholar.org/graph/v1/paper/DOI:{doi}"
-    params = {"fields": "citationCount"}
+#     url = f"https://api.semanticscholar.org/graph/v1/paper/DOI:{doi}"
+#     params = {"fields": "citationCount"}
 
-    try:
-        r = requests.get(url, params=params, timeout=10)
-        if r.status_code == 200:
-            return r.json().get("citationCount", 0)
-    except Exception as e:
-        print(f"Citation fetch failed for {doi}: {e}")
+#     try:
+#         r = requests.get(url, params=params, timeout=10)
+#         if r.status_code == 200:
+#             return r.json().get("citationCount", 0)
+#     except Exception as e:
+#         print(f"Citation fetch failed for {doi}: {e}")
 
-    return 0
+#     return 0
 
 
 def load_papers_from_csv():
@@ -142,7 +142,12 @@ def load_papers_from_csv():
                 if i == 1:
                     print(f"First row keys: {list(row.keys())[:5]}")
                     print(f"Title from first row: '{row.get('title', 'NOT_FOUND')}'")
-
+                # Normalize CSV row keys
+                normalized_row = {}
+                for k, v in row.items():
+                    clean_key = str(k).strip().replace('"', "")
+                    normalized_row[clean_key] = v
+                row = normalized_row
                 title = (row.get("title") or "").strip()
                 citation = (row.get("citation") or "").strip()
                 abstract = (row.get("abstract") or "").strip()
@@ -168,7 +173,7 @@ def load_papers_from_csv():
                     continue
                 seen_keys.add(dedupe_key)
 
-                citation_count = fetch_citation_count(doi)
+                #citation_count = fetch_citation_count(doi)
 
                 paper = {
                     "id": f"paper_{str(len(papers_data) + 1).zfill(3)}",
@@ -189,9 +194,10 @@ def load_papers_from_csv():
                     ),
                     "citation": citation,
                     "doi": doi,
-                    "citations": citation_count,
+                    #"citations": citation_count,
                     "abstract": abstract,
                     "abstract_verbatim": row.get("abstract_verbatim", ""),
+                    "ai_context_summary": row.get("ai_context_summary", ""),
                     "sample_size": (
                         int(row.get("sample_size", "0").replace(",", ""))
                         if row.get("sample_size", "").replace(",", "").isdigit()
@@ -265,16 +271,19 @@ def load_papers_from_csv():
                         # Context / system metrics
                         "democracy": row.get("democracy", ""),
                         "press_freedom": row.get("press_freedom", ""),
-                        "Internet_freedom": row.get("Internet_freedom", ""),
+                        "internet_freedom": row.get("internet_freedom", ""),
                         "internet_penetration": row.get("internet_penetration", ""),
                         "governance": row.get("governance", ""),
                         "polarization": row.get("polarization", ""),
-                        "deliberative_democracy": row.get("deliberative_democracy", ""),
+                        "deliberative_democracy": row.get("polarization", ""),
                         "economic_performance": row.get("economic_performance", ""),
                         "election_period": row.get("election_period", ""),
                         "covid_period": row.get("covid_period", ""),
                         "high_salience_period": row.get("high_salience_period", ""),
                         "interpersonal_trust": row.get("interpersonal_trust", ""),
+
+                        "ai_context_summary": row.get("ai_context_summary", ""),
+
                         # Population / internet / platform metrics
                         "population_million": row.get("population_million", ""),
                         "internet_users_million": row.get("internet_users_million", ""),
