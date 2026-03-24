@@ -438,8 +438,11 @@
         {% else %}
         <div class="empty-comparison">
             <h3>No Studies Selected</h3>
-            <p>Add studies from search results to compare them side by side.</p>
-            <a href="{{ url_for('search') }}" class="btn btn-primary">Add Studies</a>
+            <p class="empty-comparison-onboarding">
+                Start your comparison by<br>
+                <span class="empty-comparison-steps"><strong>1.</strong> Search for a study → <strong>2.</strong> Click &ldquo;Add to Compare&rdquo;</span>
+            </p>
+            <a href="{{ url_for('search') }}" class="btn btn-primary empty-comparison-cta">Add Studies</a>
         </div>
         {% endif %}
     </section>

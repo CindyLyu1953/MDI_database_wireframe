@@ -197,21 +197,7 @@
 
                                                 {% if needs_truncation %}
                                                     <div class="summary-preview">
-                                                        <div class="summary-text">
-                                                            {% if is_platform_metric and '%' in v %}
-                                                                {% set parts = v.rsplit(' ', 1) %}
-                                                                {% if parts|length == 2 %}
-                                                                    <div class="metric-breakdown">
-                                                                        <strong>{{ feature_label }}:</strong> {{ parts[0] }}<br>
-                                                                        <strong>% of Platform Users based on Population:</strong> {{ parts[1] }}
-                                                                    </div>
-                                                                {% else %}
-                                                                    {{ v }}
-                                                                {% endif %}
-                                                            {% else %}
-                                                                {{ v }}
-                                                            {% endif %}
-                                                        </div>
+                                                        <div class="summary-text">{%- if is_platform_metric and '%' in v -%}{% set parts = v.rsplit(' ', 1) %}{% if parts|length == 2 %}<div class="metric-breakdown"><strong>{{ feature_label }}:</strong> {{ parts[0] }}<br><strong>% of Platform Users based on Population:</strong> {{ parts[1] }}</div>{% else %}{{ v|trim }}{% endif %}{%- else -%}{{ v|trim }}{%- endif -%}</div>
 
                                                         <button type="button"
                                                             class="inline-expand-toggle"
@@ -303,19 +289,15 @@
             <div class="footer-content">
                 <div class="footer-section">
                     <h4>About Us</h4>
-                    <p>To provide efficient tools and platforms for academic research</p>
+                    <p>StudyLens was built to enable users to compare and analyze research studies, focusing on methodology, measures, and context. By highlighting design differences, we aim to help users draw more informed conclusions from existing research.</p>
                 </div>
                 <div class="footer-section">
                     <h4>Our Database</h4>
-                    <a href="{{ url_for('search') }}">View Database</a>
-                </div>
-                <div class="footer-section">
-                    <h4>Contact Us</h4>
-                    <p>support@questionnaire-platform.com</p>
+                    <a href="{{ url_for('database') }}">View Database</a>
                 </div>
             </div>
             <div class="footer-bottom">
-                <p>&copy; 2024 StudyLens. All rights reserved.</p>
+                <p>&copy; 2026 StudyLens. All rights reserved.</p>
             </div>
         </div>
     </footer>

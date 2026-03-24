@@ -48,7 +48,7 @@
 .feature-item h3 {
     color: #2c3e50;
     margin-top: 0;
-    margin-bottom: 1.5rem !important;
+    margin-bottom: 0.5rem !important;
     font-size: 1.1rem;
     font-weight: 600;
 }
@@ -246,11 +246,15 @@
 }
 
 .feature-summary p {
-    margin-bottom: 1rem;
+    margin-bottom: 0;
+}
+
+.feature-summary p:first-child {
+    margin-top: 0;
 }
 
 .feature-summary p:last-child {
-    margin-bottom: 1rem;
+    margin-bottom: 0;
 }
 
 .summary-preview {
@@ -258,7 +262,7 @@
     padding: 0;
     display: flex;
     align-items: center;
-    gap: 0.25rem;
+    gap: 0.35rem;
     white-space: pre-line;
 }
 

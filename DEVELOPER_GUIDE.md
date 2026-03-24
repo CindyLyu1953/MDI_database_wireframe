@@ -1,463 +1,332 @@
 # Developer Guide
 
-Technical documentation for developers working on the Social Media Effects Research Database Platform.
+This guide is for collaborators maintaining and deploying the StudyLens Flask app, especially on PythonAnywhere.
 
-## Table of Contents
-- [Project Structure](#project-structure)
-- [File Descriptions](#file-descriptions)
-- [Setup & Installation](#setup--installation)
-- [Running the Application](#running-the-application)
-- [Architecture Overview](#architecture-overview)
-- [Key Components](#key-components)
-- [API Endpoints](#api-endpoints)
-- [Database Schema](#database-schema)
-- [Development Guidelines](#development-guidelines)
+---
 
-## Project Structure
+## 1) Project Overview
 
-```
+StudyLens is a Flask application for searching, reading, and comparing social media deactivation studies.
+
+- Backend: Flask (`app.py`)
+- Frontend: Jinja templates + page-specific CSS + inline JavaScript
+- Research dataset: CSV in `data/input/`
+- Tracking and upload workflow: SQLite in `data/output/tracking.db`
+- Admin pages: login, usage analytics, upload request review
+
+Key user flows:
+- Search studies and add/remove items in compare list
+- Open individual article details with condensed/verbatim toggles
+- Compare up to 5 papers side-by-side
+- Build a custom comparison by selecting indicators
+- Submit upload requests from Profile page
+
+---
+
+## 2) Current Project Structure
+
+```text
 database_wireframe/
-├── app.py                         # Main Flask application
-├── requirements.txt               # Python dependencies
-├── README.md                      # User-facing documentation
-├── DEVELOPER_GUIDE.md             # This file
-├── ADMIN_GUIDE.md                 # Admin dashboard guide
-├── data/
-│   ├── input/
-│   │   └── papers_extracted.csv   # Research data (CSV format)
-│   ├── output/
-│   │   └── tracking.db            # Usage tracking database (SQLite)
-│   └── user_uploads/              # User-submitted PDF files (awaiting feature extraction)
+├── app.py
+├── requirements.txt
+├── README.md
+├── ADMIN_GUIDE.md
+├── DEVELOPER_GUIDE.md
 ├── database/
-│   └── init_db.py                 # Database initialization script
-├── templates/                     # Jinja2 HTML templates
-│   ├── base.html                  # Base template with header/footer
-│   ├── index.html                 # Home page
-│   ├── search.html                # Search results page
-│   ├── article.html               # Article detail page
-│   ├── compare.html               # Comparison page
-│   ├── profile.html               # User profile page
-│   ├── admin_login.html           # Admin login page
-│   ├── admin_dashboard.html       # Admin dashboard
-│   └── admin_requests.html        # Admin request review page
-└── static/
-    └── css/                       # Stylesheets
-        ├── main.css               # Core styles
-        ├── home.css               # Home page styles
-        ├── search.css             # Search page styles
-        ├── article.css            # Article page styles
-        ├── compare.css            # Comparison page styles
-        └── profile.css            # Profile page styles
+│   └── init_db.py
+├── data/
+│   ├── input/          # CSV source data
+│   ├── output/         # tracking.db
+│   └── user_uploads/   # uploaded PDFs
+├── templates/
+│   ├── base.html
+│   ├── index.html
+│   ├── search.html
+│   ├── compare.html
+│   ├── article.html
+│   ├── profile.html
+│   ├── database.html
+│   ├── admin_login.html
+│   ├── admin_dashboard.html
+│   └── admin_requests.html
+└── static/css/
+    ├── main.css
+    ├── home.css
+    ├── search.css
+    ├── compare.css
+    ├── article.css
+    ├── profile.css
+    └── database.css
 ```
 
-## File Descriptions
+---
 
-### Backend Files
+## 3) Runtime Architecture
 
-**`app.py`**
-- Main Flask application with all routes and business logic
-- Handles CSV data loading and parsing
-- Contains search functionality, paper management
-- Implements API endpoints for tracking and admin functions
-- Manages file uploads and request processing
-- Admin authentication and authorization
-- Database connection management
-- Run directly with: `python app.py`
+### 3.1 App startup
 
-**`requirements.txt`**
-- Lists required Python packages:
-  - `Flask==2.3.3`: Web framework
-  - `Werkzeug==2.3.7`: WSGI utilities
-  - `pytz==2023.3`: Timezone handling
+`app.py` is both module and local entrypoint:
+- Creates `app = Flask(__name__)`
+- Registers Jinja filters (`word_count`, `truncate_words`, `extract_url`)
+- Loads CSV data into global `papers_data` at import time (`load_papers_from_csv()`)
+- Local run command uses `app.run(..., port=5001)`
 
-### Data Files
+Important implication:
+- Each WSGI worker loads CSV at startup.
+- Citation counts are fetched via Semantic Scholar API when data is loaded.
 
-**`data/input/papers_extracted.csv`**
-- Contains extracted research features in CSV format
-- Features have both condensed and verbatim versions
-- Feature columns follow pattern: `feature_name` and `feature_name_verbatim`
+### 3.2 Data model
 
-**`data/output/tracking.db`**
-- SQLite database for usage tracking
-- Tables: search_logs, compare_view_logs, download_logs, upload_requests
-- Tracks user activity and admin requests
+There is no ORM. Core data stores:
 
-**`data/user_uploads/`**
-- Directory for storing user-submitted PDF files
-- Files are renamed with timestamps for uniqueness
-- These files are waiting to be processed through the feature extraction pipeline
-- After feature extraction, the processed data should be added to `papers_extracted.csv`
+1) **CSV papers dataset** (`data/input/...`)
+- Accepts first existing file among:
+  - `paper_extracted.csv`
+  - `papers_extracted.csv`
+  - `papers.csv`
 
-### Database Files
+2) **SQLite tracking DB** (`data/output/tracking.db`)
+- Tables:
+  - `search_logs`
+  - `compare_view_logs`
+  - `download_logs`
+  - `upload_requests`
 
-**`database/init_db.py`**
-- Initializes the SQLite tracking database
-- Creates all required tables
-- Can be run independently: `python database/init_db.py`
+3) **Uploaded files**
+- PDFs saved in `data/user_uploads/`
+- Admin-only download route: `/uploads/<filename>`
 
-### Template Files
+### 3.3 Frontend architecture
 
-**`templates/base.html`**
-- Base template with common header, navigation, and footer
-- Extended by all other templates
-- Includes common CSS and JavaScript
+- `base.html` provides shared layout (header/nav/footer).
+- Most pages extend `base.html`.
+- `article.html` is currently standalone (does not extend `base.html`).
+- JS is embedded in templates (no separate `static/js` folder yet).
 
-**`templates/index.html`**
-- Home page with search box
-- Displays platform description
-- Entry point for user searches
+State handling:
+- `localStorage`: comparison IDs, favorites, saved comparisons, profile draft data
+- `sessionStorage`: lightweight session ID on home page
+- Flask session: admin auth state
 
-**`templates/search.html`**
-- Search results page with filtering options
-- Shows year range, journal, and country/region filters
-- Displays search results with "View Details" and "Compare" buttons
-- Tracks search queries for analytics
+---
 
-**`templates/article.html`**
-- Detailed article view with all extracted features
-- Progressive disclosure: condensed - verbatim
-- Add to favorites and comparison functionality
+## 4) Route Map (High-Level)
 
-**`templates/compare.html`**
-- Side-by-side comparison of multiple papers
-- Features listed vertically on left, papers on right
-- Download and save comparison functionality
-- View Full button implementation
+### Pages
+- `/` -> home
+- `/search`
+- `/article/<paper_id>`
+- `/compare`
+- `/profile`
+- `/database`
 
-**`templates/profile.html`**
-- User profile management page
-- Multiple sections: Profile, Favorites, Saved Comparisons, Upload Papers, My Requests
-- Local storage integration for user data
-- Activity statistics display
+### Public API
+- `/api/papers`
+- `/api/search`
+- `/api/paper/<paper_id>`
+- `/api/statistics`
+- `/api/tracking/stats`
+- `/api/track/search` (POST)
+- `/api/track/compare_view` (POST)
+- `/api/track/download` (POST)
+- `/api/upload-request` (POST)
+- `/api/my-requests`
 
-**`templates/admin_login.html`**
-- Admin authentication page
-- Simple username/password login
+### Admin
+- `/admin/login` (GET/POST)
+- `/admin/logout`
+- `/admin/dashboard`
+- `/admin/requests`
+- `/api/admin/search_logs`
+- `/api/admin/compare_view_logs`
+- `/api/admin/download_logs`
+- `/api/admin/stats`
+- `/api/admin/requests`
+- `/api/admin/requests/<id>/status` (POST)
 
-**`templates/admin_dashboard.html`**
-- Admin dashboard with usage statistics
-- Displays search logs, comparison views, and downloads
-- Shows top search queries and recent activity
+Security note:
+- `/api/admin/refresh-citations` currently has no admin guard and should be protected before public deployment.
 
-**`templates/admin_requests.html`**
-- Admin page for reviewing and approving user upload requests
-- Lists all pending requests
-- Allows approve/reject actions
+---
 
-### Style Files
+## 5) Local Development
 
-**`static/css/main.css`**
-- Core styles, layout, and components
-- Common UI elements and typography
+### 5.1 Setup
 
-**`static/css/home.css`**
-- Home page specific styles
-- Search box and hero section
+```bash
+cd database_wireframe
+python -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pip install requests
+python database/init_db.py
+```
 
-**`static/css/search.css`**
-- Search page specific styles
-- Filter components and result cards
+Why install `requests` manually?
+- `app.py` imports and uses `requests`, but it is currently not pinned in `requirements.txt`.
 
-**`static/css/article.css`**
-- Article page specific styles
-- Feature display and View Full functionality
-
-**`static/css/compare.css`**
-- Comparison page specific styles
-- Dynamic grid layout and table styling
-
-**`static/css/profile.css`**
-- Profile page specific styles
-- Sidebar navigation and content sections
-- Request cards and status badges
-
-## Setup & Installation
-
-### Prerequisites
-- Python 3.7 or higher
-- pip (Python package installer)
-
-### Installation Steps
-
-1. **Clone or Download** the project to your local machine
-
-2. **Navigate** to the project directory:
-   ```bash
-   cd database_wireframe
-   ```
-
-3. **Install Dependencies**:
-   ```bash
-   pip install -r requirements.txt
-   ```
-
-4. **Initialize Database**:
-   ```bash
-   python database/init_db.py
-   ```
-
-5. **Run the Application**:
-   ```bash
-   python app.py
-   ```
-
-6. **Access the Website**:
-   - Open browser at: `http://localhost:5001`
-   - Application will be running locally
-
-## Running the Application
+### 5.2 Run
 
 ```bash
 python app.py
 ```
-- Runs on port 5001
-- Debug mode enabled
-- Auto-reload on code changes
-- Access at: `http://localhost:5001`
 
-### Stopping the Application
-- Press `Ctrl+C` in the terminal
+Default local URL:
+- `http://127.0.0.1:5001`
 
-## Architecture Overview
+If port is busy:
+```bash
+lsof -i :5001
+kill <PID>
+```
 
-### Technology Stack
-- **Backend**: Flask (Python web framework)
-- **Frontend**: HTML5, CSS3, JavaScript
-- **Templates**: Jinja2 templating engine
-- **Database**: SQLite for tracking and requests
-- **Data Storage**: CSV file-based for research data
+---
 
-### Key Concepts
+## 6) PythonAnywhere Deployment Guide
 
-**1. Progressive Information Disclosure**
-- Three levels of information:
-  1. Concise overviews in search results
-  2. Condensed versions in article view
-  3. Full verbatim text with View Verbatim Text
-- Smart button display based on content comparison
+This is the most important section for collaborators.
 
-**2. Dynamic Content Loading**
-- CSV data loaded at startup
-- Real-time search and filtering
-- Dynamic comparison table generation
+### 6.1 Create environment
 
-**3. User State Management**
-- Browser localStorage for user data
-- Session management for admin
-- Tracking database for analytics
+In a PythonAnywhere Bash console:
 
-## Key Components
+```bash
+cd ~
+git clone <your-repo-url> database_wireframe
+cd database_wireframe
+python3.10 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+pip install requests
+python database/init_db.py
+```
 
-### Search Functionality
-- Cross-field keyword matching
-- Filter support (year, journal, country)
-- Results tracking and analytics
-- URL parameter handling
+### 6.2 Ensure required files exist
 
-### Comparison Feature
-- CSS variable-based dynamic columns
-- Max 5 papers per comparison
-- Intelligent button labeling (View Full Text vs View Verbatim Text)
-- Feature categorization and display
-- Download and save functionality
+- CSV exists in `data/input/` with one supported name.
+- `data/output/tracking.db` exists (created by init script).
+- `data/user_uploads/` exists and is writable.
 
-### Request Management
-- User upload request system through Profile page
-- PDF file upload handling with secure storage
-- Unique filename generation using timestamps
-- Admin approval workflow with status updates
-- Status tracking (pending, approved, rejected)
-- Admin-only PDF download route with authentication
-- Files stored in `data/user_uploads/` (outside static directory)
-- Database tracking of all requests
+### 6.3 Configure PythonAnywhere web app
 
-### Admin Interface
-- Authentication and authorization
-- Usage statistics dashboard
-- Request review and approval
-- Search log analysis
+1. In the **Web** tab, set source code path to your project.
+2. Set virtualenv path to `.../database_wireframe/.venv`.
+3. Add static mapping:
+   - URL: `/static/`
+   - Directory: `/home/<username>/database_wireframe/static/`
 
-## API Endpoints
+### 6.4 WSGI file
 
-### User-Facing APIs
-- `GET /` - Home page
-- `GET /search` - Search results page
-- `GET /article/<paper_id>` - Article detail page
-- `GET /compare` - Comparison page
-- `GET /profile` - User profile page
+Edit your WSGI config and import the Flask app object:
 
-### Data APIs
-- `GET /api/papers` - Get all papers (JSON)
-- `POST /api/track/search` - Track search query
-- `POST /api/track/compare_view` - Track comparison view
-- `POST /api/track/download` - Track download
-- `GET /api/tracking/stats` - Get usage statistics
-- `POST /api/upload-request` - Submit upload request
-- `GET /api/my-requests` - Get user requests
+```python
+import sys
+path = '/home/<username>/database_wireframe'
+if path not in sys.path:
+    sys.path.append(path)
 
-### Admin APIs
-- `POST /admin/login` - Admin login
-- `GET /admin/logout` - Admin logout
-- `GET /admin/dashboard` - Admin dashboard
-- `GET /admin/requests` - Admin request review page
-- `GET /api/admin/search_logs` - Get search logs
-- `GET /api/admin/compare_view_logs` - Get comparison logs
-- `GET /api/admin/download_logs` - Get download logs
-- `GET /api/admin/stats` - Get admin statistics
-- `GET /api/admin/requests` - Get all upload requests
-- `POST /api/admin/requests/<id>/status` - Update request status
-- `GET /uploads/<filename>` - Download uploaded PDF (admin only)
+from app import app as application
+```
 
-## Database Schema
+Then reload the web app from the Web tab.
 
-### search_logs
-- `id` (INTEGER PRIMARY KEY)
-- `timestamp` (DATETIME)
-- `search_query` (TEXT)
-- `filters_used` (TEXT - JSON)
-- `num_results` (INTEGER)
-- `user_session` (TEXT)
+### 6.5 Critical deployment caveat (paths)
 
-### compare_view_logs
-- `id` (INTEGER PRIMARY KEY)
-- `timestamp` (DATETIME)
-- `paper_ids` (TEXT)
-- `num_papers` (INTEGER)
-- `user_session` (TEXT)
+Some file paths in `app.py` are currently relative (`os.path.join("data", ...)`), so app behavior depends on process working directory.
 
-### download_logs
-- `id` (INTEGER PRIMARY KEY)
-- `timestamp` (DATETIME)
-- `paper_ids` (TEXT)
-- `num_papers` (INTEGER)
-- `file_format` (TEXT)
-- `user_session` (TEXT)
+For stability on PythonAnywhere, ensure:
+- the app runs with project root as working directory, or
+- refactor path usage to always build from `BASE_DIR`.
 
-### upload_requests
-- `id` (INTEGER PRIMARY KEY)
-- `timestamp` (DATETIME)
-- `request_name` (TEXT)
-- `institution` (TEXT)
-- `email` (TEXT)
-- `paper_info` (TEXT)
-- `change_requests` (TEXT)
-- `pdf_filename` (TEXT)
-- `status` (TEXT - default: 'pending')
+Recommended future hardening:
+- Replace all relative DB/CSV/upload paths with `BASE_DIR / ...`.
 
-## Development Guidelines
+---
 
-### Adding New Features
+## 7) Configuration Checklist Before Production
 
-1. **New Routes**: Add to `app.py` in the appropriate section
-2. **New Templates**: Create in `templates/` directory
-3. **New Styles**: Add to corresponding CSS file
-4. **API Endpoints**: Follow RESTful conventions
-5. **Database Changes**: Update `database/init_db.py`
+Must do:
+- Change `app.secret_key` to a strong secret.
+- Move admin credentials (`ADMIN_USERNAME`, `ADMIN_PASSWORD`) to environment variables.
+- Protect `/api/admin/refresh-citations` with admin auth.
+- Add `requests` to `requirements.txt`.
 
-### Code Style
-- Follow PEP 8 Python style guide
-- Use descriptive variable names
-- Add comments for complex logic
-- Keep functions focused and single-purpose
+Should do:
+- Add structured logging.
+- Add error pages for 404/500.
+- Add backup strategy for `tracking.db` and `data/user_uploads/`.
 
-### Testing
-- Test locally before committing
-- Verify all routes work correctly
-- Check responsive design on different screen sizes
-- Test admin functionality separately
+---
 
-### Common Tasks
+## 8) Data + Content Maintenance
 
-**Adding a New Paper**:
-1. Update `data/input/papers_extracted.csv`
-2. Follow CSV format exactly
-3. Include both condensed and verbatim versions
-4. Restart application
+### Add new papers
+1. Update CSV in `data/input/`.
+2. Keep column naming conventions (`feature`, `feature_verbatim`).
+3. Use `NOT SPECIFIED` for unavailable fields.
+4. Restart app workers so `papers_data` reloads.
 
-**Updating Database Schema**:
-1. Modify `database/init_db.py`
-2. Add migration logic if needed
-3. Run: `python database/init_db.py`
-4. Update affected code
+### Handle upload requests
+1. Review in `/admin/requests`.
+2. Download uploaded PDFs via admin route.
+3. Run external extraction pipeline.
+4. Append processed rows to input CSV.
+5. Mark request status approved/rejected.
 
-**Adding a New Admin Feature**:
-1. Update authentication if needed
-2. Add new route with `@require_admin` decorator
-3. Create corresponding template
-4. Update `ADMIN_GUIDE.md`
+---
 
-**Processing Upload Requests**:
-1. Admin reviews request in `/admin/requests`
-2. Download PDF from request (if provided)
-3. Extract features using your extraction pipeline
-4. Add extracted data to `data/input/papers_extracted.csv`
-5. Update request status to "approved"
-6. Paper becomes available to all users
+## 9) Frontend Notes for Collaborators
 
-## Important Notes
+- Compare page now includes:
+  - left subtitle navigation
+  - custom comparison mode with indicator multi-select
+  - section-level select/deselect controls
+  - expandable selected indicator tags (`+N more`)
 
-### Feature Extraction Requirements
-- **Short features**: Should only include verbatim version
-- **Long features**: Should include both condensed and verbatim versions
-- **Naming convention**: Use `feature_name` and `feature_name_verbatim`
-- **Empty values**: Use "NOT SPECIFIED"
+- Search page compare button state is persisted in `localStorage`.
+- Profile page is heavily localStorage-driven and reads tracking stats from API.
 
-### Expansion Logic (View Full Text & View Verbatim Text)
-- Button appears when there are both short condensed version and long verbatim text
-- Implemented in Article and Compare pages
-- Uses JavaScript content comparison
+If UI changes seem missing after deployment:
+- hard-refresh browser cache
+- verify static file mapping
+- reload PythonAnywhere web app
 
-### User Data
-- Profile, favorites, comparisons stored in localStorage
-- Not synchronized across devices
-- Upload requests stored in database
-- Admin can track all activity
+---
 
-### Timezone
-- All timestamps in US Eastern Time
-- Uses pytz for conversion
-- Applies to search logs and upload requests
+## 10) Troubleshooting (PythonAnywhere-focused)
 
-### Upload Security
-- PDF files stored outside `static/` directory for security
-- Only admins can download files via `/uploads/` route
-- Route protected with `@require_admin` decorator
-- Unique timestamped filenames prevent collisions
-- File upload uses Flask's secure file handling
+### A) App boots but shows no papers
+- Confirm CSV exists in `data/input/`.
+- Confirm filename is one of the supported names.
+- Check web app error log for CSV read errors.
 
-## Troubleshooting
+### B) 500 errors on tracking/upload endpoints
+- Confirm `tracking.db` exists and tables were initialized.
+- Confirm process can write to `data/output/` and `data/user_uploads/`.
 
-### Common Issues
+### C) CSS/JS updates not visible
+- Hard refresh browser.
+- Verify `/static/` mapping points to the correct directory.
+- Reload web app.
 
-**Flask app won't start**:
-- Check if port 5001 is in use
-- Verify all dependencies installed
-- Check for syntax errors in `app.py`
+### D) Admin login works locally but not on server
+- Confirm session secret and cookie/domain settings.
+- Ensure no stale old workers are running after credential changes.
 
-**Data not loading**:
-- Verify CSV file format
-- Check file path in `app.py`
-- Ensure data has required columns
+### E) Citation refresh or startup delays
+- Semantic Scholar API calls can be slow/rate-limited.
+- Consider background jobs or cached citation updates in future iterations.
 
-**Database errors**:
-- Run `python database/init_db.py` to reset
-- Check file permissions for `data/output/`
-- Verify SQLite installation
+---
 
-**Search not working**:
-- Check CSV data format
-- Verify search logic in `app.py`
-- Clear browser cache
+## 11) Immediate TODOs (Recommended)
 
-**File upload failing**:
-- Check `data/user_uploads/` directory exists and is writable
-- Verify file size limits (default Flask limit is 16MB)
-- Check browser console for JavaScript errors
-- Verify form has `enctype="multipart/form-data"`
+1. Add `requests` to `requirements.txt`.
+2. Move secrets/credentials to env vars.
+3. Refactor all data paths to `BASE_DIR`.
+4. Guard `/api/admin/refresh-citations` with `@require_admin`.
+5. Optionally convert `article.html` to extend `base.html` for consistency.
 
-**PDF download not working**:
-- Ensure admin is logged in
-- Check file exists in `data/user_uploads/`
-- Verify `/uploads/<filename>` route is working
-- Check Flask logs for permission errors
+---
 
+If you are deploying to PythonAnywhere for the first time, follow sections **6** and **7** exactly in order.

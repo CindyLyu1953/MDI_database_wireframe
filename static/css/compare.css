@@ -421,10 +421,10 @@
 }
 
 .page-description {
-    font-size: 1.125rem;
+    font-size: 1rem;
     color: #7f8c8d;
     margin-bottom: 0.75rem;
-    max-width: 760px;
+    max-width: min(1100px, 100%);
 }
 
 .compare-actions {
@@ -437,6 +437,33 @@
 /* Compare Content */
 .compare-content {
     margin-bottom: 0;
+}
+
+.empty-comparison {
+    padding: 2rem 0 3rem;
+    text-align: center;
+}
+
+.empty-comparison h3 {
+    margin-bottom: 0.75rem;
+    color: #2c3e50;
+}
+
+.empty-comparison-onboarding {
+    color: #5a6c7d;
+    font-size: 1.05rem;
+    line-height: 1.6;
+    max-width: 520px;
+    margin: 0 auto 1.75rem;
+}
+
+.empty-comparison-steps {
+    display: inline-block;
+    margin-top: 0.35rem;
+}
+
+.empty-comparison-cta {
+    margin-top: 0.25rem;
 }
 
 /* Remove extra gap above footer on compare page */
