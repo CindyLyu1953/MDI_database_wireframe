@@ -490,7 +490,8 @@ body.compare-page .footer {
     z-index: 38;
     background: #f8f9fa;
     border: 1px solid #e5e7eb;
-    border-right: none;
+    /* Divider between section nav and main comparison column */
+    border-right: 2px solid #cbd5e1;
     border-radius: 0;
     overflow: hidden;
     display: flex;
