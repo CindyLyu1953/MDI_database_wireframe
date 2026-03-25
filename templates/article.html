@@ -169,14 +169,19 @@
                                 }%}
                                 {% for feature_name in feature_order %}
                                     {% set feature_value = paper.extracted_features.get(feature_name, '') %}
-                                    {% if feature_value and feature_value != 'NOT SPECIFIED' %}
+                                    {% set fv = (feature_value|string|trim) if feature_value is not none else '' %}
+                                    {% set fv_lower = fv|lower %}
+                                    {% set fv_is_placeholder = fv_lower in ['', 'not specified', 'none', 'nan', 'null'] %}
+                                    {% if fv and not fv_is_placeholder %}
                                         {% set feature_label = feature_labels.get(feature_name, feature_name.replace('_', ' ').title()) %}
                                         {% set verbatim_key = feature_name + '_verbatim' %}
                                         {% set verbatim_value = paper.extracted_features.get(verbatim_key, '') %}
-                                        {% set has_verbatim = verbatim_value and verbatim_value != 'NOT SPECIFIED' %}
-                                        {% set summary_word_count = feature_value|word_count %}
+                                        {% set vv = (verbatim_value|string|trim) if verbatim_value is not none else '' %}
+                                        {% set vv_lower = vv|lower %}
+                                        {% set has_verbatim = vv and vv_lower not in ['not specified', 'none', 'nan', 'null'] %}
+                                        {% set summary_word_count = fv|word_count %}
                                         {% set needs_truncation = summary_word_count > 30 %}
-                                        {% set display_summary = needs_truncation and feature_value|truncate_words(30) or feature_value %}
+                                        {% set display_summary = needs_truncation and fv|truncate_words(30) or fv %}
                                         {% set button_label = has_verbatim and 'View Verbatim Text' or 'View Full Text' %}
                                         <div class="feature-item">
                                             <h3 class="feature-title">{{ feature_label }}</h3>
@@ -203,7 +208,7 @@
 
                                                         <button type="button"
                                                             class="inline-expand-toggle"
-                                                            data-full-text="{{ feature_value|e }}"
+                                                            data-full-text="{{ fv|e }}"
                                                             data-truncated-text="{{ display_summary|e }}"
                                                             aria-expanded="false"
                                                             aria-label="View full text">
