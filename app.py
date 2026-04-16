@@ -28,10 +28,54 @@ import pytz
 import re
 import requests
 
+import hashlib
+import pandas as pd
+from groq import Groq
+from flask import Flask, request, jsonify, render_template
+
 app = Flask(__name__)
 app.secret_key = "your-secret-key-change-this-in-production"  # Change this!
 
 
+CSV_PATH = "data/input/paper_extracted.csv"
+TRACKING_DB_PATH = "data/output/tracking.db"
+
+client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
+
+
+def normalize_text(value):
+    if pd.isna(value):
+        return ""
+    return re.sub(r"\s+", " ", str(value).strip())
+
+
+def make_paper_key(title, year, journal):
+    base = f"{normalize_text(title).lower()}||{normalize_text(year).lower()}||{normalize_text(journal).lower()}"
+    return hashlib.md5(base.encode("utf-8")).hexdigest()
+
+
+def load_papers_df():
+    df = pd.read_csv(CSV_PATH)
+    df = df.fillna("")
+
+    # critical: remove bad spaces/newlines from column names
+    df.columns = [str(c).strip() for c in df.columns]
+
+    required = ["title", "year", "journal"]
+    for col in required:
+        if col not in df.columns:
+            raise ValueError(f"CSV must contain '{col}' column")
+
+    df["title"] = df["title"].apply(normalize_text)
+    df["year"] = df["year"].apply(normalize_text)
+    df["journal"] = df["journal"].apply(normalize_text)
+
+    df["paper_key"] = df.apply(
+        lambda row: make_paper_key(row["title"], row["year"], row["journal"]),
+        axis=1
+    )
+
+    return df
 # @app.route("/api/admin/refresh-citations", methods=["POST"])
 # def refresh_citations():
 #     for paper in papers_data:
@@ -39,6 +83,35 @@ app.secret_key = "your-secret-key-change-this-in-production"  # Change this!
 #             paper["citations"] = fetch_citation_count(paper["doi"])
 #     return jsonify({"success": True})
 
+def get_db_connection():
+    conn = sqlite3.connect(TRACKING_DB_PATH)
+    conn.row_factory = sqlite3.Row
+    return conn
+
+
+def init_compare_summary_table():
+    os.makedirs("data/output", exist_ok=True)
+
+    conn = get_db_connection()
+    conn.execute("""
+        CREATE TABLE IF NOT EXISTS compare_ai_summaries (
+            id INTEGER PRIMARY KEY AUTOINCREMENT,
+            combination_key TEXT NOT NULL UNIQUE,
+            paper_keys_json TEXT NOT NULL,
+            paper_titles_json TEXT NOT NULL,
+            research_design_sample TEXT,
+            measurement_analysis TEXT,
+            findings TEXT,
+            context TEXT,
+            model_name TEXT,
+            prompt_version TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )
+    """)
+    conn.commit()
+    conn.close()
+
+init_compare_summary_table()
 
 def word_count(value):
     """Return word count for a given string value."""
@@ -174,9 +247,10 @@ def load_papers_from_csv():
                 seen_keys.add(dedupe_key)
 
                 #citation_count = fetch_citation_count(doi)
-
+                paper_key = make_paper_key(title, row.get("year", ""), row.get("journal", ""))
                 paper = {
                     "id": f"paper_{str(len(papers_data) + 1).zfill(3)}",
+                    "paper_key": paper_key,
                     "title": title,
                     "title_verbatim": row.get("title_verbatim", ""),
                     "authors": [
@@ -518,12 +592,12 @@ def api_statistics():
 
 
 # Database helper functions
-def get_db_connection():
-    """Get database connection."""
-    db_path = os.path.join("data", "output", "tracking.db")
-    conn = sqlite3.connect(db_path)
-    conn.row_factory = sqlite3.Row
-    return conn
+# def get_db_connection():
+#     """Get database connection."""
+#     db_path = os.path.join("data", "output", "tracking.db")
+#     conn = sqlite3.connect(db_path)
+#     conn.row_factory = sqlite3.Row
+#     return conn
 
 
 def get_eastern_time():
@@ -994,6 +1068,252 @@ def update_request_status(request_id):
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
+CATEGORY_FIELDS = {
+    "Research Design & Sample": [
+        "paper_key",
+        "title",
+        "study_type",
+        "sample_size",
+        "country_region",
+        "recruitment_source",
+        "demographics",
+        "incentive"
+    ],
+    "Measurement & Analysis": [
+        "paper_key",
+        "title",
+        "independent_variables",
+        "dependent_variables",
+        "survey_questions",
+        "analysis_equations",
+        "level_of_analysis"
+    ],
+    "Findings": [
+        "paper_key",
+        "title",
+        "main_effects",
+        "moderators",
+        "moderation_results",
+        "statistical_power"
+    ],
+    "Context": [
+        "paper_key",
+        "title",
+        "sociocultural_context",
+        "political_context",
+        "platform_technological_context",
+        "temporal_context",
+        "democracy",
+        "press_freedom",
+        "internet_freedom",
+        "internet_penetration",
+        "governance",
+        "polarization",
+        "ai_context_summary"
+    ]
+}
+
+def clean_value(value, max_len=600):
+    value = normalize_text(value)
+    if len(value) > max_len:
+        value = value[:max_len].rsplit(" ", 1)[0] + "..."
+    return value
+
+
+def build_category_payload(selected_rows, category_name):
+    fields = CATEGORY_FIELDS[category_name]
+    papers = []
+
+    for _, row in selected_rows.iterrows():
+        item = {}
+        for field in fields:
+            item[field] = clean_value(row.get(field, ""))
+        papers.append(item)
+
+    return papers
+
+
+def make_combination_key(paper_keys):
+    normalized = sorted(str(k).strip() for k in paper_keys)
+    return "|".join(normalized)
+
+def get_cached_compare_summary(paper_keys):
+    combination_key = make_combination_key(paper_keys)
+
+    conn = get_db_connection()
+    row = conn.execute("""
+        SELECT *
+        FROM compare_ai_summaries
+        WHERE combination_key = ?
+    """, (combination_key,)).fetchone()
+    conn.close()
+
+    if not row:
+        return None
+
+    return {
+        "paper_keys": json.loads(row["paper_keys_json"]),
+        "paper_titles": json.loads(row["paper_titles_json"]),
+        "results": {
+            "Research Design & Sample": json.loads(row["research_design_sample"]) if row["research_design_sample"] else None,
+            "Measurement & Analysis": json.loads(row["measurement_analysis"]) if row["measurement_analysis"] else None,
+            "Findings": json.loads(row["findings"]) if row["findings"] else None,
+            "Context": json.loads(row["context"]) if row["context"] else None,
+        },
+        "source": "cache"
+    }
+
+
+def save_compare_summary(paper_keys, paper_titles, results, model_name="llama-3.3-70b-versatile", prompt_version="v1"):
+    combination_key = make_combination_key(paper_keys)
+
+    conn = get_db_connection()
+    conn.execute("""
+        INSERT OR REPLACE INTO compare_ai_summaries (
+            combination_key,
+            paper_keys_json,
+            paper_titles_json,
+            research_design_sample,
+            measurement_analysis,
+            findings,
+            context,
+            model_name,
+            prompt_version
+        )
+        VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
+    """, (
+        combination_key,
+        json.dumps(sorted(str(k).strip() for k in paper_keys)),
+        json.dumps(paper_titles),
+        json.dumps(results.get("Research Design & Sample")),
+        json.dumps(results.get("Measurement & Analysis")),
+        json.dumps(results.get("Findings")),
+        json.dumps(results.get("Context")),
+        model_name,
+        prompt_version
+    ))
+    conn.commit()
+    conn.close()
+
+def build_prompt(category_name, papers_payload):
+    return f"""
+You are comparing a selected set of research papers.
+
+Task:
+For the category "{category_name}", write a single compact comparison string that highlights the most important differences across the selected papers.
+
+Rules:
+- Use only the provided data
+- Focus only on differences, not similarities
+- Use compact contrastive phrasing
+- Use "X vs Y" style where helpful
+- If there are more than 2 papers, compare them in a grouped way when natural
+- Mention only the most important 2 to 5 differences
+- Use comma-separated or semicolon-separated phrases
+- No full sentences
+- No introductory text
+- No explanations
+- Do not invent missing details
+- Ignore empty fields unless the absence itself is a meaningful difference
+- Keep the comparison concise and readable
+- Return valid JSON only
+- Do not use markdown fences
+
+Return exactly this format:
+{{
+  "category": "{category_name}",
+  "comparison": "compact contrastive comparison here"
+}}
+
+Papers to compare:
+{json.dumps(papers_payload, ensure_ascii=False, indent=2)}
+""".strip()
+
+def call_groq_for_category(category_name, papers_payload):
+    prompt = build_prompt(category_name, papers_payload)
+
+    completion = client.chat.completions.create(
+        model="llama-3.3-70b-versatile",
+        messages=[
+            {
+                "role": "system",
+                "content": "You are a careful research comparison assistant. Return valid JSON only."
+            },
+            {
+                "role": "user",
+                "content": prompt
+            }
+        ],
+        temperature=0.2
+    )
+
+    text = completion.choices[0].message.content.strip()
+    text = re.sub(r"^```json\s*", "", text)
+    text = re.sub(r"^```\s*", "", text)
+    text = re.sub(r"\s*```$", "", text)
+
+    try:
+        return json.loads(text)
+    except json.JSONDecodeError:
+        return {
+            "category": category_name,
+            "comparison": "AI comparison unavailable",
+            "raw_response": text
+        }
+
+@app.route("/api/compare-ai-differences", methods=["POST"])
+def compare_ai_differences():
+    try:
+        data = request.get_json(force=True)
+        paper_keys = data.get("paper_keys", [])
+
+        if not isinstance(paper_keys, list) or not paper_keys:
+            return jsonify({"error": "paper_keys must be a non-empty list"}), 400
+
+        if len(paper_keys) > 5:
+            return jsonify({"error": "Maximum of 5 papers allowed"}), 400
+
+        paper_keys = [str(k).strip() for k in paper_keys]
+
+        cached = get_cached_compare_summary(paper_keys)
+        if cached:
+            return jsonify(cached)
+
+        df = load_papers_df()
+        selected_rows = df[df["paper_key"].isin(paper_keys)].copy()
+
+        if selected_rows.empty:
+            return jsonify({"error": "No matching papers found"}), 404
+
+        selected_rows["__order"] = selected_rows["paper_key"].apply(lambda x: paper_keys.index(x))
+        selected_rows = selected_rows.sort_values("__order").drop(columns="__order")
+
+        results = {}
+        from concurrent.futures import ThreadPoolExecutor
+
+        def process_category(category_name):
+            payload = build_category_payload(selected_rows, category_name)
+            return category_name, call_groq_for_category(category_name, payload)
+
+        with ThreadPoolExecutor(max_workers=4) as executor:
+            futures = [executor.submit(process_category, c) for c in CATEGORY_FIELDS]
+
+            for future in futures:
+                category_name, result = future.result()
+                results[category_name] = result
+
+        paper_titles = selected_rows["title"].tolist()
+        save_compare_summary(paper_keys, paper_titles, results)
+
+        return jsonify({
+            "paper_keys": paper_keys,
+            "paper_titles": paper_titles,
+            "results": results,
+            "source": "generated"
+        })
+
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 load_papers_from_csv()
 
