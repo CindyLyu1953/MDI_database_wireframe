@@ -172,8 +172,8 @@
         {% set summary = paper.extracted_features.democracy %}
     {% elif feature_key == 'press_freedom' %}
         {% set summary = paper.extracted_features.press_freedom %}
-    {% elif feature_key == 'Internet_freedom' %}
-        {% set summary = paper.extracted_features.Internet_freedom %}
+    {% elif feature_key == 'internet_freedom' %}
+        {% set summary = paper.extracted_features.internet_freedom %}
     {% elif feature_key == 'internet_penetration' %}
         {% set summary = paper.extracted_features.internet_penetration %}
     {% elif feature_key == 'governance' %}
@@ -327,10 +327,9 @@
                     {'key': 'temporal_context', 'label': 'Temporal context'},
                     {'key': 'democracy', 'label': 'Liberal Democracy Index'},
                     {'key': 'press_freedom', 'label': 'Press Freedom Index'},
-                    {'key': 'Internet_freedom', 'label': 'Internet Freedom Score'},
+                    {'key': 'internet_freedom', 'label': 'Internet Freedom Score'},
                     {'key': 'internet_penetration', 'label': 'Internet Penetration'},
-                    {'key': 'governance', 'label': 'Political Stability Score'},
-                    {'key': 'deliberative_democracy', 'label': 'Deliberative Democracy Index'}
+                    {'key': 'governance', 'label': 'Political Stability Score'}
                 ]
             },
             {
@@ -472,7 +471,10 @@
     </div>
 
     <script id="comparisonData" type="application/json">{{ papers|tojson }}</script>
+    <div id="ai-difference-summaries" style="margin-top: 30px;"></div>
+
 </div>
+
 {% endblock %}
 
 {% block scripts %}
@@ -496,6 +498,15 @@
         const modalBackdrop = modalElements.container?.querySelector('.modal-backdrop');
         if (modalBackdrop) {
             modalBackdrop.addEventListener('click', closeFullTextModal);
+        }
+        if (Array.isArray(comparisonPapersData) && comparisonPapersData.length > 1) {
+            const selectedPaperKeys = comparisonPapersData
+                .map(p => p.paper_key)
+                .filter(Boolean);
+
+            if (selectedPaperKeys.length > 1) {
+                fetchAiDifferenceSummaries(selectedPaperKeys);
+            }
         }
 
         document.querySelectorAll('.full-text-trigger').forEach(button => {
@@ -542,6 +553,15 @@
 
         // Check content length and hide unnecessary View Full buttons
         setTimeout(checkContentLength, 100);
+        if (Array.isArray(comparisonPapersData) && comparisonPapersData.length > 1) {
+            const selectedPaperKeys = comparisonPapersData
+                .map(p => p.paper_key)
+                .filter(Boolean);
+
+            if (selectedPaperKeys.length > 1) {
+                fetchAiDifferenceSummaries(selectedPaperKeys);
+            }
+        }
     });
 
     // Track comparison page visit
@@ -781,7 +801,7 @@
                       value = paper.extracted_features.press_freedom || '';
                       break;
                     case 'Internet Freedom':
-                      value = paper.extracted_features.Internet_freedom || '';
+                      value = paper.extracted_features.internet_freedom || '';
                       break;
                     case 'Internet Penetration':
                       value = paper.extracted_features.internet_penetration || '';
@@ -1236,5 +1256,73 @@
     } else {
         initComparePage();
     }
+</script>
+
+<script>
+async function fetchAiDifferenceSummaries(selectedPaperKeys) {
+  const container = document.getElementById("ai-difference-summaries");
+  container.innerHTML = "<p>Generating AI difference summaries...</p>";
+
+  try {
+    const response = await fetch("/api/compare-ai-differences", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({
+        paper_keys: selectedPaperKeys
+      })
+    });
+
+    const data = await response.json();
+
+    if (!response.ok) {
+      container.innerHTML = `<p>Error: ${data.error || "Something went wrong"}</p>`;
+      return;
+    }
+
+    if (!data.results) {
+      container.innerHTML = "<p>Could not generate AI comparisons.</p>";
+      return;
+    }
+
+    renderAiSummaries(data.results, data.source);
+  } catch (error) {
+    container.innerHTML = `<p>Error: ${error.message}</p>`;
+  }
+}
+
+function renderAiSummaries(results, source) {
+  const container = document.getElementById("ai-difference-summaries");
+  container.innerHTML = "";
+
+  const heading = document.createElement("h2");
+  heading.textContent = "AI Difference Summaries";
+  container.appendChild(heading);
+
+  const sourceNote = document.createElement("p");
+  sourceNote.innerHTML = `<em>Summary source: ${source}</em>`;
+  container.appendChild(sourceNote);
+
+  Object.entries(results).forEach(([categoryName, categoryData]) => {
+    const section = document.createElement("div");
+    section.style.marginBottom = "24px";
+    section.style.padding = "16px";
+    section.style.border = "1px solid #ddd";
+    section.style.borderRadius = "8px";
+    section.style.background = "#fff";
+
+    const title = document.createElement("h3");
+    title.textContent = categoryName;
+    section.appendChild(title);
+
+    const text = document.createElement("p");
+    text.textContent = categoryData.comparison || "No comparison available.";
+    section.appendChild(text);
+
+    container.appendChild(section);
+  });
+}
+
 </script>
 {% endblock %}
