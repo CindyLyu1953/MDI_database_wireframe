@@ -1286,7 +1286,7 @@ async function fetchAiDifferenceSummaries(selectedPaperKeys) {
       return;
     }
 
-    renderAiSummaries(data.results, data.source);
+    renderAiSummaries(data.results);
   } catch (error) {
     setAiSummaryState(`Error: ${error.message}`, "error");
   }
@@ -1308,10 +1308,7 @@ function setAiSummaryState(message, variant = "loading") {
 
   container.innerHTML = `
     <div class="ai-summary-header">
-      <div>
-        <h2 class="summary-title">AI Difference Summaries</h2>
-        <p class="ai-summary-subtitle">Cross-study synthesis generated from the currently selected papers.</p>
-      </div>
+      <h2 class="summary-title">AI-powered comparison</h2>
     </div>
     <div class="ai-summary-state ${stateClass}">
       ${iconMarkup}
@@ -1327,14 +1324,7 @@ function normalizeAiCategoryName(categoryName) {
     .replace(/^-|-$/g, "");
 }
 
-function formatSummarySource(source) {
-  if (!source) return "Generated";
-  return String(source)
-    .replace(/[_-]+/g, " ")
-    .replace(/\b\w/g, char => char.toUpperCase());
-}
-
-function renderAiSummaries(results, source) {
+function renderAiSummaries(results) {
   const container = document.getElementById("ai-difference-summaries");
   container.innerHTML = "";
 
@@ -1347,24 +1337,10 @@ function renderAiSummaries(results, source) {
   const header = document.createElement("div");
   header.className = "ai-summary-header";
 
-  const headingGroup = document.createElement("div");
-
   const heading = document.createElement("h2");
   heading.className = "summary-title";
-  heading.textContent = "AI Difference Summaries";
-  headingGroup.appendChild(heading);
-
-  const subtitle = document.createElement("p");
-  subtitle.className = "ai-summary-subtitle";
-  subtitle.textContent = "Cross-study synthesis generated from the currently selected papers.";
-  headingGroup.appendChild(subtitle);
-
-  const sourceBadge = document.createElement("div");
-  sourceBadge.className = "ai-summary-source";
-  sourceBadge.innerHTML = `<span class="ai-summary-source-label">Source</span><span class="ai-summary-source-value">${formatSummarySource(source)}</span>`;
-
-  header.appendChild(headingGroup);
-  header.appendChild(sourceBadge);
+  heading.textContent = "AI-powered comparison";
+  header.appendChild(heading);
   container.appendChild(header);
 
   const grid = document.createElement("div");
