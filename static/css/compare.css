@@ -427,6 +427,26 @@
     max-width: min(1100px, 100%);
 }
 
+/* Shown on small screens only; compare layout is best on desktop */
+.compare-mobile-hint {
+    display: none;
+    font-size: 0.9rem;
+    color: #1e3a4c;
+    margin: 0.35rem 0 0.85rem;
+    padding: 0.7rem 0.9rem;
+    background: #eff6ff;
+    border: 1px solid #bfdbfe;
+    border-radius: 8px;
+    line-height: 1.45;
+    max-width: min(1100px, 100%);
+}
+
+@media (max-width: 768px) {
+    .compare-mobile-hint {
+        display: block;
+    }
+}
+
 .compare-actions {
     display: flex;
     gap: 1rem;
@@ -1331,7 +1351,15 @@ body.compare-page .footer {
     margin-right: 0.5rem;
 }
 
-.ai-summary-panel {
+/* Only show the full-bleed panel when the AI block has real content. Empty
+   #ai-difference-summaries would still inherit padding/background and appear as
+   a white bar above the footer when no studies are selected. */
+#ai-difference-summaries.ai-summary-panel:empty,
+#ai-difference-summaries.ai-summary-panel:not(:has(*)) {
+    display: none;
+}
+
+#ai-difference-summaries.ai-summary-panel:has(*) {
     padding: 1.75rem;
     background: linear-gradient(180deg, #ffffff 0%, #f8fafc 100%);
     width: 100vw;
