@@ -389,11 +389,16 @@ body.profile-page {
 
 /* Responsive Design */
 @media (max-width: 768px) {
-    /* Full-bleed margin tricks break on mobile and can misalign footer; keep header in flow */
+    /* Full-width white band (edge-to-edge) like desktop; text inset matches .container (20px) */
     .profile-header {
-        margin-left: 0;
-        margin-right: 0;
-        padding: 1.25rem 0;
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+        width: 100vw;
+        max-width: 100vw;
+        box-sizing: border-box;
+        padding: 1.25rem 1.25rem;
+        padding-left: max(1.25rem, env(safe-area-inset-left, 0px));
+        padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
     }
 
     .page-title {
