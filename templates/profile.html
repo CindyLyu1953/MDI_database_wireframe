@@ -585,10 +585,10 @@
         const features = [
             'Authors', 'Title', 'Journal', 'Year', 'Citation', 'Abstract',
             'Sample Size', 'Country / Region', 'Recruitment Source', 'Demographics', 'Incentive',
-            'Treatment / Independent variable(s)', 'Survey Measures (treatment variables)',
-            'Outcome / Dependent variable(s)', 'Survey Measures (outcome variables)', 'Analysis (estimating equation)',
+            'Treatment / Independent Variable(s)', 'Survey Measures (Treatment Variables)',
+            'Outcome / Dependent Variable(s)', 'Survey Measures (Outcome Variables)', 'Analysis (Estimating Equation)',
             'Main Effects', 'Moderators', 'Moderation Results',
-            'Socio-cultural context', 'Political context', 'Platform / Technological context', 'Temporal context'
+            'Socio-cultural Context', 'Political Context', 'Platform / Technological Context', 'Temporal Context'
         ];
         
         // Create header row
@@ -633,19 +633,19 @@
                     case 'Incentive':
                         value = paper.extracted_features.incentive || '';
                         break;
-                    case 'Treatment / Independent variable(s)':
+                    case 'Treatment / Independent Variable(s)':
                         value = paper.extracted_features.independent_variables || '';
                         break;
-                    case 'Survey Measures (treatment variables)':
+                    case 'Survey Measures (Treatment Variables)':
                         value = paper.extracted_features.survey_questions || '';
                         break;
-                    case 'Outcome / Dependent variable(s)':
+                    case 'Outcome / Dependent Variable(s)':
                         value = paper.extracted_features.dependent_variables || '';
                         break;
-                    case 'Survey Measures (outcome variables)':
+                    case 'Survey Measures (Outcome Variables)':
                         value = paper.extracted_features.survey_questions || '';
                         break;
-                    case 'Analysis (estimating equation)':
+                    case 'Analysis (Estimating Equation)':
                         value = paper.extracted_features.analysis_equations || '';
                         break;
                     case 'Main Effects':
@@ -657,16 +657,16 @@
                     case 'Moderation Results':
                         value = paper.extracted_features.moderation_results || '';
                         break;
-                    case 'Socio-cultural context':
+                    case 'Socio-cultural Context':
                         value = paper.extracted_features.sociocultural_context || '';
                         break;
-                    case 'Political context':
+                    case 'Political Context':
                         value = paper.extracted_features.political_context || '';
                         break;
-                    case 'Platform / Technological context':
+                    case 'Platform / Technological Context':
                         value = paper.extracted_features.platform_technological_context || '';
                         break;
-                    case 'Temporal context':
+                    case 'Temporal Context':
                         value = paper.extracted_features.temporal_context || '';
                         break;
                 }
