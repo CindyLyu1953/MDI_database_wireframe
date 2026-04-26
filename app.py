@@ -1200,16 +1200,15 @@ def build_prompt(category_name, papers_payload):
 You are comparing a selected set of research papers.
 
 Task:
-For the category "{category_name}", write a single compact comparison string that highlights the most important differences across the selected papers.
+For the category "{category_name}", write a brief narrative summary comparing all selected papers on this dimension.
 
 Rules:
 - Use only the provided data
-- Focus only on differences, not similarities
-- Use compact contrastive phrasing
-- Use "X vs Y" style where helpful
+- Write 1-2 sentences of plain prose
+- Focus on the most meaningful pattern: what do they share, and what is the key split or variation?
+- Do not list every detail – the reader can see those in the table
+- Highlight what is analytically interesting about how the papers relate on this dimension
 - If there are more than 2 papers, compare them in a grouped way when natural
-- Mention only the most important 2 to 5 differences
-- Use comma-separated or semicolon-separated phrases
 - No full sentences
 - No introductory text
 - No explanations
