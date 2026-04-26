@@ -1,5 +1,10 @@
 /* Profile Page Styles */
 
+/* Prevent full-bleed headers from causing horizontal scroll on narrow viewports */
+body.profile-page {
+    overflow-x: hidden;
+}
+
 .profile-header {
     background: white;
     margin-left: calc(-50vw + 50%);
@@ -384,6 +389,26 @@
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    /* Full-width white band (edge-to-edge) like desktop; text inset matches .container (20px) */
+    .profile-header {
+        margin-left: calc(-50vw + 50%);
+        margin-right: calc(-50vw + 50%);
+        width: 100vw;
+        max-width: 100vw;
+        box-sizing: border-box;
+        padding: 1.25rem 1.25rem;
+        padding-left: max(1.25rem, env(safe-area-inset-left, 0px));
+        padding-right: max(1.25rem, env(safe-area-inset-right, 0px));
+    }
+
+    .page-title {
+        font-size: 1.75rem;
+    }
+
+    .page-description {
+        font-size: 1rem;
+    }
+
     .profile-layout {
         grid-template-columns: 1fr;
         gap: 1rem;
@@ -391,26 +416,39 @@
     
     .profile-sidebar {
         position: static;
-        padding: 1rem;
+        padding: 0.75rem 1rem;
     }
     
+    /* Stack nav vertically for tap targets; avoid cramped horizontal scroll */
     .sidebar-menu {
-        flex-direction: row;
-        overflow-x: auto;
-        gap: 0.25rem;
+        flex-direction: column;
+        overflow-x: visible;
+        gap: 0.5rem;
     }
     
     .menu-item {
-        white-space: nowrap;
-        min-width: fit-content;
+        white-space: normal;
+        min-width: 0;
+        width: 100%;
+        padding: 0.85rem 1rem;
+        font-size: 0.9375rem;
+        justify-content: flex-start;
     }
     
     .profile-main {
-        padding: 1.5rem;
+        padding: 1.25rem 1rem;
+    }
+
+    .profile-form {
+        max-width: none;
     }
     
     .favorites-grid,
     .comparisons-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .requests-grid {
         grid-template-columns: 1fr;
     }
     
@@ -420,6 +458,10 @@
     
     .form-actions {
         flex-direction: column;
+    }
+
+    .form-actions .btn {
+        width: 100%;
     }
 }
 

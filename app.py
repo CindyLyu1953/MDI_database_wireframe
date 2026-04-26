@@ -339,6 +339,17 @@ def load_papers_from_csv():
                             "platform_technological_context", ""
                         ),
                         "temporal_context": row.get("temporal_context", ""),
+                        "gdp_per_capita_usd": row.get("gdp_per_capita_usd", ""),
+                        "gini_coefficient": row.get("gini_coefficient", ""),
+                        "income_group": row.get("income_group", ""),
+                        "study_language": row.get("study_language", ""),
+                        "platform_language_optimization": row.get(
+                            "platform_language_optimization", ""
+                        ),
+                        "traditional_media_strength": row.get(
+                            "traditional_media_strength", ""
+                        ),
+                        "electoral_proximity": row.get("electoral_proximity", ""),
                         "recommended_moderators": row.get("recommended_moderators", ""),
                         "research_context": row.get("research_context", ""),
                         "intervention_insights": row.get("intervention_insights", ""),
@@ -1103,6 +1114,13 @@ CATEGORY_FIELDS = {
         "political_context",
         "platform_technological_context",
         "temporal_context",
+        "gdp_per_capita_usd",
+        "gini_coefficient",
+        "income_group",
+        "study_language",
+        "platform_language_optimization",
+        "traditional_media_strength",
+        "electoral_proximity",
         "democracy",
         "press_freedom",
         "internet_freedom",
@@ -1301,6 +1319,10 @@ def compare_ai_differences():
                 category_name, result = future.result()
                 results[category_name] = result
 
+        # Enforce consistent category order in JSON (browser Object key order, some clients sort alphabetically).
+        category_order = list(CATEGORY_FIELDS.keys())
+        results = {k: results[k] for k in category_order if k in results}
+
         paper_titles = selected_rows["title"].tolist()
         save_compare_summary(paper_keys, paper_titles, results)
 
@@ -1317,4 +1339,4 @@ def compare_ai_differences():
 load_papers_from_csv()
 
 if __name__ == "__main__":
-    app.run(debug=True, host="127.0.0.1", port=5001)
+    app.run(debug=True, host="0.0.0.0", port=5001)

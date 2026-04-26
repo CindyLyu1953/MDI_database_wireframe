@@ -40,7 +40,7 @@
                             {% if parts|length == 2 %}
                                 <span class="summary-text metric-breakdown">
                                     <span class="metric-line"><strong>{{ feature_label }}:</strong> {{ parts[0] }}</span><br>
-                                    <span class="metric-line"><strong>% of Platform Users based on Population:</strong> {{ parts[1] }}</span>
+                                    <span class="metric-line"><strong>% Of Platform Users Based On Population:</strong> {{ parts[1] }}</span>
                                 </span>
                             {% else %}
                                 <span class="summary-text">{{ v }}</span>
@@ -168,6 +168,20 @@
     {% elif feature_key == 'temporal_context' %}
         {% set summary = paper.extracted_features.temporal_context %}
         {% set verbatim = paper.extracted_features.temporal_context_verbatim %}
+    {% elif feature_key == 'gdp_per_capita_usd' %}
+        {% set summary = paper.extracted_features.gdp_per_capita_usd %}
+    {% elif feature_key == 'gini_coefficient' %}
+        {% set summary = paper.extracted_features.gini_coefficient %}
+    {% elif feature_key == 'income_group' %}
+        {% set summary = paper.extracted_features.income_group %}
+    {% elif feature_key == 'study_language' %}
+        {% set summary = paper.extracted_features.study_language %}
+    {% elif feature_key == 'platform_language_optimization' %}
+        {% set summary = paper.extracted_features.platform_language_optimization %}
+    {% elif feature_key == 'traditional_media_strength' %}
+        {% set summary = paper.extracted_features.traditional_media_strength %}
+    {% elif feature_key == 'electoral_proximity' %}
+        {% set summary = paper.extracted_features.electoral_proximity %}
     {% elif feature_key == 'democracy' %}
         {% set summary = paper.extracted_features.democracy %}
     {% elif feature_key == 'press_freedom' %}
@@ -221,6 +235,7 @@
     <section class="compare-header">
         <h1 class="page-title">Research Comparison</h1>
         <p class="page-description">Side-by-side comparison of key features from different studies, discovering operationalization differences and measurement method variations</p>
+        <p class="compare-mobile-hint" role="note" aria-label="Mobile limitation notice">Use the desktop version for full capabilities.</p>
 
         <div class="compare-actions">
             <button class="btn btn-primary" onclick="addStudy()">
@@ -302,8 +317,8 @@
                 'id': 'measurement-analysis',
                 'label': 'Measurement & Analysis',
                 'features': [
-                    {'key': 'independent_variables', 'label': 'Treatment / Independent variable(s)'},
-                    {'key': 'dependent_variables', 'label': 'Outcome / Dependent variable(s)'},
+                    {'key': 'independent_variables', 'label': 'Treatment / Independent Variable(s)'},
+                    {'key': 'dependent_variables', 'label': 'Outcome / Dependent Variable(s)'},
                     {'key': 'survey_questions', 'label': 'Survey Questions'},
                     {'key': 'analysis_equations', 'label': 'Analysis Equations'}
                 ]
@@ -321,10 +336,17 @@
                 'id': 'context',
                 'label': 'Context',
                 'features': [
-                    {'key': 'sociocultural_context', 'label': 'Socio-cultural context'},
-                    {'key': 'political_context', 'label': 'Political context'},
-                    {'key': 'platform_technological_context', 'label': 'Platform / Technological context'},
-                    {'key': 'temporal_context', 'label': 'Temporal context'},
+                    {'key': 'sociocultural_context', 'label': 'Socio-cultural Context'},
+                    {'key': 'political_context', 'label': 'Political Context'},
+                    {'key': 'platform_technological_context', 'label': 'Platform / Technological Context'},
+                    {'key': 'temporal_context', 'label': 'Temporal Context'},
+                    {'key': 'gdp_per_capita_usd', 'label': 'GDP Per Capita (USD)'},
+                    {'key': 'gini_coefficient', 'label': 'Gini Coefficient'},
+                    {'key': 'income_group', 'label': 'World Bank Income Group'},
+                    {'key': 'study_language', 'label': 'Study Language'},
+                    {'key': 'platform_language_optimization', 'label': 'Platform Language / Locale Optimization'},
+                    {'key': 'traditional_media_strength', 'label': 'Traditional Media Strength'},
+                    {'key': 'electoral_proximity', 'label': 'Electoral Proximity'},
                     {'key': 'democracy', 'label': 'Liberal Democracy Index'},
                     {'key': 'press_freedom', 'label': 'Press Freedom Index'},
                     {'key': 'internet_freedom', 'label': 'Internet Freedom Score'},
@@ -334,7 +356,7 @@
             },
             {
                 'id': 'internet-social-media',
-                'label': 'Internet and Social Media Usage',
+                'label': 'Internet And Social Media Usage',
                 'features': [
                     {'key': 'population_million', 'label': 'Population (Million)'},
                     {'key': 'internet_users_million', 'label': 'Internet Users (Million)'},
@@ -700,10 +722,12 @@
         const features = [
               'Authors', 'Title', 'Journal', 'Year', 'Citation', 'Abstract',
               'Sample Size', 'Country / Region', 'Recruitment Source', 'Demographics', 'Incentive',
-              'Treatment / Independent variable(s)',
-              'Outcome / Dependent variable(s)', 'Survey Questions', 'Analysis Equations',
+              'Treatment / Independent Variable(s)',
+              'Outcome / Dependent Variable(s)', 'Survey Questions', 'Analysis Equations',
               'Main Effects', 'Moderators', 'Moderation Results',
-              'Socio-cultural context', 'Political context', 'Platform / Technological context', 'Temporal context',
+              'Socio-cultural Context', 'Political Context', 'Platform / Technological Context', 'Temporal Context',
+              'GDP Per Capita (USD)', 'Gini Coefficient', 'World Bank Income Group', 'Study Language',
+              'Platform Language / Locale Optimization', 'Traditional Media Strength', 'Electoral Proximity',
 
               'Democracy', 'Press Freedom', 'Internet Freedom', 'Internet Penetration', 'Governance', 'Polarization',
               'Population (Million)', 'Internet Users (Million)', 'Social Media Users (Million)',
@@ -761,10 +785,10 @@
                     case 'Incentive':
                         value = paper.extracted_features.incentive || '';
                         break;
-                    case 'Treatment / Independent variable(s)':
+                    case 'Treatment / Independent Variable(s)':
                         value = paper.extracted_features.independent_variables || '';
                         break;
-                    case 'Outcome / Dependent variable(s)':
+                    case 'Outcome / Dependent Variable(s)':
                         value = paper.extracted_features.dependent_variables || '';
                         break;
                     case 'Survey Questions':
@@ -782,17 +806,38 @@
                     case 'Moderation Results':
                         value = paper.extracted_features.moderation_results || '';
                         break;
-                    case 'Socio-cultural context':
+                    case 'Socio-cultural Context':
                         value = paper.extracted_features.sociocultural_context || '';
                         break;
-                    case 'Political context':
+                    case 'Political Context':
                         value = paper.extracted_features.political_context || '';
                         break;
-                    case 'Platform / Technological context':
+                    case 'Platform / Technological Context':
                         value = paper.extracted_features.platform_technological_context || '';
                         break;
-                    case 'Temporal context':
+                    case 'Temporal Context':
                         value = paper.extracted_features.temporal_context || '';
+                        break;
+                    case 'GDP Per Capita (USD)':
+                        value = paper.extracted_features.gdp_per_capita_usd || '';
+                        break;
+                    case 'Gini Coefficient':
+                        value = paper.extracted_features.gini_coefficient || '';
+                        break;
+                    case 'World Bank Income Group':
+                        value = paper.extracted_features.income_group || '';
+                        break;
+                    case 'Study Language':
+                        value = paper.extracted_features.study_language || '';
+                        break;
+                    case 'Platform Language / Locale Optimization':
+                        value = paper.extracted_features.platform_language_optimization || '';
+                        break;
+                    case 'Traditional Media Strength':
+                        value = paper.extracted_features.traditional_media_strength || '';
+                        break;
+                    case 'Electoral Proximity':
+                        value = paper.extracted_features.electoral_proximity || '';
                         break;
                     case 'Democracy':
                       value = paper.extracted_features.democracy || '';
@@ -1324,11 +1369,26 @@ function normalizeAiCategoryName(categoryName) {
     .replace(/^-|-$/g, "");
 }
 
+const AI_CATEGORY_DISPLAY_ORDER = [
+  "Research Design & Sample",
+  "Measurement & Analysis",
+  "Findings",
+  "Context"
+];
+
 function renderAiSummaries(results) {
   const container = document.getElementById("ai-difference-summaries");
   container.innerHTML = "";
 
-  const entries = Object.entries(results || {});
+  const raw = results || {};
+  const entries = [
+    ...AI_CATEGORY_DISPLAY_ORDER.filter((name) => Object.prototype.hasOwnProperty.call(raw, name)).map(
+      (name) => [name, raw[name]]
+    ),
+    ...Object.entries(raw).filter(
+      ([name]) => !AI_CATEGORY_DISPLAY_ORDER.includes(name)
+    )
+  ];
   if (!entries.length) {
     setAiSummaryState("No AI summaries are available for this comparison yet.", "empty");
     return;

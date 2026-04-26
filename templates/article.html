@@ -12,7 +12,7 @@
         <div class="container">
             <div class="logo">
                 <h1>StudyLens</h1>
-                <span class="tagline">Academic Research Tool</span>
+                <span class="tagline">Deactivation Studies</span>
             </div>
             <nav class="nav">
                 <a href="{{ url_for('index') }}" class="nav-link">Home</a>
@@ -79,7 +79,7 @@
                                 {% endif %}
                                 {% if has_abstract_verbatim %}
                                 <div class="feature-actions">
-                                    <button class="btn btn-outline btn-sm full-text-trigger" data-full-text-id="abstract-verbatim-full" data-feature-label="Abstract Verbatim" data-study-title="{{ paper.title|e }}" data-study-index="1">
+                                    <button type="button" class="btn btn-outline btn-sm full-text-trigger" data-full-text-id="abstract-verbatim-full" data-feature-label="Abstract Verbatim" data-study-title="{{ paper.title|e }}" data-study-index="1">
                                         <span class="btn-text">View Verbatim Text</span>
                                     </button>
                                 </div>
@@ -108,6 +108,13 @@
                                   'political_context',
                                   'platform_technological_context',
                                   'temporal_context',
+                                  'gdp_per_capita_usd',
+                                  'gini_coefficient',
+                                  'income_group',
+                                  'study_language',
+                                  'platform_language_optimization',
+                                  'traditional_media_strength',
+                                  'electoral_proximity',
 
                                   'democracy',
                                   'press_freedom',
@@ -136,33 +143,40 @@
                                 'recruitment_source': 'Recruitment Source',
                                 'demographics': 'Demographics',
                                 'incentive': 'Incentive',
-                                'independent_variables': 'Treatment / Independent variable(s)',
-                                'dependent_variables': 'Outcome / Dependent variable(s)',
+                                'independent_variables': 'Treatment / Independent Variable(s)',
+                                'dependent_variables': 'Outcome / Dependent Variable(s)',
                                 'survey_questions': 'Survey Questions',
                                 'analysis_equations': 'Analysis Equations',
                                 'main_effects': 'Main Effects',
                                 'moderators': 'Moderators',
                                 'moderation_results': 'Moderation Results',
-                                'sociocultural_context': 'Socio-cultural context',
-                                'political_context': 'Political context',
-                                'platform_technological_context': 'Platform / Technological context',
-                                'temporal_context': 'Temporal context',
+                                'sociocultural_context': 'Socio-cultural Context',
+                                'political_context': 'Political Context',
+                                'platform_technological_context': 'Platform / Technological Context',
+                                'temporal_context': 'Temporal Context',
+                                'gdp_per_capita_usd': 'GDP Per Capita (USD)',
+                                'gini_coefficient': 'Gini Coefficient',
+                                'income_group': 'World Bank Income Group',
+                                'study_language': 'Study Language',
+                                'platform_language_optimization': 'Platform Language / Locale Optimization',
+                                'traditional_media_strength': 'Traditional Media Strength',
+                                'electoral_proximity': 'Electoral Proximity',
                                 'democracy': 'Liberal Democracy Index',
                                 'press_freedom': 'Press Freedom Index',
                                 'internet_freedom': 'Internet Freedom Score',
                                 'internet_penetration': 'Internet Penetration',
                                 'governance': 'Political Stability Score',
-                                'polarization': 'Deliberative Democracy Index ',
+                                'polarization': 'Deliberative Democracy Index',
                                 'ai_context_summary': 'AI Context Summary',
                                 'population_million': 'Population (Million)',
                                 'internet_users_million': 'Internet Users (Million)',
                                 'social_media_users_million': 'Social Media Users (Million)',
-                                'youtube_users_million': 'Youtube Users (Million)',
+                                'youtube_users_million': 'YouTube Users (Million)',
                                 'facebook_users_million': 'Facebook Users (Million)',
                                 'instagram_users_million': 'Instagram Users (Million)',
                                 'x_users_million': 'X Users (Million)',
-                                'tiktok_users_million': 'Tiktok Users (Million)',
-                                'linkedin_users_million': 'Linkedin Users (Million)',
+                                'tiktok_users_million': 'TikTok Users (Million)',
+                                'linkedin_users_million': 'LinkedIn Users (Million)',
                                 'messenger_users_million': 'Messenger Users (Million)',
                                 'snapchat_users_million': 'Snapchat Users (Million)',
                                 'pinterest_users_million': 'Pinterest Users (Million)'
@@ -204,7 +218,7 @@
 
                                                 {% if needs_truncation %}
                                                     <div class="summary-preview">
-                                                        <div class="summary-text">{%- if is_platform_metric and '%' in v -%}{% set parts = v.rsplit(' ', 1) %}{% if parts|length == 2 %}<div class="metric-breakdown"><strong>{{ feature_label }}:</strong> {{ parts[0] }}<br><strong>% of Platform Users based on Population:</strong> {{ parts[1] }}</div>{% else %}{{ v|trim }}{% endif %}{%- else -%}{{ v|trim }}{%- endif -%}</div>
+                                                        <div class="summary-text">{%- if is_platform_metric and '%' in v -%}{% set parts = v.rsplit(' ', 1) %}{% if parts|length == 2 %}<div class="metric-breakdown"><strong>{{ feature_label }}:</strong> {{ parts[0] }}<br><strong>% Of Platform Users Based On Population:</strong> {{ parts[1] }}</div>{% else %}{{ v|trim }}{% endif %}{%- else -%}{{ v|trim }}{%- endif -%}</div>
 
                                                         <button type="button"
                                                             class="inline-expand-toggle"
@@ -223,7 +237,7 @@
                                                         {% if parts|length == 2 %}
                                                             <div class="metric-breakdown">
                                                                 <strong>{{ feature_label }}:</strong> {{ parts[0] }}<br>
-                                                                <strong>% of Platform Users based on Population:</strong> {{ parts[1] }}
+                                                                <strong>% Of Platform Users Based On Population:</strong> {{ parts[1] }}
                                                             </div>
                                                         {% else %}
                                                             <p>{{ v }}</p>
@@ -235,8 +249,11 @@
                                             </div>
 
                                                 {% if has_verbatim %}
+                                                <div class="feature-full-text hidden" id="{{ feature_name }}-verbatim-full">
+                                                    <p>{{ vv }}</p>
+                                                </div>
                                                 <div class="feature-actions">
-                                                    <button class="btn btn-outline btn-sm full-text-trigger" data-full-text-id="{{ feature_name }}-verbatim-full" data-feature-label="{{ feature_label }} Verbatim" data-study-title="{{ paper.title|e }}" data-study-index="1">
+                                                    <button type="button" class="btn btn-outline btn-sm full-text-trigger" data-full-text-id="{{ feature_name }}-verbatim-full" data-feature-label="{{ feature_label }} Verbatim" data-study-title="{{ paper.title|e }}" data-study-index="1">
                                                         <span class="btn-text">View Verbatim Text</span>
                                                     </button>
                                                 </div>
@@ -368,7 +385,8 @@
                 return;
             }
 
-            const targetId = button.dataset.fullTextId;
+            const targetId =
+                button.dataset.fullTextId || button.getAttribute('data-full-text-id');
             const featureLabel = button.dataset.featureLabel || 'Full Text';
             const studyLabel = button.dataset.studyTitle || '';
 
@@ -467,7 +485,8 @@
                 const summaryText = summary ? summary.textContent.trim() : '';
 
                 content.querySelectorAll('.full-text-trigger').forEach(button => {
-                    const targetId = button.dataset.fullTextId;
+                    const targetId =
+                        button.dataset.fullTextId || button.getAttribute('data-full-text-id');
                     const fullTextElement = targetId ? document.getElementById(targetId) : null;
                     const fullTextContent = fullTextElement ? fullTextElement.textContent.trim() : '';
 
