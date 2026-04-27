@@ -408,6 +408,151 @@ def load_papers_from_csv():
         return []
 
 
+# Fields merged into free-text search (Option 1: broaden search beyond title/abstract).
+SEARCH_CONTEXT_FEATURE_KEYS = (
+    "country_region",
+    "income_group",
+    "study_language",
+    "platform_language_optimization",
+    "traditional_media_strength",
+    "electoral_proximity",
+    "gdp_per_capita_usd",
+    "gini_coefficient",
+    "sociocultural_context",
+    "political_context",
+    "platform_technological_context",
+    "temporal_context",
+    "demographics",
+    "recruitment_source",
+    "sample_size",
+    "study_type",
+    "ai_context_summary",
+)
+
+# Normalized lowercase tokens -> substrings often used in country_region / text (for US ↔ United States, etc.)
+COUNTRY_TERM_ALIASES = {
+    "us": (
+        "united states",
+        "united states of america",
+        "u.s.",
+        "u.s.a.",
+        "u.s.a",
+        "usa",
+        "america",
+        "american",
+    ),
+    "usa": ("united states", "u.s.", "usa", "american"),
+    "u.s.": ("united states", "usa", "american"),
+    "u.s.a.": ("united states", "usa"),
+    "america": ("united states", "usa", "american"),
+    "uk": (
+        "united kingdom",
+        "great britain",
+        "britain",
+        "u.k.",
+        "england",
+        "scotland",
+        "wales",
+        "northern ireland",
+        "british",
+    ),
+    "u.k.": ("united kingdom", "great britain", "britain"),
+    "britain": ("united kingdom", "great britain", "britain"),
+    "england": ("england", "united kingdom", "british"),
+    "scotland": ("scotland", "united kingdom"),
+    "wales": ("wales", "united kingdom"),
+    "eu": ("european union", "europe"),
+    "uae": ("united arab emirates", "uae", "emirates"),
+    "de": ("germany", "german", "deutsch"),
+    "germany": ("germany", "german"),
+    "fr": ("france", "french", "français"),
+    "france": ("france", "french"),
+    "es": ("spain", "spanish"),
+    "spain": ("spain", "spanish"),
+    "cn": ("china", "chinese", "mainland china"),
+    "china": ("china", "chinese"),
+    "jp": ("japan", "japanese"),
+    "japan": ("japan", "japanese"),
+    "kr": ("south korea", "korea", "korean", "republic of korea"),
+    "korea": ("south korea", "korea", "korean"),
+    "india": ("india", "indian"),
+    "br": ("brazil", "brazilian"),
+    "brazil": ("brazil", "brazilian"),
+    "ca": ("canada", "canadian"),
+    "canada": ("canada", "canadian"),
+    "au": ("australia", "australian"),
+    "australia": ("australia", "australian"),
+    "nz": ("new zealand", "zealand"),
+    "mx": ("mexico", "mexican"),
+    "sg": ("singapore", "singaporean"),
+    "nl": ("netherlands", "dutch", " holland"),
+    "se": ("sweden", "swedish"),
+    "norway": ("norway", "norwegian"),
+    "dk": ("denmark", "danish"),
+    "fi": ("finland", "finnish"),
+    "ie": ("ireland", "irish"),
+    "be": ("belgium", "belgian"),
+    "at": ("austria", "austrian"),
+    "ch": ("switzerland", "swiss"),
+    "pt": ("portugal", "portuguese"),
+    "es": ("spain", "spanish"),
+    "it": ("italy", "italian"),
+    "pl": ("poland", "polish"),
+    "ru": ("russia", "russian"),
+    "tr": ("turkey", "turkish"),
+    "sa": ("saudi arabia", "saudi"),
+    "eg": ("egypt", "egyptian"),
+    "za": ("south africa",),
+    "ar": ("argentina", "argentine"),
+    "cl": ("chile", "chilean"),
+    "tw": ("taiwan", "taiwanese"),
+    "hk": ("hong kong", "hongkong"),
+}
+
+
+def _normalize_search_token(raw: str) -> str:
+    return raw.strip().lower().strip(".,;:()\"'")
+
+
+def _term_matches_haystack(term: str, haystack: str) -> bool:
+    """Match one query token against lowercase haystack; supports country synonyms."""
+    if not term:
+        return True
+    if term in COUNTRY_TERM_ALIASES:
+        if any(phrase in haystack for phrase in COUNTRY_TERM_ALIASES[term]):
+            return True
+        try:
+            if re.search(r"\b" + re.escape(term) + r"\b", haystack):
+                return True
+        except re.error:
+            pass
+        return False
+    if len(term) <= 3:
+        try:
+            return bool(re.search(r"\b" + re.escape(term) + r"\b", haystack))
+        except re.error:
+            return term in haystack
+    return term in haystack
+
+
+def _paper_search_text_blob(paper):
+    """Lowercase haystack for substring matching (title, abstract, authors, journal,
+    countries list, and selected contextual extracted_features)."""
+    extracted = paper.get("extracted_features") or {}
+    parts = [
+        paper.get("title") or "",
+        paper.get("abstract") or "",
+        " ".join(paper.get("authors") or []),
+        paper.get("journal") or "",
+        " ".join(str(c) for c in (paper.get("countries") or [])),
+    ]
+    for key in SEARCH_CONTEXT_FEATURE_KEYS:
+        val = extracted.get(key, "")
+        if val is not None and str(val).strip():
+            parts.append(str(val))
+    return " ".join(parts).lower()
+
+
 def search_papers(query="", filters=None):
     """Search papers based on query and filters."""
     if filters is None:
@@ -415,22 +560,16 @@ def search_papers(query="", filters=None):
 
     results = papers_data.copy()
 
-    # Text search - search in title, abstract, journal, and author names
+    # Text search — title, abstract, authors, journal, countries, + context-related fields
     if query:
-        search_terms = query.lower().split()
+        search_terms = [
+            t for t in (_normalize_search_token(w) for w in query.lower().split()) if t
+        ]
         results = [
             paper
             for paper in results
             if all(
-                term
-                in " ".join(
-                    [
-                        paper["title"],
-                        paper["abstract"],
-                        " ".join(paper["authors"]),
-                        paper["journal"],
-                    ]
-                ).lower()
+                _term_matches_haystack(term, _paper_search_text_blob(paper))
                 for term in search_terms
             )
         ]
@@ -1114,13 +1253,6 @@ CATEGORY_FIELDS = {
         "political_context",
         "platform_technological_context",
         "temporal_context",
-        "gdp_per_capita_usd",
-        "gini_coefficient",
-        "income_group",
-        "study_language",
-        "platform_language_optimization",
-        "traditional_media_strength",
-        "electoral_proximity",
         "democracy",
         "press_freedom",
         "internet_freedom",
@@ -1218,16 +1350,15 @@ def build_prompt(category_name, papers_payload):
 You are comparing a selected set of research papers.
 
 Task:
-For the category "{category_name}", write a single compact comparison string that highlights the most important differences across the selected papers.
+For the category "{category_name}", write a brief narrative summary comparing all selected papers on this dimension.
 
 Rules:
 - Use only the provided data
-- Focus only on differences, not similarities
-- Use compact contrastive phrasing
-- Use "X vs Y" style where helpful
+- Write 1-2 sentences of plain prose
+- Focus on the most meaningful pattern: what do they share, and what is the key split or variation?
+- Do not list every detail – the reader can see those in the table
+- Highlight what is analytically interesting about how the papers relate on this dimension
 - If there are more than 2 papers, compare them in a grouped way when natural
-- Mention only the most important 2 to 5 differences
-- Use comma-separated or semicolon-separated phrases
 - No full sentences
 - No introductory text
 - No explanations
@@ -1320,10 +1451,6 @@ def compare_ai_differences():
                 category_name, result = future.result()
                 results[category_name] = result
 
-        # Enforce consistent category order in JSON (browser Object key order, some clients sort alphabetically).
-        category_order = list(CATEGORY_FIELDS.keys())
-        results = {k: results[k] for k in category_order if k in results}
-
         paper_titles = selected_rows["title"].tolist()
         save_compare_summary(paper_keys, paper_titles, results)
 
@@ -1340,4 +1467,4 @@ def compare_ai_differences():
 load_papers_from_csv()
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5001)
+    app.run(debug=True, host="127.0.0.1", port=5001)
