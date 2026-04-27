@@ -280,7 +280,7 @@ Q: To what extent do you think Facebook is good or bad for society?
 
 Outcome: Facebook opinions
 
-Q:To what extent do you think using Facebook makes people more or less happy?
+Q: To what extent do you think using Facebook makes people more or less happy?
 
 Outcome: Facebook opinions
 
@@ -296,7 +296,7 @@ Q: To what extent do you think Facebook exposes people to clickbait or false new
 
 Outcome: Facebook opinions
 
-To what extent do you think Facebook makes people more or less politically polarized?
+Q: To what extent do you think Facebook makes people more or less politically polarized?
 
 Outcome: Facebook opinions
 
@@ -713,26 +713,32 @@ Instagram — Endline: N = 13,480","On Facebook, a total of 10.6 million users w
 6. Value of Facebook","We explore the effect of not using Facebook for one week on five outcomes: social media usage, news consumption, news awareness, subjective well-being, daily activities and the value of Facebook.","Outcome: Demographics
 
 Q: What is your gender?
+
 Options: Male, Female
 
 Outcome: Demographics
 
 Q: What is your age in years? Please round up
+
 Options: Numeric entry
 
 Outcome: Demographics
 
 Q: Which college are you currently enrolled in?
+
 Options: Dropdown menu
 
 Outcome: Demographics
 
 Q: What is your major?
+
 Options: Text entry
 
 Outcome: Demographics
 
-Did you live in the United States when you were 15 years old? Response Options: Yes, No
+Q: Did you live in the United States when you were 15 years old?
+
+Options: Yes, No
 
 Outcome: Demographics
 
@@ -741,16 +747,19 @@ Q: What was the zip code of your address when you were 15 years old?Options: Num
 Outcome: Demographics
 
 Q: What country did you live in when you were 15 years old?
+
 Options: Text entry
 
 Outcome: Social media usage
 
 Q: Do you have an active Facebook account?
+
 Options: Yes, No
 
 Outcome: Value of Facebook
 
 Q: What is the value of your weekly time on Facebook? (Please enter a dollar amount)
+
 Options: Numeric entry [Note: Half subjects were asked 'How much money would you need to be given to stop using Facebook for a week?']
 
 Outcome: News awareness
@@ -888,16 +897,18 @@ Options: 0-10 scale (Not at all worthwhile to Very worthwhile)
 Outcome: Subjective well-being
 
 Q: How happy are you?
+
 Options: 0-10 scale (Very unhappy to Very happy)
 
 Outcome: Subjective well-being
 
 Q: How often do you worry?
+
 Options: 0-10 scale (Never to All of the time)
 
 Outcome: Subjective well-being
 
-How often do you feel depressed?
+Q: How often do you feel depressed?
 
 Options: 0-10 scale (Never to All of the time)
 
@@ -916,6 +927,7 @@ Options: Hispanic/ Latino, Not Hispanic/ Latino
 Outcome: Open-ended feedback
 
 Q: Is there anything else you would like to tell the research team?
+
 Options: Text entry",BDM counter-offer to elicit weekly WTA; random payouts (min $5; expected $11.58); average total payment $16.79 (SD $5.22),Cash payouts based on an auction... If our counter-offer is greater than or equal to your valuation YOU WILL BE CONSIDERED TO PARTICIPATE IN THE EXPERIMENT. We will randomly select the final participants from this group. FINAL PARTICIPANTS will be paid the value of our random counter-offer... Average payment to participants was $16.79 (s.d. $5.22) at the completion of Phase 3.,Randomized Controlled Trial (RCT),"We ran a field experiment in the Spring of 2017 with a randomized, and validated, Facebook restriction to investigate how Facebook may affect daily activities and news exposure and quantify how much users value access. In total, 1769 individuals from a large U.S. university participated in the study.","Estimator: ITT
 Model: OLS with individual fixed effects
 Covariates: Yes — individual fixed effects (time-invariant characteristics)
@@ -1383,53 +1395,53 @@ Endline: N = 2,246","Of the 2246 respondents who gave their informed consent to 
 "Nejla Asimovic, Jonathan Nagler, Richard Bonneau, and Joshua A. Tucker","Nejla Asimovic, Jonathan Nagler, Richard Bonneau, and Joshua A. Tucker",Testing The Effects Of Facebook Usage In An Ethnically Polarized Setting,Pnas,2021,"Asimovic, N., Nagler, J., Bonneau, R., & Tucker, J. A. (2021). Testing the effects of Facebook usage in an ethnically polarized setting. Proceedings of the National Academy of Sciences, 118(25), e2022819118. https://doi.org/10.1073/pnas.2022819118","Despite the belief that social media is altering intergroup dynamics—bringing people closer or further alienating them from one another—the impact of social media on interethnic attitudes has yet to be rigorously evaluated, especially within areas with tenuous interethnic relations. We report results from a randomized controlled trial in Bosnia and Herzegovina (BiH), exploring the effects of exposure to social media during 1 wk around genocide remembrance in July 2019 on a set of interethnic attitudes of Facebook users. We find evidence that, counter to preregistered expectations, people who deactivated their Facebook profiles report lower regard for ethnic outgroups than those who remained active. Moreover, we present additional evidence suggesting that this effect is likely conditional on the level of ethnic heterogeneity of respondents’ residence. We also extend the analysis to include measures of subjective well-being and knowledge of news. Here, we find that Facebook deactivation leads to suggestive improvements in subjective wellbeing and a decrease in knowledge of current events, replicating results from recent research in the United States in a very different context, thus increasing our confidence in the generalizability of these effects.",Facebook deactivation (1 week) vs. usual use,"Our treatment of Facebook deactivation took place from 7 July until 14 July 2019, encompassing the week around the Remembrance Day (11 July) of the genocide in Srebrenica. The genocide in Srebrenica is central and deeply intertwined with the memory of the Bosnian war as the worst atrocity in Europe after World War II. Online and offline discussions related to the war are held to a certain extent throughout the year, but significantly intensify during this period.","1. Interethnic regard (composite index)
 2. Subjective well-being (index)
 3. News knowledge (index)
-4. Political disaffection (secondary)","Participants took a comprehensive survey at the end of the experiment, and we focus on questions within three families of outcomes: outgroup regard, subjective wellbeing, and news knowledge (full list of questions in SI Appendix, Table S4). All of the questions were preregistered; following our preanalysis plan, we present results both for the composite indexes and for each of their corresponding indicators.","Outcome: Out-Group Ratings
+4. Political disaffection (secondary)","Participants took a comprehensive survey at the end of the experiment, and we focus on questions within three families of outcomes: outgroup regard, subjective wellbeing, and news knowledge (full list of questions in SI Appendix, Table S4). All of the questions were preregistered; following our preanalysis plan, we present results both for the composite indexes and for each of their corresponding indicators.","Outcome: Outgroup Ratings
 
-Q: To understand the situation in BiH, we are interested in your opinion about the constituent people in BiH and the relationship between different groups. For each characteristic, please indicate how well you think it applies to members of the two ethnic groups different than the one you identify yourself with. Measurements: Traits: Intelligent; Honest; Patriotic; Open-minded; Generous; Hypocritical; Selfish; Mean; Unreliable
+Q: To understand the situation in BiH, we are interested in your opinion about the constituent people in BiH and the relationship between different groups. For each characteristic, please indicate how well you think it applies to members of the two ethnic groups different than the one you identify yourself with. Traits: Intelligent; Honest; Patriotic; Open-minded; Generous; Hypocritical; Selfish; Mean; Unreliable
 
-Options: [Not at all; Not too well; Somewhat well; Very well; Extremely well]
+Options: Not at all; Not too well; Somewhat well; Very well; Extremely well
 
-Outcome: In-Group Trait Ratings
+Outcome: Ingroup Trait Ratings (Metastereotypes)
 
-Q: How do you think members of the other two main ethnic groups in BiH would evaluate members of your ethnic group in terms of these same trait ratings? Measurements: Traits: Intelligent; Honest; Patriotic; Open-minded; Generous; Hypocritical; Selfish; Mean; Unreliable
+Q: How do you think members of the other two main ethnic groups in BiH would evaluate members of your ethnic group in terms of these same trait ratings? Traits: Intelligent; Honest; Patriotic; Open-minded; Generous; Hypocritical; Selfish; Mean; Unreliable
 
-Options: [Not at all; Not too well; Somewhat well; Very well; Extremely well]
+Options: Not at all; Not too well; Somewhat well; Very well; Extremely well
 
-Outcome: Out-Group Feeling Thermometer
+Outcome: Feeling Thermometer (outgroup)
 
-Q: Academically-run national surveys in the United States often use something we call the feeling thermometer to understand how people feel about different individuals and groups. The question about feelings between groups has been included in every American National Election Studies since 1968. Given that there are different ethnic groups living in BiH, we'd like you to rate the groups in the following way: Indicate on a 101-point scale how warm you feel towards the members of the other ethnic groups in BiH. Ratings between 50 degrees and 100 degrees mean that you feel favorable and warm toward the group. Ratings between 0 degrees and 50 degrees mean that you do not feel favorable toward the group, and you would select the 50 degree mark if you have no feelings one way or the other
+Q: Indicate on a 101-point scale how warm you feel towards the members of the other ethnic groups in BiH. Ratings between 50 and 100 mean favorable/warm; ratings between 0 and 50 mean unfavorable; 50 = no feelings either way
 
-Options: Survey slider (0-100)
+Options: Survey slider (0–100)
 
-Outcome: In-Group Feeling Thermometer
+Outcome: Feeling Thermometer (ingroup)
 
-Q: Indicate on a 101-point scale how warm you feel towards the members of the ethnic group you identify with. Measurements: Survey slider (0-100)
+Q: Indicate on a 101-point scale how warm you feel towards the members of the ethnic group you identify with
+
+Options: Survey slider (0–100)
 
 Outcome: Social Distance
 
-Q: People tend to be willing to participate in social contacts of varying degrees of closeness with members of diverse social groups, such as racial and ethnic groups. Please consider and share whether you would be willing to: 1. Marry a member of the other group? 2. Have a member of the other group as your close personal friend? 3. Have a member of the other group as your neighbor? 4. Have a member of the other group as your colleague at work? 5. Have more members of the other group as citizens of your country? 6. Have more members of the other group as non-citizen visitors? 7. Have members of the other group be excluded from associating with your country in any way?
+Q: Please consider and share whether you would be willing to: 1. Marry a member of the other group? 2. Have a member of the other group as your close personal friend? 3. Have a member of the other group as your neighbor? 4. Have a member of the other group as your colleague at work? 5. Have more members of the other group as citizens of your country? 6. Have more members of the other group as non-citizen visitors? 7. Have members of the other group be excluded from associating with your country in any way?
 
 Options: Not willing; Not really willing; Undecided; Somewhat willing; Willing
-
-*In the final survey, rather than providing a Likert scale for each response, we asked participants to indicate all the ways in which they would be willing to engage with the outgroup from the indicated seven options. Hence, our composite social distance indicator goes from 1-7, capturing the least to the highest level of willingness to be socially close
 
 Outcome: Cooperation
 
 Q: Please indicate your agreement with the following statements: 1. Multi-ethnic parties cannot secure the interests of my people. 2. It is possible to cooperate only with people of my ethnic group
 
-Options: 1.Absolutely agree; 3. No opinion; 6. Strongly disagree
+Options: 1. Absolutely agree; 3. No opinion; 6. Strongly disagree
 
-Outcome: Subjective Well-Being
+Outcome: Subjective Well-being
 
-Q: Please indicate how well you agree with the following statements. How often did you feel the following over the last week: Satisfaction with life, Depression, Loneliness, Anxiety, Boredom, Joy, Isolation, Fulfillment Measurements:
+Q: How often did you feel the following over the last week: Satisfaction with life, Depression, Loneliness, Anxiety, Boredom, Joy, Isolation, Fulfillment
 
-Options: Never, Rarely, Sometimes, Often, Always
+Options: Never; Rarely; Sometimes; Often; Always
 
 Outcome: Political News Knowledge
 
-Q: We present you few headlines, few of which truly appeared in the news over the last few days and few of which are false [added by our team]. Please indicate your belief that the following appeared in the news: 8 news summary headlines [4 political and 4 non-political]: T: South-East European Cooperation Process (SEECP) summit began in Bosnia- Herzegovina this week. F: Thirteen bh. political officials sued for corruption; hearings scheduled to start in September. T: Amel Tuka won the 3rd Place in the Final Race of the Diamond League. F: Opening ceremony of Europe Youth U18 and U16 Basketball Cup began in Sarajevo yesterday; matches planned in four bh. cities! T: Turkish President Recep Tayyip Erdogan arrived to BiH on Monday. F: Head of the EU Delegation to Ukraine Hugues Mingarelli started his visit to Bosnia- Herzegovina, with a full week of meetings ahead of him. T: An aluminum smelter based in Bosnia closes its doors due to bankruptcy. F: An earthquake of magnitude of 3.1 degrees Richter scale hits eastern part of the country
+Q: Please indicate your belief that the following appeared in the news recently [8 headlines: 4 true, 4 false, covering political and non-political topics]
 
-Options: True, Not Sure, Untrue",20 BAM (≈ $11.45) in mobile credit,"The text above the ad stated the following “Take part in an academic study about the effects of social media on users! Share your thoughts, help the accumulation of knowledge, and win 20KM.” (Fig. S1.b, below), while the ad image indicated that 20BAM (equivalent of $11.45, as of July 2019) in mobile credit awaits for all study participants.",Randomized Controlled Trial (RCT),"We report results from a randomized controlled trial in Bosnia and Herzegovina (BiH), exploring the effects of exposure to social media during 1 wk around genocide remembrance in July 2019 on a set of interethnic attitudes of Facebook users.","Estimator: ITT
+Options: True; Not Sure; Untrue",20 BAM (≈ $11.45) in mobile credit,"The text above the ad stated the following “Take part in an academic study about the effects of social media on users! Share your thoughts, help the accumulation of knowledge, and win 20KM.” (Fig. S1.b, below), while the ad image indicated that 20BAM (equivalent of $11.45, as of July 2019) in mobile credit awaits for all study participants.",Randomized Controlled Trial (RCT),"We report results from a randomized controlled trial in Bosnia and Herzegovina (BiH), exploring the effects of exposure to social media during 1 wk around genocide remembrance in July 2019 on a set of interethnic attitudes of Facebook users.","Estimator: ITT
 Model: OLS regression with pre-treatment covariates
 Covariates: Yes — gender, age, employment status, ethnicity, Facebook usage frequency, ethnic identity importance
 Compliance: ITT — binary treatment assignment
@@ -1467,61 +1479,13 @@ Direction: More negative effect of Facebook deactivation when online networks we
 
 p-value = <0.05
 
-3. Moderator = Age
+Not significant: Age, Gender, Interest in politics, Ethnicity, Entity of residence","Moreover, we present additional evidence suggesting that this effect is likely conditional on the level of ethnic heterogeneity of respondents’ residence. ... To explore whether this implication holds in the context of our study, we performed a series of analyses that were not explicitly part of our original preregistration and thus should be interpreted with that caveat in mind. To proxy for users’ offline networks, we use the latest Bosnia and Herzegovina census data (2013) on ethnic heterogeneities of BiH localities.","Test/Interaction: Treatment × Offline ethnic heterogeneity of residence
 
-DV = None
+Result: Negative effect of deactivation on outgroup regard was concentrated among participants in more homogeneous communities (β = -0.429***, SE = 0.151); no significant effect in more heterogeneous communities
 
-Effect present: No evidence reported
+Test/Interaction: Treatment × Difference between offline and online network diversity
 
-Direction: NA
-
-p-value = NA
-
-4. Moderator = Gender
-
-DV = None
-
-Effect present: No evidence reported
-
-Direction: NA
-
-p-value = NA
-
-5. Moderator = Interest in politics
-
-DV = None
-
-Effect present: No evidence reported
-
-Direction: NA
-
-p-value = NA
-
-6. Moderator = Ethnicity
-
-DV = None
-
-Effect present: No evidence reported
-
-Direction: NA
-
-p-value = NA
-
-7. Moderator = Entity of residence
-
-DV = None
-
-Effect present: No evidence reported
-
-Direction: NA
-
-p-value = NA","Moreover, we present additional evidence suggesting that this effect is likely conditional on the level of ethnic heterogeneity of respondents’ residence. ... To explore whether this implication holds in the context of our study, we performed a series of analyses that were not explicitly part of our original preregistration and thus should be interpreted with that caveat in mind. To proxy for users’ offline networks, we use the latest Bosnia and Herzegovina census data (2013) on ethnic heterogeneities of BiH localities.","Test/Interaction: Treatment effect on outgroup regard moderated by offline ethnic heterogeneity of residence
-
-Result: The negative effect of Facebook deactivation on outgroup regard was found almost exclusively among participants living in more ethnically homogeneous communities. In the subsample of users from homogeneous towns, the effect on the outgroup regard index was negative and statistically significant (e.g., for ethnic fractionalization measure, β=-0.429***, SE=0.151). For participants in more heterogeneous communities, there was no statistically significant effect
-
-Test/Interaction: Treatment effect on outgroup regard moderated by the difference between offline and online network diversity
-
-Result: Deactivating from Facebook had a significantly more negative effect on outgroup attitudes for users whose online networks were more diverse than their offline networks. For example, the interaction effect between treatment and a binary indicator for (offline more homogeneous than online) was significant and negative (β=-0.679**, SE=0.329, using the Shannon Entropy index)","Within the subsample of more homogeneous towns, the effect of deactivation on the composite index of outgroup regard is negative and highly statistically significant (SI Appendix, Tables S10–S12); on the contrary, for people living in more heterogeneous offline environments, there is no effect of deactivation on outgroup attitudes. Hence, it appears that the negative effect of Facebook deactivation on outgroup regard is almost entirely driven by users within the communities in which the opportunities for offline intergroup contact are limited (and in some cases possibly Nonexistent), and they therefore may be living within offline echo chambers that are stronger than the ones users find online. ... Across all three methods of measuring diversity, the estimate on outgroup regard passes the Benjamini-Hochberg multiple-comparisons correction at the 0.05 level (SI Appendix, Tables S13–15).","Age: Mean 29.2 years (SD = 8.96)
+Result: More negative effect of deactivation when online networks were more diverse than offline networks (β = -0.679**, SE = 0.329)","Within the subsample of more homogeneous towns, the effect of deactivation on the composite index of outgroup regard is negative and highly statistically significant (SI Appendix, Tables S10–S12); on the contrary, for people living in more heterogeneous offline environments, there is no effect of deactivation on outgroup attitudes. Hence, it appears that the negative effect of Facebook deactivation on outgroup regard is almost entirely driven by users within the communities in which the opportunities for offline intergroup contact are limited (and in some cases possibly Nonexistent), and they therefore may be living within offline echo chambers that are stronger than the ones users find online. ... Across all three methods of measuring diversity, the estimate on outgroup regard passes the Benjamini-Hochberg multiple-comparisons correction at the 0.05 level (SI Appendix, Tables S13–15).","Age: Mean 29.2 years (SD = 8.96)
 
 Gender: Majority female
 
@@ -1549,27 +1513,29 @@ Analyzed endline: N = 353 (T = 159, C = 194)","We block randomized the 556 resul
 
 Q: To understand the situation in Cyprus, we are interested in your opinion about different groups in Cyprus and the relationship between them. For each characteristic, please indicate how well you think it applies to members of the two ethnic groups different than the one you identify yourself with. Traits: Intelligent; Honest; Patriotic; Open-minded; Generous; Hypocritical; Selfish; Mean; Unreliable
 
-Scale: Not at all; Not too well; Somewhat well; Very well; Extremely well
+Options: Not at all; Not too well; Somewhat well; Very well; Extremely well
 
-Outcome: Metastereotypes
+Outcome: Ingroup Trait Ratings (Metastereotypes)
 
 Q: How do you think members of the other ethnic group would evaluate members of your ethnic group in terms of these same trait ratings? Traits: Intelligent; Honest; Patriotic; Open-minded; Generous; Hypocritical; Selfish; Mean; Unreliable
 
-Scale: Not at all; Not too well; Somewhat well; Very well; Extremely well
+Options: Not at all; Not too well; Somewhat well; Very well; Extremely well
 
 Outcome: Feeling Thermometer (outgroup)
 
-Q: Indicate on a 101-point scale how warm you feel towards the members of the other ethnic groups (Greek Cypriots/Turkish Cypriots) in Cyprus. Ratings between 50 degrees and 100 degrees mean that you feel favorable and warm toward the group. Ratings between 0 degrees and 50 degrees mean that you do not feel favorable toward the group, and you would select the 50 degree mark if you have no feelings one way or the other
+Q: Indicate on a 101-point scale how warm you feel towards the members of the other ethnic groups (Greek Cypriots/Turkish Cypriots) in Cyprus. Ratings between 50 and 100 mean favorable/warm; ratings between 0 and 50 mean unfavorable; 50 = no feelings either way
 
-Scale: Survey slider (0-100)
+Options: Survey slider (0–100)
 
 Outcome: Feeling Thermometer (ingroup)
 
-Q: Indicate on a 101-point scale how warm you feel towards the members of the ethnic group you identify with.Survey slider (0-100)
+Q: Indicate on a 101-point scale how warm you feel towards the members of the ethnic group you identify with
+
+Options: Survey slider (0–100)
 
 Outcome: Social Distance
 
-Q: People tend to be willing to participate in social contacts of varying degrees of closeness with members of diverse social groups, such as racial and ethnic groups. Please consider and share whether you would be willing to: a) Marry a member of the other group? b) Have a member of the other group as your close personal friend? c) Have a member of the other group as your neighbor? d) Have a member of the other group as your colleague at work? e) Have more members of the other group as citizens of your country?
+Q: Please consider and share whether you would be willing to: a) Marry a member of the other group? b) Have a member of the other group as your close personal friend? c) Have a member of the other group as your neighbor? d) Have a member of the other group as your colleague at work? e) Have more members of the other group as citizens of your country?
 
 Options: Not willing; Not really willing; Undecided; Somewhat willing; Willing
 
@@ -1577,31 +1543,31 @@ Outcome: Cooperation
 
 Q: Please indicate your agreement with the following statements: 1. Multi-ethnic parties cannot secure the interests of my people. 2. It is possible to cooperate only with people of my ethnic group. 3. Only nationalist parties will ensure the vital interests of the people they represent
 
-Options:1. Absolutely agree; 3. No opinion; 6. Strongly disagree
+Options: 1. Absolutely agree; 3. No opinion; 6. Strongly disagree
 
 Outcome: Offline Network Friendship
 
-Q: Estimate the % of outgroup members (Greek CY/Turkish CY) you have within your offline network of friends
+Q: Estimate the % of outgroup members (Greek Cypriot/Turkish Cypriot) you have within your offline network of friends
 
-Options: <5%, 5%-25%, 25%-50%, 50%-75%, 75%-100%
+Options: <5%; 5%–25%; 25%–50%; 50%–75%; 75%–100%
 
 Outcome: Offline Network Active Communication
 
-Q: Thinking about your everyday offline interaction with other people, how often do you actively interact with outgroup members (Greek CY/Turkish CY)?
+Q: Thinking about your everyday offline interaction with other people, how often do you actively interact with outgroup members (Greek Cypriot/Turkish Cypriot)?
 
-Option: 5-item Likert scale
+Options: 5-point Likert scale
 
-Outcome: Offline Network Passive exposure
+Outcome: Offline Network Passive Exposure
 
-Q: How frequently are you exposed to the outgroup (Greek CY/Turkish CY)? Within your offline setting (even when not actively engaging with them)?
+Q: How frequently are you exposed to the outgroup (Greek Cypriot/Turkish Cypriot) within your offline setting, even when not actively engaging with them?
 
-Response option: 5-item Likert scale
+Options: 5-point Likert scale
 
 Outcome: Weekly Activities
 
-Q: ""In the last week, relative to what is typical for you, have you spent more or less of your free time...""
+Q: In the last week, relative to what is typical for you, have you spent more or less of your free time on: Instagram, other online activities, TV, family and friends, no technology
 
-Multiple responses permitted, options included Instagram, Other online activities, TV, Family & friends, No technology",25 EUR of mobile credit or a gift card in the same amount,"TREATMENT GROUP: ... Activating your Facebook account at any point over the period of the study will make you ineligible to receive the final prize, which is 25 EUR of mobile credit sent to the number of your choice (or alternatively, gift card in the same amount).",Randomized Controlled Trial (RCT),"To overcome this challenge, researchers have begun to utilize what are known as “deactivation studies,” which are based on assigning users in the treatment group to deactivate (i.e., not use) social media accounts for a particular period of time, while the control group remains active as usual. ... To assess the scope conditions of these findings, we implement the same deactivation design within a different ethnically polarized setting.","Estimator: ITT
+Options: Multiple responses permitted",25 EUR of mobile credit or a gift card in the same amount,"TREATMENT GROUP: ... Activating your Facebook account at any point over the period of the study will make you ineligible to receive the final prize, which is 25 EUR of mobile credit sent to the number of your choice (or alternatively, gift card in the same amount).",Randomized Controlled Trial (RCT),"To overcome this challenge, researchers have begun to utilize what are known as “deactivation studies,” which are based on assigning users in the treatment group to deactivate (i.e., not use) social media accounts for a particular period of time, while the control group remains active as usual. ... To assess the scope conditions of these findings, we implement the same deactivation design within a different ethnically polarized setting.","Estimator: ITT
 Model: Linear regression with year fixed effects
 Covariates: Yes — demeaned individual covariates interacted with treatment indicator
 Compliance: ITT — binary treatment assignment
@@ -1622,7 +1588,7 @@ Anxiety (reverse coded): β = 0.249, SE = 0.114, p < 0.05
 
 Outgroup regard: β = −0.075, SE = 0.143, n.s
 News knowledge: β = −0.211, SE = 0.134, n.s
-Anxiety (reverse coded): β = 0.271, SE = 0.136, p < 0.05","Pooled Sample (from Table A7, Model 2): News knowledge index: -0.087 (0.081) Well-being index: 0.117 (0.084) Satisfaction: 0.005 (0.085) Joy: 0.012 (0.085) Fulfillment: -0.017 (0.087) Anxiety (reverse coded): 0.264*** (0.086) Boredom (reverse coded): 0.065 (0.084) Loneliness (reverse coded): 0.092 (0.083) Depression (reverse coded): 0.100 (0.088) Isolation (reverse coded): -0.010 (0.088) Feeling thermometer: 0.060 (0.084) Social distance (reverse coded): 0.042 (0.084) Cooperation: -0.027 (0.087) Perception of out-group evaluations: 0.118 (0.090) Out-group traits: 0.152* (0.091) Out-group regard (sum of z-scores): 0.095 (0.087) Out-group regard (principal components): 0.044 (0.085)",The study was powered to detect 0.24 SD at 80% power with N = 543,"Pooling the data across the 2 years, our sample size in Cyprus (N = 543) is larger than the sample size in the original study in BiH (N = 354), and we are powered to detect an effect size larger than 0.24 SD (SI, Section B). As such, we do not attribute our inability to replicate the effect from BiH in Cyprus to issues of statistical power. We recognize that we do not have adequate power to detect the statistical significance of smaller effects, but such effects would also be of a more limited substantive significance. ... The minimum detectable effect size (with a power of 80%) with the sample we recruited is 0.238 SD.","1. Moderator = Offline network homogeneity (offline network heterogeneity index from baseline outgroup-contact questions)
+Anxiety (reverse coded): β = 0.271, SE = 0.136, p < 0.05","Pooled Sample (from Table A7, Model 2): News knowledge index: -0.087 (0.081) Well-being index: 0.117 (0.084) Satisfaction: 0.005 (0.085) Joy: 0.012 (0.085) Fulfillment: -0.017 (0.087) Anxiety (reverse coded): 0.264*** (0.086) Boredom (reverse coded): 0.065 (0.084) Loneliness (reverse coded): 0.092 (0.083) Depression (reverse coded): 0.100 (0.088) Isolation (reverse coded): -0.010 (0.088) Feeling thermometer: 0.060 (0.084) Social distance (reverse coded): 0.042 (0.084) Cooperation: -0.027 (0.087) Perception of out-group evaluations: 0.118 (0.090) Out-group traits: 0.152* (0.091) Out-group regard (sum of z-scores): 0.095 (0.087) Out-group regard (principal components): 0.044 (0.085)",The study was powered to detect 0.24 SD at 80% power with N = 543,"Pooling the data across the 2 years, our sample size in Cyprus (N = 543) is larger than the sample size in the original study in BiH (N = 354), and we are powered to detect an effect size larger than 0.24 SD (SI, Section B). As such, we do not attribute our inability to replicate the effect from BiH in Cyprus to issues of statistical power. We recognize that we do not have adequate power to detect the statistical significance of smaller effects, but such effects would also be of a more limited substantive significance. ... The minimum detectable effect size (with a power of 80%) with the sample we recruited is 0.238 SD.","1. Moderator = Offline network homogeneity
 
 DV = Outgroup regard
 
@@ -1632,7 +1598,7 @@ Direction: More negative effect of deactivation on outgroup regard when offline 
 
 p-value = 0.031
 
-2. Moderator = Capital residence (living in the capital vs. not; proxy for offline network heterogeneity)
+2. Moderator = Capital residence (proxy for offline network heterogeneity)
 
 DV = Outgroup regard
 
@@ -1648,49 +1614,39 @@ DV = Outgroup regard
 
 Effect present: Yes (heterogeneity across years noted)
 
-Direction: Effect is more positive in 2020 and more negative/near-zero in 2021 (2020: β=0.195; 2021: β=−0.075)
+Direction: Effect is more positive in 2020 and more negative/near-zero in 2021 (2020: β=0.195; 2021: β=-0.075)
 
 p-value = NA
 
-4. Moderator = Local polarization (baseline outgroup thermometer / regional pre-existing polarization; exploratory)
+4. Moderator = Local polarization (exploratory)
 
 DV = Outgroup regard
 
 Effect present: Yes (exploratory)
 
-Direction: More negative outgroup regard effects in regions with higher pre-existing polarization (lower baseline outgroup warmth)
+Direction: More negative outgroup regard effects in regions with higher pre-existing polarization
 
 p-value = NA
 
-5. Moderator = Ethnic group status (Greek Cypriot vs Turkish Cypriot)
+Not significant: Ethnic group status (Greek Cypriot vs Turkish Cypriot)","This pattern made authors of the deactivation study in BiH consider the role of offline echo chambers in shaping the effects of deactivation: they used census data to leverage variation in levels of local ethnic heterogeneity. In Cyprus, census data is less useful for our analysis for several reasons (explained in SI, Section F), so we operationalize the heterogeneity of users' networks by creating a composite index from a set of pre-registered baseline survey questions (Table 1) that capture different ways in which users might engage with the outgroup. ... We conducted an additional test of the moderation hypothesis (H2) employing a different proxy for the heterogeneity of offline networks—living in the capital... Interestingly, though, we observe heterogeneity in the effects of deactivation across years.","Test/Interaction: Treatment × Offline network homogeneity (2021 subsample)
 
-DV = Outgroup regard
+Result: Significant negative interaction (β = -0.400, p = 0.031); deactivation had a more negative effect on outgroup regard for users with more homogeneous offline networks
 
-Effect present: No
+Test/Interaction: Treatment × Capital residence (proxy for network heterogeneity; 2021 subsample)
 
-Direction: NA
+Result: Significant negative interaction (β = -0.811, p = 0.010); more negative effect for users not living in the capital; not significant in 2020 subsample or pooled data
 
-p-value = NA","This pattern made authors of the deactivation study in BiH consider the role of offline echo chambers in shaping the effects of deactivation: they used census data to leverage variation in levels of local ethnic heterogeneity. In Cyprus, census data is less useful for our analysis for several reasons (explained in SI, Section F), so we operationalize the heterogeneity of users' networks by creating a composite index from a set of pre-registered baseline survey questions (Table 1) that capture different ways in which users might engage with the outgroup. ... We conducted an additional test of the moderation hypothesis (H2) employing a different proxy for the heterogeneity of offline networks—living in the capital... Interestingly, though, we observe heterogeneity in the effects of deactivation across years.","Test/Interaction: Treatment x Offline network homogeneity (2021 subsample only). Index created from survey questions on outgroup contact
+Test/Interaction: Heterogeneity by year (2020 vs 2021)
 
-Result: A significant negative interaction (β = -0.400, p = 0.031)
+Result: Effect on outgroup regard more positive in 2020 (β = 0.195*) than in 2021 (β = -0.075); effect on news knowledge negative in 2021 but not 2020
 
-Deactivation had a more negative effect on outgroup attitudes for users with more homogeneous offline networks
+Test/Interaction: Treatment × Local polarization (exploratory)
 
-Test/Interaction: Treatment x Living in the capital (proxy for network heterogeneity)
+Result: More negative outgroup regard effects in regions with higher pre-existing polarization (lower baseline outgroup thermometer scores)
 
-Result: A significant negative interaction in the 2021 subsample (β = -0.811, p = 0.010), showing a more negative effect of deactivation on outgroup regard for users not living in the capital. The interaction was not significant in the 2020 subsample or pooled data
+Test/Interaction: Heterogeneity by ethnic group status (Greek vs Turkish Cypriot)
 
-Test/Interaction: Heterogeneity by year (2020 vs. 2021)
-
-Result: The effect of deactivation on outgroup regard was more positive in 2020 (β = 0.195*) than in 2021 (β = -0.075). The effect on news knowledge was negative in 2021 but not 2020
-
-Test/Interaction: Deactivation by local polarization levels (exploratory analysis)
-
-Result: Deactivation led to more negative outgroup regard in regions with higher pre-existing polarization (lower baseline outgroup feeling thermometer scores)
-
-Test/Interaction: Heterogeneity by ethnic group status (Greek vs. Turkish Cypriot)
-
-Result: No significant heterogeneity detected between Greek and Turkish Cypriot participants","On the 2021 subsample, though, we find that the more homogeneous a user’s offline network is, the more negative the effect of deactivation on attitudes toward ethnic outgroups (Table 2; full results in Table A13)—the same insight as in Asimovic et al. (2021) and aligned with our pre-registered H1a. [From Table 2, 2021 ITT effect]: Treatment x offline network homogeneity (Sum score): -.400** (.185) [.031] Treatment x offline network homogeneity (PC score): -.670** (.315) [.035] [From Table A13]: Outgroup Regard Outcome: Pooled Data Program X Capital indicator: -0.257 (0.182) [0.157] Outgroup Regard Outcome: 2020 Program X Capital indicator: 0.102 (0.223) [0.647] Outgroup Regard Outcome: 2021 Program X Capital indicator: -0.811 (0.313) [0.010]","Age: Mean 29 years
+Result: No significant heterogeneity detected","On the 2021 subsample, though, we find that the more homogeneous a user’s offline network is, the more negative the effect of deactivation on attitudes toward ethnic outgroups (Table 2; full results in Table A13)—the same insight as in Asimovic et al. (2021) and aligned with our pre-registered H1a. [From Table 2, 2021 ITT effect]: Treatment x offline network homogeneity (Sum score): -.400** (.185) [.031] Treatment x offline network homogeneity (PC score): -.670** (.315) [.035] [From Table A13]: Outgroup Regard Outcome: Pooled Data Program X Capital indicator: -0.257 (0.182) [0.157] Outgroup Regard Outcome: 2020 Program X Capital indicator: 0.102 (0.223) [0.647] Outgroup Regard Outcome: 2021 Program X Capital indicator: -0.811 (0.313) [0.010]","Age: Mean 29 years
 
 Gender: NA
 
@@ -1767,7 +1723,6 @@ Outcome: Excessive SNS use
 Q: Become restless or troubled if you have been prohibited from using Facebook?
 
 Options: [1 = ""rarely/never""–7 = ""very often""]
-
 
 Outcome: Excessive SNS use
 
@@ -2088,18 +2043,23 @@ Q (recall): ""In the past 30 days, do you remember seeing or receiving this head
 Options: Yes / No / I don't remember
 
 Outcome: Affective polarization
+
 Q: Feeling thermometer difference between the two main presidential candidates (Bolsonaro and Lula)
 
 Outcome: Ideological polarization
+
 Q: Difference in ideological scale between perceived positions of the two candidates
 
 Outcome: Social polarization
+
 Q: Willingness to engage in 5 social activities with outparty voters
 
 Outcome: Issue polarization
+
 Q: Agreement across 5 policy issues, measured against sample mean
 
 Outcome: Subjective well-being (5 items)
+
 Q: How often in the past weeks did you feel happy / depressed / anxious / isolated from family and friends / satisfied with life",150 Brazilian Reais (~$30 USD) for completing the study; eligible for 3 gift cards of ~500 Brazilian Reais (~$100 USD),,Randomized Controlled Trial (RCT),,"Estimator: ITT / CACE
 Model: OLS (ITT); covariate-adjusted OLS (Cov-ITT); IV regression (CACE)
 Covariates: Yes (Cov-ITT) — sex, age, income, race, media trust, polarization, ideology, political interest, misinformation exposure, WhatsApp usage
