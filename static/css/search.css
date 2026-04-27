@@ -312,6 +312,16 @@
     cursor: not-allowed;
 }
 
+a.pagination-btn {
+    text-decoration: none;
+}
+
+.pagination-btn.pagination-btn-disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
 .pagination-pages {
     display: flex;
     gap: 0.5rem;
@@ -342,6 +352,10 @@
     background: #3498db;
     border-color: #3498db;
     color: white;
+}
+
+a.pagination-page {
+    text-decoration: none;
 }
 
 .pagination-ellipsis {

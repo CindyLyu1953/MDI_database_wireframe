@@ -42,10 +42,11 @@
     function performSearch() {
         const searchInput = document.getElementById('searchInput');
         const query = searchInput.value.trim();
+        updateUserStats('searches');
         if (query) {
-            // Update search count
-            updateUserStats('searches');
             window.location.href = "{{ url_for('search') }}?q=" + encodeURIComponent(query);
+        } else {
+            window.location.href = "{{ url_for('search') }}";
         }
     }
 

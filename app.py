@@ -1,4 +1,5 @@
 from pathlib import Path
+from urllib.parse import urlencode
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
@@ -7,6 +8,8 @@ TRACKING_DB = DATA_DIR / "output" / "tracking.db"
 UPLOAD_DIR = DATA_DIR / "user_uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 TRACKING_DB.parent.mkdir(parents=True, exist_ok=True)
+
+SEARCH_RESULTS_PER_PAGE = 10
 
 from flask import (
     Flask,
@@ -495,7 +498,6 @@ COUNTRY_TERM_ALIASES = {
     "at": ("austria", "austrian"),
     "ch": ("switzerland", "swiss"),
     "pt": ("portugal", "portuguese"),
-    "es": ("spain", "spanish"),
     "it": ("italy", "italian"),
     "pl": ("poland", "polish"),
     "ru": ("russia", "russian"),
@@ -508,6 +510,41 @@ COUNTRY_TERM_ALIASES = {
     "tw": ("taiwan", "taiwanese"),
     "hk": ("hong kong", "hongkong"),
 }
+
+# Longest phrases first — collapse to canonical alias keys used in COUNTRY_TERM_ALIASES
+# so "united states" matches like "us", not two independent tokens ("united" AND "states").
+COUNTRY_MULTIWORD_PHRASES = (
+    ("united states of america", "us"),
+    ("united arab emirates", "uae"),
+    ("great britain", "uk"),
+    ("united kingdom", "uk"),
+    ("united states", "us"),
+    ("south korea", "kr"),
+    ("new zealand", "nz"),
+    ("south africa", "za"),
+    ("saudi arabia", "sa"),
+    ("hong kong", "hk"),
+)
+
+
+def _collapse_country_phrases(query: str) -> str:
+    """Replace known multi-word country phrases with canonical tokens (same as typing US, UK, …)."""
+    if not query or not str(query).strip():
+        return ""
+    q = " ".join(query.lower().split())
+    for phrase, canon in COUNTRY_MULTIWORD_PHRASES:
+        if canon not in COUNTRY_TERM_ALIASES:
+            continue
+        parts = phrase.split()
+        if len(parts) < 2:
+            continue
+        escaped = r"\s+".join(re.escape(p) for p in parts)
+        try:
+            q = re.sub(r"(?i)\b" + escaped + r"\b", " " + canon + " ", q)
+        except re.error:
+            continue
+        q = " ".join(q.split())
+    return q
 
 
 def _normalize_search_token(raw: str) -> str:
@@ -562,8 +599,9 @@ def search_papers(query="", filters=None):
 
     # Text search — title, abstract, authors, journal, countries, + context-related fields
     if query:
+        collapsed = _collapse_country_phrases(query)
         search_terms = [
-            t for t in (_normalize_search_token(w) for w in query.lower().split()) if t
+            t for t in (_normalize_search_token(w) for w in collapsed.split()) if t
         ]
         results = [
             paper
@@ -634,6 +672,21 @@ def index():
     return render_template("index.html", stats=stats)
 
 
+def _build_search_page_url(query, filters, page):
+    """URL for search results including pagination (page 1 omits ``page`` param)."""
+    params = []
+    if query:
+        params.append(("q", query))
+    for key in ("year_from", "year_to", "journal", "country"):
+        val = filters.get(key)
+        if val:
+            params.append((key, str(val)))
+    if page > 1:
+        params.append(("page", str(page)))
+    qs = urlencode(params)
+    return url_for("search") + ("?" + qs if qs else "")
+
+
 @app.route("/search")
 def search():
     """Search page."""
@@ -652,15 +705,60 @@ def search():
 
     filters = {k: v for k, v in filters.items() if v}
 
-    results = search_papers(query, filters)
+    try:
+        page = max(1, int(request.args.get("page", "1")))
+    except ValueError:
+        page = 1
+
+    results_all = search_papers(query, filters)
+    total_results = len(results_all)
     journals = sorted(list(set(p["journal"] for p in papers_data if p["journal"])))
+
+    if total_results == 0:
+        paginated_results = []
+        total_pages = 0
+        pagination = None
+        page = 1
+    else:
+        total_pages = max(
+            1, (total_results + SEARCH_RESULTS_PER_PAGE - 1) // SEARCH_RESULTS_PER_PAGE
+        )
+        page = min(page, total_pages)
+        start = (page - 1) * SEARCH_RESULTS_PER_PAGE
+        paginated_results = results_all[start : start + SEARCH_RESULTS_PER_PAGE]
+        pagination = None
+        if total_pages > 1:
+            pagination = {
+                "page": page,
+                "total_pages": total_pages,
+                "prev_url": (
+                    _build_search_page_url(query, filters, page - 1)
+                    if page > 1
+                    else None
+                ),
+                "next_url": (
+                    _build_search_page_url(query, filters, page + 1)
+                    if page < total_pages
+                    else None
+                ),
+                "pages": [
+                    {
+                        "num": n,
+                        "url": _build_search_page_url(query, filters, n),
+                        "active": n == page,
+                    }
+                    for n in range(1, total_pages + 1)
+                ],
+            }
 
     return render_template(
         "search.html",
         query=query,
-        results=results,
+        results=paginated_results,
+        total_results=total_results,
         filters=filters,
         journals=journals,
+        pagination=pagination,
     )
 
 
