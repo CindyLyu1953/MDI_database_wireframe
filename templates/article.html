@@ -84,6 +84,12 @@
                                     </button>
                                 </div>
                                 {% endif %}
+                                {% if paper.extracted_features.ai_context_summary %}
+                                <section class="article-section">
+                                    <h2>AI Context Summary</h2>
+                                    <p>{{ paper.extracted_features.ai_context_summary }}</p>
+                                </section>
+                                {% endif %}
                             </div>
                         </div>
 

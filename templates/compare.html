@@ -214,6 +214,8 @@
         {% set summary = paper.extracted_features.linkedin_users_million %}
     {% elif feature_key == 'messenger_users_million' %}
         {% set summary = paper.extracted_features.messenger_users_million %}
+    {% elif feature_key == 'ai_context_summary' %}
+        {% set summary = paper.extracted_features.ai_context_summary %}
     {% elif feature_key == 'snapchat_users_million' %}
         {% set summary = paper.extracted_features.snapchat_users_million %}
     {% elif feature_key == 'pinterest_users_million' %}
@@ -340,6 +342,7 @@
                     {'key': 'political_context', 'label': 'Political Context'},
                     {'key': 'platform_technological_context', 'label': 'Platform / Technological Context'},
                     {'key': 'temporal_context', 'label': 'Temporal Context'},
+                    {'key': 'ai_context_summary', 'label': 'AI Context Summary'},
                     {'key': 'gdp_per_capita_usd', 'label': 'GDP Per Capita (USD)'},
                     {'key': 'gini_coefficient', 'label': 'Gini Coefficient'},
                     {'key': 'income_group', 'label': 'World Bank Income Group'},
@@ -726,7 +729,7 @@
               'Outcome / Dependent Variable(s)', 'Survey Questions', 'Analysis Equations',
               'Main Effects', 'Moderators', 'Moderation Results',
               'Socio-cultural Context', 'Political Context', 'Platform / Technological Context', 'Temporal Context',
-              'GDP Per Capita (USD)', 'Gini Coefficient', 'World Bank Income Group', 'Study Language',
+              'AI Context Summary','GDP Per Capita (USD)', 'Gini Coefficient', 'World Bank Income Group', 'Study Language',
               'Platform Language / Locale Optimization', 'Traditional Media Strength', 'Electoral Proximity',
 
               'Democracy', 'Press Freedom', 'Internet Freedom', 'Internet Penetration', 'Governance', 'Polarization',
@@ -769,6 +772,9 @@
                         break;
                     case 'Abstract':
                         value = paper.abstract;
+                        break;
+                    case 'AI Context Summary':
+                        value = paper.extracted_features.ai_context_summary || '';
                         break;
                     case 'Sample Size':
                         value = paper.sample_size ? paper.sample_size.toLocaleString() : '';
