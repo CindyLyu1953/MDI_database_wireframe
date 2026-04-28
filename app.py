@@ -1,4 +1,5 @@
 from pathlib import Path
+from urllib.parse import urlencode
 
 BASE_DIR = Path(__file__).resolve().parent
 DATA_DIR = BASE_DIR / "data"
@@ -7,6 +8,8 @@ TRACKING_DB = DATA_DIR / "output" / "tracking.db"
 UPLOAD_DIR = DATA_DIR / "user_uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 TRACKING_DB.parent.mkdir(parents=True, exist_ok=True)
+
+SEARCH_RESULTS_PER_PAGE = 10
 
 from flask import (
     Flask,
@@ -408,6 +411,185 @@ def load_papers_from_csv():
         return []
 
 
+# Fields merged into free-text search (Option 1: broaden search beyond title/abstract).
+SEARCH_CONTEXT_FEATURE_KEYS = (
+    "country_region",
+    "income_group",
+    "study_language",
+    "platform_language_optimization",
+    "traditional_media_strength",
+    "electoral_proximity",
+    "gdp_per_capita_usd",
+    "gini_coefficient",
+    "sociocultural_context",
+    "political_context",
+    "platform_technological_context",
+    "temporal_context",
+    "demographics",
+    "recruitment_source",
+    "sample_size",
+    "study_type",
+    "ai_context_summary",
+)
+
+# Normalized lowercase tokens -> substrings often used in country_region / text (for US ↔ United States, etc.)
+COUNTRY_TERM_ALIASES = {
+    "us": (
+        "united states",
+        "united states of america",
+        "u.s.",
+        "u.s.a.",
+        "u.s.a",
+        "usa",
+        "america",
+        "american",
+    ),
+    "usa": ("united states", "u.s.", "usa", "american"),
+    "u.s.": ("united states", "usa", "american"),
+    "u.s.a.": ("united states", "usa"),
+    "america": ("united states", "usa", "american"),
+    "uk": (
+        "united kingdom",
+        "great britain",
+        "britain",
+        "u.k.",
+        "england",
+        "scotland",
+        "wales",
+        "northern ireland",
+        "british",
+    ),
+    "u.k.": ("united kingdom", "great britain", "britain"),
+    "britain": ("united kingdom", "great britain", "britain"),
+    "england": ("england", "united kingdom", "british"),
+    "scotland": ("scotland", "united kingdom"),
+    "wales": ("wales", "united kingdom"),
+    "eu": ("european union", "europe"),
+    "uae": ("united arab emirates", "uae", "emirates"),
+    "de": ("germany", "german", "deutsch"),
+    "germany": ("germany", "german"),
+    "fr": ("france", "french", "français"),
+    "france": ("france", "french"),
+    "es": ("spain", "spanish"),
+    "spain": ("spain", "spanish"),
+    "cn": ("china", "chinese", "mainland china"),
+    "china": ("china", "chinese"),
+    "jp": ("japan", "japanese"),
+    "japan": ("japan", "japanese"),
+    "kr": ("south korea", "korea", "korean", "republic of korea"),
+    "korea": ("south korea", "korea", "korean"),
+    "india": ("india", "indian"),
+    "br": ("brazil", "brazilian"),
+    "brazil": ("brazil", "brazilian"),
+    "ca": ("canada", "canadian"),
+    "canada": ("canada", "canadian"),
+    "au": ("australia", "australian"),
+    "australia": ("australia", "australian"),
+    "nz": ("new zealand", "zealand"),
+    "mx": ("mexico", "mexican"),
+    "sg": ("singapore", "singaporean"),
+    "nl": ("netherlands", "dutch", " holland"),
+    "se": ("sweden", "swedish"),
+    "norway": ("norway", "norwegian"),
+    "dk": ("denmark", "danish"),
+    "fi": ("finland", "finnish"),
+    "ie": ("ireland", "irish"),
+    "be": ("belgium", "belgian"),
+    "at": ("austria", "austrian"),
+    "ch": ("switzerland", "swiss"),
+    "pt": ("portugal", "portuguese"),
+    "it": ("italy", "italian"),
+    "pl": ("poland", "polish"),
+    "ru": ("russia", "russian"),
+    "tr": ("turkey", "turkish"),
+    "sa": ("saudi arabia", "saudi"),
+    "eg": ("egypt", "egyptian"),
+    "za": ("south africa",),
+    "ar": ("argentina", "argentine"),
+    "cl": ("chile", "chilean"),
+    "tw": ("taiwan", "taiwanese"),
+    "hk": ("hong kong", "hongkong"),
+}
+
+# Longest phrases first — collapse to canonical alias keys used in COUNTRY_TERM_ALIASES
+# so "united states" matches like "us", not two independent tokens ("united" AND "states").
+COUNTRY_MULTIWORD_PHRASES = (
+    ("united states of america", "us"),
+    ("united arab emirates", "uae"),
+    ("great britain", "uk"),
+    ("united kingdom", "uk"),
+    ("united states", "us"),
+    ("south korea", "kr"),
+    ("new zealand", "nz"),
+    ("south africa", "za"),
+    ("saudi arabia", "sa"),
+    ("hong kong", "hk"),
+)
+
+
+def _collapse_country_phrases(query: str) -> str:
+    """Replace known multi-word country phrases with canonical tokens (same as typing US, UK, …)."""
+    if not query or not str(query).strip():
+        return ""
+    q = " ".join(query.lower().split())
+    for phrase, canon in COUNTRY_MULTIWORD_PHRASES:
+        if canon not in COUNTRY_TERM_ALIASES:
+            continue
+        parts = phrase.split()
+        if len(parts) < 2:
+            continue
+        escaped = r"\s+".join(re.escape(p) for p in parts)
+        try:
+            q = re.sub(r"(?i)\b" + escaped + r"\b", " " + canon + " ", q)
+        except re.error:
+            continue
+        q = " ".join(q.split())
+    return q
+
+
+def _normalize_search_token(raw: str) -> str:
+    return raw.strip().lower().strip(".,;:()\"'")
+
+
+def _term_matches_haystack(term: str, haystack: str) -> bool:
+    """Match one query token against lowercase haystack; supports country synonyms."""
+    if not term:
+        return True
+    if term in COUNTRY_TERM_ALIASES:
+        if any(phrase in haystack for phrase in COUNTRY_TERM_ALIASES[term]):
+            return True
+        try:
+            if re.search(r"\b" + re.escape(term) + r"\b", haystack):
+                return True
+        except re.error:
+            pass
+        return False
+    if len(term) <= 3:
+        try:
+            return bool(re.search(r"\b" + re.escape(term) + r"\b", haystack))
+        except re.error:
+            return term in haystack
+    return term in haystack
+
+
+def _paper_search_text_blob(paper):
+    """Lowercase haystack for substring matching (title, abstract, authors, journal,
+    countries list, and selected contextual extracted_features)."""
+    extracted = paper.get("extracted_features") or {}
+    parts = [
+        paper.get("title") or "",
+        paper.get("abstract") or "",
+        " ".join(paper.get("authors") or []),
+        paper.get("journal") or "",
+        " ".join(str(c) for c in (paper.get("countries") or [])),
+    ]
+    for key in SEARCH_CONTEXT_FEATURE_KEYS:
+        val = extracted.get(key, "")
+        if val is not None and str(val).strip():
+            parts.append(str(val))
+    return " ".join(parts).lower()
+
+
 def search_papers(query="", filters=None):
     """Search papers based on query and filters."""
     if filters is None:
@@ -415,22 +597,17 @@ def search_papers(query="", filters=None):
 
     results = papers_data.copy()
 
-    # Text search - search in title, abstract, journal, and author names
+    # Text search — title, abstract, authors, journal, countries, + context-related fields
     if query:
-        search_terms = query.lower().split()
+        collapsed = _collapse_country_phrases(query)
+        search_terms = [
+            t for t in (_normalize_search_token(w) for w in collapsed.split()) if t
+        ]
         results = [
             paper
             for paper in results
             if all(
-                term
-                in " ".join(
-                    [
-                        paper["title"],
-                        paper["abstract"],
-                        " ".join(paper["authors"]),
-                        paper["journal"],
-                    ]
-                ).lower()
+                _term_matches_haystack(term, _paper_search_text_blob(paper))
                 for term in search_terms
             )
         ]
@@ -495,6 +672,21 @@ def index():
     return render_template("index.html", stats=stats)
 
 
+def _build_search_page_url(query, filters, page):
+    """URL for search results including pagination (page 1 omits ``page`` param)."""
+    params = []
+    if query:
+        params.append(("q", query))
+    for key in ("year_from", "year_to", "journal", "country"):
+        val = filters.get(key)
+        if val:
+            params.append((key, str(val)))
+    if page > 1:
+        params.append(("page", str(page)))
+    qs = urlencode(params)
+    return url_for("search") + ("?" + qs if qs else "")
+
+
 @app.route("/search")
 def search():
     """Search page."""
@@ -513,15 +705,60 @@ def search():
 
     filters = {k: v for k, v in filters.items() if v}
 
-    results = search_papers(query, filters)
+    try:
+        page = max(1, int(request.args.get("page", "1")))
+    except ValueError:
+        page = 1
+
+    results_all = search_papers(query, filters)
+    total_results = len(results_all)
     journals = sorted(list(set(p["journal"] for p in papers_data if p["journal"])))
+
+    if total_results == 0:
+        paginated_results = []
+        total_pages = 0
+        pagination = None
+        page = 1
+    else:
+        total_pages = max(
+            1, (total_results + SEARCH_RESULTS_PER_PAGE - 1) // SEARCH_RESULTS_PER_PAGE
+        )
+        page = min(page, total_pages)
+        start = (page - 1) * SEARCH_RESULTS_PER_PAGE
+        paginated_results = results_all[start : start + SEARCH_RESULTS_PER_PAGE]
+        pagination = None
+        if total_pages > 1:
+            pagination = {
+                "page": page,
+                "total_pages": total_pages,
+                "prev_url": (
+                    _build_search_page_url(query, filters, page - 1)
+                    if page > 1
+                    else None
+                ),
+                "next_url": (
+                    _build_search_page_url(query, filters, page + 1)
+                    if page < total_pages
+                    else None
+                ),
+                "pages": [
+                    {
+                        "num": n,
+                        "url": _build_search_page_url(query, filters, n),
+                        "active": n == page,
+                    }
+                    for n in range(1, total_pages + 1)
+                ],
+            }
 
     return render_template(
         "search.html",
         query=query,
-        results=results,
+        results=paginated_results,
+        total_results=total_results,
         filters=filters,
         journals=journals,
+        pagination=pagination,
     )
 
 
@@ -1114,13 +1351,6 @@ CATEGORY_FIELDS = {
         "political_context",
         "platform_technological_context",
         "temporal_context",
-        "gdp_per_capita_usd",
-        "gini_coefficient",
-        "income_group",
-        "study_language",
-        "platform_language_optimization",
-        "traditional_media_strength",
-        "electoral_proximity",
         "democracy",
         "press_freedom",
         "internet_freedom",
@@ -1319,10 +1549,6 @@ def compare_ai_differences():
                 category_name, result = future.result()
                 results[category_name] = result
 
-        # Enforce consistent category order in JSON (browser Object key order, some clients sort alphabetically).
-        category_order = list(CATEGORY_FIELDS.keys())
-        results = {k: results[k] for k in category_order if k in results}
-
         paper_titles = selected_rows["title"].tolist()
         save_compare_summary(paper_keys, paper_titles, results)
 
@@ -1339,4 +1565,4 @@ def compare_ai_differences():
 load_papers_from_csv()
 
 if __name__ == "__main__":
-    app.run(debug=True, host="0.0.0.0", port=5001)
+    app.run(debug=True, host="127.0.0.1", port=5001)

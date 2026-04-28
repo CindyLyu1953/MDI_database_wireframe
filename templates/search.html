@@ -11,7 +11,7 @@
     <!-- Search Bar -->
     <section class="search-section">
         <div class="search-box">
-            <input type="text" id="searchInput" placeholder="Search keywords, authors, journals..." class="search-input" value="{{ query }}">
+            <input type="text" id="searchInput" placeholder="Keywords, authors, country, income group…" class="search-input" value="{{ query }}">
             <button class="search-btn" onclick="performSearch()">
                 <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <circle cx="11" cy="11" r="8"></circle>
@@ -96,7 +96,7 @@
         <div class="results-header">
             <h2 class="results-title">Search Results</h2>
             <div class="results-count">
-                <span>Found {{ results|length }} relevant articles</span>
+                <span>Found {{ total_results }} relevant articles</span>
             </div>
         </div>
 
@@ -159,26 +159,50 @@
             {% endif %}
         </div>
 
+        {% if pagination %}
         <!-- Pagination -->
-        <div class="pagination">
-            <button class="pagination-btn" disabled>
+        <nav class="pagination" aria-label="Search results pages">
+            {% if pagination.prev_url %}
+            <a class="pagination-btn" href="{{ pagination.prev_url }}">
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="15,18 9,12 15,6"></polyline>
                 </svg>
                 Previous
-            </button>
+            </a>
+            {% else %}
+            <span class="pagination-btn pagination-btn-disabled" aria-disabled="true">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="15,18 9,12 15,6"></polyline>
+                </svg>
+                Previous
+            </span>
+            {% endif %}
             <div class="pagination-pages">
-                <button class="pagination-page active">1</button>
-                <button class="pagination-page">2</button>
-                <button class="pagination-page">3</button>
+                {% for p in pagination.pages %}
+                {% if p.active %}
+                <span class="pagination-page active" aria-current="page">{{ p.num }}</span>
+                {% else %}
+                <a class="pagination-page" href="{{ p.url }}">{{ p.num }}</a>
+                {% endif %}
+                {% endfor %}
             </div>
-            <button class="pagination-btn">
+            {% if pagination.next_url %}
+            <a class="pagination-btn" href="{{ pagination.next_url }}">
                 Next
                 <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                     <polyline points="9,18 15,12 9,6"></polyline>
                 </svg>
-            </button>
-        </div>
+            </a>
+            {% else %}
+            <span class="pagination-btn pagination-btn-disabled" aria-disabled="true">
+                Next
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <polyline points="9,18 15,12 9,6"></polyline>
+                </svg>
+            </span>
+            {% endif %}
+        </nav>
+        {% endif %}
     </section>
 </div>
 {% endblock %}
@@ -190,11 +214,23 @@
     function performSearch() {
         const searchInput = document.getElementById('searchInput');
         const query = searchInput.value.trim();
+        const filters = getActiveFilters();
+
+        const params = [];
         if (query) {
-            // Update search count
-            updateUserStats('searches');
-            window.location.href = "{{ url_for('search') }}?q=" + encodeURIComponent(query);
+            params.push('q=' + encodeURIComponent(query));
         }
+        Object.keys(filters).forEach(function(key) {
+            params.push(key + '=' + encodeURIComponent(filters[key]));
+        });
+
+        let url = "{{ url_for('search') }}";
+        if (params.length > 0) {
+            url += '?' + params.join('&');
+        }
+
+        updateUserStats('searches');
+        window.location.href = url;
     }
 
     // Track search on page load if there's a query
@@ -204,7 +240,7 @@
         if (query) {
             // Wait for DOM to be fully rendered, then count results
             setTimeout(function() {
-                const numResults = document.querySelectorAll('.result-item').length;
+                const numResults = {{ total_results|default(0) }};
                 console.log('Number of results found:', numResults); // Debug log
                 trackSearch(query, numResults);
             }, 100);
@@ -255,11 +291,18 @@
         const query = urlParams.get('q') || '';
         const filters = getActiveFilters();
 
-        // Build URL with filters
-        let url = "{{ url_for('search') }}?q=" + encodeURIComponent(query);
-        Object.keys(filters).forEach(key => {
-            url += '&' + key + '=' + encodeURIComponent(filters[key]);
+        const params = [];
+        if (query) {
+            params.push('q=' + encodeURIComponent(query));
+        }
+        Object.keys(filters).forEach(function(key) {
+            params.push(key + '=' + encodeURIComponent(filters[key]));
         });
+
+        let url = "{{ url_for('search') }}";
+        if (params.length > 0) {
+            url += '?' + params.join('&');
+        }
 
         window.location.href = url;
     }
