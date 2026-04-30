@@ -1,0 +1,37 @@
+{
+  "enabled": true,
+  "apply_to_fields": [
+    "abstract",
+    "survey_questions",
+    "dependent_variables",
+    "independent_variables",
+    "main_effects",
+    "moderation_results",
+    "moderators",
+    "demographics",
+    "analysis_equations",
+    "temporal_context",
+    "ai_context_summary",
+    "recruitment_source",
+    "incentive",
+    "country_region",
+    "sample_size"
+  ],
+  "terms": [
+    "Outcome:",
+    "Outcome",
+    "Q:",
+    "Traits:",
+    "Options:",
+    "Not at all",
+    "Not too well",
+    "Somewhat well",
+    "Very well",
+    "Extremely well",
+    "Likert",
+    "Likert scale",
+    "verbatim",
+    "Verbatim"
+  ],
+  "fields": {}
+}

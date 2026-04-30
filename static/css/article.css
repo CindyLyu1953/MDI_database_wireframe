@@ -53,6 +53,13 @@
     font-weight: 600;
 }
 
+.feature-item h3.feature-title {
+    display: flex;
+    align-items: center;
+    gap: 0.4rem;
+    flex-wrap: wrap;
+}
+
 .feature-item h4 {
     color: #2c3e50;
     margin-top: 0;

@@ -1,3 +1,4 @@
+{% import 'macros/metric_tooltips.html' as metric_tt %}
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -70,11 +71,11 @@
                             {% set has_abstract_verbatim = abstract_verbatim and abstract_verbatim != 'NOT SPECIFIED' %}
                             <div class="feature-content">
                                 <div class="feature-summary">
-                                    <p>{{ abstract_text }}</p>
+                                    <p>{{ abstract_text|highlight_keywords('abstract') }}</p>
                                 </div>
                                 {% if has_abstract_verbatim %}
                                 <div class="feature-full-text hidden" id="abstract-verbatim-full">
-                                    <p>{{ abstract_verbatim }}</p>
+                                    <p>{{ abstract_verbatim|highlight_keywords('abstract') }}</p>
                                 </div>
                                 {% endif %}
                                 {% if has_abstract_verbatim %}
@@ -104,9 +105,7 @@
                                   'main_effects',
                                   'moderators',
                                   'moderation_results',
-                                  'sociocultural_context',
-                                  'political_context',
-                                  'platform_technological_context',
+                                  'ai_context_summary',
                                   'temporal_context',
                                   'gdp_per_capita_usd',
                                   'gini_coefficient',
@@ -122,7 +121,6 @@
                                   'internet_penetration',
                                   'governance',
                                   'polarization',
-                                  'ai_context_summary',
 
                                   'population_million',
                                   'internet_users_million',
@@ -150,9 +148,7 @@
                                 'main_effects': 'Main Effects',
                                 'moderators': 'Moderators',
                                 'moderation_results': 'Moderation Results',
-                                'sociocultural_context': 'Socio-cultural Context',
-                                'political_context': 'Political Context',
-                                'platform_technological_context': 'Platform / Technological Context',
+                                'ai_context_summary': 'AI Context Summary',
                                 'temporal_context': 'Temporal Context',
                                 'gdp_per_capita_usd': 'GDP Per Capita (USD)',
                                 'gini_coefficient': 'Gini Coefficient',
@@ -167,7 +163,6 @@
                                 'internet_penetration': 'Internet Penetration',
                                 'governance': 'Political Stability Score',
                                 'polarization': 'Deliberative Democracy Index',
-                                'ai_context_summary': 'AI Context Summary',
                                 'population_million': 'Population (Million)',
                                 'internet_users_million': 'Internet Users (Million)',
                                 'social_media_users_million': 'Social Media Users (Million)',
@@ -198,7 +193,10 @@
                                         {% set display_summary = needs_truncation and fv|truncate_words(30) or fv %}
                                         {% set button_label = has_verbatim and 'View Verbatim Text' or 'View Full Text' %}
                                         <div class="feature-item">
-                                            <h3 class="feature-title">{{ feature_label }}</h3>
+                                            <h3 class="feature-title">
+                                                <span class="feature-title-label">{{ feature_label }}</span>
+                                                {{ metric_tt.metric_source_tooltip(feature_name) }}
+                                            </h3>
                                             <div class="feature-content">
                                                 <div class="feature-summary">
                                                 {% set v = display_summary|string %}
@@ -218,7 +216,11 @@
 
                                                 {% if needs_truncation %}
                                                     <div class="summary-preview">
-                                                        <div class="summary-text">{%- if is_platform_metric and '%' in v -%}{% set parts = v.rsplit(' ', 1) %}{% if parts|length == 2 %}<div class="metric-breakdown"><strong>{{ feature_label }}:</strong> {{ parts[0] }}<br><strong>% Of Platform Users Based On Population:</strong> {{ parts[1] }}</div>{% else %}{{ v|trim }}{% endif %}{%- else -%}{{ v|trim }}{%- endif -%}</div>
+                                                        <div class="summary-text">{%- if is_platform_metric and '%' in v -%}{% set parts = v.rsplit(' ', 1) %}{% if parts|length == 2 %}<div class="metric-breakdown"><strong>{{ feature_label }}:</strong> {{ parts[0] }}<br><strong>% Of Platform Users Based On Population:</strong> {{ parts[1] }}</div>{% else %}{{ v|trim|highlight_keywords(feature_name) }}{% endif %}{%- else -%}{{ v|trim|highlight_keywords(feature_name) }}{%- endif -%}</div>
+                                                        {% if not is_platform_metric %}
+                                                        <template class="inline-expand-highlight-full">{{ fv|highlight_keywords(feature_name) }}</template>
+                                                        <template class="inline-expand-highlight-trunc">{{ display_summary|highlight_keywords(feature_name) }}</template>
+                                                        {% endif %}
 
                                                         <button type="button"
                                                             class="inline-expand-toggle"
@@ -240,17 +242,17 @@
                                                                 <strong>% Of Platform Users Based On Population:</strong> {{ parts[1] }}
                                                             </div>
                                                         {% else %}
-                                                            <p>{{ v }}</p>
+                                                            <p>{{ v|highlight_keywords(feature_name) }}</p>
                                                         {% endif %}
                                                     {% else %}
-                                                        <p>{{ v }}</p>
+                                                        <p>{{ v|highlight_keywords(feature_name) }}</p>
                                                     {% endif %}
                                                 {% endif %}
                                             </div>
 
                                                 {% if has_verbatim %}
                                                 <div class="feature-full-text hidden" id="{{ feature_name }}-verbatim-full">
-                                                    <p>{{ vv }}</p>
+                                                    <p>{{ vv|highlight_keywords(feature_name) }}</p>
                                                 </div>
                                                 <div class="feature-actions">
                                                     <button type="button" class="btn btn-outline btn-sm full-text-trigger" data-full-text-id="{{ feature_name }}-verbatim-full" data-feature-label="{{ feature_label }} Verbatim" data-study-title="{{ paper.title|e }}" data-study-index="1">
@@ -461,15 +463,46 @@
                 return;
             }
 
+            const tmplFull = previewSpan.querySelector('template.inline-expand-highlight-full');
+            const tmplTrunc = previewSpan.querySelector('template.inline-expand-highlight-trunc');
+            let useHtml = false;
+            let fullHtmlParsed;
+            let truncatedHtmlParsed;
+            if (tmplFull && tmplTrunc) {
+                fullHtmlParsed = tmplFull.innerHTML;
+                truncatedHtmlParsed = tmplTrunc.innerHTML;
+                useHtml = true;
+            } else {
+                const fullHtmlRaw = button.getAttribute('data-full-html');
+                const truncatedHtmlRaw = button.getAttribute('data-truncated-html');
+                if (fullHtmlRaw && truncatedHtmlRaw) {
+                    try {
+                        fullHtmlParsed = JSON.parse(fullHtmlRaw);
+                        truncatedHtmlParsed = JSON.parse(truncatedHtmlRaw);
+                        useHtml = true;
+                    } catch (err) {
+                        useHtml = false;
+                    }
+                }
+            }
+
             const isExpanded = button.getAttribute('aria-expanded') === 'true';
             if (isExpanded) {
-                textSpan.textContent = truncatedText;
+                if (useHtml) {
+                    textSpan.innerHTML = truncatedHtmlParsed;
+                } else {
+                    textSpan.textContent = truncatedText;
+                }
                 button.setAttribute('aria-expanded', 'false');
                 button.classList.remove('expanded');
                 button.setAttribute('aria-label', 'View full text');
                 button.setAttribute('title', 'View full text');
             } else {
-                textSpan.textContent = fullText;
+                if (useHtml) {
+                    textSpan.innerHTML = fullHtmlParsed;
+                } else {
+                    textSpan.textContent = fullText;
+                }
                 button.setAttribute('aria-expanded', 'true');
                 button.classList.add('expanded');
                 button.setAttribute('aria-label', 'Hide full text');

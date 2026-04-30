@@ -1,4 +1,5 @@
 {% extends "base.html" %}
+{% import 'macros/metric_tooltips.html' as metric_tt %}
 
 {% block title %}Research Comparison - StudyLens{% endblock %}
 
@@ -23,7 +24,7 @@
                 <p>
                     <span class="summary-preview">
                         {% set v = display_text|string %}
-                        {% if feature_key in [
+                        {% set is_platform_metric_row = feature_key in [
                             'internet_users_million',
                             'social_media_users_million',
                             'youtube_users_million',
@@ -36,6 +37,7 @@
                             'snapchat_users_million',
                             'pinterest_users_million'
                         ] and '%' in v %}
+                        {% if is_platform_metric_row %}
                             {% set parts = v.rsplit(' ', 1) %}
                             {% if parts|length == 2 %}
                                 <span class="summary-text metric-breakdown">
@@ -43,10 +45,14 @@
                                     <span class="metric-line"><strong>% Of Platform Users Based On Population:</strong> {{ parts[1] }}</span>
                                 </span>
                             {% else %}
-                                <span class="summary-text">{{ v }}</span>
+                                <span class="summary-text">{{ v|highlight_keywords(feature_key) }}</span>
                             {% endif %}
                         {% else %}
-                            <span class="summary-text">{{ v }}</span>
+                            <span class="summary-text">{{ v|highlight_keywords(feature_key) }}</span>
+                        {% endif %}
+                        {% if needs_truncation and not is_platform_metric_row %}
+                        <template class="inline-expand-highlight-full">{{ summary_text|highlight_keywords(feature_key) }}</template>
+                        <template class="inline-expand-highlight-trunc">{{ display_text|highlight_keywords(feature_key) }}</template>
                         {% endif %}
                         {% if needs_truncation %}
                         <button type="button"
@@ -71,7 +77,7 @@
             </div>
             {% if has_verbatim %}
             <div class="feature-full-text hidden" id="{{ verbatim_id }}">
-                <p>{{ verbatim_text }}</p>
+                <p>{{ verbatim_text|highlight_keywords(feature_key) }}</p>
             </div>
             {% endif %}
         </div>
@@ -156,15 +162,9 @@
     {% elif feature_key == 'moderation_results' %}
         {% set summary = paper.extracted_features.moderation_results %}
         {% set verbatim = paper.extracted_features.moderation_results_verbatim %}
-    {% elif feature_key == 'sociocultural_context' %}
-        {% set summary = paper.extracted_features.sociocultural_context %}
-        {% set verbatim = paper.extracted_features.sociocultural_context_verbatim %}
-    {% elif feature_key == 'political_context' %}
-        {% set summary = paper.extracted_features.political_context %}
-        {% set verbatim = paper.extracted_features.political_context_verbatim %}
-    {% elif feature_key == 'platform_technological_context' %}
-        {% set summary = paper.extracted_features.platform_technological_context %}
-        {% set verbatim = paper.extracted_features.platform_technological_context_verbatim %}
+    {% elif feature_key == 'ai_context_summary' %}
+        {% set summary = paper.extracted_features.ai_context_summary %}
+        {% set verbatim = '' %}
     {% elif feature_key == 'temporal_context' %}
         {% set summary = paper.extracted_features.temporal_context %}
         {% set verbatim = paper.extracted_features.temporal_context_verbatim %}
@@ -336,9 +336,7 @@
                 'id': 'context',
                 'label': 'Context',
                 'features': [
-                    {'key': 'sociocultural_context', 'label': 'Socio-cultural Context'},
-                    {'key': 'political_context', 'label': 'Political Context'},
-                    {'key': 'platform_technological_context', 'label': 'Platform / Technological Context'},
+                    {'key': 'ai_context_summary', 'label': 'AI Context Summary'},
                     {'key': 'temporal_context', 'label': 'Temporal Context'},
                     {'key': 'gdp_per_capita_usd', 'label': 'GDP Per Capita (USD)'},
                     {'key': 'gini_coefficient', 'label': 'Gini Coefficient'},
@@ -441,7 +439,10 @@
                     {% set group_is_first = loop.first %}
                     {% for feature in group.features %}
                     <div class="feature-title-row section-content{% if not group_is_first %} section-collapsed{% endif %}" data-section="{{ group.id }}" data-feature-key="{{ feature.key }}">
-                        <div class="feature-row-title">{{ feature.label }}</div>
+                        <div class="feature-row-title">
+                            <span class="feature-row-title-text">{{ feature.label }}</span>
+                            {{ metric_tt.metric_source_tooltip(feature.key) }}
+                        </div>
                     </div>
                     <div class="table-row section-content{% if not group_is_first %} section-collapsed{% endif %}" data-section="{{ group.id }}" data-feature-key="{{ feature.key }}">
                         {% for paper in papers %}
@@ -725,7 +726,7 @@
               'Treatment / Independent Variable(s)',
               'Outcome / Dependent Variable(s)', 'Survey Questions', 'Analysis Equations',
               'Main Effects', 'Moderators', 'Moderation Results',
-              'Socio-cultural Context', 'Political Context', 'Platform / Technological Context', 'Temporal Context',
+              'AI Context Summary', 'Temporal Context',
               'GDP Per Capita (USD)', 'Gini Coefficient', 'World Bank Income Group', 'Study Language',
               'Platform Language / Locale Optimization', 'Traditional Media Strength', 'Electoral Proximity',
 
@@ -806,14 +807,8 @@
                     case 'Moderation Results':
                         value = paper.extracted_features.moderation_results || '';
                         break;
-                    case 'Socio-cultural Context':
-                        value = paper.extracted_features.sociocultural_context || '';
-                        break;
-                    case 'Political Context':
-                        value = paper.extracted_features.political_context || '';
-                        break;
-                    case 'Platform / Technological Context':
-                        value = paper.extracted_features.platform_technological_context || '';
+                    case 'AI Context Summary':
+                        value = paper.extracted_features.ai_context_summary || '';
                         break;
                     case 'Temporal Context':
                         value = paper.extracted_features.temporal_context || '';
@@ -1047,15 +1042,46 @@
             return;
         }
 
+        const tmplFull = previewSpan.querySelector('template.inline-expand-highlight-full');
+        const tmplTrunc = previewSpan.querySelector('template.inline-expand-highlight-trunc');
+        let useHtml = false;
+        let fullHtmlParsed;
+        let truncatedHtmlParsed;
+        if (tmplFull && tmplTrunc) {
+            fullHtmlParsed = tmplFull.innerHTML;
+            truncatedHtmlParsed = tmplTrunc.innerHTML;
+            useHtml = true;
+        } else {
+            const fullHtmlRaw = button.getAttribute('data-full-html');
+            const truncatedHtmlRaw = button.getAttribute('data-truncated-html');
+            if (fullHtmlRaw && truncatedHtmlRaw) {
+                try {
+                    fullHtmlParsed = JSON.parse(fullHtmlRaw);
+                    truncatedHtmlParsed = JSON.parse(truncatedHtmlRaw);
+                    useHtml = true;
+                } catch (err) {
+                    useHtml = false;
+                }
+            }
+        }
+
         const isExpanded = button.getAttribute('aria-expanded') === 'true';
         if (isExpanded) {
-            textSpan.textContent = truncatedText;
+            if (useHtml) {
+                textSpan.innerHTML = truncatedHtmlParsed;
+            } else {
+                textSpan.textContent = truncatedText;
+            }
             button.setAttribute('aria-expanded', 'false');
             button.classList.remove('expanded');
             button.setAttribute('aria-label', 'View full text');
             button.setAttribute('title', 'View full text');
         } else {
-            textSpan.textContent = fullText;
+            if (useHtml) {
+                textSpan.innerHTML = fullHtmlParsed;
+            } else {
+                textSpan.textContent = fullText;
+            }
             button.setAttribute('aria-expanded', 'true');
             button.classList.add('expanded');
             button.setAttribute('aria-label', 'Hide full text');
