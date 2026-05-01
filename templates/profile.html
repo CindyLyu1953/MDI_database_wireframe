@@ -590,7 +590,7 @@
             'Treatment / Independent Variable(s)', 'Survey Measures (Treatment Variables)',
             'Outcome / Dependent Variable(s)', 'Survey Measures (Outcome Variables)', 'Analysis (Estimating Equation)',
             'Main Effects', 'Moderators', 'Moderation Results',
-            'Socio-cultural Context', 'Political Context', 'Platform / Technological Context', 'Temporal Context'
+            'AI Context Summary', 'Temporal Context'
         ];
         
         // Create header row
@@ -659,14 +659,8 @@
                     case 'Moderation Results':
                         value = paper.extracted_features.moderation_results || '';
                         break;
-                    case 'Socio-cultural Context':
-                        value = paper.extracted_features.sociocultural_context || '';
-                        break;
-                    case 'Political Context':
-                        value = paper.extracted_features.political_context || '';
-                        break;
-                    case 'Platform / Technological Context':
-                        value = paper.extracted_features.platform_technological_context || '';
+                    case 'AI Context Summary':
+                        value = paper.extracted_features.ai_context_summary || '';
                         break;
                     case 'Temporal Context':
                         value = paper.extracted_features.temporal_context || '';

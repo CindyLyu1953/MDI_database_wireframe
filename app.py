@@ -8,6 +8,8 @@ TRACKING_DB = DATA_DIR / "output" / "tracking.db"
 UPLOAD_DIR = DATA_DIR / "user_uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 TRACKING_DB.parent.mkdir(parents=True, exist_ok=True)
+HIGHLIGHT_KEYWORDS_PATH = DATA_DIR / "config" / "highlight_keywords.json"
+HIGHLIGHT_KEYWORDS_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 SEARCH_RESULTS_PER_PAGE = 10
 
@@ -30,7 +32,10 @@ from functools import wraps
 import pytz
 import re
 import requests
+
 import google.generativeai as genai
+from markupsafe import Markup, escape
+
 
 import hashlib
 import pandas as pd
@@ -147,9 +152,117 @@ def extract_url(value):
     return ""
 
 
+_highlight_cfg_cache = {"mtime": None, "data": None}
+
+
+def load_highlight_config():
+    """Load keyword-highlight rules from JSON (mtime-cached; edits apply without restart)."""
+    default = {
+        "enabled": True,
+        "terms": [],
+        "fields": {},
+        "apply_to_fields": None,
+    }
+    path = HIGHLIGHT_KEYWORDS_PATH
+    if not path.exists():
+        return default
+    try:
+        mtime = path.stat().st_mtime
+        if (
+            _highlight_cfg_cache["mtime"] == mtime
+            and _highlight_cfg_cache["data"] is not None
+        ):
+            return _highlight_cfg_cache["data"]
+        with open(path, encoding="utf-8") as f:
+            data = json.load(f)
+        if not isinstance(data, dict):
+            return default
+        merged = {**default, **data}
+        _highlight_cfg_cache["mtime"] = mtime
+        _highlight_cfg_cache["data"] = merged
+        return merged
+    except (OSError, json.JSONDecodeError):
+        return default
+
+
+def _term_to_regex_pattern(term):
+    """Build a regex for one configured highlight term.
+
+    Trailing ``\\b`` only works after a word character. Labels like ``Q:`` or
+    ``Options:`` end with punctuation, so ``\\b`` after the colon never matches;
+    those terms need a leading boundary only.
+    """
+    t = term.strip()
+    if not t:
+        return ""
+    parts = t.split()
+    if len(parts) > 1:
+        return r"\b" + r"\s+".join(re.escape(p) for p in parts) + r"\b"
+    escaped = re.escape(parts[0])
+    last = parts[0][-1]
+    if last.isalnum() or last == "_":
+        return r"\b" + escaped + r"\b"
+    return r"\b" + escaped
+
+
+def highlight_terms_html(text, feature_key=None):
+    """Escape HTML, then wrap configured term matches in <mark class=\"text-highlight\">."""
+    s = str(text) if text is not None else ""
+    fk = (feature_key or "").strip()
+    cfg = load_highlight_config()
+    if not cfg.get("enabled", True):
+        return Markup(escape(s))
+
+    apply_fields = cfg.get("apply_to_fields")
+    if apply_fields is not None:
+        if not fk or fk not in apply_fields:
+            return Markup(escape(s))
+
+    terms = [str(t).strip() for t in cfg.get("terms", []) if t and len(str(t).strip()) >= 2]
+    field_terms = cfg.get("fields") or {}
+    if fk and isinstance(field_terms, dict) and fk in field_terms:
+        extra = field_terms.get(fk) or []
+        terms.extend(str(t).strip() for t in extra if t and len(str(t).strip()) >= 2)
+
+    seen_lower = set()
+    uniq_longest_first = []
+    for t in sorted(terms, key=len, reverse=True):
+        tl = t.lower()
+        if tl not in seen_lower:
+            seen_lower.add(tl)
+            uniq_longest_first.append(t)
+
+    escaped = escape(s)
+    if not uniq_longest_first:
+        return Markup(escaped)
+
+    pattern_parts = [_term_to_regex_pattern(t) for t in uniq_longest_first]
+    combined = "|".join(pattern_parts)
+    try:
+        rx = re.compile(combined, re.IGNORECASE)
+    except re.error:
+        return Markup(escaped)
+
+    out = []
+    pos = 0
+    for m in rx.finditer(escaped):
+        out.append(escaped[pos : m.start()])
+        out.append('<mark class="text-highlight">')
+        out.append(m.group(0))
+        out.append("</mark>")
+        pos = m.end()
+    out.append(escaped[pos:])
+    return Markup("".join(out))
+
+
+def highlight_keywords_filter(text, feature_key=None):
+    return highlight_terms_html(text, feature_key)
+
+
 app.jinja_env.filters["word_count"] = word_count
 app.jinja_env.filters["truncate_words"] = truncate_words
 app.jinja_env.filters["extract_url"] = extract_url
+app.jinja_env.filters["highlight_keywords"] = highlight_keywords_filter
 
 # Admin credentials (in production, use environment variables or a proper auth system)
 ADMIN_USERNAME = "admin"
@@ -337,11 +450,6 @@ def load_papers_from_csv():
                         "sample_size": row.get("sample_size", ""),
                         "sample_size_verbatim": row.get("sample_size_verbatim", ""),
                         "country_region": row.get("country_region", ""),
-                        "sociocultural_context": row.get("sociocultural_context", ""),
-                        "political_context": row.get("political_context", ""),
-                        "platform_technological_context": row.get(
-                            "platform_technological_context", ""
-                        ),
                         "temporal_context": row.get("temporal_context", ""),
                         "gdp_per_capita_usd": row.get("gdp_per_capita_usd", ""),
                         "gini_coefficient": row.get("gini_coefficient", ""),
@@ -422,9 +530,6 @@ SEARCH_CONTEXT_FEATURE_KEYS = (
     "electoral_proximity",
     "gdp_per_capita_usd",
     "gini_coefficient",
-    "sociocultural_context",
-    "political_context",
-    "platform_technological_context",
     "temporal_context",
     "demographics",
     "recruitment_source",
@@ -1348,9 +1453,6 @@ CATEGORY_FIELDS = {
     "Context": [
         "paper_key",
         "title",
-        "sociocultural_context",
-        "political_context",
-        "platform_technological_context",
         "temporal_context",
         "democracy",
         "press_freedom",
