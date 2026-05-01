@@ -1422,9 +1422,19 @@ function renderAiSummaries(results) {
     title.textContent = categoryName;
     section.appendChild(title);
 
-    const text = document.createElement("p");
+    const text = document.createElement("div");
     text.className = "ai-summary-card-text";
-    text.textContent = categoryData.comparison || "No comparison available.";
+
+    const held = categoryData.held_constant || "";
+    const varies = categoryData.varies || "";
+    const open = categoryData.what_this_leaves_open || "";
+
+    text.innerHTML = `
+      <p><strong>Held constant:</strong> ${held}</p>
+      <p><strong>Varies:</strong> ${varies}</p>
+      <p><strong>What this leaves open:</strong> ${open}</p>
+    `;
+
     section.appendChild(text);
 
     grid.appendChild(section);

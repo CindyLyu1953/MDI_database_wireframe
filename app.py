@@ -30,6 +30,7 @@ from functools import wraps
 import pytz
 import re
 import requests
+import google.generativeai as genai
 
 import hashlib
 import pandas as pd
@@ -44,7 +45,7 @@ CSV_PATH = "data/input/paper_extracted.csv"
 TRACKING_DB_PATH = "data/output/tracking.db"
 
 client = Groq(api_key=os.environ.get("GROQ_API_KEY"))
-
+genai.configure(api_key=os.environ.get("GEMINI_API_KEY"))
 
 def normalize_text(value):
     if pd.isna(value):
@@ -1445,56 +1446,73 @@ def save_compare_summary(paper_keys, paper_titles, results, model_name="llama-3.
 
 def build_prompt(category_name, papers_payload):
     return f"""
-You are comparing a selected set of research papers.
+You are helping a researcher synthesize what a set of deactivation experiments, taken together, do and do not establish. Using the full study data provided, write a three-part synthesis:
 
-Task:
-For the category "{category_name}", write a brief narrative summary comparing all selected papers on this dimension.
+"Held constant": What core features are shared across all or most studies?
+"Varies": What differs meaningfully across studies? For each difference, name the theoretically meaningful dimension it reflects and cite specific values from the data — not surface features like "different countries" but what that difference theoretically represents. Prioritize: (1) politically/socially salient context, (2) country/political culture, (3) platform algorithmic context, (4) internet/social media penetration, (5) deactivation duration, (6) compliance verification, (7) outcome construct, (8) analytical method.
+"What this leaves open": One genuinely open question — not a suggestion — that follows directly from what varies and what is held constant.
+Word limits: held_constant 50, varies 100, what_this_leaves_open 40.
 
-Rules:
-- Use only the provided data
-- Write 1-2 sentences of plain prose
-- Focus on the most meaningful pattern: what do they share, and what is the key split or variation?
-- Do not list every detail – the reader can see those in the table
-- Highlight what is analytically interesting about how the papers relate on this dimension
-- If there are more than 2 papers, compare them in a grouped way when natural
-- No full sentences
-- No introductory text
-- No explanations
-- Do not invent missing details
-- Ignore empty fields unless the absence itself is a meaningful difference
-- Keep the comparison concise and readable
-- Return valid JSON only
-- Do not use markdown fences
+Rules: Use only the provided data. Name theoretical dimensions, not surface features. Plain prose, no bullets.
 
-Return exactly this format:
-{{
-  "category": "{category_name}",
-  "comparison": "compact contrastive comparison here"
-}}
+Return valid JSON only, no markdown fences:
+{{"held_constant": "...", "varies": "...", "what_this_leaves_open": "..."}}
 
-Papers to compare:
+Study data:
 {json.dumps(papers_payload, ensure_ascii=False, indent=2)}
 """.strip()
 
-def call_groq_for_category(category_name, papers_payload):
+# def call_groq_for_category(category_name, papers_payload):
+#     prompt = build_prompt(category_name, papers_payload)
+
+#     completion = client.chat.completions.create(
+#         model="llama-3.3-70b-versatile",
+#         messages=[
+#             {
+#                 "role": "system",
+#                 "content": "You are a careful research comparison assistant. Return valid JSON only."
+#             },
+#             {
+#                 "role": "user",
+#                 "content": prompt
+#             }
+#         ],
+#         temperature=0.2
+#     )
+
+#     text = completion.choices[0].message.content.strip()
+#     text = re.sub(r"^```json\s*", "", text)
+#     text = re.sub(r"^```\s*", "", text)
+#     text = re.sub(r"\s*```$", "", text)
+
+#     try:
+#         return json.loads(text)
+#     except json.JSONDecodeError:
+#         return {
+#             "held_constant": "",
+#             "varies": "",
+#             "what_this_leaves_open": "",
+#             "error": "AI synthesis unavailable",
+#             "raw_response": text
+#         }
+
+
+def call_gemini_for_category(category_name, papers_payload):
     prompt = build_prompt(category_name, papers_payload)
 
-    completion = client.chat.completions.create(
-        model="llama-3.3-70b-versatile",
-        messages=[
-            {
-                "role": "system",
-                "content": "You are a careful research comparison assistant. Return valid JSON only."
-            },
-            {
-                "role": "user",
-                "content": prompt
-            }
-        ],
-        temperature=0.2
+    model = genai.GenerativeModel("gemini-3-flash-preview")
+
+    response = model.generate_content(
+        prompt,
+        generation_config={
+            "temperature": 0.2,
+        }
     )
 
-    text = completion.choices[0].message.content.strip()
+    text = response.text.strip()
+
+    # Clean JSON (Gemini often wraps in ```json)
+    import re
     text = re.sub(r"^```json\s*", "", text)
     text = re.sub(r"^```\s*", "", text)
     text = re.sub(r"\s*```$", "", text)
@@ -1540,7 +1558,8 @@ def compare_ai_differences():
 
         def process_category(category_name):
             payload = build_category_payload(selected_rows, category_name)
-            return category_name, call_groq_for_category(category_name, payload)
+            return category_name, call_gemini_for_category(category_name, payload)
+            #return category_name, call_groq_for_category(category_name, payload)
 
         with ThreadPoolExecutor(max_workers=4) as executor:
             futures = [executor.submit(process_category, c) for c in CATEGORY_FIELDS]
