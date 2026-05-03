@@ -8,8 +8,6 @@ TRACKING_DB = DATA_DIR / "output" / "tracking.db"
 UPLOAD_DIR = DATA_DIR / "user_uploads"
 UPLOAD_DIR.mkdir(parents=True, exist_ok=True)
 TRACKING_DB.parent.mkdir(parents=True, exist_ok=True)
-HIGHLIGHT_KEYWORDS_PATH = DATA_DIR / "config" / "highlight_keywords.json"
-HIGHLIGHT_KEYWORDS_PATH.parent.mkdir(parents=True, exist_ok=True)
 
 SEARCH_RESULTS_PER_PAGE = 10
 
@@ -152,107 +150,33 @@ def extract_url(value):
     return ""
 
 
-_highlight_cfg_cache = {"mtime": None, "data": None}
-
-
-def load_highlight_config():
-    """Load keyword-highlight rules from JSON (mtime-cached; edits apply without restart)."""
-    default = {
-        "enabled": True,
-        "terms": [],
-        "fields": {},
-        "apply_to_fields": None,
-    }
-    path = HIGHLIGHT_KEYWORDS_PATH
-    if not path.exists():
-        return default
-    try:
-        mtime = path.stat().st_mtime
-        if (
-            _highlight_cfg_cache["mtime"] == mtime
-            and _highlight_cfg_cache["data"] is not None
-        ):
-            return _highlight_cfg_cache["data"]
-        with open(path, encoding="utf-8") as f:
-            data = json.load(f)
-        if not isinstance(data, dict):
-            return default
-        merged = {**default, **data}
-        _highlight_cfg_cache["mtime"] = mtime
-        _highlight_cfg_cache["data"] = merged
-        return merged
-    except (OSError, json.JSONDecodeError):
-        return default
-
-
-def _term_to_regex_pattern(term):
-    """Build a regex for one configured highlight term.
-
-    Trailing ``\\b`` only works after a word character. Labels like ``Q:`` or
-    ``Options:`` end with punctuation, so ``\\b`` after the colon never matches;
-    those terms need a leading boundary only.
-    """
-    t = term.strip()
-    if not t:
-        return ""
-    parts = t.split()
-    if len(parts) > 1:
-        return r"\b" + r"\s+".join(re.escape(p) for p in parts) + r"\b"
-    escaped = re.escape(parts[0])
-    last = parts[0][-1]
-    if last.isalnum() or last == "_":
-        return r"\b" + escaped + r"\b"
-    return r"\b" + escaped
-
-
 def highlight_terms_html(text, feature_key=None):
-    """Escape HTML, then wrap configured term matches in <mark class=\"text-highlight\">."""
+    """Escape HTML; **bold** segments from CSV render as <strong>.
+
+    feature_key is ignored (kept so templates can keep using
+    ``|highlight_keywords(feature_key)``).
+    """
+    _ = feature_key
     s = str(text) if text is not None else ""
-    fk = (feature_key or "").strip()
-    cfg = load_highlight_config()
-    if not cfg.get("enabled", True):
-        return Markup(escape(s))
 
-    apply_fields = cfg.get("apply_to_fields")
-    if apply_fields is not None:
-        if not fk or fk not in apply_fields:
-            return Markup(escape(s))
+    def esc_chunk(plain: str) -> str:
+        return escape(plain)
 
-    terms = [str(t).strip() for t in cfg.get("terms", []) if t and len(str(t).strip()) >= 2]
-    field_terms = cfg.get("fields") or {}
-    if fk and isinstance(field_terms, dict) and fk in field_terms:
-        extra = field_terms.get(fk) or []
-        terms.extend(str(t).strip() for t in extra if t and len(str(t).strip()) >= 2)
+    if "**" in s:
+        parts = s.split("**")
+        if len(parts) >= 2 and len(parts) % 2 == 1:
+            fragments = []
+            for i, p in enumerate(parts):
+                inner = esc_chunk(p)
+                if i % 2 == 1:
+                    fragments.append("<strong>")
+                    fragments.append(inner)
+                    fragments.append("</strong>")
+                else:
+                    fragments.append(inner)
+            return Markup("".join(fragments))
 
-    seen_lower = set()
-    uniq_longest_first = []
-    for t in sorted(terms, key=len, reverse=True):
-        tl = t.lower()
-        if tl not in seen_lower:
-            seen_lower.add(tl)
-            uniq_longest_first.append(t)
-
-    escaped = escape(s)
-    if not uniq_longest_first:
-        return Markup(escaped)
-
-    pattern_parts = [_term_to_regex_pattern(t) for t in uniq_longest_first]
-    combined = "|".join(pattern_parts)
-    try:
-        rx = re.compile(combined, re.IGNORECASE)
-    except re.error:
-        return Markup(escaped)
-
-    out = []
-    pos = 0
-    for m in rx.finditer(escaped):
-        out.append(escaped[pos : m.start()])
-        out.append('<mark class="text-highlight">')
-        out.append(m.group(0))
-        out.append("</mark>")
-        pos = m.end()
-    out.append(escaped[pos:])
-    return Markup("".join(out))
+    return Markup(esc_chunk(s))
 
 
 def highlight_keywords_filter(text, feature_key=None):
@@ -270,6 +194,40 @@ ADMIN_PASSWORD = "admin123"  # Change this!
 
 # Global variable to store papers data
 papers_data = []
+_papers_csv_mtime_when_loaded = None
+
+
+def get_papers_csv_path():
+    """Return the first existing papers CSV (same precedence as the loader)."""
+    candidates = (
+        DATA_DIR / "input" / "paper_extracted.csv",
+        DATA_DIR / "input" / "papers_extracted.csv",
+        DATA_DIR / "input" / "papers.csv",
+    )
+    for path in candidates:
+        if path.is_file():
+            return path
+    return None
+
+
+def reload_papers_from_csv_if_changed():
+    """Reload papers_data from disk when the CSV file changes (mtime). Cheap no-op if unchanged."""
+    global _papers_csv_mtime_when_loaded
+    csv_path = get_papers_csv_path()
+    if not csv_path:
+        return
+    try:
+        mtime = csv_path.stat().st_mtime
+    except OSError:
+        return
+    if (
+        _papers_csv_mtime_when_loaded is not None
+        and _papers_csv_mtime_when_loaded == mtime
+        and papers_data
+    ):
+        return
+    load_papers_from_csv()
+    _papers_csv_mtime_when_loaded = mtime
 
 
 def extract_doi(text):
@@ -301,19 +259,8 @@ def load_papers_from_csv():
     global papers_data
     papers_data = []
 
-    possible_files = [
-        os.path.join("data", "input", "paper_extracted.csv"),
-        os.path.join("data", "input", "papers_extracted.csv"),
-        os.path.join("data", "input", "papers.csv"),
-    ]
-
-    csv_file = None
-    for file_path in possible_files:
-        if os.path.exists(file_path):
-            csv_file = file_path
-            break
-
-    if not csv_file:
+    csv_path = get_papers_csv_path()
+    if not csv_path:
         print(
             "Error: No CSV file found in data/input/. Please ensure a CSV file exists."
         )
@@ -322,7 +269,7 @@ def load_papers_from_csv():
     try:
         seen_keys = set()
 
-        with open(csv_file, "r", encoding="utf-8") as file:
+        with open(csv_path, "r", encoding="utf-8") as file:
             reader = csv.DictReader(file)
 
             print(f"CSV columns found: {len(reader.fieldnames)}")
@@ -899,7 +846,7 @@ def profile():
 
 @app.route("/database")
 def database():
-    """Database page showing all papers."""
+    """Database page listing all papers; data stays in sync with paper_extracted.csv on each request."""
     paper_count = len(papers_data)
     return render_template("database.html", papers=papers_data, paper_count=paper_count)
 
@@ -1250,45 +1197,6 @@ def get_admin_stats():
                 "top_searches": top_searches,
             }
         )
-    except Exception as e:
-        return jsonify({"error": str(e)}), 500
-
-
-@app.route("/api/my-requests")
-def my_requests():
-    """Get user's upload requests."""
-    try:
-        conn = get_db_connection()
-        cursor = conn.cursor()
-
-        cursor.execute(
-            """
-            SELECT id, timestamp, request_name, institution, email, paper_info,
-                   change_requests, pdf_filename, status
-            FROM upload_requests
-            ORDER BY timestamp DESC
-        """
-        )
-
-        requests = []
-        for row in cursor.fetchall():
-            requests.append(
-                {
-                    "id": row[0],
-                    "timestamp": row[1],
-                    "request_name": row[2],
-                    "institution": row[3],
-                    "email": row[4],
-                    "paper_info": row[5],
-                    "change_requests": row[6],
-                    "pdf_filename": row[7],
-                    "status": row[8],
-                }
-            )
-
-        conn.close()
-        return jsonify({"requests": requests})
-
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
@@ -1683,7 +1591,16 @@ def compare_ai_differences():
     except Exception as e:
         return jsonify({"error": str(e)}), 500
 
-load_papers_from_csv()
+
+@app.before_request
+def sync_papers_data_with_csv():
+    """Keep in-memory papers in sync with the CSV on disk when the file's modification time changes."""
+    if request.endpoint in ("static", None):
+        return
+    reload_papers_from_csv_if_changed()
+
+
+reload_papers_from_csv_if_changed()
 
 if __name__ == "__main__":
     app.run(debug=True, host="127.0.0.1", port=5001)

@@ -53,17 +53,6 @@
                         </svg>
                         Upload Papers
                     </button>
-                    <button class="menu-item" onclick="showSection('requests')">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M9 12l2 2 4-4"></path>
-                            <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"></path>
-                            <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"></path>
-                            <path d="M12 3c0 1-1 3-3 3s-3-2-3-3 1-3 3-3 3 2 3 3"></path>
-                            <path d="M12 21c0-1 1-3 3-3s3 2 3 3-1 3-3 3-3-2-3-3"></path>
-                        </svg>
-                        My Requests
-                        <span class="badge" id="requestsCount">0</span>
-                    </button>
                 </div>
             </div>
 
@@ -233,30 +222,8 @@
                                 <button type="submit" class="btn btn-primary">Submit Request</button>
                                 <button type="button" class="btn btn-outline" onclick="resetUploadForm()">Reset Form</button>
                             </div>
+                            <p class="form-submit-hint">We usually process requests within about a week. Please check back then and click View Database to confirm your papers have been added to the database.</p>
                         </form>
-                    </div>
-                </div>
-
-                <!-- My Requests Section -->
-                <div class="content-section" id="requests-section">
-                    <div class="section-header">
-                        <h2 class="section-title">My Requests</h2>
-                        <p class="section-description">Track the status of your paper upload requests</p>
-                    </div>
-                    
-                    <div class="requests-container" id="myRequestsList">
-                        <div class="empty-state">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                                <path d="M9 12l2 2 4-4"></path>
-                                <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"></path>
-                                <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"></path>
-                                <path d="M12 3c0 1-1 3-3 3s-3-2-3-3 1-3 3-3 3 2 3 3"></path>
-                                <path d="M12 21c0-1 1-3 3-3s3 2 3 3-1 3-3 3-3-2-3-3"></path>
-                            </svg>
-                            <h3>No requests yet</h3>
-                            <p>Submit your first paper upload request to get started</p>
-                            <button class="btn btn-primary" onclick="showSection('upload')">Upload Papers</button>
-                        </div>
                     </div>
                 </div>
             </div>
@@ -275,7 +242,6 @@
         updateBadgeCounts();
         loadFavorites();
         loadSavedComparisons();
-        loadMyRequests();
     });
 
     // Section switching functionality
@@ -304,8 +270,6 @@
         } else if (sectionName === 'upload') {
             // Load any saved form data
             loadUploadFormData();
-        } else if (sectionName === 'requests') {
-            loadMyRequests();
         }
     }
 
@@ -315,17 +279,6 @@
         
         document.getElementById('favoritesCount').textContent = favorites.length;
         document.getElementById('comparisonsCount').textContent = savedComparisons.length;
-        
-        // Update requests count
-        fetch('/api/my-requests')
-            .then(response => response.json())
-            .then(data => {
-                document.getElementById('requestsCount').textContent = data.requests ? data.requests.length : 0;
-            })
-            .catch(error => {
-                console.error('Error loading requests count:', error);
-                document.getElementById('requestsCount').textContent = '0';
-            });
     }
 
     function loadProfileData() {
@@ -476,61 +429,6 @@
                 `).join('')}
             </div>
         `;
-    }
-
-    function loadMyRequests() {
-        fetch('/api/my-requests')
-            .then(response => response.json())
-            .then(data => {
-                const requestsList = document.getElementById('myRequestsList');
-                
-                if (!data.requests || data.requests.length === 0) {
-                    requestsList.innerHTML = `
-                        <div class="empty-state">
-                            <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1">
-                                <path d="M9 12l2 2 4-4"></path>
-                                <path d="M21 12c-1 0-3-1-3-3s2-3 3-3 3 1 3 3-2 3-3 3"></path>
-                                <path d="M3 12c1 0 3-1 3-3s-2-3-3-3-3 1-3 3 2 3 3 3"></path>
-                                <path d="M12 3c0 1-1 3-3 3s-3-2-3-3 1-3 3-3 3 2 3 3"></path>
-                                <path d="M12 21c0-1 1-3 3-3s3 2 3 3-1 3-3 3-3-2-3-3"></path>
-                            </svg>
-                            <h3>No requests yet</h3>
-                            <p>Submit your first paper upload request to get started</p>
-                            <button class="btn btn-primary" onclick="showSection('upload')">Upload Papers</button>
-                        </div>
-                    `;
-                    return;
-                }
-                
-                requestsList.innerHTML = `
-                    <div class="requests-grid">
-                        ${data.requests.map(request => `
-                            <div class="request-card">
-                                <div class="card-header">
-                                    <h4 class="card-title">${request.request_name}</h4>
-                                    <span class="status-badge status-${request.status}">${request.status}</span>
-                                </div>
-                                <div class="card-content">
-                                    <p class="card-date">Submitted: ${request.timestamp}</p>
-                                    <p class="card-institution">Institution: ${request.institution}</p>
-                                    <p class="card-paper">Paper: ${request.paper_info.substring(0, 100)}...</p>
-                                    ${request.change_requests ? `<p class="card-changes">Changes: ${request.change_requests.substring(0, 100)}...</p>` : ''}
-                                    ${request.pdf_filename ? `<p class="card-file">PDF: ${request.pdf_filename}</p>` : ''}
-                                </div>
-                            </div>
-                        `).join('')}
-                    </div>
-                `;
-            })
-            .catch(error => {
-                console.error('Error loading requests:', error);
-                document.getElementById('myRequestsList').innerHTML = `
-                    <div class="empty-state">
-                        <h3>Error loading requests</h3>
-                        <p>Please try refreshing the page</p>
-                    </div>
-                `;
-            });
     }
 
     function removeFavorite(paperId) {

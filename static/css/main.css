@@ -346,13 +346,6 @@ body {
 .hover\:scale-105:hover { transform: scale(1.05); }
 .hover\:scale-110:hover { transform: scale(1.1); }
 
-mark.text-highlight {
-  background-color: transparent;
-  font-weight: 700;
-  color: inherit;
-  padding: 0;
-}
-
 /* Circular “i” for metric source tooltips (Article + Compare) */
 .info-tooltip.metric-source-tooltip .info-tooltip-circle {
   display: inline-flex;

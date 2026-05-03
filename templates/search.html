@@ -142,7 +142,7 @@
                     </div>
 
                     <div class="result-abstract">
-                        <p>{{ paper.abstract }}</p>
+                        <p>{{ paper.abstract|highlight_keywords('abstract') }}</p>
                     </div>
 
                     <div class="result-footer">
