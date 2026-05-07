@@ -1,6 +1,6 @@
 authors,authors_verbatim,title,journal,year,citation,abstract,independent_variables,independent_variables_verbatim,dependent_variables,dependent_variables_verbatim,survey_questions,incentive,incentive_verbatim,study_type,study_type_verbatim,analysis_equations,analysis_equations_verbatim,level_of_analysis,level_of_analysis_verbatim,main_effects,main_effects_verbatim,statistical_power,statistical_power_verbatim,moderators,moderators_verbatim,moderation_results,moderation_results_verbatim,demographics,demographics_verbatim,recruitment_source,recruitment_source_verbatim,sample_size,sample_size_verbatim,country_region,sociocultural_context,political_context,platform_technological_context,temporal_context,recommended_moderators,research_context,intervention_insights,democracy,press_freedom,internet_freedom,internet_penetration,governance,polarization,population_million,internet_users_million,social_media_users_million,youtube_users_million,facebook_users_million,instagram_users_million,x_users_million,tiktok_users_million,linkedin_users_million,messenger_users_million,snapchat_users_million,pinterest_users_million,ai_context_summary,gdp_per_capita_usd,gini_coefficient,income_group,study_language,platform_language_optimization,traditional_media_strength,electoral_proximity
 Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Facebook Leads To Higher Levels Of Well-Being,"Cyberpsychology, Behavior, And Social Networking",2016,"Tromholt, M. (2016). The Facebook Experiment: Quitting Facebook Leads to Higher Levels of Well-Being. Cyberpsychology, Behavior, and Social Networking, 19(11), 661–666. https://doi.org/10.1089/cyber.2016.0259","Most people use Facebook on a daily basis; few are aware of the consequences. Based on a 1-week experiment with 1,095 participants in late 2015 in Denmark, this study provides causal evidence that Facebook use affects our well-being negatively. By comparing the treatment group (participants who took a break from Facebook) with the control group (participants who kept using Facebook), it was demonstrated that taking a break from Facebook has positive effects on the two dimensions of well-being: our life satisfaction increases and our emotions become more positive. Furthermore, it was demonstrated that these effects were significantly greater for heavy Facebook users, passive Facebook users, and users who tend to envy others on Facebook.",One-week Facebook abstention vs. usual use (random assignment),"To ensure ecological validity, the study was designed and conducted as a 1-week experiment. On the first day of the experiment, the participants (n = 1,095) answered the pretest (15-minute online questionnaire—questions were asked in Danish). They were then immediately assigned randomly to one of the following conditions: • Do not use Facebook in the following week (treatment group) • Keep using Facebook as usual in the following week (control group)","1. Life satisfaction
- 2. Emotions","Life satisfaction. Life satisfaction refers to the cognitive dimension of well-being and is considered to be a core measure of people’s well-being.15,24 To examine potential changes in the participants’ cognitive well-being, the following question was asked as the very first question in all questionnaires: “In general, how satisfied are you with your life today?” (1 [very dissatisfied] to 10 [very satisfied]) (the wording was borrowed from Eurofound25).b Emotions. Participants’ affective well-being (emotions) was measured on a total of nine items. To minimize participant burden, participants were asked to evaluate their emotions on a subset of five items from the Center for Epidemiologic Studies Depression (CES-D) Scale26 and a subset of four items from the Positive Affect Negative Affect Scale (PANAS).27 The chosen items were the ones that showed the strongest factorial loadings on negative/depressed affect and positive affect, according to the authors. On a 5-point Likert scale, the participants were asked to report to which degree they were experiencing enthusiasm, happiness, loneliness, enjoyment of life, depressiveness, sadness, decisiveness, anger, and worry (1 [not at all] to 5 [to a great extent]).","1. **Outcome**: Life satisfaction 
+ 2. Emotions","Life satisfaction. Life satisfaction refers to the cognitive dimension of well-being and is considered to be a core measure of people’s well-being.15,24 To examine potential changes in the participants’ cognitive well-being, the following question was asked as the very first question in all questionnaires: “In general, how satisfied are you with your life today?” (1 [very dissatisfied] to 10 [very satisfied]) (the wording was borrowed from Eurofound25).b Emotions. Participants’ affective well-being (emotions) was measured on a total of nine items. To minimize participant burden, participants were asked to evaluate their emotions on a subset of five items from the Center for Epidemiologic Studies Depression (CES-D) Scale26 and a subset of four items from the Positive Affect Negative Affect Scale (PANAS).27 The chosen items were the ones that showed the strongest factorial loadings on negative/depressed affect and positive affect, according to the authors. On a 5-point Likert scale, the participants were asked to report to which degree they were experiencing enthusiasm, happiness, loneliness, enjoyment of life, depressiveness, sadness, decisiveness, anger, and worry (1 [not at all] to 5 [to a great extent]).","1. !!Outcome!!: Life satisfaction 
  
 
  Q: “In general, how satisfied are you with your life today?” 
@@ -9,7 +9,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: (1 [very dissatisfied] to 10 [very satisfied])
  
 
- 2. **Outcome**: Emotions On a 5-point Likert scale
+ 2. !!Outcome!!: Emotions On a 5-point Likert scale
  
 
  Q: the participants were asked to report to which degree they were experiencing enthusiasm, happiness, loneliness, enjoyment of life, depressiveness, sadness, decisiveness, anger, and worry 
@@ -18,31 +18,31 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: (1 [not at all] to 5 [to a great extent]).
  
 
- 3. **Outcome**: Intensity of Facebook use 
+ 3. !!Outcome!!: Intensity of Facebook use 
  
 
  Q: ...to which degree various statements fit on the respondent (on a scale from 1 [not at all] to 5 [to a great extent]), such as “Facebook has become part of my daily routine” and “I would be sorry if Facebook shut down.”
  
 
- 4. **Outcome**: Facebook envy 
+ 4. !!Outcome!!: Facebook envy 
  
 
  Q: ...asking the participants to assess to which degree a group of statements fit them (on a scale from 1 [not at all] to 5 [to a great extent]). For example, “When on Facebook, I sometimes envy: how much of the world others have already seen/how successful others are/how happy others are.”
  
 
- 5. **Outcome**: Active Facebook use 
+ 5. !!Outcome!!: Active Facebook use 
  
 
  Q: “On Facebook, how often do you: post a picture/write a status update on/comment on others’ posts” (Cronbach’s a=0.78)...on a 5-point scale, from “never” (1) to “very frequently.” (5)
  
 
- 6. **Outcome**: Passive Facebook use 
+ 6. !!Outcome!!: Passive Facebook use 
  
 
  Q: “On Facebook, how often do you: browse the newsfeed/view friends’ photos/browse a friend’s timeline” (Cronbach’s a=0.73)...on a 5-point scale, from “never” (1) to “very frequently.” (5)
  
 
- 7. **Outcome**: Life satisfaction (supplemental) “Taking all things together on a scale of 1 to 10, how happy would you say you are?” 
+ 7. !!Outcome!!: Life satisfaction (supplemental) “Taking all things together on a scale of 1 to 10, how happy would you say you are?” 
  
 
  Options: (1 [very unhappy] to 10 [very happy]).",No compensation,"The participants did not receive any compensation for taking part in the experiment. Instead, they were encouraged to follow their assigned treatment or control condition by reminding them that their participation was of significant value for the study.",Field experiment,"To ensure ecological validity, the study was designed and conducted as a 1-week experiment. On the first day of the experiment, the participants (n = 1,095) answered the pretest (15-minute online questionnaire—questions were asked in Danish). They were then immediately assigned randomly to one of the following conditions: • Do not use Facebook in the following week (treatment group) • Keep using Facebook as usual in the following week (control group)","The study's causal analysis involved comparing the posttest outcomes of the treatment group (quit Facebook) with the control group (used Facebook as usual). This comparison was based on an Intention-To-Treat (ITT) analysis, where all participants were analyzed in the group to which they were randomized, regardless of noncompliance. The statistical tests used were t-tests to compare the means of the two groups on life satisfaction and emotions. For moderation analysis, the sample was divided into subgroups based on intensity of use, envy, and active/passive use, and t-tests were conducted within these subgroups.","The aim of this study was to identify if the use of Facebook is causally affecting the users’ cognitive and affective well-being. By comparing the posttest answers from the treatment group with the posttest answers from the control group, the causal effects of not using Facebook for 1 week were identified. As the noncompliers were kept in the samples, the results should be considered as conservative estimates of the true treatment effects. Well-being. H1 predicted that Facebook users would report lower levels of cognitive well-being (life satisfaction) than Facebook users not using Facebook for 1 week. H2 predicted that Facebook users would report lower levels of affective well-being (emotions) than Facebook users not using Facebook for 1 week. Table 1 sums up means and standard deviations for the control group (Facebook users) and the treatment group (Facebook users not using Facebook for 1 week).",Individual participant,"By comparing the posttest answers from the treatment group with the posttest answers from the control group, the causal effects of not using Facebook for 1 week were identified.","Life satisfaction:
@@ -63,7 +63,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  The treatment group reported significantly higher levels of positive emotions than the control group.","On the life satisfaction item, the treatment group reported a significantly higher level than the control group, t(888) = 4.03, p<0.001. This confirms H1; people’s life satisfaction increases significantly when they quit Facebook for 1 week. On the emotion items, the treatment group also reported significantly higher levels than the control group, t(888) = 5.01, p<0.001. This provides evidence to confirm H2; people’s emotional life improves significantly when they quit Facebook for 1 week. TABLE 1. MEANS AND STANDARD DEVIATIONS FOR LIFE SATISFACTION AND EMOTIONS Treatment (n = 516) | Control (n = 372) | ITT effect Life satisfaction (range: 1–10) | 8.11 (1.23) | 7.74 (1.43) | 0.37*** Emotions (range: 9–45) | 36.21 (6.09) | 33.99 (6.81) | 1.22***",None,None,"1. Intensity of Facebook use
  
 
- **Moderator** = Facebook use intensity
+ !!Moderator!! = Facebook use intensity
  
 
  DV = Well-being (life satisfaction and emotions)
@@ -83,7 +83,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  2. Facebook envy
  
 
- **Moderator** = Facebook envy
+ !!Moderator!! = Facebook envy
  
 
  DV = Well-being (life satisfaction and emotions)
@@ -103,7 +103,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  3. Passive Facebook use
  
 
- **Moderator** = Passive Facebook use
+ !!Moderator!! = Passive Facebook use
  
 
  DV = Well-being (life satisfaction and emotions)
@@ -123,7 +123,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  4. Active Facebook use
  
 
- **Moderator** = Active Facebook use
+ !!Moderator!! = Active Facebook use
  
 
  DV = Well-being (life satisfaction and emotions)
@@ -196,13 +196,13 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  7. Subjective well-being
  8. Post-experiment Facebook use
  9. Opinions about Facebook
- 10. WTA valuation",Substitute Time Uses Social Interaction Substitute News Sources News Knowledge Political Engagement Political Polarization Subjective Well-Being Post-Experiment Facebook Use Opinions about Facebook Secondary Outcomes,"1. **Outcome**: Substitute time uses 
+ 10. WTA valuation",Substitute Time Uses Social Interaction Substitute News Sources News Knowledge Political Engagement Political Polarization Subjective Well-Being Post-Experiment Facebook Use Opinions about Facebook Secondary Outcomes,"1. !!Outcome!!: Substitute time uses 
  
 
  Q: On an average day in the past 4 weeks, how many minutes would you say you spent on Facebook, including through the Facebook app on your phone?
  
 
- 2. **Outcome**: Substitute time uses
+ 2. !!Outcome!!: Substitute time uses
  
 
  Q: On an average day in the last 4 weeks, how much free time (i.e. excluding work) did you spend... 
@@ -211,43 +211,43 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [0 minutes, Between 1 and 30 minutes, Between 31 minutes and 1 hour, Between 1 and 2 hours, Between 2 and 3 hours, More than 3 hours]
  
 
- 3. **Outcome**: Substitute time uses 
+ 3. !!Outcome!!: Substitute time uses 
  
 
  Q: In the last 4 weeks, relative to what is typical for you, would you say you spent more or less of your free time (i.e. excluding work)... [A lot less, A little less, Same, A little more, A lot more] ...using social media apps other than Facebook? ...online (on your computer, tablet, smartphone, etc.) for things other than social media? ...watching TV or movies by yourself? ...on non-screen activities (e.g. cooking, reading books, exercising - anything without an electronic screen in front of you) by yourself? ...doing anything with friends and family (in person)?
  
 
- 4. **Outcome**: Social interaction 
+ 4. !!Outcome!!: Social interaction 
  
 
  Q: List the first names of as many of the friends you met in person last week that you can think of in 1 minute (if None, enter ""None""). Separate the names using commas ("","").
  
 
- 5. **Outcome**: Social interaction 
+ 5. !!Outcome!!: Social interaction 
  
 
  Q: Which of the following activities did you do at least once last week? Check all that apply: Go out for dinner, Go to the cinema, Talk to friends on the phone, Go to a party, Get together with friends, Go to a shopping mall, Spend time with your parents, Spend time with your kids
  
 
- 6. **Outcome**: Social interaction 
+ 6. !!Outcome!!: Social interaction 
  
 
  Q: Interact with someone who voted the opposite way as you in the last presidential election. Interact with someone from another country.
  
 
- 7. **Outcome**: Substitute news sources 
+ 7. !!Outcome!!: Substitute news sources 
  
 
  Q: Over the past four weeks, how often did you... [Never, Hardly Ever, Sometimes, Fairly Often, Very Often] ...get news from Facebook ...read any newspapers in print? ...listen to the news on the radio? ...watch local television news? ...watch national evening network television news (such as ABC World News, CBS Evening News, or NBC Nightly News)? ...watch cable television news (such as CNN, the Fox News cable channel, or MSNBC)? ...get news from social media sites other than Facebook (e.g. Twitter or Snapchat)? ...get news from news websites or apps other than social media?
  
 
- 8. **Outcome**: Substitute news sources 
+ 8. !!Outcome!!: Substitute news sources 
  
 
  Q: In the last 4 weeks, relative to what is typical for you, would you say you spent more or less time... [A lot less, A little less, Same, A little more, A lot more] ...get news from Facebook
  
 
- 9. **Outcome**: News knowledge
+ 9. !!Outcome!!: News knowledge
  
 
  Q: Thinking back over the last 4 weeks, how closely did you follow US politics? 
@@ -256,7 +256,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [Not at all closely, somewhat closely, rather closely, very closely]
  
 
- 10. **Outcome**: News knowledge 
+ 10. !!Outcome!!: News knowledge 
  
 
  Q: Thinking back over the last 4 weeks, how closely did you follow news about President Trump? 
@@ -265,13 +265,13 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [Not at all closely, somewhat closely, rather closely, very closely]
  
 
- 11. **Outcome**: News knowledge 
+ 11. !!Outcome!!: News knowledge 
  
 
  Q: On an average day of the last 4 weeks, how many minutes did you spend watching, reading or listening to the news (including news via social media)?
  
 
- 12. **Outcome**: News knowledge 
+ 12. !!Outcome!!: News knowledge 
  
 
  Q: Of the following news events, which ones do you think are true, and which ones do you think are false? 
@@ -280,19 +280,19 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [True, False, Unsure]
  
 
- 13. **Outcome**: Political polarization 
+ 13. !!Outcome!!: Political polarization 
  
 
  Q: Thinking back over the last 4 weeks, how warm or cold did you feel towards the parties and the president on the feeling thermometer?
  
 
- 14. **Outcome**: Political polarization 
+ 14. !!Outcome!!: Political polarization 
  
 
  Q: List as many recent (last 4 weeks) news events you can think of that made you angry at the [Republican/Democratic] Party. (If more than 5, just list those 5 that left you most angry. If less than 5, list less. If None, enter “None” in the first textbox.)
  
 
- 15. **Outcome**: Political polarization 
+ 15. !!Outcome!!: Political polarization 
  
 
  Q: Thinking back over the last 4 weeks, how often did you see news that made you better understand the point of view of the [Republican/Democratic] Party? 
@@ -301,13 +301,13 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [Never, Once, Two or three times, Four times or more]
  
 
- 16. **Outcome**: Political polarization (Issue polarization) 
+ 16. !!Outcome!!: Political polarization (Issue polarization) 
  
 
  Q: To what extent do you think that free trade agreements between the US and other countries have been a good thing or a bad thing for the United States? (Pew Research Center 2018a); Overall, would you say that blacks or whites are treated more fairly in dealing with the police? (Pew Research Center 2016); Do you think that employers firing men who have been accused of sexual harassment or assault before finding out all the facts is a major or a minor problem? (Pew Research Center 2018c); As you may know, Brett Kavanaugh is a federal judge who has been nominated to serve on the Supreme Court. Would you like to see the Senate vote in favor of Kavanaugh serving on the Supreme Court, or not? (Gallup 2018b); On the whole, do you think immigration is a good thing or a bad thing for this country today? (Pew Research Center 2018d); How confident, if at all, are you that the Justice Department special counsel Robert Mueller will conduct a fair investigation into Russian involvement in the 2016 election? (Pew Research Center 2018b); In general, do you feel that the laws covering the sale of firearms should be made less strict, more strict, or kept as they are now? (Gallup 2018c); In presenting the news dealing with political and social issues, do you think that news organizations deal fairly with all sides, or do they tend to favor one side? (Pew Research Center 2017); To what extent do you think President Trump is honest and trustworthy? (Gallup 2018a)
  
 
- 17. **Outcome**: Subjective well-being
+ 17. !!Outcome!!: Subjective well-being
  
 
  Q: Over the last 4 weeks, I think I was 
@@ -316,7 +316,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [1 (not a very happy person) ... 7 (a very happy person)]
  
 
- 18. **Outcome**: Subjective well-being 
+ 18. !!Outcome!!: Subjective well-being 
  
 
  Q: Over the last 4 weeks, compared to most of my peers, I think I was 
@@ -325,7 +325,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [1 (less happy) ... 7 (more happy)]
  
 
- 19. **Outcome**: Subjective well-being 
+ 19. !!Outcome!!: Subjective well-being 
  
 
  Q: Below are three statements that you may agree or disagree with. Indicate your agreement with each item and please be open and honest in your responding. 
@@ -334,7 +334,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: Strongly disagree, Disagree, Slightly disagree, Neither agree nor disagree, Slightly agree, Agree, Strongly agree] In most ways my life during the past 4 weeks was close to ideal. The conditions of my life during the past 4 weeks were excellent. During the past 4 weeks, I was satisfied with my life.
  
 
- 20. **Outcome**: Subjective well-being 
+ 20. !!Outcome!!: Subjective well-being 
  
 
  Q: How often did you feel that you lacked companionship over the past four weeks 
@@ -343,7 +343,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [Hardly ever, Some of the time, Often]
  
 
- 21. **Outcome**: Subjective well-being 
+ 21. !!Outcome!!: Subjective well-being 
  
 
  Q: How often did you feel left out over the past four weeks 
@@ -352,7 +352,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [Hardly ever, Some of the time, Often]
  
 
- 22. **Outcome**: Subjective well-being 
+ 22. !!Outcome!!: Subjective well-being 
  
 
  Q: How often did you feel isolated from others over the past four weeks 
@@ -361,7 +361,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [Hardly ever, Some of the time, Often]
  
 
- 23. **Outcome**: Subjective well-being 
+ 23. !!Outcome!!: Subjective well-being 
  
 
  Q: Below are some ways you might have felt or behaved in the past 4 weeks. Please tell us how much of the time during the past 4 weeks: 
@@ -370,13 +370,13 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [1 None or almost None of the time, 2, 3, 4 All or almost all of the time] ... you felt depressed. ... you felt anxious. ... you were absorbed in doing something worthwhile. ... you felt bored.]
  
 
- 24. **Outcome**: Subjective well-being 
+ 24. !!Outcome!!: Subjective well-being 
  
 
  Q: (SMS) Overall, how happy do you feel right now on a scale from 1 (not at all happy) to 10 (completely happy)?
  
 
- 25. **Outcome**: Subjective well-being (SMS) 
+ 25. !!Outcome!!: Subjective well-being (SMS) 
  
 
  Q: What best describes how you felt over the last 10 minutes? Please text back the corresponding number. 
@@ -385,13 +385,13 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [1: Lonely/left out 2: Shameful/guilty 3: Absorbed in doing something worthwhile 4: Sad 5: Loving/tender 6: Bored 7: Happy 8: Angry 9: Worried 10: Other positive feeling 11: Other negative feeling 12: Other neutral feeling]
  
 
- 26. **Outcome**: Subjective well-being 
+ 26. !!Outcome!!: Subjective well-being 
  
 
  Q: (SMS) How lonely are you feeling right now on a scale from 1 (not at all lonely) to 10 (very lonely)?
  
 
- 27. **Outcome**: Post-experiment use 
+ 27. !!Outcome!!: Post-experiment use 
  
 
  Q: After going through this study, how much more or less time do you plan to","$5 per survey
@@ -445,7 +445,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Facebook mobile app use: coefficient = -12.15 minutes, p = 0.00 
  
 
- Speed of reactivation: coefficient = -0.59 SD, p = 0.00","Deactivating Facebook freed up 60 minutes per day for the average person in our Treatment group. The Treatment group actually spent less time on both non-Facebook social media and other online activities, while devoting more time to a range of offline activities such as watching television alone and spending time with friends and family. Consistent with the reported reduction in news consumption, we find that Facebook deactivation significantly reduced news knowledge and attention to politics. The Treatment group was less likely to say they follow news about politics or the President, and less able to correctly answer factual questions about recent news events. Our overall index of news knowledge fell by 0.19 standard deviations. ... Deactivation significantly reduced polarization of views on policy issues and a measure of exposure to polarizing news. ... Our overall index of political polarization fell by 0.16 standard deviations. Deactivation caused small but significant improvements in well-being, and in particular in self-reported happiness, life satisfaction, depression, and anxiety. ... Our overall index of subjective well-being improved by 0.09 standard deviations. As the experiment ended, participants reported planning to use Facebook much less in the future. Several weeks later, the Treatment group’s reported usage of the Facebook mobile app was about 11 minutes (22 percent) lower than in Control. ... Our overall index of post-experiment Facebook use is 0.61 standard deviations lower in Treatment than in Control.","The paper discusses power in the context of comparing its sample size to previous studies: 'Given the effect sizes and residual variance in our sample, we would have been unlikely to have sufficient power to detect any effects if limited to the sample sizes in previous experiments.'","Given the effect sizes and residual variance in our sample, we would have been unlikely to have sufficient power to detect any effects if limited to the sample sizes in previous experiments.","1. **Moderator** = Heavy vs. light Facebook users
+ Speed of reactivation: coefficient = -0.59 SD, p = 0.00","Deactivating Facebook freed up 60 minutes per day for the average person in our Treatment group. The Treatment group actually spent less time on both non-Facebook social media and other online activities, while devoting more time to a range of offline activities such as watching television alone and spending time with friends and family. Consistent with the reported reduction in news consumption, we find that Facebook deactivation significantly reduced news knowledge and attention to politics. The Treatment group was less likely to say they follow news about politics or the President, and less able to correctly answer factual questions about recent news events. Our overall index of news knowledge fell by 0.19 standard deviations. ... Deactivation significantly reduced polarization of views on policy issues and a measure of exposure to polarizing news. ... Our overall index of political polarization fell by 0.16 standard deviations. Deactivation caused small but significant improvements in well-being, and in particular in self-reported happiness, life satisfaction, depression, and anxiety. ... Our overall index of subjective well-being improved by 0.09 standard deviations. As the experiment ended, participants reported planning to use Facebook much less in the future. Several weeks later, the Treatment group’s reported usage of the Facebook mobile app was about 11 minutes (22 percent) lower than in Control. ... Our overall index of post-experiment Facebook use is 0.61 standard deviations lower in Treatment than in Control.","The paper discusses power in the context of comparing its sample size to previous studies: 'Given the effect sizes and residual variance in our sample, we would have been unlikely to have sufficient power to detect any effects if limited to the sample sizes in previous experiments.'","Given the effect sizes and residual variance in our sample, we would have been unlikely to have sufficient power to detect any effects if limited to the sample sizes in previous experiments.","1. !!Moderator!! = Heavy vs. light Facebook users
  
 
  DV = Subjective well-being / main outcomes
@@ -464,7 +464,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 2. **Moderator** = Heavy vs. light Facebook news users
+ 2. !!Moderator!! = Heavy vs. light Facebook news users
  
 
  DV = News knowledge
@@ -481,7 +481,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 3. **Moderator** = Active vs. passive users
+ 3. !!Moderator!! = Active vs. passive users
  
 
  DV = Subjective well-being
@@ -500,7 +500,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 4. **Moderator** = Time of day of use
+ 4. !!Moderator!! = Time of day of use
  
 
  DV = Subjective well-being (SMS measures)
@@ -519,7 +519,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 5. **Moderator** = Age
+ 5. !!Moderator!! = Age
  
 
  DV = Political polarization
@@ -538,7 +538,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 6. **Moderator** = Political party
+ 6. !!Moderator!! = Political party
  
 
  DV = News and political outcomes
@@ -555,7 +555,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 7. **Moderator** = Income
+ 7. !!Moderator!! = Income
  
 
  DV = Main outcomes
@@ -574,7 +574,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 8. **Moderator** = Education
+ 8. !!Moderator!! = Education
  
 
  DV = Main outcomes
@@ -593,7 +593,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 9. **Moderator** = Gender
+ 9. !!Moderator!! = Gender
  
 
  DV = Political polarization
@@ -612,7 +612,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 10. **Moderator** = Race
+ 10. !!Moderator!! = Race
  
 
  DV = Political polarization
@@ -633,7 +633,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 11. **Moderator** = Baseline indices (e.g., baseline SWB, social interaction, opinions)
+ 11. !!Moderator!! = Baseline indices (e.g., baseline SWB, social interaction, opinions)
  
 
  DV = Subjective well-being / post-experiment use
@@ -713,7 +713,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  21%",None,"160.0
  62%",None,"101.3 
  36%",None,"The 2018 U.S. midterm election cycle dominated media discourse, with intense partisan campaigning and debates over the Trump administration’s policies. Issues such as misinformation, political advertising, and the influence of social media platforms became major topics of public discussion. Concerns about election interference and platform regulation were also widely debated.",62997,0.39,High income,English,"Very high — Facebook's primary development language; full algorithmic, content-moderation, and fact-checking infrastructure in place",Moderate — historically strong but significantly fragmented; cable news dominant over newspapers; declining print circulation,Yes — 2018 US midterm elections fell within the study window (September–December 2018)
-"Hunt Allcott, Matthew Gentzkow, Benjamin Wittenbrink, Juan Carlos Cisneros, Adriana Crespo-Tenorio, Drew Dimmery, Deen Freelon, Sandra González-Bailón, Andrew M. Guess, Young Mie Kim, David Lazer, Neil Malhotra, Devra Moehler, Sameer Nair-Desai, Brendan Nyhan, Jennifer Pan, Jaime Settle, Emily Thorson, Rebekah Tromble, Carlos Velasco Rivera, Arjun Wilkins, Magdalena Wojcieszak, Annie Franco, Chad Kiewiet de Jonge, Winter Mason, Natalie Jomini Stroud, Joshua A. Tucker","Hunt Allcott, Matthew Gentzkow, Benjamin Wittenbrink, Juan Carlos Cisneros, Adriana Crespo-Tenorio, Drew Dimmery, Deen Freelon, Sandra González-Bailón, Andrew M. Guess, Young Mie Kim, David Lazer, Neil Malhotra, Devra Moehler, Sameer Nair-Desai, Brendan Nyhan, Jennifer Pan, Jaime Settle, Emily Thorson, Rebekah Tromble, Carlos Velasco Rivera, Arjun Wilkins, Magdalena Wojcieszak, Annie Franco, Chad Kiewiet de Jonge, Winter Mason, Natalie Jomini Stroud, Joshua A. Tucker",The Effect Of Deactivating Facebook And Instagram On Users’ Emotional State,National Bureau of Economic Research (NBER),2025,The Effect of Deactivating Facebook and Instagram on Users’ Emotional State. (2025). Stanford Institute for Economic Policy Research (SIEPR); Stanford University. https://siepr.stanford.edu/publications/working-paper/effect-deactivating-facebook-and-instagram-users-emotional-state,"We estimate the effect of social media deactivation on users' emotional state in two large randomized experiments before the 2020 U.S. election. People who deactivated Facebook for the six weeks before the election reported a 0.060 standard deviation improvement in an index of happiness, depression, and anxiety, relative to controls who deactivated for just the first of those six weeks. People who deactivated Instagram for those six weeks reported a 0.041 standard deviation improvement relative to controls. Exploratory analysis suggests the Facebook effect is driven by people over 35, while the Instagram effect is driven by women under 25.",Deactivation of Facebook or Instagram for 6 weeks vs. 1 week (incremental 5 weeks),"We randomly assigned 27 percent of participants to a treatment group that was offered payment for deactivating their accounts for the six weeks before the election. The remaining participants formed a control group that was paid to deactivate for just the first of those six weeks. Our baseline and endline surveys elicited three measures of self-reported emotional state—how much of the time during the past four weeks that people felt happy, depressed, or anxious—along with a large suite of political outcomes that we study separately in Allcott et al. (2024).","1. Self-reported emotional state (happiness, depression, and anxiety)","This paper focuses on the three emotional state questions that were also included: “Please tell us how much of the time during the past four weeks you felt [happy / depressed / anxious].” The response options were “All of the time,” “Often,” “Sometimes,” “Rarely,” and “Never.” We code these responses as 4, 3, 2, 1, and 0, respectively, and then standardize each to have a mean of zero and a standard deviation of one in the sample-weighted combined Control groups, giving the variables happy, depressed, and anxious. We re-sign depressed and anxious as depressed x (-1) and anxious x (-1), so that more positive values correspond to more positive emotional state. The emotional state index is the average of these three re-signed variables, re-standardized to have a standard deviation of one in the sample-weighted combined Control groups.","1. **Outcome**: happy 
+"Hunt Allcott, Matthew Gentzkow, Benjamin Wittenbrink, Juan Carlos Cisneros, Adriana Crespo-Tenorio, Drew Dimmery, Deen Freelon, Sandra González-Bailón, Andrew M. Guess, Young Mie Kim, David Lazer, Neil Malhotra, Devra Moehler, Sameer Nair-Desai, Brendan Nyhan, Jennifer Pan, Jaime Settle, Emily Thorson, Rebekah Tromble, Carlos Velasco Rivera, Arjun Wilkins, Magdalena Wojcieszak, Annie Franco, Chad Kiewiet de Jonge, Winter Mason, Natalie Jomini Stroud, Joshua A. Tucker","Hunt Allcott, Matthew Gentzkow, Benjamin Wittenbrink, Juan Carlos Cisneros, Adriana Crespo-Tenorio, Drew Dimmery, Deen Freelon, Sandra González-Bailón, Andrew M. Guess, Young Mie Kim, David Lazer, Neil Malhotra, Devra Moehler, Sameer Nair-Desai, Brendan Nyhan, Jennifer Pan, Jaime Settle, Emily Thorson, Rebekah Tromble, Carlos Velasco Rivera, Arjun Wilkins, Magdalena Wojcieszak, Annie Franco, Chad Kiewiet de Jonge, Winter Mason, Natalie Jomini Stroud, Joshua A. Tucker",The Effect Of Deactivating Facebook And Instagram On Users’ Emotional State,National Bureau of Economic Research (NBER),2025,The Effect of Deactivating Facebook and Instagram on Users’ Emotional State. (2025). Stanford Institute for Economic Policy Research (SIEPR); Stanford University. https://siepr.stanford.edu/publications/working-paper/effect-deactivating-facebook-and-instagram-users-emotional-state,"We estimate the effect of social media deactivation on users' emotional state in two large randomized experiments before the 2020 U.S. election. People who deactivated Facebook for the six weeks before the election reported a 0.060 standard deviation improvement in an index of happiness, depression, and anxiety, relative to controls who deactivated for just the first of those six weeks. People who deactivated Instagram for those six weeks reported a 0.041 standard deviation improvement relative to controls. Exploratory analysis suggests the Facebook effect is driven by people over 35, while the Instagram effect is driven by women under 25.",Deactivation of Facebook or Instagram for 6 weeks vs. 1 week (incremental 5 weeks),"We randomly assigned 27 percent of participants to a treatment group that was offered payment for deactivating their accounts for the six weeks before the election. The remaining participants formed a control group that was paid to deactivate for just the first of those six weeks. Our baseline and endline surveys elicited three measures of self-reported emotional state—how much of the time during the past four weeks that people felt happy, depressed, or anxious—along with a large suite of political outcomes that we study separately in Allcott et al. (2024).","1. Self-reported emotional state (happiness, depression, and anxiety)","This paper focuses on the three emotional state questions that were also included: “Please tell us how much of the time during the past four weeks you felt [happy / depressed / anxious].” The response options were “All of the time,” “Often,” “Sometimes,” “Rarely,” and “Never.” We code these responses as 4, 3, 2, 1, and 0, respectively, and then standardize each to have a mean of zero and a standard deviation of one in the sample-weighted combined Control groups, giving the variables happy, depressed, and anxious. We re-sign depressed and anxious as depressed x (-1) and anxious x (-1), so that more positive values correspond to more positive emotional state. The emotional state index is the average of these three re-signed variables, re-standardized to have a standard deviation of one in the sample-weighted combined Control groups.","1. !!Outcome!!: happy 
  
 
  Q: Please tell us how much of the time during the past four weeks you felt happy. 
@@ -722,7 +722,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: “All of the time,” “Often,” “Sometimes,” “Rarely,” and “Never.”
  
 
- 2. **Outcome**: depressed 
+ 2. !!Outcome!!: depressed 
  
 
  Q: Please tell us how much of the time during the past four weeks you felt depressed. 
@@ -731,7 +731,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: “All of the time,” “Often,” “Sometimes,” “Rarely,” and “Never.”
  
 
- 3. **Outcome**: anxious 
+ 3. !!Outcome!!: anxious 
  
 
  Q: Please tell us how much of the time during the past four weeks you felt anxious. 
@@ -770,7 +770,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Depressed x (-1): 0.026 standard deviations (p = 0.156) 
  
 
- Anxious x (-1): 0.024 standard deviations (p = 0.205)","Average effects. Panel A of Figure 2 reports the local average treatment effects of Facebook and Instagram deactivation on the emotional state index and its three components. Appendix D.3 presents all point estimates and p-values. Facebook and Instagram deactivation improved emotional state index by 0.060 standard deviations (p < 0.001) and 0.041 standard deviations (p = 0.016), respectively. The q-values adjusting for multiple hypothesis testing along with the full set of political outcomes considered in Allcott et al. (2024) are 0.002 and 0.139 for Facebook and Instagram; the latter is not statistically significant based on our pre-registered significance threshold of 0.05. Facebook deactivation improved the underlying happy, depressed x (-1), and anxious x (-1) outcomes by 0.064, 0.039, and 0.028 standard deviations, respectively, with p-values of ¡0.001, 0.018, and 0.110. Instagram deactivation improved those outcomes by 0.044, 0.026, and 0.024 standard deviations, respectively, with p-values of 0.030, 0.156, and 0.205. All four point estimates are smaller for Instagram than for Facebook. In both experiments, the point estimate is largest for happy and smallest for anxious x (-1).",The paper states that the large sample size makes the study 'better powered for subgroup analysis' than prior work. It also notes that a smaller share of participants was assigned to the more costly deactivation condition to 'increase power per dollar of cost'. No formal a priori power calculations are reported.,"Given this much larger sample size, we are better powered for subgroup analysis; the heterogeneous effects we document by age and gender had gone undetected in previous experimental work. Since the Deactivation condition was more expensive than Control, we allocated a smaller share to the former to increase power per dollar of cost.","1. **Moderator** = Age × gender (Facebook)
+ Anxious x (-1): 0.024 standard deviations (p = 0.205)","Average effects. Panel A of Figure 2 reports the local average treatment effects of Facebook and Instagram deactivation on the emotional state index and its three components. Appendix D.3 presents all point estimates and p-values. Facebook and Instagram deactivation improved emotional state index by 0.060 standard deviations (p < 0.001) and 0.041 standard deviations (p = 0.016), respectively. The q-values adjusting for multiple hypothesis testing along with the full set of political outcomes considered in Allcott et al. (2024) are 0.002 and 0.139 for Facebook and Instagram; the latter is not statistically significant based on our pre-registered significance threshold of 0.05. Facebook deactivation improved the underlying happy, depressed x (-1), and anxious x (-1) outcomes by 0.064, 0.039, and 0.028 standard deviations, respectively, with p-values of ¡0.001, 0.018, and 0.110. Instagram deactivation improved those outcomes by 0.044, 0.026, and 0.024 standard deviations, respectively, with p-values of 0.030, 0.156, and 0.205. All four point estimates are smaller for Instagram than for Facebook. In both experiments, the point estimate is largest for happy and smallest for anxious x (-1).",The paper states that the large sample size makes the study 'better powered for subgroup analysis' than prior work. It also notes that a smaller share of participants was assigned to the more costly deactivation condition to 'increase power per dollar of cost'. No formal a priori power calculations are reported.,"Given this much larger sample size, we are better powered for subgroup analysis; the heterogeneous effects we document by age and gender had gone undetected in previous experimental work. Since the Deactivation condition was more expensive than Control, we allocated a smaller share to the former to increase power per dollar of cost.","1. !!Moderator!! = Age × gender (Facebook)
  
 
  DV = Emotional state index
@@ -787,7 +787,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 2. **Moderator** = Age × gender (Instagram)
+ 2. !!Moderator!! = Age × gender (Instagram)
  
 
  DV = Emotional state index
@@ -804,7 +804,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 3. **Moderator** = Baseline platform use (high vs. low)
+ 3. !!Moderator!! = Baseline platform use (high vs. low)
  
 
  DV = Emotional state index
@@ -821,7 +821,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 4. **Moderator** = Baseline emotional state
+ 4. !!Moderator!! = Baseline emotional state
  
 
  DV = Emotional state index
@@ -838,7 +838,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 5. **Moderator** = Political engagement
+ 5. !!Moderator!! = Political engagement
  
 
  DV = Emotional state index
@@ -857,7 +857,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 6. **Moderator** = Undecided voter status
+ 6. !!Moderator!! = Undecided voter status
  
 
  DV = Emotional state index
@@ -876,7 +876,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 7. **Moderator** = College degree (college vs. no college)
+ 7. !!Moderator!! = College degree (college vs. no college)
  
 
  DV = Emotional state index
@@ -973,68 +973,68 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  3. News awareness
  4. Subjective well-being
  5. Daily activities
- 6. Value of Facebook","We explore the effect of not using Facebook for one week on five outcomes: social media usage, news consumption, news awareness, subjective well-being, daily activities and the value of Facebook.","1. **Outcome**: Demographics
+ 6. Value of Facebook","We explore the effect of not using Facebook for one week on five outcomes: social media usage, news consumption, news awareness, subjective well-being, daily activities and the value of Facebook.","1. !!Outcome!!: Demographics
  
 
  Q: What is your gender? 
  Options: Male, Female
  
 
- 2. **Outcome**: Demographics 
+ 2. !!Outcome!!: Demographics 
  
 
  Q: What is your age in years? Please round up. 
  Options: Numeric entry
  
 
- 3. **Outcome**: Demographics 
+ 3. !!Outcome!!: Demographics 
  
 
  Q: Which college are you currently enrolled in? 
  Options: Dropdown menu
  
 
- 4. **Outcome**: Demographics 
+ 4. !!Outcome!!: Demographics 
  
 
  Q: What is your major? 
  Options: Text entry
  
 
- 5. **Outcome**: Demographics 
+ 5. !!Outcome!!: Demographics 
  
 
  Did you live in the United States when you were 15 years old? Response Options: Yes, No
  
 
- 6. **Outcome**: Demographics 
+ 6. !!Outcome!!: Demographics 
  
 
  Q: What was the zip code of your address when you were 15 years old?Options: Numeric entry
  
 
- 7. **Outcome**: Demographics 
+ 7. !!Outcome!!: Demographics 
  
 
  Q: What country did you live in when you were 15 years old?
  Options: Text entry
  
 
- 8. **Outcome**: Social media usage 
+ 8. !!Outcome!!: Social media usage 
  
 
  Q: Do you have an active Facebook account? 
  Options: Yes, No
  
 
- 9. **Outcome**: Value of Facebook 
+ 9. !!Outcome!!: Value of Facebook 
  
 
  Q: What is the value of your weekly time on Facebook? (Please enter a dollar amount)
  Options: Numeric entry [Note: Half subjects were asked 'How much money would you need to be given to stop using Facebook for a week?']
  
 
- 10. **Outcome**: News awareness 
+ 10. !!Outcome!!: News awareness 
  
 
  Q: Read the following list of events. Did these events happen in the previous week? 
@@ -1043,7 +1043,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: Definitely happened, I do not know, Definitely did not happened. Items: [Serena Williams, the best women's tennis player, is expecting her first child and will not play again until next year.], [Thousands of people gathered in the rain Saturday on the soggy grounds of the Washington Monument to turn Earth Day into an homage to science.], [Facebook killer, Steve Stephens, was arrested in Ohio.], [Vice President Mike Pence visited the demilitarized zone as the U.S. kept its options open on North Korea.], [Stanford University, said that it would permit the conservative author Ann Coulter to speak on campus in early May, just one day after it canceled her appearance.], [MSNBC analyst calls for ISIS to bomb Trump property.], [General Motors has become the latest multinational company to pull out of Venezuela after it says government authorities illegally seized its plant there.], [Bulls bow out of playoffs with blowout loss to Celtics in Game 6.], [Federal agencies take actions to implement President Trump's order to strip fund from municipal governments that refuse to cooperate fully with immigration agents.], [Obama begins new phase of public life with Chicago visit.], [Tens of thousands of people protested the president's rollback of rules protecting the environment.], [President Trump has instructed his advisers to keep the corporate tax rate close to 30 percent.], [In France's most consequential election in recent history, voters on Sunday chose Emmanuel Macron and Marine Le Pen to go to a runoff to determine the next president.], [Trump wants to send astronauts to Mars during his presidency.]
  
 
- 11. **Outcome**: News consumption 
+ 11. !!Outcome!!: News consumption 
  
 
  Q: How much time did you spend reading or watching the news per day last week? 
@@ -1052,7 +1052,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: Less than 15 min, More than 15 minutes but less than 30 minutes, More than 30 minutes but less than 1 hours, More than 1 hour but less than 2 hours, More than 2 hours
  
 
- 12. **Outcome**: News consumption 
+ 12. !!Outcome!!: News consumption 
  
 
  Q: Please indicate how frequently you used the following types of news media last week. Please answer on a scale of 1 to 7, where 7 is a type of media that you used frequently, and 1 is a type of media you used infrequently. 
@@ -1061,7 +1061,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: 1-7 scale (Not at all to All of the time). Items: Cable TV, Paper news, Radio, Online news, Social media, News feed, Other 1, Other 2.
  
 
- 13. **Outcome**: News consumption 
+ 13. !!Outcome!!: News consumption 
  
 
  Q: Please indicate how frequently you used the following methods to obtain news last week. Please answer on a scale of 1 to 7, where 7 is a method you used frequently, and 1 is a method you used infrequently. 
@@ -1070,7 +1070,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: 1-7 scale (Not at all to All of the time). Items: Watch, Read, Listen.
  
 
- 14. **Outcome**: News consumption 
+ 14. !!Outcome!!: News consumption 
  
 
  Q: List the top 3 news outlets/sources you got your news from last week. 
@@ -1079,7 +1079,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: Text entry (1st Choice, 2nd Choice, 3rd Choice).
  
 
- 15. **Outcome**: News consumption 
+ 15. !!Outcome!!: News consumption 
  
 
  Q: What type of news did you frequently read, watch or listen to last week? Please answer on a scale of 1 to 7, where 7 is a type you used frequently, and 1 is a type you used infrequently. 
@@ -1088,7 +1088,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: 1-7 scale (Not at all to All of the time). Items: Political, Sports, Business, International, Local news, Culture, Science, Weather.
  
 
- 16. **Outcome**: News consumption 
+ 16. !!Outcome!!: News consumption 
  
 
  Q: For the following sources, indicate how frequently you used each last week. Please answer on a scale of 1 to 7 where 7 is a source you used frequently, and 1 is a source you used infrequently. 
@@ -1097,7 +1097,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: 1-7 scale (Not at all to All of the time). Items: Battalion, KBTX, MSC website, Local radio, Local newspaper, National newspaper, Online news, Online social network, Friends.
  
 
- 17. **Outcome**: Daily activities
+ 17. !!Outcome!!: Daily activities
  
 
  Q: Last week, how much time did you spend each day doing the following activities? 
@@ -1106,7 +1106,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: Hours (numeric entry). Items: Sitting in a library on campus, Studying, Working for pay, Exercising, Hanging out with friends, Reading news, Attending class, Sleeping (average number of hours per night), Attending a party or social event (fill in for time you spent in total last week).
  
 
- 18. **Outcome**: Daily activities 
+ 18. !!Outcome!!: Daily activities 
  
 
  Q: At what time do you typically go to bed? 
@@ -1115,7 +1115,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: Time entry (AM/PM)
  
 
- 19. **Outcome**: Daily activities 
+ 19. !!Outcome!!: Daily activities 
  
 
  Q: At what time do you typically wake up? 
@@ -1124,7 +1124,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: Time entry (AM/PM)
  
 
- 20. **Outcome**: Social media usage 
+ 20. !!Outcome!!: Social media usage 
  
 
  Q: Last week, how much time did you spend each day on the following types of social media? 
@@ -1133,7 +1133,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: Hours (numeric entry). Items: Facebook, Instagram, Twitter, Tumblr, Snapchat, Vimeo, YouTube, Other 1, Other 2.
  
 
- 21. **Outcome**: Social media usage 
+ 21. !!Outcome!!: Social media usage 
  
 
  Q: How many friends do you have on Facebook? (Feel free to open your FB account to check) 
@@ -1142,7 +1142,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: Numeric entry
  
 
- 22. **Outcome**: Social media usage
+ 22. !!Outcome!!: Social media usage
  
 
  Q: How many followers do you have on Instagram? 
@@ -1151,7 +1151,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: Numeric entry
  
 
- 23. **Outcome**: Social media usage 
+ 23. !!Outcome!!: Social media usage 
  
 
  Q: How many followers do you have on Tumblr? 
@@ -1159,7 +1159,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: Numeric entry
  
 
- 24. **Outcome**: Social media usage 
+ 24. !!Outcome!!: Social media usage 
  
 
  Q: How many followers do you have on Twitter? 
@@ -1168,7 +1168,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: Numeric entry
  
 
- 25. **Outcome**: Social media usage 
+ 25. !!Outcome!!: Social media usage 
  
 
  Q: How often do you do the following on Facebook? 
@@ -1177,7 +1177,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: Never, Rarely, 1-2 times per month, Once a week, 2-4 times per week, Once a day, Several times per day. Items: Open up FB to check your news feed, Read news feed content, Post pictures, Post comments.
  
 
- 26. **Outcome**: Subjective well-being 
+ 26. !!Outcome!!: Subjective well-being 
  
 
  Q: When you are on Facebook, how often do you feel the following? 
@@ -1186,7 +1186,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: Never, Rarely, Sometimes, Frequently, Often, All the time. Items: Envy/jealousy, Happiness, Misery, Satisfaction, Connected with friends, Up to date on my friends' activities, Lonely, Annoyed, Inspired.
  
 
- 27. **Outcome**: Daily activities 
+ 27. !!Outcome!!: Daily activities 
  
 
  Q: Please think about what you did last week as you answer the following questions. (1-Strongly agree, 2-Agree, 3-Neither agree nor disagree, 4-Disagree, 5-Strongly disagree) 
@@ -1195,7 +1195,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: 1-5 Likert scale. Items: I ate out less than I normally do, I did less impulse buying than usual, I saved more money than I usually do, I ate healthier than usual, I exercised more than usual.
  
 
- 28. **Outcome**: Daily activities 
+ 28. !!Outcome!!: Daily activities 
  
 
  Q: Please think about what you did last week as you answer the following questions. (1-Strongly agree, 2-Agree, 3-Neither agree nor disagree, 4-Disagree, 5-Strongly disagree) 
@@ -1204,7 +1204,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: 1-5 Likert scale. Items: I wasted less time than I normally do, I achieved more than I normally do, I spent more time studying and doing school related work, I was not late for classes, meetings or work, I was able to meet deadlines without rushing at the last minute, I was able to prevent distractions from achieving high priority tasks, I discontinued any wasteful or unprofitable activities or routines, I had time to relax and be with friends, I procrastinated less than I normally do, I partied a lot.
  
 
- 29. **Outcome**: Daily activities 
+ 29. !!Outcome!!: Daily activities 
  
 
  Q: Please think about what you are going to do this coming week as you answer the following questions. (1-Strongly agree, 2-Agree, 3-Neither agree nor disagree, 4-Disagree, 5-Strongly disagree) 
@@ -1227,7 +1227,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Value of Facebook: increased by 0.20 (p<0.1, likely a standardized measure or proportion, representing a 19.6% increase from $30.13 to $36.04) 
  
 
- Uncertainty about skewed news: +22.1 pp (significant, p-value None in text) Correctly identifying skewed news: -15.6 pp (significant, p-value None in text)",Full sample (Unweighted): Facebook use: -1.73*** News media index—traditional media: 0.07 News media index—social media: -0.66*** News consumption index: -0.64** Probability right answer—mainstream news: 0.01 Probability wrong answer—mainstream news: 0.002 Probability not sure answer—mainstream news: -0.01 Probability right answer—skewed news: -0.16** Probability wrong answer—skewed news: -0.06 Probability not sure answer—skewed news: 0.22* Overall satisfaction: 0.002 Life is worthwhile: 0.05 Feel happy: 0.03 Worry: 0.37 Depressed: -0.57** Healthy daily activities index: 0.84* Productive time index: 0.25 Efficient time index: 0.33 Expected healthy daily activities consumption index: 0.16 Value of Facebook: 0.20*,"The study notes it was not powered to detect significant results for the change in the value of Facebook. For other measures, the sample size allowed detection of effects up to 0.182 percentage points at the 5% level with a power of 80%.",The adjusted p value is 0.125. Our sample size allows us to detect effects up to 0.182 percentage points at the 5% level with a power of 80%. ...interpreted cautiously given that we are not powered to detect significant results.,"1. **Moderator** = Gender (men vs. women)
+ Uncertainty about skewed news: +22.1 pp (significant, p-value None in text) Correctly identifying skewed news: -15.6 pp (significant, p-value None in text)",Full sample (Unweighted): Facebook use: -1.73*** News media index—traditional media: 0.07 News media index—social media: -0.66*** News consumption index: -0.64** Probability right answer—mainstream news: 0.01 Probability wrong answer—mainstream news: 0.002 Probability not sure answer—mainstream news: -0.01 Probability right answer—skewed news: -0.16** Probability wrong answer—skewed news: -0.06 Probability not sure answer—skewed news: 0.22* Overall satisfaction: 0.002 Life is worthwhile: 0.05 Feel happy: 0.03 Worry: 0.37 Depressed: -0.57** Healthy daily activities index: 0.84* Productive time index: 0.25 Efficient time index: 0.33 Expected healthy daily activities consumption index: 0.16 Value of Facebook: 0.20*,"The study notes it was not powered to detect significant results for the change in the value of Facebook. For other measures, the sample size allowed detection of effects up to 0.182 percentage points at the 5% level with a power of 80%.",The adjusted p value is 0.125. Our sample size allows us to detect effects up to 0.182 percentage points at the 5% level with a power of 80%. ...interpreted cautiously given that we are not powered to detect significant results.,"1. !!Moderator!! = Gender (men vs. women)
  
 
  DV = Depressed
@@ -1244,7 +1244,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 2. **Moderator** = Gender (men vs. women)
+ 2. !!Moderator!! = Gender (men vs. women)
  
 
  DV = Healthy daily activities index
@@ -1261,7 +1261,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 3. **Moderator** = Gender (men vs. women)
+ 3. !!Moderator!! = Gender (men vs. women)
  
 
  DV = News awareness (politically-skewed news certainty/recognition)
@@ -1278,7 +1278,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 4. **Moderator** = Gender (men vs. women)
+ 4. !!Moderator!! = Gender (men vs. women)
  
 
  DV = Value of Facebook (post-restriction valuation)
@@ -1295,7 +1295,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 5. **Moderator** = Age (older than 21 vs. 21 and younger)
+ 5. !!Moderator!! = Age (older than 21 vs. 21 and younger)
  
 
  DV = Value of Facebook (weekly willingness-to-accept valuation)
@@ -1362,19 +1362,19 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  3. Anxiety","The present study aimed to understand the effects of a 1-week break from social media (SM) (Facebook, Instagram, Twitter, and TikTok) on well-being, depression, and anxiety compared with using SM as usual.","1. The paper does not provide the full verbatim text of the survey questions, but describes the scales used:
  
 
- 2. **Outcome**: Well-being 
+ 2. !!Outcome!!: Well-being 
  
 
  The Warwick-Edinburgh Mental Well-being Scale (WEMWBS) is a 14-item instrument that asks respondents to respond to statements about their feelings and thoughts that best describe their experience over the previous 2 weeks on a 5-point scale. Example items include: “I’ve been feeling optimistic about the future” and “I’ve been thinking clearly.”
  
 
- 3. **Outcome**: Depression
+ 3. !!Outcome!!: Depression
  
 
  The Patient Health Questionnaire-8 (PHQ-8) is an 8-item instrument that measures the frequency of depressive symptoms over the last 2 weeks on a 3-point scale. A score of 0–4 indicates no depression, 5–9 indicates mild depression, 10–14 indicates moderate depression, 15–19 indicates moderately severe depression, and 20–24 indicates severe depression.
  
 
- 4. **Outcome**: Anxiety 
+ 4. !!Outcome!!: Anxiety 
  
 
  The General Anxiety Disorder Scale-7 (GAD-7) is a 7-item instrument that measures the frequency of anxiety symptoms over the last 2 weeks on a 3-point scale. A score of 0–4 indicates no anxiety, 5–9 indicates mild anxiety, 10–15 indicates moderate anxiety and 16–21 indicates severe anxiety.",No incentive,"No costs were associated with the study’s promotion, and participants were not paid for their involvement.",Randomized Controlled Trial (RCT),"The present trial used a two-arm, parallel-group RCT design with participants individually randomized in a 1:1 allocation ratio.","Statistical analyses were performed using SPSS version 25. The primary analysis used linear models to assess differences in well-being, depression, and anxiety at follow-up between the intervention and control groups, controlling for baseline scores, age, and gender. Moderation and mediation analyses were conducted using PROCESS v3.5 with the product of coefficients method. For moderation, the model specified the experimental condition as the independent variable (X), baseline mental health scores (well-being, depression, or anxiety) as the moderator (W), and post-intervention scores as the outcome (Y). For mediation, the model specified condition as the independent variable (X), 'time spent on social media' as the mediator (M), and post-intervention mental health scores as the outcome (Y), with baseline scores, age, and gender as covariates in all models. Analyses were conducted on an intention-to-treat, complete case basis.","SPSS statistical software version 25 (2017; IBM Corp.) was used for all analyses. Descriptive statistics were produced for demographic characteristics and all measures at baseline and 1 week postrandomization. Between-group differences were presented as medians and interquartile ranges alongside adjusted mean differences and 95% confidence intervals (CIs). Linear models were selected to understand if there were significant differences in primary and secondary outcomes between groups at follow-up while controlling for baseline levels, age, and gender (Hypothesis 1). Moderation and mediation analyses were performed using PROCESS v3.5, with the product of coefficients method. For the moderation models, “condition” (intervention or control) was specified as the independent (X) variable, baseline well-being, depression, or anxiety was specified as the moderator (W) variable, and postintervention well-being, depression, or anxiety was specified as the outcome (Y) variable (Hypothesis 2). For the mediation models, “condition” was specified as the independent (X) variable, “time spent on social media” was specified as the mediator (M) variable, and postintervention well-being, depression, or anxiety was specified as the outcome (Y) variable (Hypothesis 3). Baseline scores, age, and gender were specified as covariates for all moderation and mediation models. All analyses were conducted on an intention-to-treat, complete case basis, and missing data were not imputed.",Individual participant,"Group allocation was completed through simple randomization at the individual level in a 1:1 allocation ratio via an online random generation service (JustFlipACoin, n.d.).","After controlling for baseline scores, age, and gender: 
@@ -1386,7 +1386,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Depression (PHQ-8): Adjusted mean difference = -2.17, 95% CI [-3.28, -1.06], p < 0.001. 
  
 
- Anxiety (GAD-7): Adjusted mean difference = -1.68, 95% CI [-2.79, -0.57], p < 0.01.","When controlling for baseline scores, age, and gender, there was a significant adjusted mean improvement in well-being in favor of the intervention group (p<0.001). There were also significant reductions in symptoms of depression (p<0.001) and anxiety (p<0.01) in favor of the intervention group (Table 2). From Table 2: Well-being (WEMWBS) Adjusted mean difference (95% CI): 4.90 (2.97 to 6.83)*** Depression (PHQ-8) Adjusted mean difference (95% CI): -2.17 (–3.28 to –1.06)*** Anxiety (GAD-7) Adjusted mean difference (95% CI): -1.68 (–2.79 to –0.57)**","The study was powered to detect a 4-point change in the Warwick-Edinburgh Mental Well-being Scale (WEMWBS) score, which required at least 148 participants. This was based on an estimated population mean of 51.61 and a standard deviation of 8.71.",Sample size calculations revealed that at least 148 participants were needed to detect a 4-point change in the WEMWBS score. This was based on an estimated population mean score of 51.61 and a standard deviation of 8.71.,"1. **Moderator** = Baseline depression
+ Anxiety (GAD-7): Adjusted mean difference = -1.68, 95% CI [-2.79, -0.57], p < 0.01.","When controlling for baseline scores, age, and gender, there was a significant adjusted mean improvement in well-being in favor of the intervention group (p<0.001). There were also significant reductions in symptoms of depression (p<0.001) and anxiety (p<0.01) in favor of the intervention group (Table 2). From Table 2: Well-being (WEMWBS) Adjusted mean difference (95% CI): 4.90 (2.97 to 6.83)*** Depression (PHQ-8) Adjusted mean difference (95% CI): -2.17 (–3.28 to –1.06)*** Anxiety (GAD-7) Adjusted mean difference (95% CI): -1.68 (–2.79 to –0.57)**","The study was powered to detect a 4-point change in the Warwick-Edinburgh Mental Well-being Scale (WEMWBS) score, which required at least 148 participants. This was based on an estimated population mean of 51.61 and a standard deviation of 8.71.",Sample size calculations revealed that at least 148 participants were needed to detect a 4-point change in the WEMWBS score. This was based on an estimated population mean score of 51.61 and a standard deviation of 8.71.,"1. !!Moderator!! = Baseline depression
  
 
  DV = Post-intervention depression (PHQ-8)
@@ -1403,7 +1403,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 2. **Moderator** = Baseline anxiety
+ 2. !!Moderator!! = Baseline anxiety
  
 
  DV = Post-intervention anxiety (GAD-7)
@@ -1420,7 +1420,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 3. **Moderator** = Baseline well-being
+ 3. !!Moderator!! = Baseline well-being
  
 
  DV = Post-intervention well-being (WEMWBS)
@@ -1503,7 +1503,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  3. Affective polarization (partisan, ideological, social)
  
 
- 4. Political engagement (time spent following news, online political discussion)","subjective well-being, news knowledge and polarization","1. **Outcome**: Subjective Well-being 
+ 4. Political engagement (time spent following news, online political discussion)","subjective well-being, news knowledge and polarization","1. !!Outcome!!: Subjective Well-being 
  
 
  French Version: Dans quelle mesure êtes-vous satisfait de la vie que vous menez ? 0 (Absolument pas satisfait) to 5 (Ni insatisfait, ni satisfait) to 10 (Absolument satisfait)
@@ -1512,7 +1512,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
   English Translation: How much are you satisfied with the life that you lead? 0 (Absolutely not satisfied) to 5 (Neither unsatisfied nor satisfied) to 10 (Absolutely satisfied)
  
 
- 2. **Outcome**: Subjective Well-being 
+ 2. !!Outcome!!: Subjective Well-being 
  
 
  French Version: Dans quelle mesure avez-vous ressenti chacune de ces émotions au cours des deux dernières semaines ? Pour chaque émotion, veuillez indiquer un chiffre sur une échelle de 0 à 10 : [Order randomized] 1. Joie 2. Epanouissement 3. Anxiété 4. Ennui 5. Solitude 6. Dépression 7. Isolement 
@@ -1521,7 +1521,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  English Translation: How much have you felt each of these emotions during the past two weeks? For each emotion, please choose a number on the scale going from 0 to 10: [Order randomized] 1. Joy 2. Fulfillment 3. Anxiety 4. Boredom 5. Loneliness 6. Depression 7. Isolation
  
 
- 3. **Outcome**: Political Engagement 
+ 3. !!Outcome!!: Political Engagement 
  
 
  French Version: Avez-vous récemment participé à des discussions en ligne sur les réseaux sociaux en rapport avec les élections ? 1. Oui 2. Non 
@@ -1530,7 +1530,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  English Translation: Have you recently participated in online discussions on social media about the elections. 1. Yes 2. No
  
 
- 4. **Outcome**: Political Engagement 
+ 4. !!Outcome!!: Political Engagement 
  
 
  French Version: La semaine dernière, combien de minutes avez-vous passé à lire/regarder/écouter des nouvelles sur la politique, y compris des nouvelles sur les réseaux sociaux ? 1. 0 minute 2. Moins de 30 minutes 3. Entre 30 min. et 60 min. 4. Entre 1 heure et 2 heures 5. 2 heures et plus 
@@ -1539,7 +1539,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  English Translation: Last week, how many minutes did you spend reading, watching, and/or listening to news about politics, including news on social media? 1. 0 minutes 2. Less than 30 minutes 3. Between 30 and 60 minutes 4. Between 1 and 2 hours 5. 2 or more hours
  
 
- 5. **Outcome**: News Knowledge Midline Survey 
+ 5. !!Outcome!!: News Knowledge Midline Survey 
  
 
  (English Translation): Please indicate whether the following statements about current events (political and non-political) are true or false. 1. True 2. False. [Items:] 1. The outsourcing of public policies by private consulting firms amounts to 160 billion euros per year. 2. France's public debt reached 2.8 trillion euros in 2021, amounting to 116% of GDP. 3. Prominent French magazines (l'Express, l'Obs, le Point, Paris Match) are owned by billionaires who are close to the political power. 4. Ukraine and the United Kingdom made a joint statement that they are ready to rejoin the European Union. 5. In the weeks preceding the elections, a far-left supporter was suspected of sending the deadly poison ricin in an envelope addressed to Marine Le Pen. 6. France prepares to withdraw from NATO in response to idleness amidst the war in Ukraine. 7. Paris to host the 2024 Summer Olympics with the opening ceremony taking place on the Seine. 8. France has started using facial recognition, particularly for judicial purposes. 9. French court pulls SpaceX's Starlink license. 10. A group of scientists discovered that Covid-19 originated in Southern France long before 2020. 11. The Metaverse (interconnected virtual worlds promoted by Facebook), will impose all current Facebook users to join the new social network by 2027. 12. PSG is the last French team to qualify for the quarterfinals of the Champions League after beating Real Madrid. 
@@ -1548,7 +1548,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Endline Survey (English Translation): Please indicate whether the following statements about current events (political and non-political) are true or false. 1. True 2. False. [Items:] 1. On April 18, 2022, Ukrainian President Volodymyr Zelensky officially handed over to the European Union envoy in Kiev a completed questionnaire for EU membership. 2. Jean-Luc Mélenchon asks French voters to elect him 'as prime minister'. 3. Ukraine's President Zelensky on BFM TV: Le Pen should admit that “she was mistaken about Russia and Putin”. 4. Carmaker Porsche wants to launch its own satellite constellation to compete with Tesla and SpaceX in future autonomous cars. 5. Netflix shares drop 25% after service loses 200,000 subscribers. 6. The Cannes Film Festival has announced the official selection for its 75th edition, which kicks off on May 17, 2022. 7. Jean-Luc Mélenchon hoped that the outcome of the second round of the presidential election would lead to a third round of the presidential election. 8. French presidential debate 2022: Macron attacks Le Pen over her links to Australia on the diplomatic crisis over a scrapped submarine deal. 9. Last week, the Minister of Economy, Bruno Le Maire had promised to deliver by September 2022 a monthly food voucher of €80 to all low-income households. 10. Following the recent contamination with listeria, salmonella and E. Coli bacteria (cheese, chocolate, pizza), the brands concerned have been banned from marketing their products in France. 11. Guinness measured an ear-shattering 142.2 dbA roar at Parc des Princes in the PSG's 2-1 rout of Olympique de Marseille. 12. Billionaire Elon Musk offers to buy The Principality of Aigues-Mortes, a micronation in southern France, to launch his “SpaceX Europe” program.
  
 
- 6. **Outcome**: Affective Polarization 
+ 6. !!Outcome!!: Affective Polarization 
  
 
  English Translation: We would like to know how you feel about these different groups: please indicate how you feel about these groups using a scale from 0 to 10. A score of 10 means that you feel very warmly towards this group, a score of 0 means that you don't like them at all. A score of 5 means that you have no particular liking or disliking for that group. The intermediate scores help to qualify your feelings. 
@@ -1728,7 +1728,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- (All other main effects were not statistically significant at p < 0.05.)","by the end of the study, those in the deactivation only group rated their overall well-being, measured by the well-being index, more positively than those in the control group (d = 0.05, p = 0.007, Q = 0.016; electronic supplementary material, appendix S5.1 and table S13). The results seem to be especially driven by people reporting that they felt more positive emotions (joy and fulfilled) as well as higher life satisfaction in both the midline and endline surveys across both treatment arms. participants randomly assigned to the deactivation only treatment group were less knowledgeable about current political events on the endline survey (d = −0.07, p = 0.003, Q = 0.016; electronic supplementary material, appendix S5.2 and table S13). Inconsistent with both H3a and H3b, we find that Facebook deactivation had essentially no effect on partisan polarization, ideological polarization or social polarization. Not only are all of the effects that we observed statistically insignificant (p > 0.05), the effect size in almost every case is near zero (see the electronic supplementary material, appendix S5.4 and tables S16 and S17; BF range from 0.06 to 0.14).","We designed the experiment to be powered to detect small treatment effects (d = 0.2 at a power level of 0.95), and we ended up recruiting more participants than pre-registered, leaving us with an achieved power of 0.97 and the ability to detect very small treatment effects (d = 0.18 at a power level of 0.95 and d = 0.14 at a power level of 0.80).","We designed the experiment to be powered to detect small treatment effects (d = 0.2 at a power level of 0.95), and we ended up recruiting more participants than pre-registered, leaving us with an achieved power of 0.97 and the ability to detect very small treatment effects (d = 0.18 at a power level of 0.95 and d = 0.14 at a power level of 0.80).","1. **Moderator** = College education (college vs. non-college)
+ (All other main effects were not statistically significant at p < 0.05.)","by the end of the study, those in the deactivation only group rated their overall well-being, measured by the well-being index, more positively than those in the control group (d = 0.05, p = 0.007, Q = 0.016; electronic supplementary material, appendix S5.1 and table S13). The results seem to be especially driven by people reporting that they felt more positive emotions (joy and fulfilled) as well as higher life satisfaction in both the midline and endline surveys across both treatment arms. participants randomly assigned to the deactivation only treatment group were less knowledgeable about current political events on the endline survey (d = −0.07, p = 0.003, Q = 0.016; electronic supplementary material, appendix S5.2 and table S13). Inconsistent with both H3a and H3b, we find that Facebook deactivation had essentially no effect on partisan polarization, ideological polarization or social polarization. Not only are all of the effects that we observed statistically insignificant (p > 0.05), the effect size in almost every case is near zero (see the electronic supplementary material, appendix S5.4 and tables S16 and S17; BF range from 0.06 to 0.14).","We designed the experiment to be powered to detect small treatment effects (d = 0.2 at a power level of 0.95), and we ended up recruiting more participants than pre-registered, leaving us with an achieved power of 0.97 and the ability to detect very small treatment effects (d = 0.18 at a power level of 0.95 and d = 0.14 at a power level of 0.80).","We designed the experiment to be powered to detect small treatment effects (d = 0.2 at a power level of 0.95), and we ended up recruiting more participants than pre-registered, leaving us with an achieved power of 0.97 and the ability to detect very small treatment effects (d = 0.18 at a power level of 0.95 and d = 0.14 at a power level of 0.80).","1. !!Moderator!! = College education (college vs. non-college)
  
 
  DV = Political news knowledge (midline)
@@ -1743,7 +1743,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  p-value = NA (reported as p < 0.1)
  
 
- 2. **Moderator** = College education (college vs. non-college)
+ 2. !!Moderator!! = College education (college vs. non-college)
  
 
  DV = Affective polarization (partisan / ideological / social)
@@ -1758,7 +1758,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  p-value = NA
  
 
- 4. **Moderator** = Age
+ 4. !!Moderator!! = Age
  
 
  DV = Political news knowledge (midline)
@@ -1773,7 +1773,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  p-value = NA (only “***” is provided, no numeric p)
  
 
- 5. **Moderator** = Pre-study Facebook use (high vs. low)
+ 5. !!Moderator!! = Pre-study Facebook use (high vs. low)
  
 
  DV = Well-being index
@@ -1788,7 +1788,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  p-value = NA
  
 
- 6. **Moderator** = Pre-study Facebook use (high vs. low)
+ 6. !!Moderator!! = Pre-study Facebook use (high vs. low)
  
 
  DV = Political news knowledge
@@ -1803,7 +1803,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  p-value = NA
  
 
- 7. **Moderator** = Pre-study Facebook use (high vs. low)
+ 7. !!Moderator!! = Pre-study Facebook use (high vs. low)
  
 
  DV = Affective polarization
@@ -1894,7 +1894,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 "Nejla Asimovic, Jonathan Nagler, Richard Bonneau, and Joshua A. Tucker","Nejla Asimovic, Jonathan Nagler, Richard Bonneau, and Joshua A. Tucker",Testing The Effects Of Facebook Usage In An Ethnically Polarized Setting,Pnas,2021,"Asimovic, N., Nagler, J., Bonneau, R., & Tucker, J. A. (2021). Testing the effects of Facebook usage in an ethnically polarized setting. Proceedings of the National Academy of Sciences, 118(25), e2022819118. https://doi.org/10.1073/pnas.2022819118","Despite the belief that social media is altering intergroup dynamics—bringing people closer or further alienating them from one another—the impact of social media on interethnic attitudes has yet to be rigorously evaluated, especially within areas with tenuous interethnic relations. We report results from a randomized controlled trial in Bosnia and Herzegovina (BiH), exploring the effects of exposure to social media during 1 wk around genocide remembrance in July 2019 on a set of interethnic attitudes of Facebook users. We find evidence that, counter to preregistered expectations, people who deactivated their Facebook profiles report lower regard for ethnic outgroups than those who remained active. Moreover, we present additional evidence suggesting that this effect is likely conditional on the level of ethnic heterogeneity of respondents’ residence. We also extend the analysis to include measures of subjective well-being and knowledge of news. Here, we find that Facebook deactivation leads to suggestive improvements in subjective wellbeing and a decrease in knowledge of current events, replicating results from recent research in the United States in a very different context, thus increasing our confidence in the generalizability of these effects.",Deactivation from Facebook for one week (treatment) vs. continued normal Facebook use (control).,"Our treatment of Facebook deactivation took place from 7 July until 14 July 2019, encompassing the week around the Remembrance Day (11 July) of the genocide in Srebrenica. The genocide in Srebrenica is central and deeply intertwined with the memory of the Bosnian war as the worst atrocity in Europe after World War II. Online and offline discussions related to the war are held to a certain extent throughout the year, but significantly intensify during this period.","1. Interethnic regard (composite index and components)
  2. Subjective well-being (index and components)
  3. News knowledge (index and items)
- 4. Political disaffection (secondary)","Participants took a comprehensive survey at the end of the experiment, and we focus on questions within three families of outcomes: outgroup regard, subjective wellbeing, and news knowledge (full list of questions in SI Appendix, Table S4). All of the questions were preregistered; following our preanalysis plan, we present results both for the composite indexes and for each of their corresponding indicators.","1. **Outcome**: Out-Group Ratings
+ 4. Political disaffection (secondary)","Participants took a comprehensive survey at the end of the experiment, and we focus on questions within three families of outcomes: outgroup regard, subjective wellbeing, and news knowledge (full list of questions in SI Appendix, Table S4). All of the questions were preregistered; following our preanalysis plan, we present results both for the composite indexes and for each of their corresponding indicators.","1. !!Outcome!!: Out-Group Ratings
  
 
  Q: To understand the situation in BiH, we are interested in your opinion about the constituent people in BiH and the relationship between different groups. For each characteristic, please indicate how well you think it applies to members of the two ethnic groups different than the one you identify yourself with. Measurements: Traits: Intelligent; Honest; Patriotic; Open-minded; Generous; Hypocritical; Selfish; Mean; Unreliable 
@@ -1903,7 +1903,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [Not at all; Not too well; Somewhat well; Very well; Extremely well]
  
 
- 2. **Outcome**: In-Group Trait Ratings 
+ 2. !!Outcome!!: In-Group Trait Ratings 
  
 
  Q: How do you think members of the other two main ethnic groups in BiH would evaluate members of your ethnic group in terms of these same trait ratings? Measurements: Traits: Intelligent; Honest; Patriotic; Open-minded; Generous; Hypocritical; Selfish; Mean; Unreliable 
@@ -1912,7 +1912,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [Not at all; Not too well; Somewhat well; Very well; Extremely well]
  
 
- 3. **Outcome**: Out-Group Feeling Thermometer 
+ 3. !!Outcome!!: Out-Group Feeling Thermometer 
  
 
  Q: Academically-run national surveys in the United States often use something we call the feeling thermometer to understand how people feel about different individuals and groups. The question about feelings between groups has been included in every American National Election Studies since 1968. Given that there are different ethnic groups living in BiH, we'd like you to rate the groups in the following way: Indicate on a 101-point scale how warm you feel towards the members of the other ethnic groups in BiH. Ratings between 50 degrees and 100 degrees mean that you feel favorable and warm toward the group. Ratings between 0 degrees and 50 degrees mean that you do not feel favorable toward the group, and you would select the 50 degree mark if you have no feelings one way or the other. 
@@ -1921,13 +1921,13 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: Survey slider (0-100)
  
 
- 4. **Outcome**: In-Group Feeling Thermometer
+ 4. !!Outcome!!: In-Group Feeling Thermometer
  
 
  Q: Indicate on a 101-point scale how warm you feel towards the members of the ethnic group you identify with. Measurements: Survey slider (0-100)
  
 
- 5. **Outcome**: Social Distance 
+ 5. !!Outcome!!: Social Distance 
  
 
  Q: People tend to be willing to participate in social contacts of varying degrees of closeness with members of diverse social groups, such as racial and ethnic groups. Please consider and share whether you would be willing to: 1. Marry a member of the other group? 2. Have a member of the other group as your close personal friend? 3. Have a member of the other group as your neighbor? 4. Have a member of the other group as your colleague at work? 5. Have more members of the other group as citizens of your country? 6. Have more members of the other group as non-citizen visitors? 7. Have members of the other group be excluded from associating with your country in any way? 
@@ -1939,7 +1939,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  *In the final survey, rather than providing a Likert scale for each response, we asked participants to indicate all the ways in which they would be willing to engage with the outgroup from the indicated seven options. Hence, our composite social distance indicator goes from 1-7, capturing the least to the highest level of willingness to be socially close.
  
 
- 6. **Outcome**: Cooperation 
+ 6. !!Outcome!!: Cooperation 
  
 
  Q: Please indicate your agreement with the following statements: 1. Multi-ethnic parties cannot secure the interests of my people. 2. It is possible to cooperate only with people of my ethnic group. 
@@ -1948,7 +1948,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: 1.Absolutely agree; 3. No opinion; 6. Strongly disagree
  
 
- 7. **Outcome**: Subjective Well-Being 
+ 7. !!Outcome!!: Subjective Well-Being 
  
 
  Q: Please indicate how well you agree with the following statements. How often did you feel the following over the last week: Satisfaction with life, Depression, Loneliness, Anxiety, Boredom, Joy, Isolation, Fulfillment Measurements: 
@@ -1957,7 +1957,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: Never, Rarely, Sometimes, Often, Always
  
 
- 8. **Outcome**: Political News Knowledge 
+ 8. !!Outcome!!: Political News Knowledge 
  
 
  Q: We present you few headlines, few of which truly appeared in the news over the last few days and few of which are false [added by our team]. Please indicate your belief that the following appeared in the news: 8 news summary headlines [4 political and 4 non-political]: T: South-East European Cooperation Process (SEECP) summit began in Bosnia- Herzegovina this week. F: Thirteen bh. political officials sued for corruption; hearings scheduled to start in September. T: Amel Tuka won the 3rd Place in the Final Race of the Diamond League. F: Opening ceremony of Europe Youth U18 and U16 Basketball Cup began in Sarajevo yesterday; matches planned in four bh. cities! T: Turkish President Recep Tayyip Erdogan arrived to BiH on Monday. F: Head of the EU Delegation to Ukraine Hugues Mingarelli started his visit to Bosnia- Herzegovina, with a full week of meetings ahead of him. T: An aluminum smelter based in Bosnia closes its doors due to bankruptcy. F: An earthquake of magnitude of 3.1 degrees Richter scale hits eastern part of the country. 
@@ -1987,7 +1987,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Cooperation with outgroup: β = -0.21 SD, SE = 0.112, P < 0.10 
  
 
- Political Disaffection Index: β = 0.401, SE = 0.108, p < 0.01 (increase in disaffection)","Main Effects on Subjective Wellbeing and News Knowledge. We test our news knowledge variable by creating an eight-item knowledge quiz with news headlines... What we find is that Facebook deactivation significantly reduced news knowledge, with treatment leading to a reduction of news knowledge by 0.27 SD (SE = 0.106; P < 0.05) (Fig. 1A). ... With regard to subjective wellbeing (Fig 1A and SI Appendix, Table S5), we detect statistically significant effects on levels of anxiety (intention to treat [ITT]: β = −0.37 SD, SE = 0.108, P < 0.01) and loneliness (ITT: β = −0.20 SD, SE = 0.107, P < 0.10). ... The effect estimate on the index of subjective wellbeing, created as a sum of z scores, yields a marginally significant effect size of 0.18 SD (SE = 0.105, P < 0.10, as shown in SI Appendix, Table S5). Main Effects on Interethnic Regard. Analyzing the impact of the treatment on interethnic attitudes, we find that deactivation from Facebook led to more negative rather than positive outgroup attitudes, the opposite of what we initially hypothesized. ... However, we find that deactivation reduced the reported willingness to cooperate with the outgroup by 0.21 SD (SE = 0.112, P < 0.10), while significantly reducing the feeling thermometer score by 0.24 SD (SE = 0.105, P < 0.05), controlling for randomization block and a rich set of baseline covariates. ... With a principal component index of outgroup regard, we find that deactivation significantly reduced reported levels of outgroup regard by 0.24 SD (SE = 0.105, P < 0.05).",The paper states that the study is underpowered for the exploration of heterogeneous treatment effects. No a priori power analysis is reported for the main effects.,Such replications could also allow for a more robust exploration of heterogeneous treatment effects for which this study is underpowered.,"1. **Moderator** = Offline ethnic heterogeneity of residence
+ Political Disaffection Index: β = 0.401, SE = 0.108, p < 0.01 (increase in disaffection)","Main Effects on Subjective Wellbeing and News Knowledge. We test our news knowledge variable by creating an eight-item knowledge quiz with news headlines... What we find is that Facebook deactivation significantly reduced news knowledge, with treatment leading to a reduction of news knowledge by 0.27 SD (SE = 0.106; P < 0.05) (Fig. 1A). ... With regard to subjective wellbeing (Fig 1A and SI Appendix, Table S5), we detect statistically significant effects on levels of anxiety (intention to treat [ITT]: β = −0.37 SD, SE = 0.108, P < 0.01) and loneliness (ITT: β = −0.20 SD, SE = 0.107, P < 0.10). ... The effect estimate on the index of subjective wellbeing, created as a sum of z scores, yields a marginally significant effect size of 0.18 SD (SE = 0.105, P < 0.10, as shown in SI Appendix, Table S5). Main Effects on Interethnic Regard. Analyzing the impact of the treatment on interethnic attitudes, we find that deactivation from Facebook led to more negative rather than positive outgroup attitudes, the opposite of what we initially hypothesized. ... However, we find that deactivation reduced the reported willingness to cooperate with the outgroup by 0.21 SD (SE = 0.112, P < 0.10), while significantly reducing the feeling thermometer score by 0.24 SD (SE = 0.105, P < 0.05), controlling for randomization block and a rich set of baseline covariates. ... With a principal component index of outgroup regard, we find that deactivation significantly reduced reported levels of outgroup regard by 0.24 SD (SE = 0.105, P < 0.05).",The paper states that the study is underpowered for the exploration of heterogeneous treatment effects. No a priori power analysis is reported for the main effects.,Such replications could also allow for a more robust exploration of heterogeneous treatment effects for which this study is underpowered.,"1. !!Moderator!! = Offline ethnic heterogeneity of residence
  
 
  DV = Outgroup regard
@@ -2002,7 +2002,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  p-value = <0.05 (significant in homogeneous subsample)
  
 
- 2. **Moderator** = Difference between offline and online network diversity
+ 2. !!Moderator!! = Difference between offline and online network diversity
  
 
  DV = Outgroup regard
@@ -2017,7 +2017,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  p-value = <0.05
  
 
- 3. **Moderator** = Age
+ 3. !!Moderator!! = Age
  
 
  DV = None
@@ -2032,7 +2032,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  p-value = NA
  
 
- 4. **Moderator** = Gender
+ 4. !!Moderator!! = Gender
  
 
  DV = None
@@ -2047,7 +2047,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  p-value = NA
  
 
- 5. **Moderator** = Interest in politics
+ 5. !!Moderator!! = Interest in politics
  
 
  DV = None
@@ -2062,7 +2062,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  p-value = NA
  
 
- 6. **Moderator** = Ethnicity
+ 6. !!Moderator!! = Ethnicity
  
 
  DV = None
@@ -2077,7 +2077,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  p-value = NA
  
 
- 7. **Moderator** = Entity of residence
+ 7. !!Moderator!! = Entity of residence
  
 
  DV = None
@@ -2132,7 +2132,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  2. News knowledge
  
 
- 3. Well-being","Our main outcome of interest is attitudes toward ethnic outgroups (i.e., outgroup regard), captured as a composite index from a set of pre-registered indicators (listed in SI, Table A6): a feeling thermometer, social distance, meta-stereotypes, outgroup trait ratings, and attitudes toward cooperation. ... we also pre-registered predictions that we would replicate two additional findings from prior research that Facebook deactivation would lead to improvements in subjective well-being (H2) and a decrease in knowledge of the news (H3).","1. **Outcome**: Outgroup Ratings 
+ 3. Well-being","Our main outcome of interest is attitudes toward ethnic outgroups (i.e., outgroup regard), captured as a composite index from a set of pre-registered indicators (listed in SI, Table A6): a feeling thermometer, social distance, meta-stereotypes, outgroup trait ratings, and attitudes toward cooperation. ... we also pre-registered predictions that we would replicate two additional findings from prior research that Facebook deactivation would lead to improvements in subjective well-being (H2) and a decrease in knowledge of the news (H3).","1. !!Outcome!!: Outgroup Ratings 
  
 
  Q: To understand the situation in Cyprus, we are interested in your opinion about different groups in Cyprus and the relationship between them. For each characteristic, please indicate how well you think it applies to members of the two ethnic groups different than the one you identify yourself with. Traits: Intelligent; Honest; Patriotic; Open-minded; Generous; Hypocritical; Selfish; Mean; Unreliable 
@@ -2141,7 +2141,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Scale: Not at all; Not too well; Somewhat well; Very well; Extremely well
  
 
- 2. **Outcome**: Metastereotypes 
+ 2. !!Outcome!!: Metastereotypes 
  
 
  Q: How do you think members of the other ethnic group would evaluate members of your ethnic group in terms of these same trait ratings? Traits: Intelligent; Honest; Patriotic; Open-minded; Generous; Hypocritical; Selfish; Mean; Unreliable 
@@ -2150,7 +2150,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Scale: Not at all; Not too well; Somewhat well; Very well; Extremely well
  
 
- 3. **Outcome**: Feeling Thermometer (outgroup) 
+ 3. !!Outcome!!: Feeling Thermometer (outgroup) 
  
 
  Q: Indicate on a 101-point scale how warm you feel towards the members of the other ethnic groups (Greek Cypriots/Turkish Cypriots) in Cyprus. Ratings between 50 degrees and 100 degrees mean that you feel favorable and warm toward the group. Ratings between 0 degrees and 50 degrees mean that you do not feel favorable toward the group, and you would select the 50 degree mark if you have no feelings one way or the other. 
@@ -2159,13 +2159,13 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Scale: Survey slider (0-100)
  
 
- 4. **Outcome**: Feeling Thermometer (ingroup) 
+ 4. !!Outcome!!: Feeling Thermometer (ingroup) 
  
 
  Q: Indicate on a 101-point scale how warm you feel towards the members of the ethnic group you identify with.Survey slider (0-100)
  
 
- 5. **Outcome**: Social Distance 
+ 5. !!Outcome!!: Social Distance 
  
 
  Q: People tend to be willing to participate in social contacts of varying degrees of closeness with members of diverse social groups, such as racial and ethnic groups. Please consider and share whether you would be willing to: a) Marry a member of the other group? b) Have a member of the other group as your close personal friend? c) Have a member of the other group as your neighbor? d) Have a member of the other group as your colleague at work? e) Have more members of the other group as citizens of your country? 
@@ -2174,7 +2174,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: Not willing; Not really willing; Undecided; Somewhat willing; Willing
  
 
- 6. **Outcome**: Cooperation 
+ 6. !!Outcome!!: Cooperation 
  
 
  Q: Please indicate your agreement with the following statements: 1. Multi-ethnic parties cannot secure the interests of my people. 2. It is possible to cooperate only with people of my ethnic group. 3. Only nationalist parties will ensure the vital interests of the people they represent. 
@@ -2183,7 +2183,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options:1. Absolutely agree; 3. No opinion; 6. Strongly disagree
  
 
- 7. **Outcome**: Offline Network Friendship 
+ 7. !!Outcome!!: Offline Network Friendship 
  
 
  Q: Estimate the % of outgroup members (Greek CY/Turkish CY) you have within your offline network of friends 
@@ -2192,7 +2192,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: <5%, 5%-25%, 25%-50%, 50%-75%, 75%-100%
  
 
- 8. **Outcome**: Offline Network Active Communication 
+ 8. !!Outcome!!: Offline Network Active Communication 
  
 
  Q: Thinking about your everyday offline interaction with other people, how often do you actively interact with outgroup members (Greek CY/Turkish CY)? 
@@ -2201,7 +2201,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Option: 5-item Likert scale
  
 
- 9. **Outcome**: Offline Network Passive exposure 
+ 9. !!Outcome!!: Offline Network Passive exposure 
  
 
  Q: How frequently are you exposed to the outgroup (Greek CY/Turkish CY)? Within your offline setting (even when not actively engaging with them)? 
@@ -2210,7 +2210,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Response option: 5-item Likert scale
  
 
- 10. **Outcome**: Weekly Activities 
+ 10. !!Outcome!!: Weekly Activities 
  
 
  Q: ""In the last week, relative to what is typical for you, have you spent more or less of your free time..."". 
@@ -2246,7 +2246,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  Outgroup regard (sum of z-scores):β = –0.075, SE = 0.143, n.s.
  News knowledge index:β = –0.211, SE = 0.134, n.s.
- Anxiety (reverse coded): β = 0.271, SE = 0.136, P < 0.05","Pooled Sample (from Table A7, Model 2): News knowledge index: -0.087 (0.081) Well-being index: 0.117 (0.084) Satisfaction: 0.005 (0.085) Joy: 0.012 (0.085) Fulfillment: -0.017 (0.087) Anxiety (reverse coded): 0.264*** (0.086) Boredom (reverse coded): 0.065 (0.084) Loneliness (reverse coded): 0.092 (0.083) Depression (reverse coded): 0.100 (0.088) Isolation (reverse coded): -0.010 (0.088) Feeling thermometer: 0.060 (0.084) Social distance (reverse coded): 0.042 (0.084) Cooperation: -0.027 (0.087) Perception of out-group evaluations: 0.118 (0.090) Out-group traits: 0.152* (0.091) Out-group regard (sum of z-scores): 0.095 (0.087) Out-group regard (principal components): 0.044 (0.085)",0.24 SD @80% power (N=543),"Pooling the data across the 2 years, our sample size in Cyprus (N = 543) is larger than the sample size in the original study in BiH (N = 354), and we are powered to detect an effect size larger than 0.24 SD (SI, Section B). As such, we do not attribute our inability to replicate the effect from BiH in Cyprus to issues of statistical power. We recognize that we do not have adequate power to detect the statistical significance of smaller effects, but such effects would also be of a more limited substantive significance. ... The minimum detectable effect size (with a power of 80%) with the sample we recruited is 0.238 SD.","1. **Moderator** = Offline network homogeneity (offline network heterogeneity index from baseline outgroup-contact questions)
+ Anxiety (reverse coded): β = 0.271, SE = 0.136, P < 0.05","Pooled Sample (from Table A7, Model 2): News knowledge index: -0.087 (0.081) Well-being index: 0.117 (0.084) Satisfaction: 0.005 (0.085) Joy: 0.012 (0.085) Fulfillment: -0.017 (0.087) Anxiety (reverse coded): 0.264*** (0.086) Boredom (reverse coded): 0.065 (0.084) Loneliness (reverse coded): 0.092 (0.083) Depression (reverse coded): 0.100 (0.088) Isolation (reverse coded): -0.010 (0.088) Feeling thermometer: 0.060 (0.084) Social distance (reverse coded): 0.042 (0.084) Cooperation: -0.027 (0.087) Perception of out-group evaluations: 0.118 (0.090) Out-group traits: 0.152* (0.091) Out-group regard (sum of z-scores): 0.095 (0.087) Out-group regard (principal components): 0.044 (0.085)",0.24 SD @80% power (N=543),"Pooling the data across the 2 years, our sample size in Cyprus (N = 543) is larger than the sample size in the original study in BiH (N = 354), and we are powered to detect an effect size larger than 0.24 SD (SI, Section B). As such, we do not attribute our inability to replicate the effect from BiH in Cyprus to issues of statistical power. We recognize that we do not have adequate power to detect the statistical significance of smaller effects, but such effects would also be of a more limited substantive significance. ... The minimum detectable effect size (with a power of 80%) with the sample we recruited is 0.238 SD.","1. !!Moderator!! = Offline network homogeneity (offline network heterogeneity index from baseline outgroup-contact questions)
  
 
  DV = Outgroup regard
@@ -2261,7 +2261,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  p-value = 0.031
  
 
- 2. **Moderator** = Capital residence (living in the capital vs. not; proxy for offline network heterogeneity)
+ 2. !!Moderator!! = Capital residence (living in the capital vs. not; proxy for offline network heterogeneity)
  
 
  DV = Outgroup regard
@@ -2276,7 +2276,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  p-value = 0.010
  
 
- 3. **Moderator** = Year (2020 vs 2021)
+ 3. !!Moderator!! = Year (2020 vs 2021)
  
 
  DV = Outgroup regard
@@ -2291,7 +2291,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  p-value = NA
  
 
- 4. **Moderator** = Local polarization (baseline outgroup thermometer / regional pre-existing polarization; exploratory)
+ 4. !!Moderator!! = Local polarization (baseline outgroup thermometer / regional pre-existing polarization; exploratory)
  
 
  DV = Outgroup regard
@@ -2306,7 +2306,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  p-value = NA
  
 
- 5. **Moderator** = Ethnic group status (Greek Cypriot vs Turkish Cypriot)
+ 5. !!Moderator!! = Ethnic group status (Greek Cypriot vs Turkish Cypriot)
  
 
  DV = Outgroup regard
@@ -2381,7 +2381,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  https://doi.org/10.1016/j.psychres.2018.11.017","Online social networking sites (SNSs), such as Facebook, provide frequent and copious social reinforcers (e.g., “likes”) delivered at variable time intervals. As a result, some SNS users display excessive, maladaptive behaviors on these platforms. Excessive SNS users, and typical users alike, are often aware of their intense use and psychological dependence on these sites, which may lead to elevated stress. In fact, research has demonstrated that use of SNSs alone induces elevated stress. Other research has begun to investigate the effects of short periods of SNS abstinence, revealing beneficial effects on subjective wellbeing. We aligned these two lines of research and hypothesized that a short period of SNS abstinence would induce a reduction in perceived stress, especially in excessive users. The results confirmed our hypothesis and revealed that both typical and excessive SNS users experienced reduction in perceived stress following SNS abstinence of several days. The effects were particularly pronounced in excessive SNS users. The reduction in stress was not associated with academic performance increases. These results indicate a benefit—at least temporarily—of abstinence from SNSs and provide important information for therapists treating patients who struggle with excessive SNS use.","Abstinence instruction (yes vs. no)
  SNS use type (typical vs. excessive)","We employed a randomized 2 × 2 factor design: treatment (abstain/control) and SNS use type (typical/excessive). Twenty sections of the course (~ 40 students in each section) were randomly either asked to abstain from Facebook use (abstain condition; 15 course sections yielding 413 participants; 68.8% response rate, 170 women, Mage = 24.26) or given no instruction regarding their SNS use (control condition; 5 course sections yielding 142 participants; 71.0% response rate, 68 women, Mage = 23.29).","1. Perceived stress change (absolute and relative)
- 2. GPA change","Stress was assessed in both surveys with the short version of the perceived stress scale (Cohen et al., 1983). ... Change in stress was operationalized in two ways. First, a simple difference between the stress scores (t1 stress minus t2 stress) was calculated. Second, a relative change score was calculated by taking this difference and dividing it by the baseline stress (t1 stress). ... Relative change in academic performance was used as a potential long term exogenous indictor for the possible effect of the intervention. It was operationalized as the difference between the GPA in the semester of the study and the GPA of the prior semester divided by the GPA of the prior semester.","1. **Outcome**: Perceived Stress 
+ 2. GPA change","Stress was assessed in both surveys with the short version of the perceived stress scale (Cohen et al., 1983). ... Change in stress was operationalized in two ways. First, a simple difference between the stress scores (t1 stress minus t2 stress) was calculated. Second, a relative change score was calculated by taking this difference and dividing it by the baseline stress (t1 stress). ... Relative change in academic performance was used as a potential long term exogenous indictor for the possible effect of the intervention. It was operationalized as the difference between the GPA in the semester of the study and the GPA of the prior semester divided by the GPA of the prior semester.","1. !!Outcome!!: Perceived Stress 
  
 
  Q: How often have you felt that you were unable to control the important things in your life? 
@@ -2390,28 +2390,28 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [1 = ""never""–7 = ""almost always""]
  
 
- 2. **Outcome**: Perceived Stress
+ 2. !!Outcome!!: Perceived Stress
  
 
  Q: How often have you felt NOT confident about your ability to handle your personal problems?
  Options: [1 = ""never""–7 = ""almost always""]
  
 
- 3. **Outcome**: Perceived Stress
+ 3. !!Outcome!!: Perceived Stress
  
 
  Q: How often have you felt that things were NOT going your way? 
  Options: [1 = ""never""–7 = ""almost always""]
  
 
- 4. **Outcome**: Perceived Stress 
+ 4. !!Outcome!!: Perceived Stress 
  
 
  Q: How often have you felt difficulties were piling up so high that you could not overcome them? 
  Options: [1 = ""never""–7 = ""almost always""]
  
 
- 5. **Outcome**: Excessive SNS use
+ 5. !!Outcome!!: Excessive SNS use
  
 
  Q: Spent a lot of time thinking about Facebook or planned use of Facebook? 
@@ -2420,7 +2420,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [1 = ""rarely/never""–7 = ""very often""]
  
 
- 6. **Outcome**: Excessive SNS use
+ 6. !!Outcome!!: Excessive SNS use
  
 
  Q: Felt an urge to use Facebook more and more? 
@@ -2429,7 +2429,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [1 = ""rarely/never""–7 = ""very often""]
  
 
- 7. **Outcome**: Excessive SNS use
+ 7. !!Outcome!!: Excessive SNS use
  
 
  Q: Used Facebook in order to forget about personal problems? 
@@ -2438,7 +2438,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [1 = ""rarely/never""–7 = ""very often""]
  
 
- 8. **Outcome**: Excessive SNS use
+ 8. !!Outcome!!: Excessive SNS use
  
 
  Q: Tried to cut down on the use of Facebook without success? 
@@ -2447,7 +2447,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [1 = ""rarely/never""–7 = ""very often""]
  
 
- 9. **Outcome**: Excessive SNS use
+ 9. !!Outcome!!: Excessive SNS use
  
 
  Q: Become restless or troubled if you have been prohibited from using Facebook? 
@@ -2456,7 +2456,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [1 = ""rarely/never""–7 = ""very often""]
  
 
- 10. **Outcome**: Excessive SNS use
+ 10. !!Outcome!!: Excessive SNS use
  
 
  Q: Used Facebook so much that it has had a negative impact on your job/studies/social life? 
@@ -2465,7 +2465,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [1 = ""rarely/never""–7 = ""very often""]
  
 
- 11. **Outcome**: Facebook use descriptors
+ 11. !!Outcome!!: Facebook use descriptors
  
 
  Q: Approximately how many friends/connections/followers do you have on Facebook? 
@@ -2474,7 +2474,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [1 = ""0–10"" to 7 = ""more than 1000""]
  
 
- 12. **Outcome**: Facebook use descriptors
+ 12. !!Outcome!!: Facebook use descriptors
  
 
  Q: Overall, how often do you use Facebook? 
@@ -2483,7 +2483,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [1 = ""less than once a week"" to 7 = ""many times per day""]
  
 
- 13. **Outcome**: Facebook use descriptors
+ 13. !!Outcome!!: Facebook use descriptors
  
 
  Q: How many DAYS PER WEEK do you typically use Facebook? 
@@ -2492,7 +2492,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [1 = ""one"" to 7 = ""seven/ every day""]
  
 
- 14. **Outcome**: Facebook use descriptors
+ 14. !!Outcome!!: Facebook use descriptors
  
 
  Q: How many HOURS PER DAY do you typically spend on using Facebook? 
@@ -2501,7 +2501,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [1 = ""less than 1"" to 7 = ""at least 6""]
  
 
- 15. **Outcome**: Facebook use descriptors 
+ 15. !!Outcome!!: Facebook use descriptors 
  
 
  Q: Overall, how do you consider the extent of your current use of Facebook? 
@@ -2522,7 +2522,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Sex: F=6.05, p=0.014, partial eta2=0.011
  
 
- Treatment (Abstinence): F=2.20, p=0.139, partial eta2=0.004.","Table 2. Analysis of covariance results for stress reduction. Model for testing H1: Sex F=4.35, Sig.=0.037, Partial Eta2=0.008; Treatment (Abstinence) F=4.49, Sig.=0.035, Partial Eta2=0.008.",None,None,"1. **Moderator** = SNS use type (typical vs. excessive users)
+ Treatment (Abstinence): F=2.20, p=0.139, partial eta2=0.004.","Table 2. Analysis of covariance results for stress reduction. Model for testing H1: Sex F=4.35, Sig.=0.037, Partial Eta2=0.008; Treatment (Abstinence) F=4.49, Sig.=0.035, Partial Eta2=0.008.",None,None,"1. !!Moderator!! = SNS use type (typical vs. excessive users)
  
 
  DV = Perceived stress change
@@ -2537,7 +2537,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  p-value = 0.002 (absolute), 0.026 (relative)
  
 
- 2. **Moderator** = Sex (male vs. female)
+ 2. !!Moderator!! = Sex (male vs. female)
  
 
  DV = Perceived stress change
@@ -2617,13 +2617,13 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  4. Happiness
  
 
- 5. Life satisfaction","Social displacement is the proposition that time spent using media replaces time spent in face-to-face (FtF) interaction, particularly with close friends and family. ... Presumptively, social displacement negatively influences people’s well-being because a well-being promoting activity is replaced with a less valuable or even harmful activity.","1. **Outcome**: Time spent socializing
+ 5. Life satisfaction","Social displacement is the proposition that time spent using media replaces time spent in face-to-face (FtF) interaction, particularly with close friends and family. ... Presumptively, social displacement negatively influences people’s well-being because a well-being promoting activity is replaced with a less valuable or even harmful activity.","1. !!Outcome!!: Time spent socializing
  
 
  Q: Socialization includes FtF conversation, hosting or attending parties, and visiting and being visited by friends and family and voice calls (except UK estimates from 2016 to 2020 [20]).
  
 
- 2. **Outcome**: Socializing with friends
+ 2. !!Outcome!!: Socializing with friends
  
 
  Q: Estimates extracted from interval-scale responses suggest incoming college students spent 13.5 h a week socializing with friends in 1987, but this had shrunk to 9.1 h a week by 2016, with most of the decline occurring in more recent years.",None,None,Narrative review,"This essay concludes, however, there is very little direct or causal evidence of social media time displacing face-to-face time. ... To explain findings that seem to support social displacement, this essay examines the difference between population-level trends and within-individual behavior, and the difference between within-person and between-person displacement effects, followed by conclusions and future directions.","The review synthesizes population-level trends from time use surveys (e.g., ATUS) and within-person effects from longitudinal and experience sampling studies. It contrasts population-level declines in FtF socializing with within-person behavioral changes. It differentiates between between-person effects (social people being active both online/offline) and within-person displacement.","To explain findings that seem to support social displacement, this essay examines the difference between population-level trends and within-individual behavior, and the difference between within-person and between-person displacement effects, followed by conclusions and future directions.","Population-level
@@ -2644,7 +2644,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Global social media use: 
  
 
- 2.4 h/day (2020); Mobile device use (April 2020): 4.3 h/day (up 20% from 2019).","Including the use of messaging apps, the average worldwide daily social media use was 2.4 h per day in 2020. ... In the past 25 years, there has been an approximate 10-min per day decline in time spent socializing across these three countries (1.2 h/wk). ... incoming college students spent 13.5 h a week socializing with friends in 1987, but this had shrunk to 9.1 h a week by 2016, with most of the decline occurring in more recent years.",None,None,"1. **Moderator** = Type of social media use (active communication vs. passive use)
+ 2.4 h/day (2020); Mobile device use (April 2020): 4.3 h/day (up 20% from 2019).","Including the use of messaging apps, the average worldwide daily social media use was 2.4 h per day in 2020. ... In the past 25 years, there has been an approximate 10-min per day decline in time spent socializing across these three countries (1.2 h/wk). ... incoming college students spent 13.5 h a week socializing with friends in 1987, but this had shrunk to 9.1 h a week by 2016, with most of the decline occurring in more recent years.",None,None,"1. !!Moderator!! = Type of social media use (active communication vs. passive use)
  
 
  DV = Face-to-face communication / well-being
@@ -2659,7 +2659,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  p-value = NA
  
 
- 2. **Moderator** = Relationship quality
+ 2. !!Moderator!! = Relationship quality
  
 
  DV = Well-being / displacement effects
@@ -2674,7 +2674,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  p-value = NA
  
 
- 3. **Moderator** = Social skills / number of close discussion partners
+ 3. !!Moderator!! = Social skills / number of close discussion partners
  
 
  DV = Face-to-face communication frequency
@@ -2765,7 +2765,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  12. Depression
  
 
- 13. Social trust (Trust in people, Conversation frequency).","The conceptual categories were: 1) voting behavior, 2) support for democracy, 3) political violence, 4) polarization, 5) media agenda setting, 6) news knowledge, 7) subjective well-being, 8) trust in people, 9) substitution effects in media and time use, 10) echo chambers and media trust, 11) self-conscious emotions.","1. **Outcome**: Support for political violence
+ 13. Social trust (Trust in people, Conversation frequency).","The conceptual categories were: 1) voting behavior, 2) support for democracy, 3) political violence, 4) polarization, 5) media agenda setting, 6) news knowledge, 7) subjective well-being, 8) trust in people, 9) substitution effects in media and time use, 10) echo chambers and media trust, 11) self-conscious emotions.","1. !!Outcome!!: Support for political violence
  
 
  Q: how often is it okay for individuals to use violence to pursue political ends? 
@@ -2774,13 +2774,13 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: [Very often, often, sometimes, rarely, never, creating a 5-point scale]
  
 
- 2. **Outcome**: Affective Polarization 
+ 2. !!Outcome!!: Affective Polarization 
  
 
  Q: asking participants to self-report how they feel about partisan (Democrats, Republicans), ideological (conservatives, liberals), and racial groups (blacks, Latinos, and whites) on an 11-point scale that ranges from 0 (“I do not like them at all”) to 10 (“I have very warming feelings toward this group”)
  
 
- 3. **Outcome**: Support for democracy
+ 3. !!Outcome!!: Support for democracy
  
 
  Q: 
@@ -2792,13 +2792,13 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  4. support for a free press.
  
 
- 4. **Outcome**: News Knowledge
+ 4. !!Outcome!!: News Knowledge
  
 
  Q: presented participants with a list of 12 possible news events asked them to say whether each event happened in the last month.
  
 
- 5. **Outcome**: Substitution Effects 
+ 5. !!Outcome!!: Substitution Effects 
  
 
  Q: online activities (spending time on YouTube, Facebook, Instagram, TikTok, Twitter/X), watching television (national programming, local programming, and streaming), offline social activities (walking outside, exercising, talking to friends, going to a coffee shop, eating out at a restaurant), and offline reading activities (reading a book or newspaper). 
@@ -2886,7 +2886,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  3. False rumors accuracy (belief accuracy for false items)
  4. True news accuracy (belief accuracy for true items)
  5. Political polarization (composite index: affective, ideological, social, and issue polarization)
- 6. Subjective well-being (composite index: happiness, satisfaction, social isolation, anxiety, depression)",,"1. **Outcome**: Misinformation recall and belief accuracy
+ 6. Subjective well-being (composite index: happiness, satisfaction, social isolation, anxiety, depression)",,"1. !!Outcome!!: Misinformation recall and belief accuracy
  
 
  For each of 8 headlines (4 false rumors, 4 true news stories), participants were asked:
@@ -2900,23 +2900,23 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  Options: Yes / No / I don't remember
  
 
- 2. **Outcome**: Affective polarization
+ 2. !!Outcome!!: Affective polarization
  Q: Feeling thermometer difference between the two main presidential candidates (Bolsonaro and Lula)
  
 
- 3. **Outcome**: Ideological polarization
+ 3. !!Outcome!!: Ideological polarization
  Q: Difference in ideological scale between perceived positions of the two candidates
  
 
- 4. **Outcome**: Social polarization
+ 4. !!Outcome!!: Social polarization
  Q: Willingness to engage in 5 social activities with outparty voters
  
 
- 5. **Outcome**: Issue polarization
+ 5. !!Outcome!!: Issue polarization
  Q: Agreement across 5 policy issues, measured against sample mean
  
 
- 6. **Outcome**: Subjective well-being (5 items)
+ 6. !!Outcome!!: Subjective well-being (5 items)
  Q: How often in the past weeks did you feel happy / depressed / anxious / isolated from family and friends / satisfied with life",150 Brazilian Reais (~$30 USD) for completing the study; eligible for 3 gift cards of ~500 Brazilian Reais (~$100 USD),,Randomized field experiment (multimedia deactivation),,"Three estimators: (1) Intention-to-Treat OLS (ITT) with HC2 robust standard errors; (2) Covariate-Adjusted ITT (Cov-ITT) using pre-registered pre-treatment covariates (sex, age, income, race, trust in media and institutions, affective polarization, ideology, interest in politics, direct self-reported misinformation exposure, daily WhatsApp usage, purposes of WhatsApp use); (3) Complier Average Causal Effect (CACE) via IV, instrumenting compliance with treatment assignment. All models use two-tailed t-tests. Multiple hypothesis testing adjustments reported using FDR correction.",,Individual participant,,"False Rumors Exposure index: ITT = -0.38 SD (p < 0.01)
  True News Exposure index: ITT = -0.27 SD (p < 0.01)
  Difference in exposure reduction (false vs. true): 66% larger for false rumors (p = 0.02)
@@ -2929,7 +2929,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
  
 
  First-stage (multimedia consumption reduction): -0.27 SD behavioral (p < 0.01); -0.75 SD self-reported (p < 0.01); -0.28 SD overall WhatsApp usage (p < 0.01)
- Substitution: increased TV watching (coeff = 0.216, p < 0.01); no substitution to other social media platforms",,Pre-registered for 80% power to detect Cohen's d > 0.2 SD (benchmarked from Allcott et al. 2020 and Asimovic et al. 2021). Post-hoc analysis using control group data confirms COV-ITT achieves >80% power for all primary outcomes at d = 0.2 SD.,,"1. **Moderator** = WhatsApp usage for politics (pre-registered)
+ Substitution: increased TV watching (coeff = 0.216, p < 0.01); no substitution to other social media platforms",,Pre-registered for 80% power to detect Cohen's d > 0.2 SD (benchmarked from Allcott et al. 2020 and Asimovic et al. 2021). Post-hoc analysis using control group data confirms COV-ITT achieves >80% power for all primary outcomes at d = 0.2 SD.,,"1. !!Moderator!! = WhatsApp usage for politics (pre-registered)
  
 
  DV = False Rumors Accuracy
@@ -2946,7 +2946,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 2. **Moderator** = Age (pre-registered)
+ 2. !!Moderator!! = Age (pre-registered)
  
 
  DV = All primary outcomes
@@ -2960,7 +2960,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 3. **Moderator** = Digital literacy (pre-registered)
+ 3. !!Moderator!! = Digital literacy (pre-registered)
  
 
  DV = All primary outcomes
@@ -2974,7 +2974,7 @@ Morten Tromholt,"Morten Tromholt, MSc",The Facebook Experiment: Quitting Faceboo
 
  
 
- 4. **Moderator** = Partisan affiliation
+ 4. !!Moderator!! = Partisan affiliation
  
 
  DV = False Rumors Exposure

@@ -24,6 +24,7 @@ from flask import (
 import csv
 import os
 import json
+import secrets
 import sqlite3
 from datetime import datetime
 from functools import wraps
@@ -41,7 +42,7 @@ from groq import Groq
 from flask import Flask, request, jsonify, render_template
 
 app = Flask(__name__)
-app.secret_key = "your-secret-key-change-this-in-production"  # Change this!
+app.secret_key = os.environ.get("FLASK_SECRET_KEY") or secrets.token_hex(32)
 
 
 CSV_PATH = "data/input/paper_extracted.csv"
@@ -151,7 +152,7 @@ def extract_url(value):
 
 
 def highlight_terms_html(text, feature_key=None):
-    """Escape HTML; **bold** segments from CSV render as <strong>.
+    """Escape HTML; ``!!bold!!`` segments from CSV render as <strong>.
 
     feature_key is ignored (kept so templates can keep using
     ``|highlight_keywords(feature_key)``).
@@ -162,8 +163,8 @@ def highlight_terms_html(text, feature_key=None):
     def esc_chunk(plain: str) -> str:
         return escape(plain)
 
-    if "**" in s:
-        parts = s.split("**")
+    if "!!" in s:
+        parts = s.split("!!")
         if len(parts) >= 2 and len(parts) % 2 == 1:
             fragments = []
             for i, p in enumerate(parts):
@@ -188,9 +189,9 @@ app.jinja_env.filters["truncate_words"] = truncate_words
 app.jinja_env.filters["extract_url"] = extract_url
 app.jinja_env.filters["highlight_keywords"] = highlight_keywords_filter
 
-# Admin credentials (in production, use environment variables or a proper auth system)
-ADMIN_USERNAME = "admin"
-ADMIN_PASSWORD = "admin123"  # Change this!
+# Admin login: set ADMIN_USERNAME and ADMIN_PASSWORD in the environment (do not commit values).
+ADMIN_USERNAME = (os.environ.get("ADMIN_USERNAME") or "").strip()
+ADMIN_PASSWORD = os.environ.get("ADMIN_PASSWORD") or ""
 
 # Global variable to store papers data
 papers_data = []
@@ -1033,6 +1034,11 @@ def get_tracking_stats():
 def admin_login():
     """Admin login page."""
     if request.method == "POST":
+        if not ADMIN_USERNAME or not ADMIN_PASSWORD:
+            return render_template(
+                "admin_login.html",
+                error="Admin login is not configured on this server.",
+            )
         username = request.form.get("username")
         password = request.form.get("password")
 
